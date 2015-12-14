@@ -1,0 +1,17 @@
+snoozit_platform_panier_homepage:
+    path:     /
+    defaults: { _controller: SnoozitPlatformBundle:Panier:index }
+
+snoozit_platform_panier_page_desistement:
+    path:     /desist
+    defaults: { _controller: SnoozitPlatformBundle:Panier:pageDesistement }
+
+snoozit_platform_panier_page_finished:
+    path:     /finished
+    defaults: { _controller: SnoozitPlatformBundle:Panier:pageFinished }
+
+snoozit_platform_panier_page_refus:
+    path:     /refus
+    defaults: { _controller: SnoozitPlatformBundle:Panier:pageRefus }
+
+

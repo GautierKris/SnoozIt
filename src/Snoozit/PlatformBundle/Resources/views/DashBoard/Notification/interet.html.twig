@@ -1,0 +1,52 @@
+{% if u.type.id == 2 and u.advert.user is not null %}
+    <section>
+        <div class="well well-sm userLogsBox text-center">
+            {% if u.user == app.user and u.owner != app.user %}
+
+                <h4 class="text-grey">Nouvel interet le <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                <p><a href="{{ path('fos_user_profile_show_name', {'username' : u.owner.username}) }}">{{ u.owner.username }} </a> est
+                    interessé par : <a href="{{ path('snoozit_show_advert',{'id' : u.advert.id, 'slug': u.advert.slug}) }}">{{ u.advert.title|truncate(50) }}</a>
+                </p>
+            {% else %}
+                <h4 class="text-grey"> Nouvel interet <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                <p>Pour l'annonce de <a href="{{ path('fos_user_profile_show_name', {'username' : u.advert.user.username}) }}">{{ u.advert.user.username }}</a> -
+                    <a href="{{ path('snoozit_show_advert',{'id' : u.advert.id, 'slug': u.advert.slug}) }}">{{ u.advert.title|truncate(50) }}</a>
+                </p>
+            {% endif %}
+        </div>
+    </section>
+{% endif %}
+
+{% if u.type.id == 5 %}
+    <section>
+        <div class="well well-sm userLogsBox text-center" style="border-left-color: red">
+            {% if u.owner.id == app.user.id %}
+
+                <h4 class="text-grey"><span class="text-danger">Refus d'interet</span> <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                <p>
+                    <a href="{{ path('fos_user_profile_show_name', {'username' :u.userAsked.username}) }}">{{ u.userAsked.username }}</a> pour:
+                    <a href="{{ path('snoozit_show_advert',{'id' : u.advert.id, 'slug': u.advert.slug}) }}" class="text-remove">{{ u.advert.title|truncate(50) }}</a> </p>
+            {% else %}
+                <h4 class="text-grey"><span class="text-danger">Refus d'interet </span> <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span>
+                </h4>
+                <p>
+                    <a href="{{ path('fos_user_profile_show_name', {'username' :u.userAsked.username}) }}">{{ u.owner.username }}</a> pour:
+                    <a href="{{ path('snoozit_show_advert',{'id' : u.advert.id, 'slug': u.advert.slug}) }}">{{ u.advert.title|truncate(50) }}</a>
+                </p>
+            {% endif %}
+        </div>
+    </section>
+{% endif %}
+
+{% if (u.type.id == 6) and (u.owner != app.user)  %}
+    <section>
+        <div class="well well-sm userLogsBox text-center" style="border-left-color: red">
+            <h4 class="text-grey">{{ u.userAsked.username }} <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+            <p> <span class="text-danger">Désistement</span> pour:
+                <a href="{{ path('snoozit_show_advert',{'id' : u.advert.id, 'slug': u.advert.slug}) }}">{{ u.advert.title|truncate(50) }}</a>
+            </p>
+        </div>
+    </section>
+{% endif %}
+
+

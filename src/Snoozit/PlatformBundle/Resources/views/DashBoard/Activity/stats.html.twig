@@ -1,0 +1,52 @@
+<div class="well well-sm">
+
+    <div class="percent-stats">
+        <div class="percent-box col-md-3">
+            <div class="percent-circle percent-green">
+                <span class="percent">{{ stats.totalAdverts }}</span>
+                <p class="pie-title">Annonce <i class="m-l-5 fa fa-file"></i></p>
+            </div>
+        </div>
+
+        <div class="percent-box col-md-3">
+            <div class="percent-circle percent-red percent-1">
+                <span class="percent">{{ stats.percentSuccess }}</span>
+                <p class="pie-title">Réussite <i class="m-l-5 fa fa-check"></i></p>
+            </div>
+        </div>
+
+        <div class="percent-box col-md-3">
+            <div class="percent-circle percent-blue percent-2 ">
+                <span class="percent">{{ stats.percentNegoce }}</span>
+                <p class="pie-title">Négociation <i class="m-l-5 fa fa-euro"></i></p>
+            </div>
+        </div>
+
+        <div class="percent-box col-md-3">
+            <div class="percent-circle percent-yellow percent-3">
+                <span class="percent">{{ stats.openPercent }}</span>
+                <p class="pie-title">Ouverture <i class="m-l-5 fa fa-folder-open"></i></p>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 text-center" id="noteBox">
+            <h4>MA NOTE</h4>
+            <p class="text-star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </p>
+            <p>37 Votes</p>
+        </div>
+        <div class="col-md-7">
+            <h4 class="text-info time">{{ stats.totalViews }} Visite{% if stats.totalViews > 1 %}s {% endif %}</h4>
+            <p class="numbers">Total de visites sur vos annonces</p></div>
+    </div>
+</div>
+

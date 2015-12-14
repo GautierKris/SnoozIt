@@ -1,0 +1,145 @@
+<div id="dsh-no-follow-box">
+
+    <div class="box-header">
+        <h3>Bienvenue dans votre espace personnel</h3>
+        <p>Vous ne suivez aucune personne ni rubrique pour le moment, voiçi quelques suggestions: </p>
+    </div>
+
+    <div class="box-content">
+
+        <div class="col-md-4">
+
+            <div class="well well-sm clearfix">
+
+                <div class="col-md-4 col-md-offset-4 divNoPadding">
+                    <img src="{{ asset('bundles/snoozitplatform/images/avatars/user-1.jpg') }}" alt="..." class="img-responsive img-circle">
+                </div>
+
+                <div class="col-md-12 text-center box">
+                    <h4 class="text-grey">{{ app.user.city.departement.region.nom }}</h4>
+                    <p>France</p>
+                    <p class="text-star">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </p>
+
+                    <a href="{{ path('snoozit_follow_region', {'slug': app.user.city.departement.region.slug}) }}" class="btn btn-xs btn-success col-md-6 col-md-offset-3">Suivre </a>
+                </div>
+
+                <div class="col-md-12  box-footer box">
+                    <div class="clearfix">
+                        <div class="col-md-4 divNoPadding">
+                            <p>Annonces</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+
+                        <div class="col-md-4 diviser divNoPadding">
+                            <p>Suivis</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+
+                        <div class="col-md-4 divNoPadding">
+                            <p>Abonnés</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>  <!-- well well-sm clearfix -->
+
+        </div> <!-- Col-md-6 -->
+        <div class="col-md-4">
+
+            <div class="well well-sm clearfix">
+
+                <div class="col-md-4 col-md-offset-4 divNoPadding">
+                    <img src="{{ asset('bundles/snoozitplatform/images/avatars/user-7.jpg') }}" alt="..." class="img-responsive img-circle">
+                </div>
+
+                <div class="col-md-12 text-center box">
+                    <h4 class="text-grey">{{ app.user.city.departement.nom }}</h4>
+                    <p>{{ app.user.city.departement.region.nom }}</p>
+                    <p class="text-star">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </p>
+
+                    <a href="{{ path('snoozit_follow_departement',{'slug': app.user.city.departement.slug}) }}) }}" class="btn btn-xs btn-success col-md-6 col-md-offset-3">Suivre </a>
+                </div>
+
+                <div class="col-md-12  box-footer box">
+                    <div class="clearfix">
+                        <div class="col-md-4 divNoPadding">
+                            <p>Annonces</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+
+                        <div class="col-md-4 diviser divNoPadding">
+                            <p>Suivis</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+
+                        <div class="col-md-4 divNoPadding">
+                            <p>Abonnés</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>  <!-- well well-sm clearfix -->
+
+        </div> <!-- Col-md-6 -->
+        <div class="col-md-4">
+
+            <div class="well well-sm clearfix">
+
+                <div class="col-md-4 col-md-offset-4 divNoPadding">
+                    <img src="{{ asset('bundles/snoozitplatform/images/avatars/user-6.jpg') }}" alt="..." class="img-responsive img-circle">
+                </div>
+
+                <div class="col-md-12 text-center box">
+                    <h4 class="text-grey">{{ app.user.city.nom }}</h4>
+                    <p>{{ app.user.city.departement.nom }}, {{ app.user.city.postal|truncate(2,'',false) }}</p>
+                    <p class="text-star">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </p>
+
+                    <a href="{{ path('snoozit_follow_city', {'slug': app.user.city.slug}) }}) }}" class="btn btn-xs btn-success col-md-6 col-md-offset-3">Suivre </a>
+                </div>
+
+                <div class="col-md-12  box-footer box">
+                    <div class="clearfix">
+                        <div class="col-md-4 divNoPadding">
+                            <p>Annonces</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+
+                        <div class="col-md-4 diviser divNoPadding">
+                            <p>Suivis</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+
+                        <div class="col-md-4 divNoPadding">
+                            <p>Abonnés</p>
+                            <p class="text-grey"><strong>3491</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>  <!-- well well-sm clearfix -->
+
+        </div> <!-- Col-md-6 -->
+
+    </div> <!-- box-content -->
+
+</div> <!-- #dsh-no-follow-box -->

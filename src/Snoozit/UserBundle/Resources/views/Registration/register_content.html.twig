@@ -1,0 +1,130 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    <div class="register-body">
+
+        <div class="text-center">
+            <h1>Créer un compte, c'est gratuit</h1>
+            <p>Créer votre compte prendra moins d'une minute, vous aurez ensuite la possibilité de créer votre espace d'annonces.</p>
+        </div>
+
+        <hr />
+
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+        <div class="row">
+
+            {% if form_errors(form.username)|length > 0 %}{% set errors_username = 'has-error' %}{% else %} {% set errors_username = NULL %}{% endif %}
+            {% if form_errors(form.email)|length > 0 %}{% set errors_email = 'has-error' %}{% else %} {% set errors_email = NULL %}{% endif %}
+            <div class="col-xs-12 has-error">
+                {{ form_errors(form.username) }}
+                {{ form_errors(form.email) }}
+
+            </div>
+            <div class="form-group {{ errors_username }} col-md-6">
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username,{'attr': {'class': 'form-control input-lg', 'placeholder': 'JohnDoe'}}) }}
+                {% if(errors_username) %}
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group {{ errors_email }} col-md-6">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email,{'attr': {'class': 'form-control input-lg', 'placeholder': 'john@doe.com'}}) }}
+                {% if(errors_email) %}
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12  has-error">
+                {% if form_errors(form.plainPassword.second)|length > 0 %}{% set errors_password2 = 'has-error' %}{% else %} {% set errors_password2 = NULL %}{% endif %}
+                {% if form_errors(form.plainPassword.first)|length > 0 %}
+                    {% set errors_password1 = 'has-error' %}
+                    {% set errors_password2 = 'has-error' %}
+                {% else %}
+                    {% set errors_password1 = NULL %}
+                    {% set errors_password2 = NULL %}
+                {% endif %}
+                {{ form_errors(form.plainPassword.first) }}
+                {{ form_errors(form.plainPassword.second) }}
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="form-group {{ errors_password1 }} col-md-6">
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first,{'attr': {'class': 'form-control input-lg', 'placeholder': 'Mot de passe'}}) }}
+                {% if(errors_password1) %}
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                {% endif %}
+            </div>
+
+            <div class="form-group {{ errors_password2 }} col-md-6">
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second,{'attr': {'class': 'form-control input-lg', 'placeholder': 'Confirmation'}}) }}
+                {% if(errors_password2) %}
+                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Région -->
+        <div class="row">
+            {% if form_errors(form.city)|length > 0 %}{% set errors_city = 'has-error' %}{% else %} {% set errors_city = NULL %}{% endif %}
+            {% if form_errors(form.codePostal)|length > 0 %}{% set errors_codepostal = 'has-error' %}{% else %} {% set errors_codepostal = NULL %}{% endif %}
+            <div class="col-xs-12 has-error">
+                {{ form_errors(form.codePostal) }}
+                {{ form_errors(form.city) }}
+            </div>
+
+            <div class="form-group col-md-6 {{ errors_codepostal }}">
+                <div class="input-group input-group-lg ">
+                    {{ form_widget(form.codePostal, {
+                        'attr' : {
+                            'data-url' : path('ahs_commun_json_codesPostaux')
+                        }} )
+                    }}
+                    <span class="input-group-addon"><i class="fa fa-mail-forward"></i></span>
+                </div>
+
+            </div>
+            <div class="form-group col-md-6  {{ errors_city }} ">
+                <div class="input-group input-group-lg">
+                    {{ form_widget(form.city, {
+                        'attr' : {
+                            'data-url' : path('ahs_commun_json_villes')
+                        }} )
+                    }}
+                    <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group text-center">
+            <div class="checkbox">
+                <label for="#">
+                    <input type="checkbox" checked/>
+                    En vous inscrivant vous acceptez les termes et conditions de SnoozIt
+                </label>
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">{{ 'registration.submit'|trans }} </button>
+        </div>
+
+        <hr>
+        <div class="text-center already-registered">
+            <a href="{{ path('fos_user_security_login') }}">
+                Vous avez déja un compte? <strong> Connectez vous</strong>
+            </a>
+        </div>
+
+    </div>
+</form>

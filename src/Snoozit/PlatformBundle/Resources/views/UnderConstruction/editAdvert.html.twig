@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well">
+                    <h2 class="text-center stylised-font">
+                        Under Construction
+                    </h2>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="help-block">Ce tiendra içi un formulaire permettant au visiteur de modifier leur annonce.</p>
+                           {{ form_start(form) }}
+                            {{ form_row(form) }}
+                            {{ form_rest(form) }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

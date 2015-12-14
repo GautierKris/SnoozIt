@@ -1,0 +1,107 @@
+<div class="col-md-4 well" id="shop-filters">
+    <div class=" options-choose-container">
+        <h5 class="filter-name">Localisation</h5>
+        <div class="box-filters">
+            <form action="{{ path('snoozit_advert_region_filter') }}" method="post" id="formRegionFilters">
+                <div class="form-group">
+                    <select class="form-control input-sm" name="localisation">
+                        {% if localisation %}
+                            {% for l in localisation  %}
+                                {% set statut = '' %}
+                                {% if app.session.get('selectedRegion') == l.id %}
+                                    {% set statut = 'selected=selected' %}
+                                {% endif %}
+                                {% if app.session.get('RegionFilter') == l.id %}
+                                    {% set statut = 'selected=selected' %}
+                                {% endif %}
+                                <option value="{{ l.id }}" name="localisation_{{ l.id  }}" {{ statut }}>{{ l.nom }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+            </form>
+            {% if(choices) %}
+                <p class="pull-right"><a href="{{ path('snoozit_platform_remove_filters') }}"><i class="fa fa-refresh"></i> Réinitialiser les filtres</a></p>
+            {% endif %}
+        </div>
+
+        <h5 class="filter-name">Affichage</h5>
+
+        <div class="box-filters">
+            <div class="checkbox">
+                <form action="#" method="post" id="formFilters">
+                    {% set choice1 = '' %}
+                    {% set choice2 = '' %}
+                    {% set choice3 = '' %}
+                    {% if showBy %}
+
+                        {% if choices %}
+                            {% for c in choices %}
+                                {% if c == 1 %}
+                                    {% set choice1 = 'checked' %}
+                                {% elseif c == 2 %}
+                                    {% set choice2 = 'checked' %}
+                                {% elseif c == 3 %}
+                                    {% set choice3 = 'checked' %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <label for="#" class="col-xs-12"><input type="checkbox" name="cBox[]" value = "1" {{ choice1 }}> Uniquement <span class="text-success">{{ showBy.0 }}</span></label>
+                        <label for="#" class="col-xs-12"><input type="checkbox" name="cBox[]" value = "2" {{ choice2 }}> Uniquement <span class="text-info">   {{ showBy.1 }}</span></label>
+                        <label for="#" class="col-xs-12"><input type="checkbox" name="cBox[]" value = "3" {{ choice3 }}> Uniquement <span class="text-warning">{{ showBy.2 }}</span></label>
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <label for="#"><input type="checkbox"> Uniquement <span class="text-primary">{{ showBy.3 }}</span></label>
+                        {% endif %}
+                    {% endif %}
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+
+        <h5 class="filter-name">Suggestions</h5>
+        <div class="box-filters">
+            <ul class="list-group box-propose">
+                {% if userSuggestion %}
+                    {% for u in userSuggestion %}
+                        <li class="list-group-item">
+                            <div class="user-propose clearfix">
+                                <div class="col-xs-2 divNoPadding">
+                                       <img src="{{ asset('uploads/avatar/'~u.avatar.path) }}" alt="..." class="img-responsive thumbnail" >
+                                </div>
+                                <div class="col-xs-10 divNoPadding">
+                                    <h4>
+                                        <a href="{{ path('fos_user_profile_show_name', {'username' : u.username}) }}" class="text-grey">{{ u.username }}</a>
+                                        <span class="text-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                        <i class="fa fa-star-half-empty"></i>
+                                                    </span>
+
+                                        <div id="loading{{ u.id }}" class="pull-right hidden">
+                                            <img src="{{ asset('bundles/snoozitplatform/images/loading.gif') }}" alt="Loading" class="loader-img">
+                                        </div>
+
+                                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                        <span class="pull-right hidden btn btn-xs ajaxRemoveAbo" id="remove{{ u.id }}" rel="{{ u.id }}">
+                                            <i class="fa fa-check" id="{{ u.id }}"></i> <span class="text text-bold">Abonné</span>
+                                        </span>
+                                        <span class="pull-right"><i class="fa fa-plus ajaxNewAbo" id="{{ u.id }}"></i></span>
+                                        {% else %}
+                                            <a class="pull-right text-grey" href="{{ path('fos_user_security_login') }}"><i class="fa fa-plus"></i></a>
+                                        {% endif %}
+                                    </h4>
+                                    <p>{{ u.city.departement.nom }} - {{ u.city.nom }} ({{ u.city.postal|truncate(2,'',false) }})</p>
+                                    <p> Annonce <span class="text-grey">{{ u|CountUserAdvert }}</span> | Abonné <span class="text-grey">{{ u.totalFollower }}</span> | Abonnement <span class="text-grey">{{ u.followedUser|length }}</span></p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+

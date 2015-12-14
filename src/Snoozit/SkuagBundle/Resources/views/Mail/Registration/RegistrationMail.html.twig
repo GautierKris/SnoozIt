@@ -1,0 +1,66 @@
+<style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Poiret+One);
+    .text-primary{ color: #337ab7 }
+    .well{
+        background: #eee;
+        padding: 0 20px;
+        border: 1px solid #DDD;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+    }
+    .center{ text-align: center;}
+    h1{ color: #0088cc;
+        margin-bottom: 20px;
+        font-family: 'Poiret One', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+    h1{ font-size: 2.3em; }
+    h2{ font-size: 1.6em; font-weight: 400}
+    h3{ font-size: 1.4em; font-weight: 400 }
+    .button{
+        border: 1px solid #4cae4c;
+        color: #fff;
+        background-color: #5cb85c;
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border-radius: 4px;
+        text-decoration: none;
+        margin: 10px 0;
+    }
+    hr{ border-top: 1px solid #ddd; margin: 10px 0; width: 100%; height: 1px;}
+</style>
+<h1>SnoozIt</h1>
+<div class="well">
+    <h2>Bienvenue, {{ user }}</h2>
+    <hr />
+    <p>Nous sommes heureux de vous compter parmis nos membre.</p>
+
+    <div class="center">
+        <a href="{{ url('snoozit_dashboard_homepage') }}" class="button">Allez dans votre espace</a>
+    </div>
+    <p>L'équipe Snoozit.</p>
+</div>
+
+<div>
+    <p>
+        You're receiving this message because you're signed up to receive notifications about replies to disqus_PZmEebgc7v.
+        You can <a href="#" class="link">unsubscribe</a> from emails about replies to disqus_PZmEebgc7v by replying to this email with "unsubscribe"
+        or reduce the rate with which these emails are sent by <a href="#">adjusting your notification settings.</a>
+    </p>
+</div>
+

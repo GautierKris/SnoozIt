@@ -1,0 +1,382 @@
+<div class="left-col-dash">
+    <div  id="time-advert">
+        {% if advertList is not empty %}
+            {% for a in advertList %}
+                {% if a.title is defined %}
+                    <section>
+                        <div class="well well-sm box-time-advert">
+                            <div class="box-header">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                            {% if a.userId|userFollow %}
+                                                {% set userFollow = 'followed' %}
+                                            {% else %}
+                                                {% set userFollow = '' %}
+                                            {% endif %}
+                                        {% endif %}
+
+                                        {% if a.guestUsername %}
+                                            <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="Guest" class="img-circle img-responsive avatar pull-left">
+                                        {% else %}
+                                            <img src="{{ asset('uploads/avatar/'~a.avatar) }}" alt="{{ a.username }}" class="img-circle img-responsive avatar pull-left {{ userFollow }}">
+                                        {% endif %}
+
+                                        <h5>
+                                            {% if a.guestUsername %}
+                                                {{ a.guestUsername }}
+                                            {% else %}
+                                                <a href="{{ path('fos_user_profile_show_name', {'username' : a.username}) }}" class="user"> {{ a.username }}
+                                                    <span class="text-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                        <i class="fa fa-star-half-empty"></i>
+                                                    </span>
+                                                </a>
+                                            {% endif %}
+                                            <span class="text-default text-normal">dans la catégorie</span>
+                                            <a href="{{ path('snoozit_platform_show_by_category', {'slug' : a.category_slug}) }}" class="text-grey">{{ a.category }}</a>
+
+
+
+                                        </h5>
+                                        <p class="datetime">{{ a.created|date('d M Y \\à h:i') }} -
+                                            {{ a.departementName }} -
+                                            <a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.city_slug}) }}" class="text-primary">
+                                                {{ a.city }} ({{ a.postal|truncate(2,false,false) }})
+                                            </a>
+                                            {% if a|advertIsNew %}
+                                                <span class="label label-hidden">New</span>
+                                            {% endif %}
+                                        </p>
+
+                                    </div>
+
+                                    <div class="col-md-2 dropdown text-right divNoPadding-left">
+                                        {% include 'SnoozitPlatformBundle:Site/Templating/Annonce:dropdown.html.twig' %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-content">
+                                <div class="col-md-2 thumbnail">
+                                    {% if a.picture_path is not null %}
+                                        <img src="{{ asset('uploads/annonce/'~a.picture_path) }}" alt="..." class="img-responsive">
+                                    {% else %}
+                                        <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-10">
+
+                                    <h4 class="text-primary"><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}">{{ a.title }}</a></h4>
+
+                                    <p class="text-grey text-bold">€ {{ a.price }}</p>
+
+                                    <div class="description row">
+                                        <span class="text-grey col-md-2">Option</span>
+                                <span class="col-md-10 text-lowersize">
+                                    {% if a.delivery %}
+                                        <i class="fa fa-car"></i> <span>Livraison</span>
+                                    {% endif %}
+                                    {% if a.urgent %}
+                                        <i class="fa fa-warning"></i> <span>Urgent</span>
+                                    {% endif %}
+                                    {% if a.espece %}
+                                        <i class="fa fa-euro"></i> <span>Espece</span>
+                                    {% endif %}
+                                    {% if a.paypal %}
+                                        <i class="fa fa-paypal"></i> <span>Paypal</span>
+                                    {% endif %}
+                                </span>
+                                    </div>
+
+                                    <div class="description row">
+                                        <span class="text-grey col-md-2">Description</span>
+                                            <span class="col-md-10">
+                                                 {{ a.description|truncate(100) }}
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </section>
+                {% else %}
+                        {% set u = a %}
+                        <!-- On limite à 5 les affichages -->
+                            <!-- Si le type d'annonce est Abonnement (1) -->
+                            {% if u.type is not null %}
+                                {% if u.type.id == 1 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:abonnement.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Abonnement (1) -->
+
+                                {% if u.type.id == 2 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Abonnement (2) -->
+
+                                {% if u.type.id == 3 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Negoce (3) -->
+
+                                {% if u.type.id == 4 %}
+
+                                {% endif %} <!-- Si le type d'annonce est Systeme (4) -->
+
+                                {% if u.type.id == 5 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Abonnement (5) -->
+
+                                {% if u.type.id == 6 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Abonnement (6) -->
+
+                                {% if u.type.id == 7 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:register.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Abonnement (7) -->
+
+                                {% if u.type.id == 8 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
+
+                                {% if u.type.id == 9 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:userAdvertToHide.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
+
+                            {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+
+            <div class="clearfix" id="dsh-no-follow-box">
+                {% if not app.user.tutonotification %} <!-- Si les notifications pour le tutoriel du départ est à TRUE -->
+                    <div class="well well-sm" id="dsh-message-system">
+
+                        <h4 class="text-bold text-primary text-center">Bienvenue dans votre espace personnel</h4>
+                        <p>Cette espace vous ai dédié, vous y retrouverez toutes les annonces de vos abonnements(régions, départements, villes, catégories et utilisateurs)
+                            et égalements quelques statistiques sur vos annonces.</p>
+                        <hr>
+                        <h4 class="text-grey">Vous pourriez commencer par : </h4>
+                        <div class="row link">
+                            <div class="col-md-6">
+                                <p>- <a href="{{ path('snoozit_add_advert') }}">Poster votre premiere annonce</a></p>
+                                <p>- <a href="{{ path('fos_user_profile_edit') }}">Personnaliser votre profile</a></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>- <a href="#">Chercher un vendeur</a></p>
+                                <p>- <a href="#">Consulter notre guide du débutant</a></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row">
+
+                    {% if app.user.followedRegion is empty %}
+                        <div class="col-xs-6 box-dsh">
+
+                            <div class="well well-sm clearfix">
+
+                                <div class="col-md-4 col-md-offset-4">
+                                    <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="..." class="img-responsive img-circle">
+                                </div>
+
+                                <div class="col-md-12 text-center box">
+                                    <h4 class="text-grey">{{ app.user.city.departement.region.nom }}</h4>
+                                    <p>France</p>
+                                    <p class="text-star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </p>
+
+                                    <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboCityProfile" rel="{{ app.user.city.departement.region.id }}">Ne plus suivre </span>
+                                    <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddCityAbo hidden" id="addCityProfile{{ app.user.city.departement.region.id }}" rel="{{ app.user.city.departement.region.id }}">Suivre </span>
+
+                                </div>
+
+                                <div class="col-md-12  box-footer box">
+                                    <div class="clearfix">
+                                        <div class="col-md-4 ">
+                                            <p>Annonces</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 diviser ">
+                                            <p>Suivis</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 ">
+                                            <p>Abonnés</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>  <!-- well well-sm clearfix -->
+
+                        </div>
+                    {% endif %}
+
+                    {% if app.user.followedDepartement is empty %}
+                        <div class="col-xs-6 box-dsh">
+
+                            <div class="well well-sm clearfix">
+
+                                <div class="col-md-4 col-md-offset-4">
+                                    <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="..." class="img-responsive img-circle">
+                                </div>
+
+                                <div class="col-md-12 text-center box">
+                                    <h4 class="text-grey">{{ app.user.city.departement.nom }}</h4>
+                                    <p>{{ app.user.city.departement.region.nom }}</p>
+                                    <p class="text-star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </p>
+
+                                    <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboCityProfile" rel="{{ app.user.city.departement.id }}">Ne plus suivre </span>
+                                    <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddCityAbo hidden" id="addCityProfile{{ app.user.city.departement.id }}" rel="{{ app.user.city.departement.id }}">Suivre </span>
+
+                                </div>
+
+                                <div class="col-md-12  box-footer box">
+                                    <div class="clearfix">
+                                        <div class="col-md-4 ">
+                                            <p>Annonces</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 diviser ">
+                                            <p>Suivis</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 ">
+                                            <p>Abonnés</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>  <!-- well well-sm clearfix -->
+
+                        </div>
+                    {% endif %}
+
+                    {% if app.user.followedCity is empty %}
+                        <div class="col-xs-6 box-dsh">
+
+                            <div class="well well-sm clearfix">
+
+                                <div class="col-md-4 col-md-offset-4">
+                                    <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="..." class="img-responsive img-circle">
+                                </div>
+
+                                <div class="col-md-12 text-center box">
+                                    <h4 class="text-grey">{{ app.user.city.nom }}</h4>
+                                    <p>{{ app.user.city.departement.nom }}, {{ app.user.city.postal|truncate(2,'',false) }}</p>
+                                    <p class="text-star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </p>
+
+                                    <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboCityProfile" rel="{{ app.user.city.id }}">Ne plus suivre </span>
+                                    <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddCityAbo hidden" id="addCityProfile{{ app.user.city.id }}" rel="{{ app.user.city.id }}">Suivre </span>
+
+                                </div>
+
+                                <div class="col-md-12  box-footer box">
+                                    <div class="clearfix">
+                                        <div class="col-md-4 ">
+                                            <p>Annonces</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 diviser ">
+                                            <p>Suivis</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 ">
+                                            <p>Abonnés</p>
+                                            <p class="text-grey"><strong>0</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>  <!-- well well-sm clearfix -->
+
+                        </div>
+                    {% endif %}
+
+                    <!-- Les utilisateurs -->
+                    {% if oneUserPropose is not null %}
+                        {% if oneUserPropose.id != app.user.id %}
+                            <div class="col-xs-6 box-dsh">
+                                <div class="well well-sm clearfix">
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img src="{{ asset('uploads/avatar/'~oneUserPropose.avatar.path) }}" alt="..." class="img-responsive img-circle">
+                                    </div>
+
+                                    <div class="col-md-12 text-center box">
+                                        <h4 class="text-grey">{{ oneUserPropose.username }}</h4>
+                                        <p>{{ oneUserPropose.city.nom }}, {{ oneUserPropose.city.postal|truncate(2,'',false) }}</p>
+                                        <p class="text-star">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </p>
+
+                                        <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboProfile" rel="{{ oneUserPropose.id }}">Ne plus suivre </span>
+                                        <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddAbo hidden" id="addProfile{{ oneUserPropose.id }}" rel="{{ oneUserPropose.id }}">Suivre </span>
+                                    </div>
+
+                                    <div class="col-md-12  box-footer box">
+                                        <div class="clearfix">
+                                            <div class="col-md-4 ">
+                                                <p>Annonces</p>
+                                                <p class="text-grey"><strong>{{ oneUserPropose|CountUserAdvert }}</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 diviser ">
+                                                <p>Suivis</p>
+                                                <p class="text-grey"><strong>{{ oneUserPropose.getFolloweduser|length }}</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 ">
+                                                <p>Abonnés</p>
+                                                <p class="text-grey"><strong>{{ oneUserPropose.totalFollower}}</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>  <!-- well well-sm clearfix -->
+
+                            </div>
+
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+        {% endif %}
+        {# display navigation #}
+        <div class="navigation text-right">
+            {{ knp_pagination_render(advertList) }}
+        </div>
+    </div>
+</div>

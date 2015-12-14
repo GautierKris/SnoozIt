@@ -1,0 +1,26 @@
+<div  class="row" id="addAnnonce">
+
+    <div class="col-md-12">
+        <!-- Début du formulaire -->
+        <form action="{{ path('snoozit_dashboard_edit_advert', {'advert' : advert.id }) }}" method="post" {{ form_enctype(form) }}>
+
+            <!-- Etape 1 -->
+            <div class="col-md-6">
+                {% include 'SnoozitPlatformBundle:Advert/Edit/Bloc:bloc-one.html.twig' %}
+            </div>
+
+            <!-- Etape 2 -->
+            <div class="col-md-6">
+                {% include 'SnoozitPlatformBundle:Advert/Edit/Bloc:bloc-two.html.twig' %}
+                {% include 'SnoozitPlatformBundle:Advert/Edit/Bloc:bloc_three.html.twig' %}
+            </div>
+
+                {{ form_rest(form) }}
+            <!-- Fin du formulaire -->
+        </form>
+
+        <!-- row -->
+    </div>
+
+    <!-- Container -->
+</div>

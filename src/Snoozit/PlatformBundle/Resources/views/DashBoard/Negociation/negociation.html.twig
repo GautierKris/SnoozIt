@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-2" id="menuLeft-container" >
+        <div  role="navigation" id="menuLeft">
+            {{ render(controller('SnoozitPlatformBundle:Site:categoriesMenu')) }}
+        </div>
+    </div>
+
+    <div class="col-md-10 col-md-offset-2">
+        {# L'espace pour le breadcrumb #}
+        <div class="row">
+            {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+        </div>
+        {% include 'SnoozitPlatformBundle:DashBoard/Negociation:negociation_content.html.twig' %}
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,14 @@
+<div class="nav profile-nav">
+    <ul class="nav nav-pills">
+        <li><a href="{{ path('snoozit_dashboard_homepage') }}">Ma page</a></li>
+        <li {% if( generalActive is defined ) %} class="active" {% endif %}><a href="{{ path('fos_user_profile_edit') }}">Général</a></li>
+        <li {% if( notificationActive is defined ) %} class="active" {% endif %}><a href="{{ path('snoozit_user_notifications_edit') }}">Notifications</a></li>
+        <li {% if( changeavatarActive is defined ) %} class="active" {% endif %}><a href="{{ path('snoozit_dashboard_user_change_avatar') }}">Avatar</a></li>
+        <li {% if( passActive is defined ) %} class="active" {% endif %}><a href="{{ path('fos_user_change_password') }}">Mot de passe</a></li>
+        <li {% if( localisationActive is defined ) %} class="active" {% endif %}><a href="{{ path('snoozit_user_profile_edit_localisation') }}">Localisation</a></li>
+        <li {% if( accountActive is defined  ) %} class="active" {% endif %}><a href="{{ path('snoozit_user_account_upgrade') }}">Compte premium</a></li>
+        <li {% if( abonnementActive is defined  ) %} class="active" {% endif %}><a href="{{ path('snoozit_user_profile_edit_abonnement') }}">Mes abonnements</a></li>
+        <li {% if( abonneActive is defined  ) %} class="active" {% endif %}><a href="{{ path('snoozit_user_profile_edit_abonne') }}">Vos abonnés</a></li>
+        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+    </ul>
+</div>

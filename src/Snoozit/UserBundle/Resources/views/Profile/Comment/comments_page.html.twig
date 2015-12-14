@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div class="col-lg-12"  id="showUseProfile">
+        <div class="row">
+            {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+        </div>
+
+        <div class="well well-sm">
+            {% include "SnoozitUserBundle:Profile/Comment:comments_content_page.html.twig" %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,31 @@
+<div class="container" id="addAnnonce">
+
+    <div class="row">
+        {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+    </div>
+
+    <div class="row">
+        <!-- Début du formulaire -->
+        <form action="{{ path('snoozit_add_advert') }}" method="post" {{ form_enctype(form) }}>
+
+            <!-- Etape 1 -->
+            <div class="col-md-6">
+                {% include 'SnoozitPlatformBundle:Advert/Add/Bloc:bloc-one.html.twig' %}
+            </div>
+
+            <!-- Etape 2 -->
+            <div class="col-md-6">
+                {% include 'SnoozitPlatformBundle:Advert/Add/Bloc:bloc-two.html.twig' %}
+                {% include 'SnoozitPlatformBundle:Advert/Add/Bloc:bloc_three.html.twig' %}
+                {% include 'SnoozitPlatformBundle:Advert/Add/Bloc:guest-block.html.twig' %}
+            </div>
+
+                {{ form_rest(form) }}
+            <!-- Fin du formulaire -->
+        </form>
+
+        <!-- row -->
+    </div>
+
+    <!-- Container -->
+</div>

@@ -1,0 +1,80 @@
+<div class="col-md-10 col-md-offset-1 wlc-container">
+
+    <section>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1><a href="{{ path('snoozit_platform_homepage') }}" class="inherit">SnoozIt</a></h1>
+            </div>
+        </div>
+    </section>
+
+    <section role="search">
+        <div class="row" id="mainSearchContainer">
+            <div class="col-md-12">
+                <form action="{{ path('snoozit_search_engine_catch') }}" class="form-horizontal form-group-sm" method="post">
+                    <div class="row">
+                        <div class="col-md-6 divNoPadding">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-search"></i></span>
+                                {{ form_widget(form.search) }}
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-6 divNoPadding">
+                            {{ form_widget(form.region) }}
+                        </div>
+                        <div class="col-md-2 col-xs-6 divNoPadding">
+                            {{ form_widget(form.category) }}
+                        </div>
+                        <div class="col-md-2 divNoPadding">
+                            <button class="btn btn-sm btn-primary pull-right btn-block" type="submit">Chercher</button>
+                        </div>
+                    </div>
+
+                    {{ form_rest(form) }}
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section role="region">
+        <div class="row">
+            <div class="col-md-6">
+            <div class="mapcontainer">
+                <div class="map">Chargement de la carte...</div>
+            </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="row">
+                    <h3 class="stylised-font">" Achetez, vendez, partagez des milliers d'objets avec la communauté de SnoozIt. "</h3>
+                </div>
+
+                <div class="row">
+                    {% if regions %}
+                        {% for r in regions %}
+                            <div class="col-md-4">
+                                <a href="{{ path('snoozit_platform_show_by_region', {'slug' : r.slug }) }}">{{ r.nom|truncate(20)}}</a>
+                            </div>
+                        {% endfor %}
+                     {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center reg">
+                        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <a href="{{ path('fos_user_registration_register') }}" class="btn btn-default btn-xs">Inscription</a>
+                            <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary btn-xs">Connexion</a>
+                        {% else %}
+                            <a href="{{ path('snoozit_dashboard_homepage') }}" class="btn btn-success btn-xs">Accedez à mon espace</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+

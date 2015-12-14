@@ -1,0 +1,23 @@
+<!-- Nouvelle négoce  -->
+{% if u.type.id == 3 and u.owner == app.user%}
+    <section>
+        <div class="well well-sm userLogsBox text-center" style="border-left-color: #999">
+            <h4 class="text-grey">Nouvelle négociation <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+            <p> <a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}" class="text-grey">{{ u.userAsked.username }} </a> -
+                <a href="{{ path('snoozit_show_advert',{'id' : u.advert.id, 'slug': u.advert.slug}) }}">{{ u.advert.title|truncate(50) }}</a>
+            </p>
+        </div>
+    </section>
+{% endif %}
+
+
+<!-- Refuse négoce  -->
+{% if u.type.id == 8 and u.userAsked.id == app.user.id %}
+    <section>
+        <div class="well well-sm userLogsBox text-center" style="border-left-color: red">
+            <h4 class="text-grey"><span class="text-danger">Négociation échouée </span><span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+            <p> <a href="{{ path('fos_user_profile_show_name', {'username' :  u.userAsked.username}) }}" class="text-grey">{{  u.userAsked.username }} </a> -
+                <a href="{{ path('snoozit_show_advert',{'id' : u.advert.id, 'slug': u.advert.slug}) }}">{{ u.advert.title|truncate(50) }}</a> </p>
+        </div>
+    </section>
+{% endif %}

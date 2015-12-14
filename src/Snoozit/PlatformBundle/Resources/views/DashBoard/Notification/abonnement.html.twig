@@ -1,0 +1,56 @@
+{% if u.user == app.user and u.owner != app.user %}
+    <section>
+        <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
+            <h4 class="text-grey"><a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }} </a>- {{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }} <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+            <p>Je {{ u.content }}! </p>
+        </div>
+    </section>
+{% else %}
+
+    {% if u.user == app.user and u.owner == app.user %}
+
+        {% if u.userAsked is null %}
+            <section>
+                <div class="well well-sm userLogsBox text-center">
+                    {% if u.region is not null %}
+                        {% set abo = u.region.nom %}
+                        {% set aboRoute = 'snoozit_platform_show_by_region' %}
+                        {% set aboSlug = u.region.slug %}
+                    {% endif %}
+
+                    {% if u.departement is not null %}
+                        {% set abo = u.departement.nom %}
+                        {% set aboRoute = 'snoozit_platform_show_by_departement' %}
+                        {% set aboSlug = u.departement.slug %}
+                    {% endif %}
+
+                    {% if u.city is not null %}
+                        {% set abo = u.city.nom %}
+                        {% set aboRoute = 'snoozit_platform_show_by_city' %}
+                        {% set aboSlug = u.city.slug %}
+                    {% endif %}
+
+                    {% if u.category is not null %}
+                        {% set abo = u.category.category %}
+                        {% set aboRoute = 'snoozit_platform_show_by_category' %}
+                        {% set aboSlug = u.category.slug %}
+                    {% endif %}
+
+                    <h4 class="text-grey">Nouvel abonnement <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span>
+                    </h4>
+                    <p> {{ u.content }} <a href="{{ path(aboRoute, {'slug': aboSlug}) }}">{{ abo }}</a> </p>
+                </div>
+            </section>
+        {% else %}
+            <section>
+                <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
+                    <h4 class="text-grey">Abonnement <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                    <p>{{ u.content }} <a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }}</a> de   {{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }}</p>
+                </div>
+            </section>
+        {% endif %}
+
+
+    {% endif %}
+
+{% endif %}

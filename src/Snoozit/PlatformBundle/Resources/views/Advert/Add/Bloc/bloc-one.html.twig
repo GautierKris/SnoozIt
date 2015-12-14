@@ -1,0 +1,222 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>1 | </span> <strong>Descriptif et options</strong>
+        <i class="fa fa-angle-up pull-right fa-2x toggleblock" data-target="blockFirst"></i>
+    </div>
+    <div class="panel-body" id="blockFirst" >
+
+        <!-- Titre de l'annonce -->
+        <div class="form-group">
+
+            {% if form_errors(form.title)|length > 0 %}{% set errors_title = 'has-error' %}{% else %} {% set errors_title = NULL %}{% endif %}
+            <div class="col-xs-12 has-error">
+                {{ form_errors(form.title) }}
+            </div>
+
+            <label for="exampleInputEmail1">Titre de l'annonce</label>
+            <div class="input-group input-group-sm {{ errors_title }}">
+                {{ form_widget(form.title) }}
+                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-tag"></i></span>
+            </div>
+        </div>
+
+        <!-- Zone Localisation -->
+        <div class="row separator">
+            <div class="col-md-2">
+                <h4>Localisation</h4>
+            </div>
+            <div class="col-md-10">
+                <hr/>
+            </div>
+        </div>
+        {% if form.city is defined %}
+        <!-- Région -->
+        <div class="row">
+            {% if form_errors(form.city)|length > 0 %}{% set errors_city = 'has-error' %}{% else %} {% set errors_city = NULL %}{% endif %}
+            {% if form_errors(form.codePostal)|length > 0 %}{% set errors_codepostal = 'has-error' %}{% else %} {% set errors_codepostal = NULL %}{% endif %}
+            <div class="col-xs-12 has-error">
+                {{ form_errors(form.codePostal) }}
+                {{ form_errors(form.city) }}
+            </div>
+
+            <div class="form-group col-md-6 ">
+                {{ form_label(form.codePostal) }}
+                <div class="input-group input-group-sm {{ errors_codepostal }}">
+                    {{ form_widget(form.codePostal, {
+                        'attr' : {
+                            'data-url' : path('ahs_commun_json_codesPostaux')
+                        }} )
+                    }}
+                    <span class="input-group-addon"><i class="fa fa-mail-forward"></i></span>
+                </div>
+
+            </div>
+            <div class="form-group col-md-6">
+                {{ form_label(form.city) }}
+                <div class="input-group input-group-sm {{ errors_city }}">
+                    {{ form_widget(form.city, {
+                        'attr' : {
+                            'data-url' : path('ahs_commun_json_villes')
+                        }} )
+                    }}
+                    <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Departement -->
+
+        <div class="row">
+
+            <!-- Category -->
+            {% if form_errors(form.category)|length > 0 %}{% set errors_category = 'has-error' %}{% else %} {% set errors_category = NULL %}{% endif %}
+            <div class="form-group col-md-12 {{ errors_category }}">
+                <div class="has-error">
+                    {{ form_errors(form.category) }}
+                </div>
+                <label for="exampleInputEmail1">Categorie</label>
+                {{ form_widget(form.category) }}
+            </div>
+        </div>
+
+        <!-- Zone Options -->
+
+        <div class="row separator">
+            <div class="col-md-2">
+                <h4>Options</h4>
+            </div>
+            <div class="col-md-10">
+                <hr/>
+            </div>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="form-group">
+
+            <div class="checkbox-inline">
+                <label>
+                    &nbsp;&nbsp; {{ form_widget(form.paypal) }}
+                    Paypal
+                </label>
+            </div>
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.espece) }}
+                    Espece
+                </label>
+            </div>
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.cheque) }}
+                    Cheque
+                </label>
+            </div>
+
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.urgent) }}
+                    Urgent
+                </label>
+            </div>
+
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.cb) }}
+                    Carte bleu
+                </label>
+            </div>
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.exchange) }}
+                    Echangeable
+                </label>
+            </div>
+
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.delivery) }}
+                    Livraison possible
+                </label>
+            </div>
+
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.commentable) }}
+                    Annonce commentable
+                </label>
+            </div>
+
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.private) }}
+                    Annonce privée
+                </label>
+            </div>
+
+            <div class="checkbox-inline">
+                <label>
+                    {{ form_widget(form.showphone) }}
+                    Masquer mon téléphone
+                </label>
+            </div>
+
+
+        </div>
+
+        <!-- Zone tarification -->
+        <div class="row separator">
+            <div class="col-md-2">
+                <h4>Tarification</h4>
+            </div>
+            <div class="col-md-10">
+                <hr/>
+            </div>
+        </div>
+
+        <!-- Tarif -->
+        <div class="row">
+
+            {% if form_errors(form.price)|length > 0 %}{% set errors_price = 'has-error' %}{% else %} {% set errors_price = NULL %}{% endif %}
+            <div class="col-xs-12 has-error">
+                {{ form_errors(form.price) }}
+            </div>
+            <div class="form-group col-md-5 ">
+                <label for="tarif">Votre prix</label>
+                <div class="input-group input-group-sm {{ errors_price }}">
+                    {{ form_widget(form.price) }}
+                    <span class="input-group-addon"> <i class="fa fa-euro"></i></span>
+                </div>
+            </div>
+
+            <!-- Checkbox negociation -->
+            <div class="form-group col-md-7">
+                <div class="checkbox-inline negociable">
+                    <label for="#">
+                        {{ form_widget(form.negotiable) }}
+                        Prix négociable
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone publication -->
+        <div class="row separator">
+            <div class="col-md-2">
+                <h4>Publication</h4>
+            </div>
+            <div class="col-md-10">
+                <hr/>
+            </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="publication">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <button type="submit" class="btn btn-primary btn-sm">Enregistrer en tant que brouillon</button>
+            {% endif %}
+            <button type="submit" class="btn btn-success btn-sm">Publier cette annonce</button>
+        </div>
+
+    </div>
+</div>

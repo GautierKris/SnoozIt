@@ -1,0 +1,89 @@
+<h2 class="panier-title">Contenu de votre panier</h2>
+
+<div class="row">
+    <div class="col-xs-12 panier-nav">
+        <ul class="nav nav-pills text-bold">
+            <li role="presentation" ><a href="{{ path('snoozit_platform_panier_homepage') }}" class="text-grey">En cours <span class="badge badge-primary">{{ stats.income|length }}</span></a></li>
+            <li role="presentation" ><a href="{{ path('snoozit_platform_panier_page_desistement') }}" class="text-grey">Désistement <span class="badge badge-primary">{{ stats.desist|length }}</span></a></li>
+            <li role="presentation"><a href="{{ path('snoozit_platform_panier_page_refus') }}" class="text-grey">Refus <span class="badge badge-primary">{{ stats.refus|length }}</span></a></li>
+            <li role="presentation" class="active"><a href="{{ path('snoozit_platform_panier_page_finished') }}" class="text-grey">Terminé <span class="badge badge-primary">{{ stats.finish|length }}</span></a></li>
+        </ul>
+    </div>
+</div>
+
+{% if advertList is not empty %}
+    <div class="well well-sm">
+        <div class="userActivity-table">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr class="text-uppercase">
+                    <th class="text-center">#</th>
+                    <th class="text-center col-xs-1">#</th>
+                    <th class="col-xs-3">Auteur</th>
+                    <th class="col-xs-6">Titre de l'annonce</th>
+                    <th class="col-xs-1">Prix</th>
+                    <th class="text-center col-xs-1">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for u in advertList %}
+                    <tr>
+                        <th scope="row" class="text-center removecheckbox">
+                            <label for="">
+                                <input type="checkbox">
+                            </label>
+                        </th>
+                        <td>
+                            {% if u.advert.pictureOne is not null %}
+                                <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="..."
+                                     class="img-responsive">
+                            {% else %}
+                                <img src="{{ asset('uploads/annonce/4ddf6e813832d52e98fe6a735bcb07dd278aca6f.jpeg') }}"
+                                     alt="..." class="img-responsive">
+                            {% endif %}
+                        </td>
+
+                        <td class="user">
+                            <h4>
+                                <a href="{{ path('fos_user_profile_show_name', {'username' : u.advert.user.username}) }}"
+                                   class="text-bold">{{ u.advert.user.username }}</a>
+                                <span class="text-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                                <i class="fa fa-star-half-empty"></i>
+                                </span>
+                            </h4>
+                            <h5>{{ u.advert.user.city.departement.region.nom }}
+                                , {{ u.advert.user.city.departement.nom }}<br>{{ u.advert.user.city.nom }}</h5>
+                        </td>
+
+                        <td class="content">
+                            <span class="text-default text-normal">Catégorie</span>
+                            <a href="{{ path('snoozit_platform_show_by_category', {'slug' : u.advert.category.slug}) }}"
+                               class="text-bold">{{ u.advert.category.category }}</a>
+                            <h4>{{ u.advert.title|truncate(50) }}</h4>
+                        </td>
+
+                        <td class="price">{{ u.advert.price }} €</td>
+
+                        <td class="text-center status">
+                            <a href="#" class="text-info text-bold">{{ u.advertOptionType.type }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+        <h3 class="text-center">Aucune annonce de terminée</h3>
+{% endif %}
+
+{# display navigation #}
+<div class="navigation text-right">
+    {{ knp_pagination_render(advertList) }}
+</div>

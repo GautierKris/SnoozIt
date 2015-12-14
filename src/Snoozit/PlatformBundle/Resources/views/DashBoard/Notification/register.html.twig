@@ -1,0 +1,13 @@
+<section>
+    <div class="well well-sm userLogsBox text-center" style="border-left-color: #0088CC">
+        <h4 class="text-grey">Snoozit <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+        <p> Inscription réussie, il est temps de faire vos courses.</p>
+    </div>
+</section>
+
+<section>
+    <div class="well well-sm userLogsBox text-center" style="border-left-color: #b431eb">
+        <h4 class="text-grey">Nouvel abonnement <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+        <p> Bienvenue dans la région <a href="{{ path('snoozit_platform_show_by_region', {'slug': u.region.slug }) }}">{{ u.region.nom }}</a> </p>
+    </div>
+</section>

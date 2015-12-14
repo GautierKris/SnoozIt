@@ -1,0 +1,51 @@
+snoozit_dashboard_homepage:
+    path:     /
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:index}
+
+snoozit_dashboard_user_advert:
+    path:     /mes-annonces
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:UserAdvert }
+
+snoozit_dashboard_negociation:
+    path:     /negociation-center
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:getNegociationCenter }
+
+snoozit_dashboard_users_hidden:
+    path:     /hidden-user
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:showHiddenUser }
+
+snoozit_dashboard_remove_negociation:
+    path:     /negociation/remove/{id}
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:removeNegociation }
+    requirements:
+        id: \d+
+
+snoozit_dashboard_hidden_user_advert:
+    path:     /hidden-user-advert/{hidden}
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:hiddenUserAdvert }
+    requirements:
+        user: \d+
+        hidden: \d+
+
+snoozit_dashboard_edit_advert:
+    path:     /edit/advert/{advert}
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:editAdvert }
+    requirements:
+        advert: \d+
+
+snoozit_dashboard_user_change_avatar:
+    path: /change-avatar
+    defaults: { _controller: SnoozitUserBundle:ChangeAvatar:changeAvatar }
+
+snoozit_dashboard_remove_welcome_notification:
+    path: /wlc-notification-remove
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:removeWelcomeNotification }
+    requirements:
+        id: \d+
+
+snoozit_dashboard_manage_advert:
+    path: /manager/advert/{advert}
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:mangeAdvert}
+    requirements:
+        advert: \d+
+

@@ -1,0 +1,78 @@
+<div class="col-md-4" id="shop-filters">
+    <h3 class="text-center text-uppercase">Filtres des annonces</h3>
+    <div class="col-md-12 options-choose-container">
+
+        <h5 class="filter-name">Localisation</h5>
+        <div class="box-filters">
+            <div class="well well-sm">
+
+            </div>
+        </div>
+
+        <h5 class="filter-name">Affichage</h5>
+
+        <div class="box-filters">
+            <div class="checkbox">
+                <form action="#" method="post" id="formFilters">
+                    {% set choice1 = '' %}
+                    {% set choice2 = '' %}
+                    {% set choice3 = '' %}
+                    {% if showBy %}
+
+                        {% if choices %}
+                            {% for c in choices %}
+                                {% if c == 1 %}
+                                    {% set choice1 = 'checked' %}
+                                {% elseif c == 2 %}
+                                    {% set choice2 = 'checked' %}
+                                {% elseif c == 3 %}
+                                    {% set choice3 = 'checked' %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <label for="#"><input type="checkbox" name="cBox[]" value = "1" {{ choice1 }}> Uniquement <span class="text-success">{{ showBy.0 }}</span></label>
+                        <label for="#"><input type="checkbox" name="cBox[]" value = "2" {{ choice2 }}> Uniquement <span class="text-info">   {{ showBy.1 }}</span></label>
+                        <label for="#"><input type="checkbox" name="cBox[]" value = "3" {{ choice3 }}> Uniquement <span class="text-warning">{{ showBy.2 }}</span></label>
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <label for="#"><input type="checkbox"> Uniquement <span class="text-primary">{{ showBy.3 }}</span></label>
+                        {% endif %}
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <h5 class="filter-name">Suggestions</h5>
+        <div class="box-filters">
+            <ul class="list-group box-propose">
+                {% if userSuggestion %}
+                    {% for u in userSuggestion %}
+                        <li class="list-group-item clearfix">
+                            <div class="user-propose">
+                                <div class="col-xs-2 divNoPadding">
+                                    {% if loop.index is divisible by(2) %}
+                                        <img class="img-responsive img-circle" src="{{ asset('bundles/snoozitplatform/images/avatars/user-6.jpg') }}" alt="...">
+                                    {% else %}
+                                        <img class="img-responsive img-circle" src="{{ asset('bundles/snoozitplatform/images/avatars/user-4.jpg') }}" alt="...">
+                                    {% endif %}
+                                </div>
+                                <div class="col-xs-9 divNoPadding">
+                                    <h5>{{ u.username }}</h5>
+                                    <p>
+                                        {% if not u.city %}
+                                            Non renseigné
+                                        {% else %}
+                                            {{ u.city }} ({{ u.postal| truncate(2,'',false) }})
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="col-xs-1 divNoPadding ico"><a href="#"><i class="fa fa-plus fa-2x"></i></a></div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</div>

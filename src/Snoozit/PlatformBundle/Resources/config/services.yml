@@ -1,0 +1,285 @@
+parameters:
+    symfony.form.form: Symfony\Component\Form\Form
+
+    sz_snoozit_manager.class: Snoozit\PlatformBundle\Manager\SnoozitManager
+    sz_stats_manager.class: Snoozit\PlatformBundle\Manager\StatsManager
+    sz_search_engine_manager.class: Snoozit\PlatformBundle\Manager\SearchEngineManager
+    sz_userlog_manager.class: Snoozit\PlatformBundle\Manager\UserLogManager
+    sz_advert_hanlder.class: Snoozit\PlatformBundle\Handler\AdvertHandler
+    sz_advert_type.class: Snoozit\PlatformBundle\Form\AdvertType
+    sz_advert_manager.class:  Snoozit\PlatformBundle\Manager\AdvertManager
+    sz_notification_handler.class: Snoozit\PlatformBundle\Handler\NotificationHandler
+    sz_notification_type.class: Snoozit\PlatformBundle\Form\NotificationType
+    sz_advert_comment_handler.class: Snoozit\PlatformBundle\Handler\AdvertCommentHandler
+    sz_advert_comment_type.class: Snoozit\PlatformBundle\Form\AdvertCommentType
+    sz_advert_negoce_type.class:  Snoozit\PlatformBundle\Form\AdvertNegoceType
+    sz_advert_negoce_handler.class: Snoozit\PlatformBundle\Handler\AdvertNegoceHandler
+
+    sz_user_profile_comment_type.class:  Snoozit\PlatformBundle\Form\UserProfileCommentType
+    sz_user_profile_comment_handler.class: Snoozit\PlatformBundle\Handler\UserProfileCommentHandler
+    sz_user_profile_comment_to_comment_type.class:  Snoozit\PlatformBundle\Form\UserProfileCommentToCommentType
+    sz_user_profile_comment_to_comment_handler.class: Snoozit\PlatformBundle\Handler\UserProfileCommentToCommentHandler
+
+    twig_user_interest_extension.class: Snoozit\PlatformBundle\Twig\Extension\UserInterestExtension
+    twig_advert_status_is_desist_extension.class: Snoozit\PlatformBundle\Twig\Extension\InterestStatusIsDesistExtension
+    twig_count_panier_extension.class: Snoozit\PlatformBundle\Twig\Extension\CountPanierExtension
+
+    twig_user_try_negotiate_extension.class: Snoozit\PlatformBundle\Twig\Extension\UserTryNegotiateExtension
+    twig_user_count_advert_picture_extension.class: Snoozit\PlatformBundle\Twig\Extension\CountAdvertPictureExtension
+    twig_user_is_online_extension.class: Snoozit\PlatformBundle\Twig\Extension\UserIsOnline
+    twig_user_follow.extension.class: Snoozit\PlatformBundle\Twig\Extension\UserFollowExtension
+    twig_count_advert_negoce_extension.class: Snoozit\PlatformBundle\Twig\Extension\CountAdvertNegoceExtension
+    twig_count_advert_comment_extension.class: Snoozit\PlatformBundle\Twig\Extension\CountAdvertCommentExtension
+    twig_count_advert_interest_extension.class: Snoozit\PlatformBundle\Twig\Extension\CountAdvertInterestExtension
+    twig_advert_is_new_extension.class: Snoozit\PlatformBundle\Twig\Extension\AdvertIsNewExtension
+    twig_count_user_advert_extension.class: Snoozit\PlatformBundle\Twig\Extension\CountUserAdvertExtension
+    twig_get_region_name_extension.class: Snoozit\PlatformBundle\Twig\Extension\GetRegionNameExtension
+    twig_notification_is_new_extension.class: Snoozit\PlatformBundle\Twig\Extension\NotificationIsNewExtension
+
+    sz_listener_activity.class:  Snoozit\PlatformBundle\Listener\ActivityListener
+    sz_search_engine_handler.class: Snoozit\PlatformBundle\Handler\SearchEngineHandler
+    sz_search_engine_type.class: Snoozit\PlatformBundle\Form\SearchEngineType
+    sz_constraint_guest_username.class: Snoozit\PlatformBundle\Validator\Constraints\GuestUsernameValidValidator
+
+services:
+    sz_user_profile_comment_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %symfony.form.form%
+        arguments:
+            - user_profile_comment
+            - snoozit_platformbundle_userprofilecomment
+
+    sz_user_profile_comment_handler:
+        class: %sz_user_profile_comment_handler.class%
+        arguments: [@sz_user_profile_comment_form, @request_stack, @doctrine.orm.entity_manager, @security.token_storage, @session]
+
+    sz_user_profile_comment_type:
+        class: %sz_user_profile_comment_type.class%
+        arguments: []
+        tags:
+            - { name: form.type, alias: snoozit_platformbundle_userprofilecomment }
+
+    sz_user_profile_comment_to_comment_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %symfony.form.form%
+        arguments:
+            - user_profile_comment_to_comment
+            - snoozit_platformbundle_userprofilecommenttocomment
+
+    sz_user_profile_comment_to_comment_handler:
+            class: %sz_user_profile_comment_to_comment_handler.class%
+            arguments: [@sz_user_profile_comment_to_comment_form, @request_stack, @doctrine.orm.entity_manager, @security.token_storage, @session]
+
+    sz_user_profile_comment_to_comment_type:
+        class: %sz_user_profile_comment_to_comment_type.class%
+        arguments: []
+        tags:
+            - { name: form.type, alias: snoozit_platformbundle_userprofilecommenttocomment }
+
+    sz_notification_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %symfony.form.form%
+        arguments:
+            - notification
+            - snoozit_platformbundle_notification
+
+    sz_notification_handler:
+        class: %sz_notification_handler.class%
+        arguments: [@sz_notification_form, @request_stack, @doctrine.orm.entity_manager, @security.token_storage, @session]
+
+    sz_notification_type:
+        class: %sz_notification_type.class%
+        arguments: []
+        tags:
+            - { name: form.type, alias: snoozit_platformbundle_notification }
+
+    sz_constraint_guest_username:
+        class: %sz_constraint_guest_username.class%
+        arguments: [@doctrine.orm.entity_manager, @request_stack]
+        tags:
+            - { name: validator.constraint_validator, alias: sz_guest_username_validator }
+
+    sz_search_engine_manager:
+        class: %sz_search_engine_manager.class%
+        arguments: [@doctrine.orm.entity_manager, @request_stack, @security.token_storage, @session, @router]
+
+    sz_advert_manager:
+        class: %sz_advert_manager.class%
+        arguments: [@doctrine.orm.entity_manager, @request_stack, @security.token_storage, @session, @router,@service_container]
+
+    sz_search_engine_handler:
+        class: %sz_search_engine_handler.class%
+        arguments: [@sz_search_engine_handler_form, @doctrine.orm.entity_manager, @request_stack, @security.token_storage, @session]
+
+    sz_search_engine_handler_type:
+        class: %sz_search_engine_type.class%
+        arguments: []
+        tags:
+            - { name: form.type, alias: snoozit_platformbundle_searchengine }
+
+    sz_search_engine_handler_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %symfony.form.form%
+        arguments:
+            - search_engine
+            - snoozit_platformbundle_searchengine
+
+    sz_listener_activity:
+        class: %sz_listener_activity.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage, @event_dispatcher]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    twig_user_count_advert_picture_extension:
+        class: %twig_user_count_advert_picture_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_count_panier_extension:
+        class: %twig_count_panier_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_user_interest_extension:
+        class: %twig_user_interest_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_advert_status_is_desist_extension:
+        class: %twig_advert_status_is_desist_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_user_try_negotiate_extension:
+        class: %twig_user_try_negotiate_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_user_is_online_extension:
+        class: %twig_user_is_online_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_user_follow_extension:
+        class: %twig_user_follow.extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_count_advert_negoce_extension:
+        class: %twig_count_advert_negoce_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_count_advert_interest_extension:
+        class: %twig_count_advert_interest_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_count_advert_comment_extension:
+        class: %twig_count_advert_comment_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_advert_is_new_extension:
+        class: %twig_advert_is_new_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_count_user_advert_extension:
+        class: %twig_count_user_advert_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_get_region_name_extension:
+        class: %twig_get_region_name_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_notification_is_new_extension:
+        class: %twig_notification_is_new_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    sz_snoozit_manager:
+        class: %sz_snoozit_manager.class%
+        arguments: []
+
+    sz_userlog_manager:
+        class: %sz_userlog_manager.class%
+        arguments: [@doctrine.orm.entity_manager, @request_stack, @security.token_storage, @session, @router]
+
+    sz_stats_manager:
+        class: %sz_stats_manager.class%
+        arguments: [@doctrine.orm.entity_manager, @request_stack, @security.token_storage, @session, @router]
+
+    sz_advert_negoce_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class:  %symfony.form.form%
+        arguments:
+            - advert_negoce
+            - snoozit_platformbundle_advertnegoce
+
+    sz_advert_negoce_type:
+        class: %sz_advert_negoce_type.class%
+        arguments: []
+        tags:
+            - { name: form.type, alias: snoozit_platformbundle_advertnegoce }
+
+    sz_advert_negoce_handler:
+        class: %sz_advert_negoce_handler.class%
+        arguments: [@sz_advert_negoce_form, @doctrine.orm.entity_manager, @request_stack, @security.token_storage, @session, @service_container]
+
+    sz_advert_comment_handler:
+        class: %sz_advert_comment_handler.class%
+        arguments: [ @sz_advert_comment_form , @doctrine.orm.entity_manager, @request_stack, @security.token_storage, @session ]
+
+    sz_advert_form_type:
+        class: %sz_advert_comment_type.class%
+        arguments: []
+        tags:
+            -  { name: form.type, alias: snoozit_platformbundle_advertcomment }
+
+    sz_advert_comment_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %symfony.form.form%
+        arguments:
+            - advertComment
+            - snoozit_platformbundle_advertcomment
+
+    sz_advert_handler:
+        class: %sz_advert_hanlder.class%
+        arguments: [@sz_advert_form, @request_stack, @doctrine.orm.entity_manager, @security.token_storage]
+
+    sz_advert_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %symfony.form.form%
+        arguments:
+            - advert
+            - snoozit_platformbundle_advert
+
+    sz_advert_type:
+        class: %sz_advert_type.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage, @request_stack]
+        tags:
+            - { name: form.type, alias: snoozit_platformbundle_advert }

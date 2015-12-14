@@ -1,0 +1,30 @@
+<div class="container">
+
+    <div class="row" id="breadcrumb" role="navigation">
+        {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+    </div>
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+
+            <h2 class="text-center stylised-font text-primary">Cette annonce ne peut pas être modifiée.</h2>
+            <p class="help-block text-center"> {{ advert.title }} </p>
+
+            <hr />
+
+            <div class="has-error">
+                    <p class="text-center" style="background: indianred; border: 1px solid #d9534f; color: #fff;">
+                    Cette annonce appartient à un membre de Snoozit, elle doit être modifier par l'interface de gestion d'annonce.
+                    </p>
+            </div>
+
+            <hr />
+
+            <div class="text-center">
+                    <a class="btn btn-primary btn-sm" href="{{ path('snoozit_platform_homepage') }}">Retour à l'accueil</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

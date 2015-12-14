@@ -1,0 +1,71 @@
+{# L'espace pour le breadcrumb #}
+<div class="row">
+    {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+</div>
+
+<div class="well well-sm" id="globalstats">
+    <div class="clearfix text-center">
+
+        <a class="col-md-2" href="{{ path('snoozit_dashboard_negociation') }}">
+            <h5 >Négociation</h5>
+            <p class="text-grey">{{ stats.inNegoce }}</p>
+        </a>
+        <a class="col-md-2" href="{{ path('snoozit_dashboard_interest') }}">
+            <h5>Interet</h5>
+            <p class="text-primary">{{ stats.totalinterest }}</p>
+        </a>
+        <a class="col-md-2" href="{{ path('snoozit_user_profile_edit_abonne') }}">
+            <h5>Abonné</h5>
+            <p class="text-success"> {{ app.user.totalFollower }}</p>
+        </a>
+        <a class="col-md-2" href="#">
+            <h5>Gagné</h5>
+            <p class="text-success">€ {{ stats.successAmount }}</p>
+        </a>
+        <a class="col-md-2" href="#">
+            <h5>Dépensé</h5>
+            <p class="text-danger">€ 0</p>
+        </a>
+        <a class="col-md-2" href="#">
+            <h5>Reste</h5>
+            <p class="text-primary">€ {{ stats.toSell }}</p>
+        </a>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        {% if app.user.tutonotification %} <!-- Si les notifications pour le tutoriel du départ est à TRUE -->
+            <div class="well well-sm" id="dsh-message-system">
+
+                <h4 class="text-bold text-primary text-center">Bienvenue dans votre espace personnel</h4>
+                <p>Cette espace vous ai dédié, vous y retrouverez toutes les annonces de vos abonnements(régions, départements, villes, catégories et utilisateurs)
+                    et égalements quelques statistiques sur vos annonces.</p>
+                <hr>
+                <h4 class="text-grey">Vous pourriez commencer par : </h4>
+                <div class="row link">
+                    <div class="col-md-6">
+                        <p>- <a href="{{ path('snoozit_add_advert') }}">Poster votre premiere annonce</a></p>
+                        <p>- <a href="{{ path('fos_user_profile_edit') }}">Personnaliser votre profile</a></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>- <a href="#">Chercher un vendeur</a></p>
+                        <p>- <a href="#">Consulter notre guide du débutant</a></p>
+                    </div>
+                </div>
+                <div class="fadetext">
+                    <p class="text-default text-center ">Cette information s'effacera au bout de 24 heures. -
+                        <a href="{{ path('snoozit_dashboard_remove_welcome_notification') }}">Effacer maintenant</a>
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+        {% include 'SnoozitPlatformBundle:DashBoard/Activity:dsh-timeline.html.twig' %}
+    </div>
+    <div class="col-md-5 sc-stats-box divNoPadding-left">
+        {#{% include 'SnoozitPlatformBundle:DashBoard/Interest:dsh_interest.html.twig' %}#}
+        {% include 'SnoozitPlatformBundle:Dashboard/Activity:stats.html.twig' %}
+        {% include 'SnoozitPlatformBundle:DashBoard/UserPropose:userPropose.html.twig' %}
+    </div>
+</div>

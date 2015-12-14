@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-md-7 divNoPadding-right" id="dsh-no-follow-box">
+        <div class="box-content">
+            <div class="row">
+                {% if hiddenUserAdvert|length > 0 %}
+                    <h3 class="text-center">Liste des ignorés</h3>
+                    {% for u in hiddenUserAdvert %}
+                        <div class="col-md-6 box-dsh">
+                            <div class="well well-sm clearfix ">
+
+                                <div class="row">
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img src="{{ asset('uploads/avatar/'~u.avatar.path) }}" alt="..." class="img-responsive img-circle">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 text-center box">
+                                    <h4 class="text-grey">{{ u.username }}</h4>
+                                    <p>{{ u.city.nom }}, {{ u.city.postal|truncate(2,'',false) }}</p>
+                                    <p class="text-star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </p>
+                                    <div class="clearfix">
+                                        <div class="col-md-6">
+                                            <a href="{{ path('snoozit_dashboard_hidden_user_advert', {'hidden': u.id }) }}" class="btn btn-xs btn-warning btn-block">Ne plus ignorés </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="{{ path('snoozit_follow_user', {'id' : u.id}) }}" class="btn btn-xs btn-success btn-block">Ne plus suivre </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12  box-footer box">
+                                    <div class="clearfix">
+                                        <div class="col-md-4 ">
+                                            <p>Annonces</p>
+                                            <p class="text-grey"><strong>{{ u|CountUserAdvert }}</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 diviser ">
+                                            <p>Suivis</p>
+                                            <p class="text-grey"><strong>{{ u.getFolloweduser|length }}</strong></p>
+                                        </div>
+
+                                        <div class="col-md-4 ">
+                                            <p>Abonnés</p>
+                                            <p class="text-grey"><strong>{{ u.totalFollower}}</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>  <!-- well well-sm clearfix -->
+
+                        </div> <!-- col-md-6-->
+                    {% endfor %}
+                {% else %}
+                    <h3>Vous ne suivez aucune personne  pour le moment</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        {% if app.user.userLogs is not empty %}
+            <h4 class="title">Console logs:</h4>
+            <div class="list-group" id="dsh-notifications">
+                {% for u in app.user.userLogs %}
+                    <!-- On limite à 5 les affichages -->
+                    {% if loop.index < 20 %}
+                        <!-- Si le type d'annonce est Abonnement (5) -->
+                        {% if u.type is not null %}
+                            {% if u.type.id == 9 %}
+                                {% include 'SnoozitPlatformBundle:DashBoard/Notification:userAdvertToHide.html.twig' %}
+                            {% endif %} <!-- Si le type d'annonce est Abonnement (2) -->
+                        {% endif %}
+                    {% endif %} <!-- On limite à 5 les affichages -->
+
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

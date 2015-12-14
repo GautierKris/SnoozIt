@@ -1,0 +1,9 @@
+snoozit_platform_homepage:
+    path:     /
+    defaults: { _controller: SnoozitPlatformBundle:Site:index }
+
+snoozit_platform_welcome:
+    path:     /welcome
+    defaults: { _controller: SnoozitPlatformBundle:Site:welcome }
+
+

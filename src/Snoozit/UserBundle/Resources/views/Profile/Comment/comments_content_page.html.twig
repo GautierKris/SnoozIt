@@ -1,0 +1,61 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% include 'SnoozitUserBundle:Profile/Comment:user_request_profile.html.twig' %}
+
+<div class="col-xs-9  profile-infos">
+
+    <div class="activity">
+        <div class="pull-right">
+            <a href="{{ path('fos_user_profile_show_name', {'username' : user.username}) }}" class="btn btn-primary btn-rounded btn-xs">Profile de {{ user.username }}</a>
+        </div>
+        <h3>Activités {{ user.username }}:</h3>
+        <p>Derniere activité: {{ user.lastActivity|date("d M Y \\à\\ H:i \\m\\i\\n") }}</p>
+        <p>Dernier commentaire: <a href="{{ path('fos_user_profile_show_name', {'username' : lastComment.user.username}) }}">{{ lastComment.user.username }}</a> - {{ lastComment.created|date("d M Y \\à\\ H:i \\m\\i\\n") }} -
+            <a href="{{ path('fos_user_profile_show_comment', {'user': user.id , 'id' : lastComment.id }) }}"> <em>Voir</em></a>
+        </p>
+    </div>
+    <hr />
+
+    {% if comments %}
+        {% for c in comments %}
+                <div class="col-md-12 profile-comment">
+                    <img src="{{ asset('uploads/avatar/'~c.user.avatar.path) }}" alt="..." class="img-responsive img-circle pull-left">
+                    <h4>
+                        <a href="{{ path('fos_user_profile_show_name', {'username' : c.user.username}) }}" class="user"> {{ c.user.username }}
+                            <span class="text-star">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <i class="fa fa-star-half-empty"></i>
+                        </span>
+                        </a>
+                        -
+                        {{ c.created|date('d/m/y \\à\ h:i') }}
+                        <span class="pull-right">
+                            <i class="fa fa-comments"></i> {{ c.commentToComments|length }} commentaires
+                        </span>
+                        <br/>
+                        <span >
+                        <a href="{{ path('snoozit_platform_show_by_region', {'slug' :c.user.city.departement.region.slug }) }}">{{ c.user.city.departement.region.nom }}</a> -
+                        <a href="{{ path('snoozit_platform_show_by_departement', {'slug' :c.user.city.departement.slug }) }}">{{ c.user.city.departement.nom }}</a> -
+                        <a href="{{ path('snoozit_platform_show_by_city', {'slug' :c.user.city.slug }) }}">{{ c.user.city.nom }}</a> -
+                        <a href="{{ path('snoozit_platform_show_by_city', {'slug' :c.user.city.slug }) }}">{{ c.user.city.postal }}</a>
+                    </span>
+                    </h4>
+                    <a href="{{ path('fos_user_profile_show_comment', {'user': c.userProfile.id ,'id': c.id}) }}" class="text-grey">
+                        <blockquote>
+                            {{ c.content|truncate(300)|nl2br }}
+                        </blockquote>
+                    </a>
+                </div>
+        {% endfor %}
+    {% endif %}
+    {# display navigation #}
+    <div class="navigation text-right">
+        {{ knp_pagination_render(comments) }}
+    </div>
+</div>
+
+
+

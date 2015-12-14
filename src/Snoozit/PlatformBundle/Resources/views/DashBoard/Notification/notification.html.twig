@@ -1,0 +1,52 @@
+{% if app.user.userLogs is not empty %}
+    <div class="list-group" id="dsh-notifications">
+
+        {% for u in app.user.userLogs %}
+
+            <!-- On limite à 5 les affichages -->
+            {% if loop.index < 5 %}
+                <!-- Si le type d'annonce est Abonnement (1) -->
+                {% if u.type is not null %}
+                    {% if u.type.id == 1 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:abonnement.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Abonnement (1) -->
+
+                    {% if u.type.id == 2 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Abonnement (2) -->
+
+                    {% if u.type.id == 3 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Negoce (3) -->
+
+                    {% if u.type.id == 4 %}
+
+                    {% endif %} <!-- Si le type d'annonce est Systeme (4) -->
+
+                    {% if u.type.id == 5 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Abonnement (5) -->
+
+                    {% if u.type.id == 6 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Abonnement (6) -->
+
+                    {% if u.type.id == 7 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:register.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Abonnement (7) -->
+
+                    {% if u.type.id == 8 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
+
+                    {% if u.type.id == 9 %}
+                        {% include 'SnoozitPlatformBundle:DashBoard/Notification:userAdvertToHide.html.twig' %}
+                    {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
+
+                {% endif %}
+            {% endif %} <!-- On limite à 5 les affichages -->
+
+        {% endfor %}
+    </div>
+{% endif %}
+

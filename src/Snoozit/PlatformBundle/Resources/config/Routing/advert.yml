@@ -1,0 +1,69 @@
+snoozit_show_advert:
+    path:     /{id}/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:show }
+    requirements:
+        id: \d+
+
+snoozit_add_advert:
+    path:     /add
+    defaults: { _controller: SnoozitPlatformBundle:Advert:add }
+
+snoozit_security_access:
+    path:     /security-access/{advert}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:securityAccess }
+
+snoozit_advert_region_filter:
+    path: /region-filter
+    defaults: { _controller: SnoozitPlatformBundle:Site:regionFilters }
+
+snoozit_change_combinaison:
+    path:     /security-access/change-combinaison/{advert}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:changeCombinaison }
+
+snoozit_change_combinaison_success:
+    path:     /security-access/change-combinaison-success/{advert}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:changeCombinaisonSuccess }
+
+snoozit_edit_advert_error_user:
+    path:     /security-access/{advert}/edit-error/
+    defaults: { _controller: SnoozitPlatformBundle:Advert:editAdvertErrorUser }
+
+snoozit_edit_advert:
+    path:     /edit/{advert}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:edit }
+
+snoozit_interest_advert:
+    path: /interestedBy/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:interestedBy }
+    requirements:
+        id: \d+
+
+snoozit_platform_show_by_region:
+    path: /region/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:showByRegion }
+
+snoozit_platform_show_by_departement:
+    path: /departement/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:showByDepartement }
+
+snoozit_platform_remove_filters:
+    path: /remove-filters
+    defaults: { _controller: SnoozitPlatformBundle:Site:regionFilters }
+
+snoozit_platform_show_by_city:
+    path: /city/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:showByCity }
+
+snoozit_platform_show_by_category:
+    path: /category/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:Advert:showByCategory }
+
+ahs_commun_json_villes:
+    pattern: /json/villes
+    defaults: { _controller: SnoozitPlatformBundle:Json:city }
+
+ahs_commun_json_codesPostaux:
+    pattern: /json/codesPostaux
+    defaults: { _controller: SnoozitPlatformBundle:Json:codesPostaux }
+
+

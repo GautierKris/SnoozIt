@@ -1,0 +1,12 @@
+<section>
+    <div class="well well-sm userLogsBox text-center" style="border-left-color: #0088CC">
+        <h4 class="text-grey">Réglages du compte
+    <span class="text-default text-normal">- <a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username }) }}">{{ u.userAsked.username }}</a> -
+        {{ u.created|date('d M Y à H:i') }}</span>
+            {% if u.created|NotificationIsNew %}
+                <span class="label label-hidden">New</span>
+            {% endif %}
+        </h4>
+        <p> {{ u.content }}</p>
+    </div>
+</section>

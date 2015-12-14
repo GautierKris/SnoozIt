@@ -1,0 +1,25 @@
+<div class="col-md-12 avatar text-center">
+    <div class="col-md-6 col-md-offset-3">
+        <img src="{{ asset('uploads/avatar/'~app.user.avatar.path) }}" alt="..." class="img-circle img-responsive img-thumbnail">
+    </div>
+</div>
+<div class="col-md-12 text-center">
+    <h2>{{ app.user.username }}</h2>
+    <a href="#" class="btn btn-xs btn-primary btn-rounded">Devenir Premium</a>
+    <hr />
+    <h3 class="text-primary">Localisation</h3>
+    <p>
+        {{ app.user.city.departement.region.nom }} <br>
+        {{ app.user.city.departement.nom }} <br>
+        {{ app.user.city.nom }} ({{ app.user.city.postal|truncate(2, '', false) }})
+    </p>
+    <h3 class="text-primary">Niveau</h3>
+    <p class="text-star">
+        <i class="fa fa-star "></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-half-empty"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+    </p>
+    <p>153 Votes</p>
+</div>

@@ -1,0 +1,84 @@
+<div class="row">
+    <div id="time-advert">
+    {% if advertList %}
+        {% for a in advertList %}
+            <section>
+                <div class="col-md-8">
+                    <div class="well well-sm box-time-advert">
+
+                        <div class="box-header">
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <img src="{{ asset('uploads/avatar/'~a.avatar) }}" alt="..." class="img-circle img-responsive avatar pull-left" >
+                                    <h5>
+                                        <a href="{{ path('fos_user_profile_show_name', {'username' : a.username}) }}" class="user"> {{ a.username }}</a>
+                                        <span class="text-default text-normal">dans la catégorie</span> {{ a.category }}
+                                    </h5>
+                                    <p class="datetime">{{ a.created|date('d M Y \\à h:i') }}
+                                        {% if a|advertIsNew %}
+                                            <span class="label label-hidden">New</span>
+                                        {% endif %}
+                                    </p>
+
+                                </div>
+
+                                <div class="col-md-4 text-right">
+                                    <a class="btn btn-sm btn-primary" href="{{ path('snoozit_dashboard_manage_advert', {'advert' : a.id})  }}">Afficher plus</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-content">
+                            <div class="col-md-2 thumbnail">
+                                {% if a.picture_path is not null %}
+                                    <img src="{{ asset('uploads/annonce/'~a.picture_path) }}" alt="..." class="img-responsive">
+                                {% else %}
+                                    <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-10">
+
+                                <h4 class="text-primary">{{ a.title }}</h4>
+                                <p class="text-grey text-bold">€ {{ a.price }}</p>
+
+                                <div class="description row">
+                                    <span class="text-grey col-md-2">Option</span>
+                                <span class="col-md-10 text-lowersize">
+                                    {% if a.delivery %}
+                                        <i class="fa fa-car"></i> <span>Livraison</span>
+                                    {% endif %}
+                                    {% if a.urgent %}
+                                        <i class="fa fa-warning"></i> <span>Urgent</span>
+                                    {% endif %}
+                                </span>
+                                </div>
+
+                                <div class="description row">
+                                    <span class="text-grey col-md-2">Description</span>
+                                <span class="col-md-10">
+                                     {{ a.description|truncate(100) }}
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 divNoPadding-left">
+                    <ul class="list-group">
+                        <li class="list-group-item clearfix"><span class="col-md-8"> Négociation en cours :</span><a class="col-md-4 text-center" href="#">{{ a.id|countAdvertNegoce }}</a> </li>
+                        <li class="list-group-item clearfix"><span class="col-md-8"> Utilisateur interessé :</span><a class="col-md-4 text-center" href="#">{{ a.id|countAdvertInterest }}</a> </li>
+                        <li class="list-group-item clearfix"><span class="col-md-8"> Commentaire :</span><a class="col-md-4 text-center" href="{{ path('snoozit_show_advert',{'id' : a.id, 'slug' : a.slug}) }}">{{ a.id|countAdvertComment }}</a> </li>
+                        <li class="list-group-item clearfix"><span class="col-md-8"> Nombre de visite :</span><span class="col-md-4 text-center">{{ a.views }}</span> </li>
+                        <li class="list-group-item clearfix"><span class="col-md-8"> Modifier :</span><a class="col-md-4 text-center" href="{{ path('snoozit_dashboard_edit_advert', {'advert' : a.id}) }}"><i class="fa fa-edit text-success"></i></a> </li>
+                    </ul>
+                </div>
+            </section>
+        {% endfor %}
+    {% else %}
+        <h3 class="text-grey text-center">Aucune annonce pour le moment.</h3>
+    {% endif %}
+</div>
+</div>

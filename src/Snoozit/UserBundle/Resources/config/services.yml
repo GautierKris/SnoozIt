@@ -1,0 +1,16 @@
+parameters:
+    snoozit_registration_form.type.class: Snoozit\UserBundle\Form\Type\RegistrationFormType
+    snoozit_user.profile.form.type.class: Snoozit\UserBundle\Form\Type\ProfileFormType
+
+services:
+    snoozit_user.registration.form.type:
+        class: %snoozit_registration_form.type.class%
+        arguments: [%fos_user.model.user.class%, @doctrine.orm.entity_manager]
+        tags:
+          - { name: form.type, alias: snoozit_user_registration }
+
+    snoozit_user.profile.form.type:
+            class: %snoozit_user.profile.form.type.class%
+            arguments: [%fos_user.model.user.class%]
+            tags:
+                - { name: form.type, alias: snoozit_user_profile }

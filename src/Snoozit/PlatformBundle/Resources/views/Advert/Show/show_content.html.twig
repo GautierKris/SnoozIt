@@ -1,0 +1,224 @@
+
+<div class="row" id="breadcrumb" role="navigation">
+    {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+</div>
+<div class="row" id="show-annonce" role="contentinfo">
+    <div class="col-xs-12">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-5 col-xs-12">
+                    <div class="thumbnail bigPic">
+                        {% if advert.pictures %}
+                            {% if advert.pictures.0.path is not null %}
+                                <img src="{{ asset('uploads/annonce/'~advert.pictures.0.path) }}" alt="..." class="img-responsive">
+                            {% else %}
+                                <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                            {% endif %}
+                        {% else %}
+                            <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                        {% endif %}
+                    </div>
+                    <div class="thumbnail-min">
+                        <div class="row">
+
+                            <div class="col-xs-12">
+
+                                {% if advert.pictures %}
+
+                                    {% set count = 1%}
+
+                                    {% for p in advert.pictures if (p.path is not null) %}
+                                        <div class="col-md-2 col-xs-4 box-img">
+                                            <div class="well well-sm">
+                                                <img src="{{ asset('uploads/annonce/'~p.path) }}" alt="..." class="img-responsive" />
+                                            </div>
+                                        </div>
+                                        {% set count = count+1 %}
+                                    {% endfor %}
+
+                                    {% for i in count..5 %}
+                                        <div class="col-md-2 col-xs-4 box-img">
+                                            <div class="well well-sm">
+                                                <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                {% else %}
+                                    {% for i in 0..4 %}
+                                        <div class="col-md-2 col-xs-4 box-img">
+                                            <div class="well well-sm">
+                                                <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-xs-12">
+                    <div class="box-show-content">
+
+                        <div class="row">
+                            <div class="col-md-10 box-content">
+                                <div class="content-header box">
+                                    <h3>{{ advert.title }}</h3>
+                                    <ul class="list-inline ">
+                                        <li><a href="{{ path('snoozit_platform_show_by_city', {'slug' : advert.city_slug}) }}" class="normal-link">{{ advert.city~' ('~advert.postal~')' }}</a></li>
+                                        <li><a href="{{ path('snoozit_platform_show_by_category', {'slug' : advert.category_slug}) }}" class="normal-link">{{ advert.category }}</a></li>
+                                        <li>{% if advert.delivery %} Livraison possible {% endif %}</li>
+                                        <li>{% if advert.urgent %} <i class="fa fa-warning text-danger"></i> Urgent{% endif %}</li>
+                                    </ul>
+                                </div>
+                                <div class="content-infos box">
+                                    <div class="row">
+                                        <div class="col-xs-7">
+                                            {% if advert.negotiate %}
+                                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                                    {% if app.user.id != advert.user.userId %}
+                                                        {% if advert.user.userId|UserTryNegotiate %}
+                                                            <button class="btn btn-primary btn-sm">Négociation en cours..</button>
+                                                        {% else %}
+                                                            <a href="#" class="btn btn-warning btn-sm negociate btn-hidden-form" data-target="#hidden-form-negoce">Tentez la négociation</a>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <a href="#" class="btn btn-warning btn-sm">Afficher les négociations</a>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <a href="#" class="btn btn-warning btn-sm negociate btn-hidden-form" data-target="#hidden-form-negoce">Tentez la négociation</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <span class="btn btn-warning btn-sm negociate">Non négociable</span>
+                                            {% endif %}
+                                            <p class="share">Partager cette annonce</p>
+                                            <ul class="list-inline">
+                                                <li class="case col-xs-1"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li class="case col-xs-1"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li class="case col-xs-1"><a href="#"><i class="fa fa-mail-forward"></i></a></li>
+                                                <li class="case col-xs-1"><a href="#"><i class="fa fa-eject"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-5 price">
+                                            <p>{{ advert.price }}€</p>
+                                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                                {% if app.user.id != advert.user.userId  %}
+                                                    {% if not advert.user.isGuest %}
+                                                        {% if advert.id|UserIsInterestBy %}
+                                                            {% if advert.id|InterestStatusIsDesist %}
+                                                                <a class="btn btn-danger btn-sm" id="interest-btn" href="#"> Vous vous êtes désisté</a>
+                                                            {% else %}
+                                                                    <a class="btn btn-default btn-sm" id="interest-btn" href="{{ path('snoozit_interest_advert', {'id' : advert.id }) }}"> <i class="fa fa-check"></i> Interet transmis</a>
+                                                            {% endif %}
+                                                        {% elseif not advert.id|UserIsInterestBy %}
+                                                            <a class="btn btn-success btn-sm" id="interest-btn" href="{{ path('snoozit_interest_advert', {'id' : advert.id }) }}">Ca m'interesse!</a>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <a class="btn btn-success btn-sm btn-hidden-form" data-target="#hidden-form-interested">Ca m'interesse!</a>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <a class="btn btn-success btn-sm" href="{{ path('snoozit_dashboard_edit_advert', {'advert' : advert.id}) }}">Gérer mon annonce</a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a class="btn btn-success btn-sm btn-hidden-form" data-target="#hidden-form-interested">Ca m'interesse!</a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-xs-12 paiement">
+                                            <p>Paiement:
+                                                {% if not advert.paypal %} <i class="fa fa-paypal text-primary"></i> Paypal  {% endif %}
+                                                {% if not advert.cheque %} <i class="fa fa-hand-paper-o text-primary"></i> Cheque  {% endif %}
+                                                {% if not advert.cb %} <i class="fa fa-credit-card text-primary"></i> CB {% endif %}
+                                                {% if advert.espece %} <i class="fa fa-money text-primary"></i> Espece {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Formulaire de négociation -->
+                                {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') or advert.user.isGuest %}
+                                    {% include 'SnoozitPlatformBundle:Advert/Show:interested-form.html.twig' %}
+                                {% endif %}
+
+                                {% include 'SnoozitPlatformBundle:Advert/Show:negotiate-form.html.twig' %}
+
+                                <!-- Fin du formulaire --->
+
+                                <div class="content-description box">
+                                    <p>
+                                        {{ advert.description|nl2br }}
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-0 col-xs-6 col-xs-offset-3 box-owner">
+                                <aside>
+
+                                    {% if advert.user.isGuest %}
+                                        {% include 'SnoozitPlatformBundle:Advert/Show:aside-guest.html.twig' %}
+                                    {% else %}
+                                        {% include 'SnoozitPlatformBundle:Advert/Show:aside-user.html.twig' %}
+                                    {% endif %}
+
+                                </aside>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="show-annonce-content" role="complementary">
+
+    <div class="col-xs-6 comment-box">
+
+        <h3>Commentaires</h3>
+
+        {% include 'SnoozitPlatformBundle:Advert/Show:AdvertComment.html.twig' %}
+
+    </div>
+    <div class="col-xs-6 propose-box">
+
+        <h3>Ca peut vous interesser</h3>
+        {% if advertListToPropose %}
+            {% for a in advertListToPropose %}
+                <section>
+                    <div class="clearfix box">
+                        <div class="col-xs-1 divNoPadding">
+                            {% if a.picture_path is not null %}
+                                <img src="{{ asset('uploads/annonce/'~a.picture_path) }}" alt="{{ a.user.username }}" class="img-responsive img-thumbnail">
+                            {% else %}
+                                <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="{{ a.user.username }}"  class="img-responsive img-thumbnail">
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-9">
+                            <h4>
+                                <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username}) }}" >{{ a.user.username }}</a> -
+                                <a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug': a.slug}) }}" >{{ a.title|truncate(30,'...', true) }} </a></h4>
+                            <p><a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.city_slug}) }}" class="normal-link">{{ a.city~' ('~a.postal~')' }} </a>-
+                                <a href="{{ path('snoozit_platform_show_by_category', {'slug' : a.category_slug}) }}" class="normal-link">{{ a.category }}</a></p>
+                            <p>{{ a.description|truncate(80) }}</p>
+                        </div>
+
+                        <div class="col-xs-2 text-right">
+                            <span>
+                                <i class="fa fa-star text-star"></i>
+                                <i class="fa fa-star text-star"></i>
+                                <i class="fa fa-star text-star"></i></span>
+                            <p class="price">{{ a.price }}€</p>
+                        </div>
+                    </div>
+                </section>
+            {% endfor %}
+        {% else %}
+            <section>
+                <div class="clearfix box">
+                    <h3>Rien à proposer</h3>
+                </div>
+            </section>
+        {% endif %}
+
+
+    </div>
+</div>

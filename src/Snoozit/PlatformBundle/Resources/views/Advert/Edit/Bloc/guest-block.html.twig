@@ -1,0 +1,78 @@
+{% if form.guest is defined %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span>Invité | </span> <strong>Identifiez vous</strong>
+            <i class="fa fa-angle-up pull-right fa-2x toggleblock" data-target="blockGuest"></i>
+        </div>
+        <div class="panel-body" id="blockGuest" >
+
+            <div class="row">
+
+                <!-- Nom d'utilisateur de l'invité -->
+                <div class="form-group col-xs-6  ">
+
+                    {% if form_errors(form.guest.username)|length > 0 %}{% set errors_username = 'has-error' %}{% else %} {% set errors_username = NULL %}{% endif %}
+                    <div class="has-error">
+                        {{ form_errors(form.guest.username) }}
+                    </div>
+
+                    <label for="exampleInputEmail1">Nom d'utilisateur</label>
+                    <div class="input-group input-group-sm {{ errors_username }}">
+                        {{ form_widget(form.guest.username) }}
+                        <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user-secret"></i></span>
+                    </div>
+                </div>
+
+
+                <!-- Email de l'invité -->
+                <div class="form-group col-xs-6  ">
+
+                    {% if form_errors(form.guest.email)|length > 0 %}{% set errors_email = 'has-error' %}{% else %} {% set errors_email = NULL %}{% endif %}
+                    <div class="has-error">
+                        {{ form_errors(form.guest.email) }}
+                    </div>
+
+                    <label for="exampleInputEmail1">Adresse email</label>
+                    <div class="input-group input-group-sm {{ errors_email }}">
+                        {{ form_widget(form.guest.email) }}
+                        <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-lock"></i></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                {% if form_errors(form.guest.phone)|length > 0 %}{% set errors_phone = 'has-error' %}{% else %} {% set errors_phone = NULL %}{% endif %}
+                <div class="col-xs-12 has-error">
+                    {{ form_errors(form.guest.phone) }}
+                </div>
+
+                <!-- Email de l'invité -->
+                <div class="form-group col-xs-6  ">
+
+                    <label for="exampleInputEmail1">Numéro de téléphone</label>
+                    <div class="input-group input-group-sm {{ errors_phone }}">
+                        {{ form_widget(form.guest.phone) }}
+                        <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+                    </div>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="form-group col-xs-6 guest-checkbox">
+
+                    <div class="checkbox-inline">
+                        <label>
+                            {{ form_widget(form.guest.showphone) }}
+                            Masquer mon numéro
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+{% endif %}

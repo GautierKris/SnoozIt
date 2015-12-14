@@ -1,0 +1,38 @@
+<div class="col-xs-12">
+    {% include 'SnoozitPlatformBundle:Site/Flashbags:flashbag.html.twig' %}
+</div>
+
+<div class="col-xs-12">
+    <ol class="breadcrumb">
+        <li><a href="{{ path('snoozit_platform_homepage') }}">Accueil</a></li>
+        {% if localisation is not null %}
+            <li><a href="{{ path('snoozit_platform_homepage') }}">{{ localisation.nom }}</a></li>
+        {% endif %}
+
+        {% if breadcrumb %}
+            {% for b in breadcrumb %}
+                {% if not b.last %}
+                    <li><a href="{{ b.href }}">{{ b.title|truncate(20) }}</a></li>
+                {% else %}
+                    <li>{{ b.title|truncate(80) }}</li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+        {% endif %}
+        <li class="pull-right connected-breadcrumb">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="{{ path('snoozit_platform_panier_homepage') }}" class="panier"><i class="fa fa-shopping-cart"></i> Panier <span class="label label-primary"> {{ app.user.id|CountPanier }}</span></a>
+                <a href="{{ path('snoozit_add_advert') }}" class="publish"><i class="fa fa-edit"></i></a>
+                <a href="#"><i class="fa fa-users"></i></a>
+                <a href="#"><i class="fa fa-gears"></i></a>
+                <a href="{{ path('fos_user_security_logout') }}" class="disconnect"><i class="fa fa-unlink"></i></a>
+                <img src="{{ asset('uploads/avatar/'~app.user.avatar.path) }}" alt="..." class="img-circle">
+                <a href="{{ path('snoozit_dashboard_homepage')}}">{{ app.user.username }}</a>
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-user"></i></a>
+                    <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus"></i></a>
+            {% endif %}
+        </li>
+    </ol>
+
+</div>

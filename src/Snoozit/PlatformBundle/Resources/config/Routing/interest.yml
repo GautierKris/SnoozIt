@@ -1,0 +1,42 @@
+snoozit_dashboard_interest:
+    path:     /
+    defaults: { _controller: SnoozitPlatformBundle:Interest:getInterestCenter }
+
+snoozit_dashboard_interest_desistement:
+    path:     /desistement
+    defaults: { _controller: SnoozitPlatformBundle:Interest:getInterestCenterDesistement }
+
+snoozit_dashboard_interest_archives:
+    path:     /archives
+    defaults: { _controller: SnoozitPlatformBundle:Interest:getInterestCenterArchives }
+
+snoozit_dashboard_remove_interest:
+    path:     /remove/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:removeInterest }
+    requirements:
+        id: \d+
+
+snoozit_dashboard_archive_interest_from_interface:
+    path:     /archive-interest/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:archiveInterest }
+    requirements:
+        id: \d+
+
+snoozit_dashboard_accept_interest:
+    path:     /accept/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:acceptInterest }
+    requirements:
+        id: \d+
+
+snoozit_dashboard_desist_interest:
+    path:     /desist/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:desistInterest }
+    requirements:
+        id: \d+
+
+snoozit_dashboard_remove_desist_interest_from_interface:
+    path:     /remove-desist/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:removeDesistInterestFromInterface }
+    requirements:
+        id: \d+
+

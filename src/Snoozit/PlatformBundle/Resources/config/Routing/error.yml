@@ -1,0 +1,3 @@
+snoozit_error_is_not_member:
+    path: /user-is-not-member
+    defaults: { _controller: SnoozitPlatformBundle:Site:errorUserNotMember }

@@ -1,0 +1,60 @@
+<nav>
+        <div class="clearfix">
+        <div class="text-center">
+            <a href="{{ path('snoozit_add_advert') }}" class="btn btn-publish"><i class="fa fa-edit"></i> Publier une annonce</a>
+        </div>
+
+        <ul class="nav nav-pills nav-stacked">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_homepage') }}"><i class="fa fa-user-secret fa-user-co"></i> Mon panel <span class="label label-hidden pull-right">3</span></a></li>
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="#"><i class="fa fa-pagelines fa-user-co"></i> Créer une page <span class="label label-hidden pull-right">Projet</span></a></li>
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears fa-user-co"></i> Modifier mon profil</a></li>
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_homepage') }}"><i class="fa fa-comments fa-user-co"></i> Notification <span class="label label-hidden pull-right">0</span></a></li>
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_user_advert') }}"><i class="fa fa-sign-out fa-user-co"></i> Mes annonces </a></li>
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_interest') }}"><i class="fa fa-dashboard     fa-user-co"></i> Intéret <span class="label label-hidden pull-right">{{ stats.totalinterest }}</span></a></li>
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_negociation') }}"><i class="fa fa-exchange fa-user-co"></i> Négociation <span class="label label-hidden pull-right">{{ stats.inNegoce }}</span></a></li>
+                {% if app.user.hiddenUsers is not empty %}
+                    <li role="menuitem"><a href="{{ path('snoozit_dashboard_users_hidden') }}"><i class="fa fa-user-secret fa-user-co"></i> Liste des ignorés <span class="label label-hidden pull-right">{{ app.user.hiddenUsers|length }}</span></a></li>
+                {% endif %}
+                <li role="menuitem"><a href="{{ path('snoozit_user_profile_edit_abonnement') }}"><i class="fa fa-user-secret fa-user-co"></i> Vos abonnements <span class="label label-hidden pull-right">{{ app.user.totalAbonnement }}</span></a></li>
+                <li role="menuitem"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-user-co"></i> Déconnexion</a></li>
+                <hr />
+            {% endif %}
+            <li role="menuitem"><a href="{{ path('snoozit_platform_homepage') }}"><i class="fa fa-home"></i> Accueil</a></li>
+
+            {% if parentsCategories %}
+                {% for p in parentsCategories %}
+
+                    <li role="menuitem" class="mainParentCategoryMenu" rel="{{ p.id }}">
+                        <a href="#"><i class="fa {{ p.ico }}"></i> {{ p.parent }}
+                            <i class="fa fa-caret-down pull-right"></i>
+                        </a>
+                    </li>
+
+                    {% for c in categories %}
+                        {% if p.id == c.parentcategory.id %}
+
+                            {% if categoryID is not null %}
+                                {% if categoryID == c.id %}
+                                    {% set color = 'blue' %}
+                                {% else %}
+                                    {% set color = null %}
+                                {% endif %}
+                            {% else %}
+                                {% set color = null %}
+                            {% endif %}
+
+                            <li role="menuitem" class="mainCategoryMenu {{ color }}" rel="{{ c.parentcategory.id }}"
+                                    {% if color is not null %} id="selectedCategory" {% endif %} >
+                                <a href="{{ path('snoozit_platform_show_by_category', { 'slug': c.slug }) }}" > {{ c.category }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                {% endfor %}
+            {% else %}
+                <li role="menuitem"><a href="#">Probleme de chargement...</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

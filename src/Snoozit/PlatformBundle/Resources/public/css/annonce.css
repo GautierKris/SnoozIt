@@ -1,0 +1,85 @@
+#addAnnonce{
+}
+#addAnnonce .form-control{
+    background: #ebf0f4;
+    border: 1px solid transparent;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    overflow: hidden;
+    color:grey;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0 10px;
+    font-size: 12px;
+}
+#addAnnonce .panel-default>.panel-heading {
+    background-color: #9ab2ca;
+    color: #fff;
+    text-transform: uppercase;
+}
+#addAnnonce .panel-default>.panel-heading i {
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+#addAnnonce form{}
+#addAnnonce form .checkbox-inline{ margin-top: 10px }
+#addAnnonce form .checkbox-inline.negociable{ margin-top: 28px}
+#addAnnonce .input-group-addon {
+    background: #d8e6f3;
+    border: 1px solid #d8e6f3;
+    color: #99b2c8;
+    font-weight: 400;
+}
+#addAnnonce label{ color: #555; font-weight: 400 }
+#addAnnonce textarea.form-control{ min-height: 300px; padding: 10px;}
+#addAnnonce select.form-control{
+    border: 1px solid #ddd;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    overflow: hidden;
+    color:grey;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0 10px ;
+    background: url('../images/br_down.png') #ebf0f4 no-repeat 100% 8px;
+}
+#addAnnonce .form-group{ position: relative; }
+#addAnnonce .has-error{ color: #d9534f; }
+#addAnnonce .has-error ul{ color: #d9534f; list-style-type: none; margin-left: 0; padding-left: 0}
+#addAnnonce .input-group.has-error { border: 1px solid #d9534f; }
+#addAnnonce .input-group.has-error .input-group-addon{ background: indianred; color: #fff; border: 1px solid transparent; border-radius: 0 }
+#addAnnonce .box-add-annonce{
+    padding: 0;
+}
+#addAnnonce h4{ margin: 12px 0;color: #68a4e2 }
+#addAnnonce hr{ border-bottom: 1px solid #68a4e2; }
+#addAnnonce .separator{ }
+#addAnnonce .guest-checkbox{ padding-top: 20px}
+.thumbnail.bigPic img{ max-height: 650px; }
+
+#blockPicture img{ max-height: 80px; min-height: 80px; margin: 0 auto}
+
+#addAnnonce .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px 10px 0;
+}
+#addAnnonce .fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.img-box.has-error img{
+    border-color: #d9534f;
+}

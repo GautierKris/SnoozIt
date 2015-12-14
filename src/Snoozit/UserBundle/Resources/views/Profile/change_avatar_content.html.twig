@@ -1,0 +1,31 @@
+<div class="row fos-user-edit-form-head">
+    <div class="text-center">
+        <h3>Modification de votre avatar</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 changeavatar">
+        <div class="well well-sm">
+            <div class="clearfix">
+                <div class="col-md-3 avatar">
+                    <img src="{{ asset('uploads/avatar/'~app.user.avatar.path) }}" alt="..." class="img-circle img-responsive img-thumbnail" id="imgUpl_snoozit_userbundle_avatar_file">
+                </div>
+                <div class="col-md-9  changeavatar-content">
+                    <form action="{{ path('snoozit_dashboard_user_change_avatar') }}" method="post" {{ form_enctype(form) }}>
+                        <div class="text-center">
+                            <div class="fileUpload btn btn-default btn-xs">
+                                <span>Chercher mon nouvel avatar <i class="fa fa-folder-open-o"></i></span>
+                                {{ form_widget(form.file) }}
+                                {{ form_rest(form) }}
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary btn-rounded btn-xs btn-block" type="submit" id="fileUpload_snoozit_userbundle_avatar_file">Mettre à jour</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

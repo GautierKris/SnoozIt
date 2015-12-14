@@ -1,0 +1,10 @@
+<div class="img">
+    <img src="{{ asset('bundles/snoozitplatform/images/avatars/noAvatar.png') }}" alt="..." class="img-responsive img-thumbnail">
+</div>
+<p>{{ advert.user.username }}</p>
+<p class="help-block">Invité</p>
+<div class="btn-group-sm">
+    <a class="btn btn-success btn-success btn-block" href="{{ path('snoozit_edit_advert', {'advert' : advert.id }) }}">Modifier</a>
+    <a class="btn btn-info btn-block btn-hidden-form" data-target="#hidden-form-interested">Téléphone</a>
+    <a class="btn btn-primary btn-block btn-hidden-form" data-target="#hidden-form-interested">Email</a>
+</div>

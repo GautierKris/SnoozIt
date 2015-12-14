@@ -1,0 +1,39 @@
+<div class="container">
+
+    <div class="row" id="breadcrumb" role="navigation">
+        {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+    </div>
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+
+            <h2 class="text-center stylised-font text-primary">Réinitialisation de la combinaison</h2>
+            <p class="help-block text-center"> {{ advert.title }} </p>
+
+            <hr />
+
+            <div class="has-error">
+                {% if error %}
+                    <p class="text-center" style="background: indianred; border: 1px solid #d9534f; color: #fff;">{{ error }}</p>
+                    <hr />
+                {% endif %}
+            </div>
+            {% if error is null %}
+                <p>Une nouvelle combinaison vous sera transmise à l'adresse email que vous avez renseigné lors de la création de l'annonce.</p>
+            {% endif %}
+
+
+                <div class="text-center">
+                    {% if error %}
+                        <a class="btn btn-primary btn-sm" href="{{ path('snoozit_platform_homepage') }}">Retour à l'accueil</a>
+                        {% else %}
+                    <form action="{{ path('snoozit_change_combinaison', {'advert': advert.id }) }}" method="post">
+                        <button class="btn btn-primary btn-sm" type="submit">Réinitialiser la combinaison</button>
+                    </form>
+                    {% endif %}
+                </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+snoozit_search_engine_catch:
+    path: /
+    defaults: { _controller: SnoozitPlatformBundle:SearchEngine:catchAdvert }
+
+snoozit_platform_search_result_without_slug:
+    path: /region/{region}/category/{category}
+    defaults: { _controller: SnoozitPlatformBundle:SearchEngine:searchAdvertResult }
+
+snoozit_platform_search_result_full:
+    path: /{region}/{category}/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:SearchEngine:searchAdvertResult}
+
+snoozit_platform_search_result_category:
+    path: /category/{category}/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:SearchEngine:searchAdvertResult}
+
+snoozit_platform_search_result_region:
+    path: /region/{region}/{slug}
+    defaults: { _controller: SnoozitPlatformBundle:SearchEngine:searchAdvertResult }
+
+snoozit_platform_search_simple_result:
+    path: /{slug}
+    defaults: { _controller: SnoozitPlatformBundle:SearchEngine:searchAdvertResult}
+

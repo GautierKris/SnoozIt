@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: localhost
+    database_port: null
+    database_name: snoozit
+    database_user: root
+    database_password: root
+    mailer_transport: gmail
+    mailer_host: 127.0.0.1
+    mailer_user: gautierkris@gmail.com
+    mailer_password: ac150910
+    secret: 526620d64011b47a2108986867b762dad4eb90d6

@@ -1,0 +1,55 @@
+<div class="col-md-3 col-xs-3 profile-user">
+    <div class="row">
+        <div class="col-xs-offset-4 col-xs-4  avatar text-center">
+            {% if userFollow %}
+                {% set followed = 'thumbnail-followed' %}
+            {% else %}
+                {% set followed = '' %}
+            {% endif %}
+            {#<i class="fa fa-plus fa-2x befriend"></i>#}
+            <img src="{{ asset('uploads/avatar/'~user.avatar.path) }}" alt="{{ user.username }}" class="img-circle img-responsive {{ followed }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>{{ user.username }}</h2>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% if app.user.id == user.id %}
+                    <a href="#" class="btn btn-xs btn-primary btn-rounded">Editer mon profile</a>
+                {% else %}
+                    {% if userFollow %}
+                        <a href="{{ path('snoozit_follow_user', {'id' : user.id }) }}" class="btn btn-xs btn-success btn-rounded">Se désabonner </a>
+                    {% else %}
+                        <a href="{{ path('snoozit_follow_user', {'id' : user.id }) }}" class="btn btn-xs btn-primary btn-rounded">S'abonner à {{ user.username }}</a>
+                    {% endif %} {# Fin de 3  #}
+                {% endif %}
+            {% else %}
+                <a href="#" class="btn btn-xs btn-primary btn-rounded">S'abonner à {{ user.username }}</a>
+            {% endif %}
+            <hr />
+            <h3 class="text-primary">Localisation</h3>
+            <p>
+                {{ user.city.departement.region.nom }} <br>
+                {{ user.city.departement.nom }} <br>
+                {{ user.city.nom }} ({{ user.city.postal|truncate(2, '', false) }})
+            </p>
+            <h3 class="text-primary">Niveau</h3>
+            <p class="text-star fa-2x">
+                <i class="fa fa-star "></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-empty"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+            </p>
+            <p>153 Votes</p>
+            <hr>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERERD') %}
+                {% if app.user.id != user.id %}
+                    <p><a class="fa fa-thumbs-o-up"> Ce vendeur a votre confiance</a></p>
+                    <p><a class="fa fa-thumbs-o-down"> Recommanderiez pas ce vendeur</a></p>
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+</div>

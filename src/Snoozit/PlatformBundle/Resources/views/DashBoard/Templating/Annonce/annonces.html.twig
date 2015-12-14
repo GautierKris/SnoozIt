@@ -1,0 +1,84 @@
+<div class="well well-sm" >
+    <div class="row">
+        <div class="col-md-12 divNoPadding-right" id="annonces-container">
+            <h3 class="text-center text-uppercase datetime-title">{{ page_title|truncate(60) }}</h3>
+            {% if searchModule is defined %}
+                <p class="text-center help-block">Résultat: <em>{{ advertList|length }} </em></p>
+            {% endif %}
+            {% if advertList %}
+                {% for a in advertList %}
+                    <section>
+                            <div class="col-xs-12 box-annonce box-annonce-dashboard">
+                                <div class="col-xs-1 date-box divNoPadding">
+                                    {{ a.created|date('d') }}
+                                    <p class="date">
+                                        {{ a.created|date('M')|lower }}
+                                    </p>
+                                </div>
+                                <div class="thumbnail col-xs-2 divNoPadding">
+                                    {% if a.picture_path is not null %}
+                                        <img src="{{ asset('uploads/annonce/'~a.picture_path) }}" alt="...">
+                                    {% else %}
+                                        <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="...">
+                                    {% endif %}
+                                </div>
+                                <div class="col-xs-7 content">
+                                    <div class="caption">
+                                        <h4><a href="{{ path('snoozit_show_advert', { 'id': a.id ,'slug' : a.slug }) }}">{{ a.title|truncate(50) }}</a></h4>
+                                        <p>
+                                            {% if not a.user.isGuest %}
+                                                <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username }) }}">{{ a.user.username }}</a> -
+                                            {% else %}
+                                                <a href="#">{{ a.user.username }}</a> -
+                                            {% endif %}
+                                            <span class="avatar">
+                        <img src="{{ asset('bundles/snoozitplatform/images/avatars/user-1.jpg') }}" alt=".." class="img-responsive img-circle">
+                    </span> <a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.city_slug}) }}"> {{ a.city~' ('~a.postal|truncate(2,null,false)~ ') ' }} </a>
+                                        </p>
+                                        <p>
+                                            <a class="label label-default inherit" href="{{ path('snoozit_platform_show_by_category', {'slug' : a.category_slug}) }}">{{ a.category }}</a>
+
+                                            {% if not a.user.isGuest %}
+                                                {% if a.user.id|IsOnline %}
+                                                    <span class="label label-primary">Connecté</span>
+                                                {% endif %}
+                                            {% endif %}
+
+                                            {% if a.urgent == 1 %}
+                                                <span class="label label-danger">Urgent</span>
+                                            {% endif %}
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 price">
+                                    <h3 class="text-primary">{{ a.price }}€</h3>
+
+                                    <div class="options-box pull-right">
+                                        {% if  a.id|CountAdvertPicture > 0 %}
+                                            <span class="active"><i class="fa fa-camera-retro "></i> <span class="countPicture">{{ a.id|CountAdvertPicture }}</span></span>
+                                        {% else %}
+                                            <span><i class="fa fa-camera-retro"></i> <span class="countPicture">0</span></span>
+                                        {% endif %}
+                                        {% if a.delivery == 1 %}
+                                            <span class="active"><i class="fa fa-car"></i></span>
+                                        {% else %}
+                                            <span><i class="fa fa-car"></i></span>
+                                        {% endif %}
+                                        <i class="fa fa-code"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                    </section>
+                {% endfor %}
+            {% else %}
+                <section>
+                    <div class="col-xs-12 box-annonce">
+                        <h3>Oups, aucune annonce...</h3>
+                    </div>
+                </section>
+            {% endif %}
+        </div>
+    </div>
+</div>

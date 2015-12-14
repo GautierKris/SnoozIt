@@ -1,0 +1,36 @@
+{% if form_errors(formNegoce.price)|length > 0 %} {% set formNegoce_error = 'has-error' %} {% set statut = "show" %} {% else %} {% set  formNegoce_error = '' %} {% set statut = '' %} {% endif %}
+
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+    <div class="col-xs-12 hidden-form {{ statut }}" id="hidden-form-negoce">
+        <span class="pull-right"><i class="fa fa-2x fa-close btn-hidden-form" data-target="#hidden-form-negoce"></i></span>
+        <div class="has-error">
+            {{ form_errors(formNegoce.price) }}
+        </div>
+        {% if form_errors(formNegoce.price)|length > 0 %} {% set formNegoce_error = 'has-error' %} {% else %} {% set  formNegoce_error = '' %} {% endif %}
+        <form action="{{ path('snoozit_show_advert', {'id' : advert.id, 'slug' : advert.slug }) }}"  method="post">
+            <div class="form-group">
+                <label for="#propose">Votre proposition en euro : </label>
+                <div class="input-group input-group-sm {{ formNegoce_error }}">
+                    {{ form_widget(formNegoce.price) }}
+                    <span class="input-group-btn">
+               <button class="btn btn-success" type="submit">Envoyer</button>
+            </span>
+                </div>
+            </div>
+            {{ form_rest(formNegoce) }}
+        </form>
+    </div>
+
+{% else %}
+
+<div class="col-xs-12 hidden-form" id="hidden-form-negoce">
+    <span class="pull-right"><i class="fa fa-2x fa-close btn-hidden-form" data-target="#hidden-form-negoce"></i></span>
+    <p class="help-block">Vous devez  être identifié pour pouvoir négocier le prix.</p>
+    <div>
+        <a class="btn btn-xs btn-success" href="{{ path('fos_user_registration_register') }}">Je m'inscris maintenant</a>
+        <a class="btn btn-xs btn-primary" href="{{ path('fos_user_security_login') }}">J'ai déjà un compte</a>
+    </div>
+</div>
+
+{% endif %}

@@ -1,0 +1,17 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div class="col-lg-12">
+
+        <div class="row">
+            {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+        </div>
+
+        <div class="text-center" id="error-box">
+            <i class="fa fa-warning fa-5x"></i>
+            <h1>Oups, là il y a une erreur...</h1>
+            <p>L'utilisateur demandé n'éxiste pas, c'est peut être un invité car seul les membres ont un profile.</p>
+        </div>
+    </div>
+{% endblock body %}

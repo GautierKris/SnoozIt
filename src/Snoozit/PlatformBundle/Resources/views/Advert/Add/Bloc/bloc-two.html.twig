@@ -1,0 +1,72 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>2 | </span> <strong>Images et Vidéos</strong>
+        <i class="fa fa-angle-up pull-right fa-2x toggleblock" data-target="blockPicture"></i>
+    </div>
+    <div class="panel-body" id="blockPicture" >
+        <div class="row">
+            {% if form_errors(form.pictureOne.file)|length > 0 %} {% set pictureOne_error = 'has-error' %} {% else %} {% set pictureOne_error  = ''%}{% endif %}
+            {% if form_errors(form.pictureTwo.file)|length > 0 %} {% set pictureTwo_error = 'has-error' %} {% else %} {% set pictureTwo_error  = ''%}{% endif %}
+            {% if form_errors(form.pictureThree.file)|length > 0 %} {% set pictureThree_error = 'has-error' %} {% else %} {% set pictureThree_error  = ''%}{% endif %}
+            {% if form_errors(form.pictureFour.file)|length > 0 %} {% set pictureFour_error = 'has-error' %} {% else %} {% set pictureFour_error  = ''%}{% endif %}
+
+            <div class="col-xs-12 has-error">
+                {{ form_errors(form.pictureOne.file) }}
+                {{ form_errors(form.pictureTwo.file) }}
+                {{ form_errors(form.pictureThree.file) }}
+                {{ form_errors(form.pictureFour.file) }}
+            </div>
+            <div class="text-center">
+                <div class=" form-group col-xs-3 img-box {{ pictureOne_error }}">
+                    <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive img-thumbnail" id="imgUpl_advert_pictureOne_file">
+                </div>
+                <div class=" form-group col-xs-3 img-box {{ pictureTwo_error }} ">
+                    <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive img-thumbnail" id="imgUpl_advert_pictureTwo_file">
+                </div>
+
+                <div class=" form-group col-xs-3 img-box {{ pictureThree_error }}">
+                    <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive img-thumbnail" id="imgUpl_advert_pictureThree_file">
+                </div>
+
+                <div class=" form-group col-xs-3 img-box {{ pictureFour_error }}">
+                    <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive img-thumbnail" id="imgUpl_advert_pictureFour_file">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+
+                <div class="text-center">
+                    <div class="fileUpload btn btn-default btn-xs" id="fileUpload_advert_pictureOne_file">
+                        <span>Upload <i class="fa fa-folder-open-o"></i></span>
+                        {{ form_widget(form.pictureOne.file) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="text-center">
+                    <div class="fileUpload btn btn-default btn-xs" id="fileUpload_advert_pictureTwo_file">
+                        <span>Upload <i class="fa fa-folder-open-o"></i></span>
+                        {{ form_widget(form.pictureTwo.file) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="text-center">
+                    <div class="fileUpload btn btn-default btn-xs" id="fileUpload_advert_pictureThree_file" >
+                        <span>Upload <i class="fa fa-folder-open-o"></i></span>
+                        {{ form_widget(form.pictureThree.file) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="text-center">
+                    <div class="fileUpload btn btn-default btn-xs" id="fileUpload_advert_pictureFour_file">
+                        <span>Upload <i class="fa fa-folder-open-o"></i></span>
+                        {{ form_widget(form.pictureFour.file) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

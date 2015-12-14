@@ -1,0 +1,45 @@
+snoozit_skuag:
+    resource: "@SnoozitSkuagBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@SnoozitUserBundle/Resources/config/routing/all.xml"
+
+snoozit_platform:
+    resource: "@SnoozitPlatformBundle/Resources/config/routing.yml"
+    prefix:   /
+
+snoozit_advert:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/advert.yml"
+    prefix: /advert
+
+snoozit_search_engine:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/searchengine.yml"
+    prefix: /search
+
+snoozit_user_dashboard:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/dashboard.yml"
+    prefix: /dashboard
+
+snoozit_interest:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/interest.yml"
+    prefix: /interest
+
+snoozit_follow:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/follow.yml"
+    prefix: /follow
+
+snoozit_error:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/error.yml"
+    prefix: /error
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+snoozit_panier:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/panier.yml"
+    prefix: /panier
+
+snoozit_advert_chat:
+    resource: "@SnoozitPlatformBundle/Resources/config/Routing/advertchat.yml"
+    prefix: /chat

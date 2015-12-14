@@ -1,0 +1,53 @@
+<section class="navbar navbar-default navbar-fixed-top">
+
+    <div class="row" id="header">
+
+
+        <div class="col-md-2 col-xs-2 divNoPadding">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% set homepagelink  = path('snoozit_platform_show_by_region', {'slug' : app.user.city.departement.region.slug }) %}
+            {% else %}
+                {% set homepagelink  = path('snoozit_platform_homepage') %}
+            {% endif %}
+            <h1 class="snoozit"><a href="{{ homepagelink }}">SnoozIt</a></h1>
+
+            <div class="text-center">
+                <p class="region-selected">
+                    {% if app.user.city is defined %}
+                        {{ app.user.city.departement.region.nom }}
+                    {% elseif app.session.get('selectedRegion') is defined %}
+                        {{ app.session.get('selectedRegion')|GetRegionName }}
+                    {% endif %}
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-10 col-xs-10">
+
+            <form action="{{ path('snoozit_search_engine_catch') }}" class="form-horizontal form-group-sm" method="post">
+                <div class="row">
+                    <div class="col-md-6 col-xs-6 divNoPadding">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-search"></i></span>
+                            {{ form_widget(form.search) }}
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-2 divNoPadding">
+                        {{ form_widget(form.region) }}
+                    </div>
+                    <div class="col-md-2 col-xs-2 divNoPadding">
+                        {{ form_widget(form.category) }}
+                    </div>
+                    <div class="col-md-2 col-xs-2 divNoPadding">
+                        <button class="btn btn-sm btn-primary pull-right btn-block" type="submit">Chercher</button>
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+            </form>
+        </div>
+
+
+    </div>
+</section>

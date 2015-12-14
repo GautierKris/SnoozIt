@@ -1,0 +1,139 @@
+<h2 class="panier-title">Ca les interessent</h2>
+
+    <div class="row">
+        <div class="col-xs-12 panier-nav">
+            <ul class="nav nav-pills text-bold">
+                <li role="presentation" class="active"><a href="{{ path('snoozit_platform_panier_homepage') }}" class="text-grey">En cours <span class="badge badge-primary">{{ stats.income|length }}</span></a></li>
+                <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_desistement') }}" class="text-grey">Désistements <span class="badge badge-primary">{{ stats.desist|length }}</span></a></li>
+                <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_archives') }}" class="text-grey">Archives <span class="badge badge-primary">{{ stats.archives|length }}</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+    <div class="row" id="advert-manager">
+    {% if advertList %}
+        {% for i in advertList  %}
+            <div class="col-md-10 col-md-offset-1 divNoPadding-right">
+                <div class="well well-sm clearfix">
+
+                    <div class="col-md-3 user-infos">
+
+                        {% if i.advertOptionType.id == 5 %}
+                            <div class="travers rotate">
+                                <span class="desist">Désistement</span>
+                            </div>
+                        {% endif %}
+                        <div class="col-md-8 col-md-offset-2">
+                            <img src="{{ asset('uploads/avatar/'~i.user.avatar.path) }}" alt="{{ i.user.username }}" class="img-circle img-responsive">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <h4 >
+                                <a href="{{ path('fos_user_profile_show_name', {'username' : i.user.username}) }}">{{ i.user.username }}</a>
+                            </h4>
+                            <p class="text-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </p>
+                            <p>
+                                {% if i.user.city.departement.region.id == 24 %}
+                                    {% set regionName = 'Paca' %}
+                                {% else %}
+                                    {% set regionName = i.user.city.departement.region.nom %}
+                                {% endif %}
+                                <a href="{{ path('snoozit_platform_show_by_region', {'slug' : i.user.city.departement.region.slug}) }}">{{ regionName }}</a>
+                            </p>
+                            <p>
+                                <a href="#">{{ i.user.city.nom }} ({{ i.user.city.postal|truncate(2, false, false) }})</a>
+                            </p>
+                            <p>
+                                <a href="#" class="btn btn-success btn-xs btn-rounded btn-block">Vous suit</a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-7 advert-infos text-center">
+
+                        <h3 class="text-center"><a href="#" class="text-grey">{{ i.advert.title }}</a></h3>
+                        <p><span>{{ i.advert.category.category }}</span>
+
+                            {% if i.advert.delivery %}
+                                <span>/ Livraison</span>
+                            {% endif %}
+                            {% if i.advert.urgent %}
+                                <span>/ Urgent</span>
+                            {% endif %}
+                            {% if i.advert.espece %}
+                                <span>/ Espece</span>
+                            {% endif %}
+                            {% if i.advert.paypal %}
+                                <span>/ Paypal</span>
+                            {% endif %}
+
+                        </p>
+
+                        <div class="row text-center advertPrice">
+                            <div class="col-md-12 ">
+                                <p class="text-center">Votre prix: <span class="price">{{ i.advert.price }} €</span></p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row ">
+                            {% if i.advertOptionType.id == 1 %}
+
+                                <div class="col-md-4 col-md-offset-2">
+                                    <a href="{{ path('snoozit_dashboard_accept_interest', {'id' : i.id }) }}" class="btn btn-primary btn-xs btn-rounded btn-block">Accepter</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id' : i.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-remove"></i> Refuse</a>
+                                </div>
+                            {% elseif i.advertOptionType.id == 5 %}
+                                <div class="row">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        <button class="btn btn-warning btn-xs btn-rounded btn-block">{{ i.user.username }} s'est désisté</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id' : i.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
+                                    </div>
+                                </div>
+                            {% elseif i.advertOptionType.id == 2 %}
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button class="btn btn-success btn-xs btn-rounded btn-block">En attente de confirmation</button>
+                                </div>
+                            {% elseif i.advertOptionType.id == 3 %}
+                                <div class="col-md-4 col-md-offset-2">
+                                    <button class="btn btn-danger btn-xs btn-rounded btn-block">Vous avez refusé</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="{{ path('snoozit_dashboard_archive_interest_from_interface', {'id' : i.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
+                                </div>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 divNoPadding-right">
+                        {% if i.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~i.advert.pictureOne.path) }}" alt="{{ i.user.username }}" class="img-responsive">
+                        {% else %}
+                            <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="{{ i.user.username }}" class="img-responsive">
+                        {% endif %}
+                        <div class="text-center">
+                            <br>
+                            <a href="{{ path('snoozit_dashboard_manage_advert', {'advert' : i.advert.id }) }}" class="text-grey"><strong>Voir l'annonce</strong></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3 class="text-center">Aucun interet en cours.</h3>
+    {% endif %}
+</div>

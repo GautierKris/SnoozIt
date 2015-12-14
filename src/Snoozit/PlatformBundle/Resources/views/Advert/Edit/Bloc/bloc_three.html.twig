@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>3 | </span> <strong>Que vendez vous</strong>
+        <i class="fa fa-angle-up pull-right fa-2x toggleblock" data-target="blockTwo"></i>
+    </div>
+    <div class="panel-body" id="blockTwo">
+
+        <!-- Contenu de l'annonce -->
+        {% if form_errors(form.description)|length > 0 %}{% set errors_description = 'has-error' %}{% else %} {% set errors_description = NULL %}{% endif %}
+        <div class="form-group">
+            <div class="has-error">
+                {{ form_errors(form.description) }}
+            </div>
+            <label for="exampleInputEmail1">Contenu de votre annonce</label>
+            <div class="input-group input-group-sm {{ errors_description }}">
+                {{ form_widget(form.description) }}
+                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-align-justify"></i></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

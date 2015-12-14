@@ -1,0 +1,87 @@
+<div class="row" id="advert-manager">
+
+    {% if negoces %}
+        {% for n in negoces  %}
+            <div class="col-md-7 col-md-offset-2 divNoPadding-right">
+                <div class="well well-sm clearfix">
+
+                    <div class="col-md-3 user-infos">
+
+                        <div class="col-md-8 col-md-offset-2">
+                            <img src="{{ asset('uploads/avatar/'~n.user.avatar.path) }}" alt="{{ n.user.username }}" class="img-circle img-responsive">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <h4>
+                                <a href="{{ path('fos_user_profile_show_name', {'username' : n.user.username}) }}">{{ n.user.username }}</a>
+                            </h4>
+                            <p class="text-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </p>
+                            <p><a href="#">{{ n.user.city.departement.region.nom }}</a></p>
+                            <p>
+                                <a href="#">{{ n.user.city.nom }} ({{ n.user.city.postal|truncate(2, false, false) }})</a>
+                            </p>
+                            <p>
+                                <a href="#" class="btn btn-success btn-xs btn-rounded btn-block">Vous suit</a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-9 advert-infos text-center">
+
+                        <h3 class="text-center"><a href="#" class="text-grey">{{ n.advert.title }}</a></h3>
+                        <p><span>{{ n.advert.category.category }}</span>
+
+                            {% if n.advert.delivery %}
+                                <span>/ Livraison</span>
+                            {% endif %}
+                            {% if n.advert.urgent %}
+                                <span>/ Urgent</span>
+                            {% endif %}
+                            {% if n.advert.espece %}
+                                <span>/ Espece</span>
+                            {% endif %}
+                            {% if n.advert.paypal %}
+                                <span>/ Paypal</span>
+                            {% endif %}
+
+                        </p>
+
+                        <div class="row  text-center advertPrice">
+                            <div class="col-md-6">
+                                <p class="text-center">Votre prix: <span class="price">{{ n.advert.price }} €</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-center">Son offre: <span class="price">{{ n.price }} €</span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-3">
+                                <a href="#" class="btn btn-primary btn-xs btn-rounded btn-block">Accepter</a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#" class="btn btn-danger btn-xs btn-rounded btn-block">Refuser</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 thumbnail">
+                {% if n.advert.pictureOne %}
+                    <img src="{{ asset('uploads/annonce/'~n.advert.pictureOne.path) }}" alt="{{ n.user.username }}" class="img-responsive">
+                {% else %}
+                    <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="{{ n.user.username }}" class="img-responsive">
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3 class="text-center">Aucune négociation en cours.</h3>
+    {% endif %}
+
+</div>

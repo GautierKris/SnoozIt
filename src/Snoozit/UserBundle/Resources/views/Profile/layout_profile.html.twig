@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} Profil de {{ app.user.username }} {% endblock title %}
+
+{% block body %}
+    {% include 'SnoozitPlatformBundle:Site/Flashbags:flashbag.html.twig' %}
+    <div class="col-lg-12" id="showUseProfile">
+        <div class="well well-sm">
+            <div class="fos_user_user_show">
+                {% include 'SnoozitUserBundle:Profile:menu-head-profile.html.twig' %}
+                {% trans_default_domain 'FOSUserBundle' %}
+                    <div class="col-md-3 profile-user">
+                        {% include 'SnoozitUserBundle:Profile:user_info_left.html.twig' %}
+                    </div>
+                <div class="col-md-9 profile-infos">
+                    {% block profile_content %}
+
+                    {% endblock %}
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

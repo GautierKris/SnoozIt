@@ -1,0 +1,24 @@
+snoozit_follow_category:
+    path: /category/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Follow:followCategory }
+
+snoozit_follow_user:
+    path: /user/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Follow:followUser }
+
+snoozit_follow_region:
+    path: /region/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Follow:followRegion }
+
+snoozit_follow_departement:
+    path: /departement/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Follow:followDepartement }
+
+snoozit_follow_city:
+    path: /city/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Follow:followCity }
+
+
+snoozit_refuse_abonnement:
+    path: /refuse/abonnement/{follower}
+    defaults: { _controller: SnoozitPlatformBundle:Follow:refuseAbonnement }

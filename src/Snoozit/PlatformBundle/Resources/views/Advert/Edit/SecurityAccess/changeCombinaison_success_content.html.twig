@@ -1,0 +1,24 @@
+<div class="container">
+
+    <div class="row" id="breadcrumb" role="navigation">
+        {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+    </div>
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+
+            <h2 class="text-center stylised-font text-primary">Réinitialisation effectuée</h2>
+            <p class="help-block text-center"> {{ advert.title }} </p>
+
+            <hr />
+
+            <div class="text-center">
+                <p>Une nouvelle combinaison vous a été transmise à l'adresse enregistrée.</p>
+                <a class="btn btn-success btn-sm" href="{{ path('snoozit_edit_advert', {'advert' : advert.id}) }}">Modifier mon annonce</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

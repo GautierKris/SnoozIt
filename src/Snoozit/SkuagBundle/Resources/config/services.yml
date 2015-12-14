@@ -1,0 +1,126 @@
+parameters:
+
+    plateform_registration_success_listener.class: Snoozit\SkuagBundle\Listener\Registration\RegistrationSuccessListener
+    plateform_add_negoce_listener.class: Snoozit\SkuagBundle\Listener\Negoce\AddNegoceListener
+    plateform_remove_negoce_listener.class: Snoozit\SkuagBundle\Listener\Negoce\RefuseNegoceListener
+
+    plateform_add_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\AddInterestListener
+    plateform_remove_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\RemoveInterestListener
+    plateform_refuse_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\RefuseInterestListener
+    plateform_accept_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\AcceptInterestListener
+    plateform_desist_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\DesistInterestListener
+
+    plateform_advert_show_listener.class: Snoozit\SkuagBundle\Listener\Advert\ShowAdvertListener
+
+    plateform_follow_region_listener.class: Snoozit\SkuagBundle\Listener\Follow\FollowRegionListener
+    plateform_follow_departement_listener.class: Snoozit\SkuagBundle\Listener\Follow\FollowDepartementListener
+    plateform_follow_city_listener.class: Snoozit\SkuagBundle\Listener\Follow\FollowCityListener
+    plateform_follow_category_listener.class: Snoozit\SkuagBundle\Listener\Follow\FollowCategoryListener
+    plateform_follow_user_listener.class: Snoozit\SkuagBundle\Listener\Follow\FollowUserListener
+    plateform_follow_refus.listener.class: Snoozit\SkuagBundle\Listener\Follow\FollowRefusListener
+
+    plateform_user_advert_to_hidden.class: Snoozit\SkuagBundle\Listener\User\HiddenUserAdvertsListener
+    plateform_user_advert_to_show.class: Snoozit\SkuagBundle\Listener\User\ShowUserAdvertsListener
+
+services:
+    plateform_user_advert_to_hidden:
+        class: %plateform_user_advert_to_hidden.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.on_hidden_user_advert , method: processHiddenUserAdverts }
+
+    plateform_user_advert_to_show:
+        class: %plateform_user_advert_to_show.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.on_show_user_advert , method: processShowUserAdverts }
+
+    platform_follow_region_listener:
+        class: %plateform_follow_region_listener.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.follow_region, method: processFollow }
+
+    platform_follow_departement_listener:
+        class: %plateform_follow_departement_listener.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.follow_departement, method: processFollow }
+
+    platform_follow_city_listener:
+        class: %plateform_follow_city_listener.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.follow_city, method: processFollow }
+
+    platform_follow_category_listener:
+        class: %plateform_follow_category_listener.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.follow_category, method: processFollow }
+
+    platform_follow_user_listener:
+        class: %plateform_follow_user_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @service_container, @mailer]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.follow_user, method: processFollow }
+
+    platform_follow_refus:
+        class: %plateform_follow_refus.listener.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform_follow_refus , method: processFollowRefus }
+
+    plateform_advert_show_listener:
+        class: %plateform_advert_show_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @session, @request_stack]
+        tags:
+            - { name: kernel.event_listener, event: skuag.platform.show_advert, method: processShow }
+
+    plateform_registration_success_listener:
+        class: %plateform_registration_success_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.registration_event, method: processRegistration }
+
+    plateform_add_negoce_listener:
+        class: %plateform_add_negoce_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.add_negoce, method: processAddNegoce }
+
+    plateform_refuse_negoce_listener:
+        class: %plateform_remove_negoce_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.refuse_negoce, method: processRefuseNegoce }
+
+    plateform_add_interest_listener:
+        class: %plateform_add_interest_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.add_interest, method: processAddInterest }
+
+    plateform_remove_interest_listener:
+        class: %plateform_remove_interest_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.remove_interest, method: processRemoveInterest }
+
+    plateform_refuse_interest_listener:
+        class: %plateform_refuse_interest_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.refuse_interest, method: processRefuseInterest }
+
+    plateform_accept_interest_listener:
+        class: %plateform_accept_interest_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.accept_interest, method: processAcceptInterest }
+
+    plateform_accept_desist_listener:
+        class: %plateform_desist_interest_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.desist_interest, method: processDesistInterest }

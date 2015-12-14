@@ -1,0 +1,312 @@
+<div class="row fos-user-edit-form-head">
+    <div class="text-center">
+        <h3>Vos abonnements</h3>
+    </div>
+</div>
+
+<div class="fos-user-edit-form-body">
+    <div id="dsh-no-follow-box">
+        <div class="box-content">
+            <!-- Followed User  -->
+            <div class="row">
+                <div class="col-md-12">
+                    {% if userFollow|length > 0 %}
+                        <h3 class="text-center">Utilisateurs suivis</h3>
+                        {% for u in userFollow %}
+                            <div class="col-xs-4 box-dsh">
+
+                                <div class="well well-sm clearfix">
+
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img src="{{ asset('uploads/avatar/'~u.avatar.path) }}" alt="..." class="img-responsive img-circle">
+                                    </div>
+
+                                    <div class="col-md-12 text-center box">
+                                        <h4 class="text-grey">{{ u.username }}</h4>
+                                        <p>{{ u.city.nom }}, {{ u.city.postal|truncate(2,'',false) }}</p>
+                                        <p class="text-star">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </p>
+
+                                        <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboProfile" rel="{{ u.id }}">Ne plus suivre </span>
+                                        <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddAbo hidden" id="addProfile{{ u.id }}" rel="{{ u.id }}">Suivre </span>
+                                    </div>
+
+                                    <div class="col-md-12  box-footer box">
+                                        <div class="clearfix">
+                                            <div class="col-md-4 ">
+                                                <p>Annonces</p>
+                                                <p class="text-grey"><strong>{{ u|CountUserAdvert }}</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 diviser ">
+                                                <p>Suivis</p>
+                                                <p class="text-grey"><strong>{{ u.getFolloweduser|length }}</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 ">
+                                                <p>Abonnés</p>
+                                                <p class="text-grey"><strong>{{ u.totalFollower}}</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>  <!-- well well-sm clearfix -->
+
+                            </div> <!-- col-md-4 -->
+                        {% endfor %}
+                    {% else %}
+                        <h3>Vous ne suivez aucune personne  pour le moment</h3>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Followed Categories  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center">Catégories suivis</h3>
+                    {% if categoriesFollow|length > 0 %}
+                        {% for u in categoriesFollow %}
+                            <div class="col-xs-4 box-dsh">
+
+                                <div class="well well-sm clearfix">
+
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="..." class="img-responsive img-circle">
+                                    </div>
+
+                                    <div class="col-md-12 text-center box">
+                                        <h4 class="text-grey">{{ u.category }}</h4>
+                                        <p>{{ u.parentcategory.parent }}</p>
+                                        <p class="text-star">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </p>
+
+                                        <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboCatProfile" rel="{{ u.id }}">Ne plus suivre </span>
+                                        <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddCatAbo hidden" id="addCatProfile{{ u.id }}" rel="{{ u.id }}">Suivre </span>
+
+                                    </div>
+
+                                    <div class="col-md-12  box-footer box">
+                                        <div class="clearfix">
+                                            <div class="col-md-4 ">
+                                                <p>Annonces</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 diviser ">
+                                                <p>Suivis</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 ">
+                                                <p>Abonnés</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>  <!-- well well-sm clearfix -->
+
+                            </div> <!-- col-md-4 -->
+                        {% endfor %}
+                    {% else %}
+                        <h3>Vous ne suivez aucune personne  pour le moment</h3>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Followed City -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center">Villes suivis</h3>
+                    {% if cityFollow|length > 0 %}
+                        {% for u in cityFollow %}
+                            <div class="col-xs-4 box-dsh">
+
+                                <div class="well well-sm clearfix">
+
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="..." class="img-responsive img-circle">
+                                    </div>
+
+                                    <div class="col-md-12 text-center box">
+                                        <h4 class="text-grey">{{ u.nom }}</h4>
+                                        <p>{{ u.departement.nom }}, {{ u.postal|truncate(2,'',false) }}</p>
+                                        <p class="text-star">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </p>
+
+                                        <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboCityProfile" rel="{{ u.id }}">Ne plus suivre </span>
+                                        <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddCityAbo hidden" id="addCityProfile{{ u.id }}" rel="{{ u.id }}">Suivre </span>
+
+                                    </div>
+
+                                    <div class="col-md-12  box-footer box">
+                                        <div class="clearfix">
+                                            <div class="col-md-4 ">
+                                                <p>Annonces</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 diviser ">
+                                                <p>Suivis</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 ">
+                                                <p>Abonnés</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>  <!-- well well-sm clearfix -->
+
+                            </div> <!-- col-md-4 -->
+                        {% endfor %}
+                    {% else %}
+
+                        <h3>Vous ne suivez aucune ville pour le moment</h3>
+
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Followed Departement  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center">Départements suivis</h3>
+                    {% if departementFollow|length > 0 %}
+                        {% for u in departementFollow %}
+                            <div class="col-xs-6 box-dsh">
+
+                                <div class="well well-sm clearfix">
+
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="..." class="img-responsive img-circle">
+                                    </div>
+
+                                    <div class="col-md-12 text-center box">
+                                        <h4 class="text-grey">{{ u.nom }}</h4>
+                                        <p>{{ u.region.nom }}</p>
+                                        <p class="text-star">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </p>
+
+                                        <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboDepProfile" rel="{{ u.id }}">Ne plus suivre </span>
+                                        <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddDepAbo hidden" id="addDepProfile{{ u.id }}" rel="{{ u.id }}">Suivre </span>
+
+                                    </div>
+
+                                    <div class="col-md-12  box-footer box">
+                                        <div class="clearfix">
+                                            <div class="col-md-4 ">
+                                                <p>Annonces</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 diviser ">
+                                                <p>Suivis</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 ">
+                                                <p>Abonnés</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>  <!-- well well-sm clearfix -->
+
+                            </div> <!-- col-md-4 -->
+                        {% endfor %}
+                    {% else %}
+
+                        <h3>Vous ne suivez aucun département pour le moment</h3>
+
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Followed Region  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center">Regions suivis</h3>
+                    {% if regionFollow|length > 0 %}
+                        {% for u in regionFollow %}
+                            <div class="col-xs-4 box-dsh">
+
+                                <div class="well well-sm clearfix">
+
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img src="{{ asset('uploads/avatar/noAvatar.png') }}" alt="..." class="img-responsive img-circle">
+                                    </div>
+
+                                    <div class="col-md-12 text-center box">
+                                        <h4 class="text-grey">{{ u.nom }}</h4>
+                                        <p>France</p>
+                                        <p class="text-star">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </p>
+
+                                        <span class="btn btn-xs btn-success col-md-6 col-md-offset-3 ajaxRemoveAboRegProfile" rel="{{ u.id }}">Ne plus suivre </span>
+                                        <span class="btn btn-xs btn-info col-md-6 col-md-offset-3 ajaxAddRegAbo hidden" id="addRegProfile{{ u.id }}" rel="{{ u.id }}">Suivre </span>
+
+                                    </div>
+
+                                    <div class="col-md-12  box-footer box">
+                                        <div class="clearfix">
+                                            <div class="col-md-4 ">
+                                                <p>Annonces</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 diviser ">
+                                                <p>Suivis</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+
+                                            <div class="col-md-4 ">
+                                                <p>Abonnés</p>
+                                                <p class="text-grey"><strong>0</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>  <!-- well well-sm clearfix -->
+
+                            </div> <!-- col-md-4 -->
+                        {% endfor %}
+                    {% else %}
+
+                        <h3>Vous ne suivez aucune personne pour le moment</h3>
+
+                    {% endif %}
+                </div>
+            </div>
+
+        </div> <!-- box-content -->
+    </div> <!-- #dsh-no-follow-box -->
+</div>

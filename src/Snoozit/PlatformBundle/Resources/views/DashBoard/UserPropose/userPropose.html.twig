@@ -1,0 +1,46 @@
+<div class="clearfix well well-sm" id="shop-filters">
+    <div class="box-filters">
+        <ul class="list-group box-propose">
+            {% if userList %}
+                {% for u in userList %}
+                    <li class="list-group-item">
+                        <div class="user-propose clearfix">
+                            <div class="col-xs-2 divNoPadding">
+                                <img src="{{ asset('uploads/avatar/'~u.avatar.path) }}" alt="..." class="img-responsive thumbnail" >
+                            </div>
+                            <div class="col-xs-10 divNoPadding">
+                                <h4><a href="{{ path('fos_user_profile_show_name', {'username' : u.username }) }}" class="text-grey">{{ u.username }}
+
+                                    <span class="text-star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <i class="fa fa-star-half-empty"></i>
+                                    </span>
+                                    </a>
+                                    <div id="loading{{ u.id }}" class="pull-right hidden">
+                                        <img src="{{ asset('bundles/snoozitplatform/images/loading.gif') }}" alt="Loading" class="loader-img">
+                                    </div>
+
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                        <span class="pull-right hidden btn btn-xs ajaxRemoveAbo" id="remove{{ u.id }}" rel="{{ u.id }}">
+                                                <i class="fa fa-check" id="{{ u.id }}"></i> <span class="text text-bold">Abonné</span>
+                                            </span>
+                                        <span class="pull-right"><i class="fa fa-plus ajaxNewAbo" id="{{ u.id }}"></i></span>
+                                    {% else %}
+                                        <a class="pull-right text-grey" href="{{ path('fos_user_security_login') }}"><i class="fa fa-plus"></i></a>
+                                    {% endif %}
+                                </h4>
+                                <p>{{ u.city.departement.nom }} - {{ u.city.nom }} ({{ u.city.postal|truncate(2,'',false) }})</p>
+                                <p> Annonce <span class="text-grey">{{ u|CountUserAdvert }}</span> | Abonné <span class="text-grey">{{ u.totalFollower }}</span> | Abonnement <span class="text-grey">{{ u.followedUser|length }}</span></p>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+

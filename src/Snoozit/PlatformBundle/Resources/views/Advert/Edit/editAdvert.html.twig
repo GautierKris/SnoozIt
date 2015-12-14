@@ -1,0 +1,8 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-12">
+        {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+        {% include 'SnoozitPlatformBundle:Advert/Edit:editAdvert_content.html.twig' %}
+    </div>
+{% endblock body %}

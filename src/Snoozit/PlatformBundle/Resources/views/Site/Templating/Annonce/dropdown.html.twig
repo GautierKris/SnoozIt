@@ -1,0 +1,44 @@
+<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+</button>
+
+<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" id="timeline-dropdown">
+
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+        {% if a.userId != app.user.id %}
+            {% if a.guestUsername is null %}
+
+                {% if a.userId|userFollow %} <!-- Si je FOLLOW déja l'auteur -->
+                    <li><span class="ajaxAddAbo hidden" id="addProfile{{ a.userId }}" rel="{{ a.userId }}"><i class="fa fa-user-plus"></i> Suivre {{ a.username }}</span></li>
+                    <li><span class="ajaxRemoveAboProfile" rel="{{ a.userId }}"><i class="fa fa-user-times"></i> Ne plus suivre {{ a.username }}</span></li>
+                {% else %} <!-- Je ne suis pas encore l'auteur  -->
+                    <li><span class="ajaxAddAbo" id="addProfile{{ a.userId }}" rel="{{ a.userId }}"><i class="fa fa-user-plus"></i> Suivre {{ a.username }}</span></li>
+                    <li><span class="hidden ajaxRemoveAboProfile" rel="{{ a.userId }}"><i class="fa fa-user-times"></i> Ne plus suivre {{ a.username }}</span></li>
+                {% endif %}
+
+
+                    <li><a href="{{ path('snoozit_dashboard_hidden_user_advert', {'hidden': a.userId }) }}"><i class="fa fa-microphone-slash"></i> Ne plus afficher d'annonce de {{ a.username }}</a></li>
+                {% else %}
+                    <li class="disabled"><a href="#"><i class="fa fa-user-secret"></i> {{ a.guestUsername }} est un utilisateur anonyme.</a></li>
+            {% endif %}
+            <li class="divider"></li>
+        {% endif %}
+
+
+        {% if a.userId != app.user.id %}
+            <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}"><i class="fa fa-align-justify"></i> Afficher plus</a></li>
+            <li><a href="#"><i class="fa fa-bell"></i>Signaler ce contenu à <span class="text-primary">Snoozit</span></a></li>
+            <li class="divider"></li>
+            <li><a href="{{ path('snoozit_interest_advert', {'id' : a.id}) }}" class="btn btn-xs btn-success">Ca m'interesse</a></li>
+        {% else %}
+            <li><a class="btn btn-xs btn-success" href="{{ path('snoozit_dashboard_edit_advert', {'advert' : a.id }) }}">Editer mon annonce</a></li>
+        {% endif %}
+
+        <!-- Si je ne suis pas authentifier -->
+    {% else %}
+        <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}"><i class="fa fa-align-justify"></i> Afficher plus</a></li>
+        <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}" class="btn btn-xs btn-success"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
+    {% endif %}
+
+</ul>

@@ -1,0 +1,55 @@
+<div class="row">
+    {# L'espace pour le breadcrumb #}
+    {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb, 'localisation' : localisation})) }}
+</div>
+<div class="row">
+    {# L'affichage du contenu du site à supprimer éventuellement si l'utilisateur est membre payant #}
+    {{ render( controller('SnoozitPlatformBundle:Site:mediaPub')) }}
+</div>
+
+{# L'espace d'affichage des annonces #}
+<div class="row">
+
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-3 follow">
+                {# 1/ Si on est connecté #}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+                    {# 2/ Si il y a quelque chose ou s'abonner  de préciser#}
+                    {% if followLink is defined and followLink is not null %}
+                        {# 3/ L'utilisateur est in abonné à cette rubrique #}
+
+                        {% if userFollow %}
+                            <span class="label hidden label-follow ajaxAdd{{ followLink.type }}Abo"  id="add{{ followLink.type }}Profile{{ followLink.id }}" rel="{{ followLink.id }}">M'abonner <i class="fa fa-plus"></i></span>
+                            <span class="label label-success ajaxRemoveAbo{{ followLink.type }}Profile" rel="{{ followLink.id }}">Abonné <i class="fa fa-check"></i></span>
+                        {% else %}
+                            <span class="label label-follow ajaxAdd{{ followLink.type }}Abo"  id="add{{ followLink.type }}Profile{{ followLink.id }}" rel="{{ followLink.id }}">M'abonner <i class="fa fa-plus"></i></span>
+                            <span class="label hidden label-success ajaxRemoveAbo{{ followLink.type }}Profile" rel="{{ followLink.id }}">Abonné <i class="fa fa-check"></i></span>
+                        {% endif %} {# Fin de 3  #}
+
+                    {% endif %} {# Fin de 2 #}
+
+                {% endif %} {# Fin de 1 #}
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-center text-uppercase datetime-title">{{ page_title|truncate(60) }}</h3>
+            </div>
+            <div class="col-md-3"></div>
+            {% if searchModule is defined %}
+                <p class="text-center help-block">Résultat: <em>{{ advertList|length }} </em></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h3 class="text-center text-uppercase datetime-title">Filtres des annonces</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        {% include 'SnoozitPlatformBundle:Site/Templating/Annonce:timeline.html.twig' %}
+    </div>
+    {{ render( controller('SnoozitPlatformBundle:Site:advertFilters', {'choices': choices })) }}
+</div>
+

@@ -1,0 +1,3 @@
+snoozit_platform_advert_chat_homepage:
+    path:     /{id}
+    defaults: { _controller: SnoozitPlatformBundle:AdvertChat:index }

@@ -1,0 +1,38 @@
+<div class="container">
+
+    <div class="row" id="breadcrumb" role="navigation">
+        {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+    </div>
+
+<div class="col-md-8 col-md-offset-2">
+    <div class="well">
+
+        <h2 class="text-center stylised-font text-primary">Vous souhaitez modifier une annonce</h2>
+        <p class="help-block text-center"> {{ advert.title }} </p>
+        <hr/>
+        <p>Combinaison à utiliser pour la démo : <span class="text-primary">{{ advert.hash }} </span></p>
+
+        {% if error is not null %}
+            <div class="has-error"> {{ error }}</div>
+        {% endif %}
+
+        <hr />
+        <form action="{{ path('snoozit_security_access', {'advert' : advert.id}) }}" method="post" >
+            <div class="form-group">
+                <label for="...">Veuillez indiquer la combinaison qui vous a été transmise par email lors de la création de votre annonce.</label>
+                <div class="input-group">
+                    {{ form_widget(form.hashkey) }}
+                    <span class="input-group-addon">@</span>
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            <div class="form-group text-center">
+                <button class="btn btn-success btn-sm">Accedez à mon annonce</button>
+                <a class="btn btn-warning btn-sm" href="{{ path('snoozit_change_combinaison', {'advert' : advert.id }) }}">J'ai perdu ma combinaison</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</div>
