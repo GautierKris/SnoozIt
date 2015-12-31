@@ -31,12 +31,12 @@ class DashBoardController extends Controller
         $advertManager = $this->getAdvertManager();
         $stats = $this->getStatsManager()->getAllStats();
 
-        $userList = $em->getRepository('SnoozitUserBundle:User')->findUserToPropose($user);
+        $userList = $em->getRepository('SnoozitUserBundle:User')->findUserToPropose($user, $user->getFolloweduser()->toArray());
 
         $advertListToPaginate = $advertManager->getAdvertListForUser($user);
 
         // A SUPPRIMER A LA PROCHAINE VERSION DE PRODUCTION
-       $merged = $this->mergeAllActivity($advertListToPaginate);
+        $merged = $this->mergeAllActivity($advertListToPaginate);
 
         $advertList  = $this->get('knp_paginator')->paginate($merged, $request->query->getInt('page', 1),20);
 
@@ -101,7 +101,7 @@ class DashBoardController extends Controller
         return $this->render('SnoozitPlatformBundle:DashBoard/UserAdvert:userAdvert.html.twig', array(
             'breadcrumb' => $breadcrumb,
             'advertList' => $userAdvertList,
-            ));
+        ));
     }
 
     // Affiche les filtres d'annonces

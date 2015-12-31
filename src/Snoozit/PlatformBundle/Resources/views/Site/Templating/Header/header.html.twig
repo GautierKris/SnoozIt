@@ -28,19 +28,19 @@
 
             <form action="{{ path('snoozit_search_engine_catch') }}" class="form-horizontal form-group-sm" method="post">
                 <div class="row">
-                    <div class="col-md-6 col-xs-6 divNoPadding">
+                    <div class="col-xs-6 divNoPadding">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-search"></i></span>
                             {{ form_widget(form.search) }}
                         </div>
                     </div>
-                    <div class="col-md-2 col-xs-2 divNoPadding">
+                    <div class="col-xs-2 divNoPadding">
                         {{ form_widget(form.region) }}
                     </div>
-                    <div class="col-md-2 col-xs-2 divNoPadding">
+                    <div class="col-xs-2 divNoPadding">
                         {{ form_widget(form.category) }}
                     </div>
-                    <div class="col-md-2 col-xs-2 divNoPadding">
+                    <div class="col-xs-2 divNoPadding">
                         <button class="btn btn-sm btn-primary pull-right btn-block" type="submit">Chercher</button>
                     </div>
                 </div>

@@ -51,4 +51,25 @@ class UserRepository extends EntityRepository
 
     }
 
+    // Trouve des utilisateur a proposé dans la timeline en fonction de la recherche
+    public function getTimelineUsersFound($search)
+    {
+        $result = null;
+
+        if($search){
+            $qb = $this->createQueryBuilder('u');
+
+            $qb->select('u')
+                ->where('u.username like :search')
+                ->setParameter('search', '%'.$search.'%')
+                ->setMaxResults(3);
+
+            $result = $qb->getQuery()->getResult();
+
+        }
+
+
+        return $result;
+    }
+
 }

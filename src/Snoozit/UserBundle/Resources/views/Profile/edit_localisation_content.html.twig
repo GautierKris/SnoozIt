@@ -1,17 +1,90 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
 <div class="row fos-user-edit-form-head">
     <div class="text-center">
         <h3>Localisation</h3>
+        <p>
+            Vous avez déménager ? Mettez à jour votre localisation.
+        </p>
     </div>
+        <div class="col-xs-12 text-bold text-center">
+            Localisation actuel :
+            <a href="{{ path('snoozit_platform_show_by_region', {'slug' : app.user.city.departement.region.slug}) }}" class="text-primary">
+                {{ app.user.city.departement.region.nom }}
+            </a> >
+            <a href="{{ path('snoozit_platform_show_by_departement', {'slug' : app.user.city.departement.slug}) }}" class="text-primary">
+                {{ app.user.city.departement.nom }}
+            </a>
+            >
+            <a href="{{ path('snoozit_platform_show_by_city', {'slug' : app.user.city.slug}) }}" class="text-primary">
+                {{ app.user.city.nom }} ({{ app.user.city.postal|truncate(2,false,false) }})
+            </a>
+        </div>
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <hr />
+        </div>
+    </div>
+    <br>
 </div>
 <div class="row fos-user-edit-form-body">
 
-    <div class="col-lg-12 form-content text-center">
-        <div class="text-center">
-            <h3>Option à mettre en place</h3>
-        </div>
-        <div class="text-center col-md-offset-4 col-md-4">
-            <br/>
-            <input type="submit" class="btn btn-primary btn-xs btn-rounded btn-block disabled" value="{{ 'profile.edit.submit'|trans }}" />
-        </div>
+    <div class="col-md-8 col-md-offset-2 form-content text-center">
+
+        <form action="{{ path('snoozit_user_profile_edit_localisation') }}" {{ form_enctype(form) }} class="fos_user_profile_edit" method="post"  >
+
+            <!-- Région -->
+            <div class="row">
+                {% if form_errors(form.city)|length > 0 %}{% set errors_city = 'has-error' %}{% else %} {% set errors_city = NULL %}{% endif %}
+                {% if form_errors(form.codePostal)|length > 0 %}{% set errors_codepostal = 'has-error' %}{% else %} {% set errors_codepostal = NULL %}{% endif %}
+                {% if form_errors(form)|length > 0 %}{% set errors_codepostal = 'has-error' %} {% set errors_city = 'has-error' %} {% else %} {% set errors_codepostal = NULL %} {% set errors_city = NULL %}{% endif %}
+                <div class="col-xs-12 has-error">
+                    {{ form_errors(form) }}
+                    {{ form_errors(form.codePostal) }}
+                    {{ form_errors(form.city) }}
+                </div>
+
+                <div class="form-group col-md-6 {{ errors_codepostal }}">
+                    <div class="input-group input-group-sm ">
+                        {{ form_widget(form.codePostal, {
+                            'attr' : {
+                                'data-url' : path('ahs_commun_json_codesPostaux')
+                            }} )
+                        }}
+                        <span class="input-group-addon"><i class="fa fa-mail-forward"></i></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6  {{ errors_city }} ">
+                    <div class="input-group input-group-sm">
+                        {{ form_widget(form.city, {
+                            'attr' : {
+                                'data-url' : path('ahs_commun_json_villes')
+                            }} )
+                        }}
+                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                    </div>
+                </div>
+            </div>
+
+
+            {{ form_rest(form) }}
+
+            <div class="text-center col-md-offset-4 col-md-4">
+                <input type="submit" class="btn btn-primary btn-xs btn-rounded btn-block" value="{{ 'profile.edit.submit'|trans }}" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row fos-user-edit-form-body">
+    <div class="col-xs-12">
+        <br>
+        <p class="help-block">
+            Notez que ce changement n'affectera pas les localisations de vos anciennes annonces.
+            <br>
+            Vous pourrez les changer à
+            la rubrique <a href="{{ path('snoozit_dashboard_user_advert') }}">mes annonces</a>
+        </p>
     </div>
 </div>

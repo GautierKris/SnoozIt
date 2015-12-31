@@ -2,6 +2,7 @@
 
 namespace Snoozit\PlatformBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -73,12 +74,19 @@ class AdvertInterest
      */
     private $customerFade;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Snoozit\PlatformBundle\Entity\sellComment",  mappedBy="advertInterest", cascade={"persist", "remove"})
+     * @ORM\OrderBy({ "created" = "desc" })
+     */
+    protected $sellComments;
+
 
     public function __construct()
     {
         $this->notification = true;
         $this->ownerFade = false;
         $this->customerFade = false;
+        $this->sellComments = new ArrayCollection();
     }
 
     /**
@@ -161,6 +169,52 @@ class AdvertInterest
     }
 
     /**
+     * Set ownerFade
+     *
+     * @param boolean $ownerFade
+     * @return AdvertInterest
+     */
+    public function setOwnerFade($ownerFade)
+    {
+        $this->ownerFade = $ownerFade;
+
+        return $this;
+    }
+
+    /**
+     * Get ownerFade
+     *
+     * @return boolean 
+     */
+    public function getOwnerFade()
+    {
+        return $this->ownerFade;
+    }
+
+    /**
+     * Set customerFade
+     *
+     * @param boolean $customerFade
+     * @return AdvertInterest
+     */
+    public function setCustomerFade($customerFade)
+    {
+        $this->customerFade = $customerFade;
+
+        return $this;
+    }
+
+    /**
+     * Get customerFade
+     *
+     * @return boolean 
+     */
+    public function getCustomerFade()
+    {
+        return $this->customerFade;
+    }
+
+    /**
      * Set user
      *
      * @param \Snoozit\UserBundle\Entity\User $user
@@ -206,7 +260,6 @@ class AdvertInterest
         return $this->advert;
     }
 
-
     /**
      * Set advertOptionType
      *
@@ -231,48 +284,35 @@ class AdvertInterest
     }
 
     /**
-     * Set ownerFade
+     * Add sellComments
      *
-     * @param boolean $ownerFade
+     * @param \Snoozit\PlatformBundle\Entity\sellComment $sellComments
      * @return AdvertInterest
      */
-    public function setOwnerFade($ownerFade)
+    public function addSellComment(\Snoozit\PlatformBundle\Entity\sellComment $sellComments)
     {
-        $this->ownerFade = $ownerFade;
+        $this->sellComments[] = $sellComments;
 
         return $this;
     }
 
     /**
-     * Get ownerFade
+     * Remove sellComments
      *
-     * @return boolean 
+     * @param \Snoozit\PlatformBundle\Entity\sellComment $sellComments
      */
-    public function getOwnerFade()
+    public function removeSellComment(\Snoozit\PlatformBundle\Entity\sellComment $sellComments)
     {
-        return $this->ownerFade;
+        $this->sellComments->removeElement($sellComments);
     }
 
     /**
-     * Set customerFade
+     * Get sellComments
      *
-     * @param boolean $customerFade
-     * @return AdvertInterest
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setCustomerFade($customerFade)
+    public function getSellComments()
     {
-        $this->customerFade = $customerFade;
-
-        return $this;
-    }
-
-    /**
-     * Get customerFade
-     *
-     * @return boolean 
-     */
-    public function getCustomerFade()
-    {
-        return $this->customerFade;
+        return $this->sellComments;
     }
 }

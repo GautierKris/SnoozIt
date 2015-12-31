@@ -56,23 +56,21 @@
                             {% endif %}
                         </th>
 
-
                         <td class="user">
                             <h4>
                                 <a href="{{ path('fos_user_profile_show_name', {'username' : u.advert.user.username}) }}"
                                    class="text-bold">{{ u.advert.user.username }}</a>
                                 <span class="text-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-half-empty"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                    <i class="fa fa-star-half-empty"></i>
                                 </span>
                             </h4>
                             <h5>{{ u.advert.user.city.departement.region.nom }}
                                 , {{ u.advert.user.city.departement.nom }}<br>{{ u.advert.user.city.nom }}</h5>
                         </td>
-
 
                         <td class="content">
                             <span class="text-default text-normal">Catégorie</span>
@@ -87,16 +85,32 @@
                                     <div class="col-md-6">
                                         <a class="btn btn-danger btn-xs btn-rounded btn-block " href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}">Me désister</a>
                                     </div>
-                                </div>
-                            {% endif %}
 
+                                    <div class="col-xs-12 text-center">
+                                        <hr>
+                                        <p class="help-block">
+                                            <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires <i class="fa fa-caret-down"></i> </button>
+                                            <span class="pull-right"><span class="badge badge-primary">{{ u.sellComments|length }}</span></span>
+                                        </p>
+                                    </div>
+                                    <div class="toggle hidden">
+                                        {% include 'SnoozitPlatformBundle:DashBoard/Templating/SellComment:sellComment.html.twig' %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% if u.advertOptionType.id == 3 %}
+                                    <a href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : u.id}) }}" class="text-danger">Archiver ce refus</a>
+                                {% else %}
+                                    <a href="{{ path('snoozit_interest_advert', {'id' : u.advert.id}) }}" class="text-grey">Annuler cet interet</a>
+                                {% endif %}
+                            {% endif %}
                         </td>
 
                         <td class="price">{{ u.advert.price }} €</td>
 
                         <td class="text-center status">
                             {% if u.advertOptionType.id == 5 or u.advertOptionType.id == 3 %}
-                            <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id': u.id}) }}" class="btn btn-xs btn-{{ color }} btn-rounded btn-block">{{ u.advertOptionType.type }}</a>
+                                <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id': u.id}) }}" class="btn btn-xs btn-{{ color }} btn-rounded btn-block">{{ u.advertOptionType.type }}</a>
                             {% else %}
                                 <a href="#" class="btn btn-xs btn-{{ color }} btn-rounded btn-block">{{ u.advertOptionType.type }}</a>
                             {% endif %}
@@ -108,6 +122,11 @@
             </table>
         </div>
     </div>
+{% else %}
+    <br>
+    <br>
+    <br>
+    <h3 class="text-center">Votre panier est vide</h3>
 {% endif %}
 
 {# display navigation #}

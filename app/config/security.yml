@@ -27,4 +27,6 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/dashboard/, role: ROLE_USER }
+        - { path: ^/interest/, role: ROLE_USER }
+        - { path: ^/panier/, role: ROLE_USER }
         - { path: ^/follow/, role: ROLE_USER }

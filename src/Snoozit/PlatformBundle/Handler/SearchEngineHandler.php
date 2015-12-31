@@ -100,7 +100,6 @@ class SearchEngineHandler
 
                 $data = $this->session->get('selectedRegion');
 
-
                 $entity  = $this->entityManager->getRepository('SnoozitPlatformBundle:Localisation\Region')->find($data);
 
 

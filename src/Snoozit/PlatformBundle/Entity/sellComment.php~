@@ -1,0 +1,53 @@
+<?php
+
+namespace Snoozit\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+
+/**
+ * sellComment
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Snoozit\PlatformBundle\Entity\sellCommentRepository")
+ */
+class sellComment
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="string", length=255)
+     */
+    protected $content;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User", inversedBy="sellComments", cascade={"persist", "remove"} )
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $user;
+
+    /**
+     * @var \DateTime $created
+
+     * @ORM\Column(name="created", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    protected $created;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "Snoozit\PlatformBundle\Entity\AdvertInterest", inversedBy="sellComments", cascade={"persist", "remove"} )
+     * @ORM\JoinColumn(name="advert_interest_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $advertInterest;
+
+}

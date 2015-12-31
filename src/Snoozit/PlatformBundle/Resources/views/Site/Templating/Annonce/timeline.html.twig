@@ -1,10 +1,55 @@
 <div class="left-col-dash">
     <div  id="time-advert">
+
+        {% if usersFound is defined %}
+            {% for u in usersFound  %}
+                <section>
+                    <div class="well well-sm box-time-advert box-time-advert-usersFound" style="border-left: 2px solid #0088cc">
+                        <div class="box-header">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <img src="{{ asset('uploads/avatar/'~u.avatar.path) }}" alt="{{ u.username }}" class="img-circle img-responsive avatar pull-left ">
+                                    <h5>
+                                        <a href="{{ path('fos_user_profile_show_name', {'username' : u.username}) }}" class="user"> {{ u.username }}
+                                            <span class="text-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                        <i class="fa fa-star-half-empty"></i>
+                                                    </span>
+                                        </a>
+                                        <span class="datetime">
+                                        <a href="{{ path('snoozit_platform_show_by_region', {'slug' : u.city.departement.region.slug}) }}" class="text-primary">
+                                            {{ u.city.departement.region.nom }}
+                                        </a> -
+                                        <a href="{{ path('snoozit_platform_show_by_departement', {'slug' : u.city.departement.slug}) }}" class="text-primary">
+                                            {{ u.city.departement.nom }}
+                                        </a>
+                                        -
+                                        <a href="{{ path('snoozit_platform_show_by_city', {'slug' : u.city.slug}) }}" class="text-primary">
+                                            {{ u.city.nom }} ({{ u.city.postal|truncate(2,false,false) }})
+                                        </a>
+                                    </span>
+                                    </h5>
+
+                                    <p> Annonce <span class="text-grey">{{ u|CountUserAdvert }}</span> | Abonné <span class="text-grey">{{ u.totalFollower }}</span> | Abonnement <span class="text-grey">{{ u.followedUser|length }}</span></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="#" class="pull-right btn btn-primary btn-sm btn-block">Suivre</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endfor %}
+        {% endif %}
+
+
         {% if advertList %}
             {% for a in advertList %}
                 <section>
                     <div class="well well-sm box-time-advert">
-
                         <div class="box-header">
                             <div class="row">
                                 <div class="col-md-10">

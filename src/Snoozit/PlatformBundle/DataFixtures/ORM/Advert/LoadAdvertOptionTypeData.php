@@ -20,10 +20,10 @@ class LoadAdvertOptionTypeData extends AbstractFixture implements OrderedFixture
     public function load(ObjectManager $manager)
     {
         $default        = $this->createNotificationtype('En cours');
-        $success        = $this->createNotificationtype('Féliciation!');
+        $success        = $this->createNotificationtype('Félicitation!');
         $refus          = $this->createNotificationtype('Refus');
         $vendu          = $this->createNotificationtype('Vendu');
-        $desistement    = $this->createNotificationtype('Desistement');
+        $desistement    = $this->createNotificationtype('Désistement');
 
         $manager->persist($default);
         $manager->persist($success);

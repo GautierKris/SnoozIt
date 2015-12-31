@@ -3,8 +3,8 @@
 <div class="row">
     <div class="col-xs-12 panier-nav">
         <ul class="nav nav-pills text-bold">
-            <li role="presentation"><a href="{{ path('snoozit_dashboard_interest') }}" class="text-grey">En cours <span class="badge badge-warning">{{ stats.income|length }}</span></a></li>
-            <li role="presentation" class="active"><a href="{{ path('snoozit_dashboard_interest_desistement') }}" class="text-grey">Désistements<span class="badge badge-danger">{{ stats.desist|length }}</span></a></li>
+            <li role="presentation"><a href="{{ path('snoozit_dashboard_interest') }}" class="text-grey">En cours <span class="badge badge-primary">{{ stats.income|length }}</span></a></li>
+            <li role="presentation" class="active"><a href="{{ path('snoozit_dashboard_interest_desistement') }}" class="text-grey">Désistements<span class="badge badge-primary">{{ stats.desist|length }}</span></a></li>
             <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_archives') }}" class="text-grey">Archives <span class="badge badge-primary">{{ stats.archives|length }}</span></a></li>
         </ul>
     </div>

@@ -123,5 +123,61 @@ $(document).ready(function(){
 
     });
 
+    // Affiche et masque les commentaires des sellComment
+    $(function(){
 
+        var element = $('.toggleSellComment');
+
+        element.on('click', function(){
+
+            var elementId = $(this).attr('rel');
+            var container = $('#sellCommentContainer'+elementId);
+
+            if( $('.toggle').hasClass('hidden')){
+                $('.toggle').removeClass('hidden');
+            }
+
+            container.toggle();
+
+        });
+    });
+
+    // Pour afficher que des chiffres dans un input
+    function supprimer_dernier_caractere(elm) {
+        var val = $(elm).val();
+        var cursorPos = elm.selectionStart;
+        $(elm).val(
+            val.substr(0,cursorPos-1) + // before cursor - 1
+            val.substr(cursorPos,val.length) // after cursor
+        )
+        elm.selectionStart = cursorPos-1; // replace the cursor at the right place
+        elm.selectionEnd = cursorPos-1;
+    }
+
+        // Supprime le dernier caractère s'il n'est pas alphanumérique sur evt keyup
+        $('body').delegate('input.only_alpha_num','keyup',function(){
+            if(!$(this).val().match(/^[0-9]*$/i)) // a-z et 0-9 uniquement
+                supprimer_dernier_caractere(this);
+        });
+
+
+    $(function(){
+
+        var copiecolleElement = document.getElementById('snoozit_user_bundle_localisation_codePostal');
+
+        // Annulation du "coller" dans l'input texte auquel on a affecté l'identifiant "no_paste"
+        if(copiecolleElement != null){
+
+            copiecolleElement.addEventListener('keydown',
+                function (foo){
+                    if (foo.keyCode == 86)
+                    {
+                        // alert('Vous avez copié du texte');
+                        foo.preventDefault();
+                    }
+                });
+        }
+
+
+    });
 });

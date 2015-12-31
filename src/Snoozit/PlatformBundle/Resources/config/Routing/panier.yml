@@ -14,4 +14,16 @@ snoozit_platform_panier_page_refus:
     path:     /refus
     defaults: { _controller: SnoozitPlatformBundle:Panier:pageRefus }
 
+snoozit_platform_add_in_panier:
+    path: /add/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Panier:addInPanier}
 
+snoozit_platform_remove_in_panier:
+    path: /remove/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Panier:removeInPanier}
+
+snoozit_dashboard_remove_refus_from_interface:
+    path:     /remove-refus/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Panier:removeRefusInPanier }
+    requirements:
+        id: \d+

@@ -40,3 +40,9 @@ snoozit_dashboard_remove_desist_interest_from_interface:
     requirements:
         id: \d+
 
+snoozit_interest_advert:
+    path: /interestedBy/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:interestedBy }
+    requirements:
+        id: \d+
+

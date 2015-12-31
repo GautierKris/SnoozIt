@@ -83,9 +83,21 @@ class AdvertManager
      * @param $advert
      * @return array
      */
-    public function getAdvertListToPropose($advert)
+    public function getAdvertListToProposeForPanier($advert, $max = null)
     {
-        $advertList = $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getAdvertListToPropose($advert);
+        $advertList = $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getAdvertListToProposeForPanier($advert, $max);
+
+        return $advertList;
+    }
+
+    // Récupere une liste d'annonces en corélation avec l'annonces affichée
+    /**
+     * @param $advert
+     * @return array
+     */
+    public function getAdvertListToPropose($advert, $max = null)
+    {
+        $advertList = $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getAdvertListToPropose($advert, $max);
 
         return $advertList;
     }
@@ -114,6 +126,10 @@ class AdvertManager
         $error_msg = 'Vous devez patienter 1 heure pour retransmettre votre interet pour cette annonce.';
         $success_msg = 'Votre interet pour cette annonce a bien été pris en compte.';
         $success_msg_remove = 'Votre interet pour cette annonce a été retirée';
+
+        if($this->session->has('_interestRemove')){
+            $this->session->remove('_interestRemove');
+        }
 
         // La session n'existe pas
         if(!$this->session->has('advertInterest'))
@@ -162,7 +178,9 @@ class AdvertManager
 
                     if($this->checkAdvertInterestByUser($advert)){
 
-                        $this->session->getFlashBag()->add('success' , $success_msg_remove );
+                        $this->session->getFlashBag()->add('warning' , $success_msg_remove );
+
+                        $this->session->set('_interestRemove' , $advert->getId() );
                     }
                     else{
                         $this->createInterestAdvert($advert);

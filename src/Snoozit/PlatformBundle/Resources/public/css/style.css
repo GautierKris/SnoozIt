@@ -78,7 +78,8 @@ a.normal-link:hover{ color: #000}
 a.text-remove{ text-decoration: line-through; color: #999}
 
 /* Les boutons */
-.btn{ font-size: .9em}
+.btn{ font-size: .9em; font-weight: 600}
+.btn-padding{ padding-left: 15px; padding-right: 15px }
 .btn-group-sm>.btn, .btn-sm {
     padding: 5px 10px;
     font-size: .9em;
@@ -177,7 +178,8 @@ select.form-control{
 .navbar button{
     border-radius: 0;
 }
-.navbar .btn{ font-size: 1.1em}
+.navbar .btn{ }
+.navbar button[type="submit"]{ line-height: 2em; letter-spacing: 1px; }
 .navbar input{
     border: none;
     height: 30px;
@@ -187,6 +189,7 @@ select.form-control{
     background: url('../images/br_down.png') no-repeat 100% 8px;
     border: none;
     border-left: 1px solid #ddd;
+    font-size: .9em;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
@@ -541,7 +544,7 @@ select.form-control{
 }
 #time-advert .dropdown-menu{ border-radius: 4px; font-size: .9em; margin-right: 6px; border-right: transparent}
 #time-advert .dropdown-menu .btn{ color: #fff; }
-#time-advert .dropdown-menu .btn:hover{ color: #fff; background: #55a955 ;border: 1px solid transparent}
+#time-advert .dropdown-menu .btn:hover{ color: #fff; background: #55a955; border: 1px solid transparent}
 #time-advert .dropdown-menu > li > span {
     display: block;
     padding: 3px 20px;
@@ -552,6 +555,8 @@ select.form-control{
     white-space: nowrap;
     cursor: pointer;
 }
+#time-advert .box-time-advert-usersFound .box-header{ border:none; margin-bottom: 0; position: relative;}
+#time-advert .box-time-advert-usersFound .box-header p{ margin-bottom: 0;}
 #time-advert .box-header{ border-bottom: 1px solid #ddd; margin-bottom: 10px;position: relative;}
 #time-advert .box-header a.user{ color: #555;}
 #time-advert .box-header a.user:hover{ color: orange;}
@@ -566,11 +571,11 @@ select.form-control{
 #time-advert .box-content .description{ margin-bottom: 5px;}
 #time-advert .box-content .text-lowersize span{ margin-right: 10px;}
 #time-advert .userLogsBox{ border-left: 2px solid #f8a22c; margin-bottom: 10px; background: #fff}
-#time-advert .userLogsBox h4{  }
-#time-advert .userLogsBox p{  }
+#time-advert .userLogsBox img.advert-img{ max-height: 50px; margin: 0 auto; max-width: 50px;}
 
 #timeline-dropdown{}
 #timeline-dropdown i{ margin-right: 8px;}
+#dropdownMenu1{ border: none;}
 
 .label-cat-{ border: 1px solid #00a300; border-radius: 8px; color: #555 }
 .label-cat-console{ border: 1px solid #426980; border-radius: 8px; color: #555 }

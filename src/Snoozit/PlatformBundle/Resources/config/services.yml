@@ -15,6 +15,9 @@ parameters:
     sz_advert_negoce_type.class:  Snoozit\PlatformBundle\Form\AdvertNegoceType
     sz_advert_negoce_handler.class: Snoozit\PlatformBundle\Handler\AdvertNegoceHandler
 
+    sz_panier_comment_type.class: Snoozit\PlatformBundle\Form\sellCommentType
+    sz_panier_comment_handler.class: Snoozit\PlatformBundle\Handler\SellCommentHandler
+
     sz_user_profile_comment_type.class:  Snoozit\PlatformBundle\Form\UserProfileCommentType
     sz_user_profile_comment_handler.class: Snoozit\PlatformBundle\Handler\UserProfileCommentHandler
     sz_user_profile_comment_to_comment_type.class:  Snoozit\PlatformBundle\Form\UserProfileCommentToCommentType
@@ -42,6 +45,24 @@ parameters:
     sz_constraint_guest_username.class: Snoozit\PlatformBundle\Validator\Constraints\GuestUsernameValidValidator
 
 services:
+    sz_panier_comment_form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %symfony.form.form%
+        arguments:
+            - sell_comment
+            - snoozit_platformbundle_sellcomment
+
+    sz_panier_comment_handler:
+            class: %sz_panier_comment_handler.class%
+            arguments: [@sz_panier_comment_form, @request_stack, @doctrine.orm.entity_manager, @security.token_storage, @session]
+
+    sz_panier_comment_form_type:
+        class: %sz_panier_comment_type.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: snoozit_platformbundle_sellcomment }
+
     sz_user_profile_comment_form:
         factory_service: form.factory
         factory_method: createNamed

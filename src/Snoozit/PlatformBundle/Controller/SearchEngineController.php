@@ -64,8 +64,12 @@ class SearchEngineController extends Controller
                         'slug'      => $routeSlug,
                         'region'    => $regionSlug
                     )));
+
+
                 }
                 if($categorySlug and !$regionSlug){
+
+
                     $this->get('session')->set('noRegionSelected', true);
                     return $this->redirect($this->generateUrl('snoozit_platform_search_result_category', array(
                         'category'  => $categorySlug,
@@ -73,6 +77,7 @@ class SearchEngineController extends Controller
                     )));
                 }
                 if($categorySlug and $regionSlug){
+
                     return $this->redirect($this->generateUrl('snoozit_platform_search_result_full', array(
                         'slug'      => $routeSlug,
                         'category'  => $categorySlug,
@@ -107,11 +112,14 @@ class SearchEngineController extends Controller
             'region' => $request->get('region'),
             'category'  => $request->get('category')
         );
+
         // La listes des annonces sans distinctions
-        $advertList = $advertManager->getAdvertForSearchEngine($parameters,$choices, null);
+        $advertListToPaginate = $advertManager->getAdvertForSearchEngine($parameters,$choices, null);
 
+        $advertList  = $this->get('knp_paginator')->paginate($advertListToPaginate, $request->query->getInt('page', 1), 10);
+        $usersFound = $this->getDoctrine()->getRepository('SnoozitUserBundle:User')->getTimelineUsersFound($searchEngineManager->getPageTitle());
 
-        return $this->getResultTemplate($advertList,$searchEngineManager->getBreadcrumb(),$choices, $searchEngineManager->getPageTitle());
+        return $this->getResultTemplate($advertList, $searchEngineManager->getBreadcrumb(),$choices, $searchEngineManager->getPageTitle(), null, $usersFound);
     }
 
     public function searchAdvertResultAction(Request $request)
@@ -131,11 +139,14 @@ class SearchEngineController extends Controller
                             'region' => $request->get('region'),
                             'category'  => $request->get('category')
         );
+
         // La listes des annonces sans distinctions
-        $advertList = $advertManager->getAdvertForSearchEngine($parameters,$choices, null);
+        $advertListToPaginate = $advertManager->getAdvertForSearchEngine($parameters,$choices, null);
 
+        $advertList  = $this->get('knp_paginator')->paginate($advertListToPaginate, $request->query->getInt('page', 1), 10);
+        $usersFound = $this->getDoctrine()->getRepository('SnoozitUserBundle:User')->getTimelineUsersFound($searchEngineManager->getPageTitle());
 
-        return $this->getResultTemplate($advertList,$searchEngineManager->getBreadcrumb(),$choices, $searchEngineManager->getPageTitle());
+        return $this->getResultTemplate($advertList,$searchEngineManager->getBreadcrumb(),$choices, $searchEngineManager->getPageTitle(), null, $usersFound);
 
     }
 
@@ -161,7 +172,7 @@ class SearchEngineController extends Controller
         return $this->get('sz_search_engine_handler');
     }
 
-    private function getResultTemplate($advertList = null, $breadcrumb = array(),$choices = null, $pageTitle = null, $localisation = null )
+    private function getResultTemplate($advertList = null, $breadcrumb = array(),$choices = null, $pageTitle = null, $localisation = null, $usersFound = null )
     {
         return $this->render('SnoozitPlatformBundle:Site/Search:search.html.twig', array(
             'advertList' => $advertList,
@@ -169,7 +180,8 @@ class SearchEngineController extends Controller
             'choices'    => $choices,
             'page_title' => $pageTitle,
             'localisation'=> $localisation,
-            'searchModule' => true ));
+            'searchModule' => true,
+            'usersFound'  => $usersFound));
     }
 
 }

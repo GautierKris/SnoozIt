@@ -83,3 +83,20 @@
 .img-box.has-error img{
     border-color: #d9534f;
 }
+
+.sponsoredTopMedia{ font-size: .9em}
+.sponsoredTopMedia h3{ margin-top: 0}
+.sponsoredTopMedia ul.list-inline{}
+.sponsoredTopMedia li{ background: transparent; border: none}
+.sponsoredTopMedia h4{ margin: 0 0 5px 0}
+.sponsoredTopMedia p{ margin: 0 0 2px 0}
+
+#addPanier{ padding: 0}
+#addPanier .top{ padding: 50px 0;}
+#addPanier .top .checked{ font-size: 2.5em; margin-bottom: 30px}
+#addPanier .top .content h3{ margin-top: 0;}
+#addPanier .top .content p{ margin-bottom: 5px}
+
+#addPanier .bottom{}
+#addPanier .bottom a{ font-weight: 600 }
+

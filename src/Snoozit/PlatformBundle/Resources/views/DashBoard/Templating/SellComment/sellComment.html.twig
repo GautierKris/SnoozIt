@@ -1,0 +1,47 @@
+<div id="sellCommentContainer{{ u.advert.id }}">
+    <div class="row">
+        <div class="sell-comment-area ">
+            <hr>
+
+            <form action="{{ path(app.request.attributes.get('_route')) }}" method="post">
+
+                <div class="form-group">
+                    <span class="toggleSellComment text-primary pull-right" rel="{{ u.advert.id }}"> Masquer les commentaires</span>
+                    <label for="sell-content">{{ app.user.username }} :</label>
+                    {{ form_widget(form.content) }}
+                </div>
+                {{ form_widget(form.advertInterest, {'value' : u.id }) }}
+                {{ form_rest(form) }}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-xs btn-primary btn-rounded col-xs-4" value="Publier">
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+    <hr />
+
+    {% if u.sellComments is not empty %} <!-- A modifier par is not empty -->
+        {% for c in u.sellComments %}
+            <div class="row">
+                <div class="sell-comment col-xs-12">
+                    <h4><img src="{{ asset('uploads/avatar/'~c.user.avatar.path) }}" alt="{{ c.user.username }}" class="img-circle img-24"> {{ c.user.username }}
+                        <span class="text-star">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <i class="fa fa-star-half-empty"></i>
+                        </span>
+                        <span class="pull-right text-bold">
+                            {{ c.created|date('h:i  d/m') }}
+                        </span>
+                    </h4>
+                    <p>{{ c.content|nl2br }}</p>
+                    <hr>
+                </div>
+            </div>
+    {% endfor %}
+{% endif %}
+</div>

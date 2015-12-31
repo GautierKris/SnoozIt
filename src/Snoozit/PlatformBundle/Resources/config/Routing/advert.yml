@@ -32,12 +32,6 @@ snoozit_edit_advert:
     path:     /edit/{advert}
     defaults: { _controller: SnoozitPlatformBundle:Advert:edit }
 
-snoozit_interest_advert:
-    path: /interestedBy/{id}
-    defaults: { _controller: SnoozitPlatformBundle:Advert:interestedBy }
-    requirements:
-        id: \d+
-
 snoozit_platform_show_by_region:
     path: /region/{slug}
     defaults: { _controller: SnoozitPlatformBundle:Advert:showByRegion }

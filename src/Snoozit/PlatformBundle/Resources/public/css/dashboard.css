@@ -204,3 +204,10 @@ h2.panier-title{ text-transform: uppercase; margin: 10px 0; font-size: 1.7em}
     background-color: transparent;
     color: #0088CC
 }
+
+.sell-comment-area{ margin-bottom: 10px; }
+.sell-comment-area textarea{ background: #eee; border: 1px solid #ddd; width: 100%; min-height: 20px; font-size: 1em}
+span.toggleSellComment{ cursor: pointer}
+.sell-comment img{ height: 24px; width: 24px; display: inline-block; margin-right: 5px}
+.sell-comment{ background: #f5f5f5; }
+.sell-comment hr{ margin: 5px 0  }

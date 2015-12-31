@@ -54,7 +54,6 @@ $(document).ready(function(){
                         cache[request.term] = data;
                         response($.map(data, function (item)
                         {
-                            console.log('Réussit non ?');
                             return {
                             label: item.CodePostal + ", " + item.City,
                                 value: function ()
@@ -69,7 +68,6 @@ $(document).ready(function(){
                                     else
                                     {
                                         $('input[data-id=codePostal]').val(item.CodePostal);
-                                        console.log('Réussit toujours');
                                         return item.City;
                                     }
                                 }
@@ -85,7 +83,7 @@ $(document).ready(function(){
                 });
             }
         },
-        minLength: 3,
+        minLength: 4,
         delay: 300
     });
 });

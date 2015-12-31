@@ -1,8 +1,17 @@
 {% if u.user == app.user and u.owner != app.user %}
     <section>
         <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
-            <h4 class="text-grey"><a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }} </a>- {{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }} <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
-            <p>Je {{ u.content }}! </p>
+            <div class="row">
+                <div class="col-xs-12">
+                    {% if u.userAsked.avatar %}
+                        <img src="{{ asset('uploads/avatar/'~u.userAsked.avatar.path) }}" alt="{{ u.userAsked.username }}"
+                             class="img-responsive advert-img pull-left img-thumbnail">
+                    {% endif %}
+                    <h4 class="text-grey"><a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }} </a>-
+                        <a href="{{ path('snoozit_platform_show_by_city', {'slug' : u.userAsked.city.slug}) }}" class="text-default text-normal">{{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }} </a><span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                    <p>Je {{ u.content }}! </p>
+                </div>
+            </div>
         </div>
     </section>
 {% else %}
@@ -44,8 +53,16 @@
         {% else %}
             <section>
                 <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
-                    <h4 class="text-grey">Abonnement <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
-                    <p>{{ u.content }} <a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }}</a> de   {{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }}</p>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {% if u.user.avatar %}
+                                <img src="{{ asset('uploads/avatar/'~u.userAsked.avatar.path) }}" alt="{{ u.userAsked.username }}"
+                                     class="img-responsive advert-img pull-left img-thumbnail">
+                            {% endif %}
+                            <h4 class="text-grey">Abonnement <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                            <p>{{ u.content }} <a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }}</a> de   {{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }}</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         {% endif %}

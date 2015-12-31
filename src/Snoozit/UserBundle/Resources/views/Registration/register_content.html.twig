@@ -73,9 +73,11 @@
 
         <!-- Région -->
         <div class="row">
+            {% if form_errors(form)|length > 0 %}{% set errors_codepostal = 'has-error' %} {% set errors_city = 'has-error' %} {% else %} {% set errors_codepostal = NULL %} {% set errors_city = NULL %}{% endif %}
             {% if form_errors(form.city)|length > 0 %}{% set errors_city = 'has-error' %}{% else %} {% set errors_city = NULL %}{% endif %}
             {% if form_errors(form.codePostal)|length > 0 %}{% set errors_codepostal = 'has-error' %}{% else %} {% set errors_codepostal = NULL %}{% endif %}
             <div class="col-xs-12 has-error">
+                {{ form_errors(form) }}
                 {{ form_errors(form.codePostal) }}
                 {{ form_errors(form.city) }}
             </div>

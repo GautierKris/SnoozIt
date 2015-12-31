@@ -131,7 +131,7 @@
                     <div class="col-md-12 divNoPadding-right">
                         <div class="well well-sm clearfix">
 
-                            <div class="col-md-3 user-infos">
+                            <div class="col-md-4 user-infos">
 
                                 <div class="col-md-8 col-md-offset-2">
                                     <img src="{{ asset('uploads/avatar/'~n.user.avatar.path) }}" alt="{{ n.user.username }}" class="img-circle img-responsive">
@@ -165,7 +165,7 @@
 
                             </div>
 
-                            <div class="col-md-9 advert-infos text-center">
+                            <div class="col-md-8 advert-infos text-center">
 
                                 <h3 class="text-center"><a href="#" class="text-grey">{{ n.advert.title }}</a></h3>
                                 <p><span>{{ n.advert.category.category }}</span>
@@ -194,13 +194,33 @@
 
                                 <hr>
 
-                                <div class="row ">
-                                    <div class="col-md-3 col-md-offset-3">
-                                        <a href="#" class="btn btn-primary btn-xs btn-rounded btn-block">Accepter</a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : n.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block">Refuser</a>
-                                    </div>
+                                <div class="row">
+                                    {% if n.advertOptionType.id == 1 %}
+                                        <div class="col-md-4 col-md-offset-2">
+                                            <a href="{{ path('snoozit_dashboard_accept_interest', {'id' : n.id }) }}" class="btn btn-primary btn-xs btn-rounded btn-block ">Accepter</a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : n.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block">Refuser</a>
+                                        </div>
+                                    {% elseif n.advertOptionType.id == 5 %}
+                                        <div class="col-md-6">
+                                            <button class="btn btn-warning btn-xs btn-rounded btn-block">{{ n.user.username }} s'est désisté</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id' : n.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
+                                        </div>
+                                    {% elseif n.advertOptionType.id == 2 %}
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <button class="btn btn-success btn-xs btn-rounded btn-block">En attente de confirmation</button>
+                                        </div>
+                                    {% elseif n.advertOptionType.id == 3 %}
+                                        <div class="col-md-6 ">
+                                            <button class="btn btn-danger btn-xs btn-rounded btn-block">Vous avez refusé</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="{{ path('snoozit_dashboard_archive_interest_from_interface', {'id' : n.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

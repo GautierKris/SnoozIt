@@ -23,14 +23,30 @@ class InterestController extends Controller
         }
 
         $advertManager = $this->getAdvertManager();
-        $response = $this->redirect($this->generateUrl('snoozit_show_advert', array('id' => $advert->getId(), 'slug' => $advert->getSlug())));
+        $response = $this->redirect($this->generateUrl('snoozit_platform_add_in_panier', array('id' => $advert->getId()) ));
+        $session = $this->get('session');
 
         // ProcessInterest va controller si oui ou non
         // l'interet existe en BDD et ajuste le résultat
         if ($advertManager->processInterest($advert)) {
+
+            // Si l'interet est supprimé et que donc la session "_interestRemove" existe
+            if($session->has('_interestRemove'))
+            {
+                // La session "_interestRemove" correspond à notre annonce
+                if($session->get('_interestRemove') == $advert->getId())
+                {
+                    return $this->redirect($this->generateUrl('snoozit_platform_remove_in_panier', array('id' => $advert->getId())));
+                }
+                // Ca ne correspond pas a notre annonce
+                return $this->redirect($this->generateUrl('snoozit_dashboard_homepage'));
+            }
+
+            $session->set('add_in_panier', true);
             return $response;
         }
 
+        $session->set('add_in_panier', true);
         return $response;
     }
 
@@ -153,6 +169,13 @@ class InterestController extends Controller
 
         $stats  = array('income' => $advertManager->getDashboardInterest(), 'desist' => $advertManager->getDashboardUserInterestByStatus(5), 'archives' => $advertManager->getInterestArchives());
 
+        // Création du formulaire pour les commentaires de chaque annonces
+        $sellCommentHandler = $this->get('sz_panier_comment_handler');
+
+        if($sellCommentHandler->process()){
+            return $this->redirect($this->generateUrl('snoozit_dashboard_interest'));
+        }
+
         $breadcrumb = array(
             array('Dashboard', $this->generateUrl('snoozit_dashboard_homepage')),
             array('Interest center', '#', true)
@@ -161,7 +184,8 @@ class InterestController extends Controller
         return $this->render('SnoozitPlatformBundle:DashBoard/Interest:interest.html.twig', array(
             'breadcrumb' => $breadcrumb,
             'advertList' => $advertManager->getDashboardInterest(),
-            'stats' => $stats
+            'stats' => $stats,
+            'form'  => $sellCommentHandler->createView()
         ));
     }
 

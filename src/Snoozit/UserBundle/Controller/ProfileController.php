@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Snoozit\UserBundle\Controller;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -18,13 +9,12 @@ use FOS\UserBundle\Model\UserInterface;
 use Snoozit\PlatformBundle\Entity\UserProfileComment;
 use Snoozit\UserBundle\Entity\User;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
+use Snoozit\UserBundle\Form\LocalisationType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 
 /**
  * Controller managing the user profile
@@ -75,6 +65,32 @@ class ProfileController extends BaseController
         ));
     }
 
+    private function checkIfUserFollow(User $user)
+    {
+        $me = $this->container->get('security.token_storage')->getToken()->getUser();
+
+        if(is_object($me) || $me instanceof User)
+        {
+            $toArray = array();
+            $followedByMe = $me->getFolloweduser();
+
+            foreach($followedByMe as $i)
+            {
+                $toArray[] = $i->getId();
+            }
+
+            if(in_array($user->getId(), $toArray)){
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+
+    }
+
+    // Affiche un commentaire précis
     public function editAction(Request $request)
     {
         $user = $this->getUser();
@@ -126,7 +142,7 @@ class ProfileController extends BaseController
         ));
     }
 
-    // Affiche un commentaire précis
+    // Affiche tous les commentaires postés pour cette utilisateur
     public function profileCommentAction(User $user, UserProfileComment $comment)
     {
 
@@ -157,7 +173,6 @@ class ProfileController extends BaseController
         ));
     }
 
-    // Affiche tous les commentaires postés pour cette utilisateur
     public function profileCommentsPageAction(Request $request, User $user)
     {
         $userFollow = $this->checkIfUserFollow($user);
@@ -205,15 +220,31 @@ class ProfileController extends BaseController
         return $this->render('SnoozitUserBundle:Profile:upgrade_account.html.twig', array('accountActive' => true));
     }
 
+    // Les abonnements
     /**
-     * Upgrade Account
+     * Modifie la localisation de l'utilisateur
      */
-    public function editLocalisationAction()
+    public function editLocalisationAction(Request $request)
     {
-        return $this->render('SnoozitUserBundle:Profile:edit_localisation.html.twig', array('localisationActive' => true));
+        $user = $this->getUser();
+        $doctrine = $this->getDoctrine()->getEntityManager();
+        $form = $this->createForm(new LocalisationType($doctrine), $user);
+
+        if($request->isMethod('POST')){
+
+            $form->handleRequest($request);
+
+            if($form->isValid()){
+                $doctrine->persist($user);
+                $doctrine->flush();
+            }
+
+        }
+
+        return $this->render('SnoozitUserBundle:Profile:edit_localisation.html.twig', array('localisationActive' => true, 'form' => $form->createView()));
     }
 
-    // Les abonnements
+    //Edit les abonnés afin d'en refuser eventuellement
     public function editAbonnementAction()
     {
         $user = $this->getUser();
@@ -233,15 +264,11 @@ class ProfileController extends BaseController
             ));
     }
 
-    //Edit les abonnés afin d'en refuser eventuellement
     public function editAbonneAction()
     {
         $user = $this->getUser();
-
         $em = $this->container->get('doctrine')->getManager();
-
         $userRep = $em->getRepository('SnoozitUserBundle:User');
-
         $users = $userRep->findAll();
 
         $userFollow = array();
@@ -262,31 +289,6 @@ class ProfileController extends BaseController
         return $this->render('SnoozitUserBundle:Profile:edit_abonne.html.twig', array('abonneActive' => true,
             'userFollow' => $userFollow,
         ));
-    }
-
-    private function checkIfUserFollow(User $user)
-    {
-        $me = $this->container->get('security.token_storage')->getToken()->getUser();
-
-        if(is_object($me) || $me instanceof User)
-        {
-            $toArray = array();
-            $followedByMe = $me->getFolloweduser();
-
-            foreach($followedByMe as $i)
-            {
-                $toArray[] = $i->getId();
-            }
-
-            if(in_array($user->getId(), $toArray)){
-                return true;
-            }
-
-            return false;
-        }
-
-        return false;
-
     }
 
 }

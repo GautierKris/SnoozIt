@@ -3,10 +3,10 @@
 <div class="row">
     <div class="col-xs-12 panier-nav">
         <ul class="nav nav-pills text-bold">
-            <li role="presentation" ><a href="{{ path('snoozit_platform_panier_homepage') }}" class="text-grey">En cours <span class="badge badge-warning">{{ stats.income|length }}</span></a></li>
-            <li role="presentation" class="active"><a href="{{ path('snoozit_platform_panier_page_desistement') }}" class="text-grey">Désistement <span class="badge badge-hidden">{{ stats.desist|length }}</span></a></li>
-            <li role="presentation"><a href="{{ path('snoozit_platform_panier_page_refus') }}" class="text-grey">Refus <span class="badge badge-danger">{{ stats.refus|length }}</span></a></li>
-            <li role="presentation"><a href="{{ path('snoozit_platform_panier_page_finished') }}" class="text-grey">Terminé <span class="badge badge-success">{{ stats.finish|length }}</span></a></li>
+            <li role="presentation" ><a href="{{ path('snoozit_platform_panier_homepage') }}" class="text-grey">En cours <span class="badge badge-primary">{{ stats.income|length }}</span></a></li>
+            <li role="presentation" class="active"><a href="{{ path('snoozit_platform_panier_page_desistement') }}" class="text-grey">Désistement <span class="badge badge-primary">{{ stats.desist|length }}</span></a></li>
+            <li role="presentation"><a href="{{ path('snoozit_platform_panier_page_refus') }}" class="text-grey">Refus <span class="badge badge-primary">{{ stats.refus|length }}</span></a></li>
+            <li role="presentation"><a href="{{ path('snoozit_platform_panier_page_finished') }}" class="text-grey">Terminé <span class="badge badge-primary">{{ stats.finish|length }}</span></a></li>
         </ul>
     </div>
 </div>

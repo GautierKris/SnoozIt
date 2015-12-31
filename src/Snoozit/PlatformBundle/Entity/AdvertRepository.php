@@ -45,7 +45,7 @@ class AdvertRepository extends EntityRepository
     }
 
     // Récupere une liste d'annonces en corélation avec l'annonces affichée
-    public function getAdvertListToPropose(Advert $advert)
+    public function getAdvertListToPropose(Advert $advert, $max = 6)
     {
         $qb = $this->getByLocalisationQueryBuilder();
 
@@ -55,18 +55,43 @@ class AdvertRepository extends EntityRepository
             ->orWhere('b.id = :advertCategory')
             ->orWhere('c.id = :advertCity')
             ->addOrderBy('a.created', 'desc')
-            ->setMaxResults(6)
+            ->setMaxResults($max)
             ->setParameters(array(
                 'advertId'          => $advert->getId(),
                 'advertSlug'        => $advert->getSlug(),
                 'advertCategory'    => $advert->getCategory(),
                 'advertDescription' => $advert->getDescription(),
-                'advertCity'        => $advert->getCity()
+                'advertCity'        => $advert->getCity(),
             ));
 
         $result = $qb->getQuery()->getArrayResult();
 
         return $this->AdvertCollectionHydrated($result);
+    }
+
+    // Récupere une liste d'annonces en corélation avec l'annonces affichée
+    public function getAdvertListToProposeForPanier(Advert $advert, $max = 3)
+    {
+        $qb = $this->getByLocalisationQueryBuilder();
+
+        $qb->having('a.id != :advertId')
+            ->where('a.slug = :advertSlug')
+            ->orWhere('a.description = :advertDescription')
+            ->orWhere('b.id = :advertCategory')
+            ->orWhere('c.id = :advertCity')
+            ->addOrderBy('a.created', 'desc')
+            ->setMaxResults($max)
+            ->setParameters(array(
+                'advertId'          => $advert->getId(),
+                'advertSlug'        => $advert->getSlug(),
+                'advertCategory'    => $advert->getCategory(),
+                'advertDescription' => $advert->getDescription(),
+                'advertCity'        => $advert->getCity(),
+            ));
+
+        $result = $qb->getQuery()->getArrayResult();
+
+        return $result;
     }
 
     // Recupere la liste des annonces sans filtres

@@ -23,8 +23,9 @@ class AdvertController extends Controller
     {
         return $this->get('sz_advert_manager');
     }
+
     // Affiche une annonce
-    public function showAction(Advert $advert, $slug)
+    public function showAction(Request $request,Advert $advert, $slug)
     {
         $user = $this->getUser();
         $userFollow = false;
@@ -40,7 +41,7 @@ class AdvertController extends Controller
         $advertNegoceHandler    = $this->get('sz_advert_negoce_handler');
 
         // Les annonces à proposer en fonction de l'annonce afficher
-        $advertListToPropose = $advertManager->getAdvertListToPropose($advert);
+        $advertListToPropose = $advertManager->getAdvertListToPropose($advert, 6);
 
         // Réhydrate function pour uniformisé l'affichage de l'annonce si c'est une annonce
         // d'un membre ou d'un invité
@@ -117,6 +118,7 @@ class AdvertController extends Controller
         $advertListToPaginate = $advertManager->getAdvertByRegion($region, $choices);
 
         $advertList  = $this->get('knp_paginator')->paginate($advertListToPaginate, $request->query->getInt('page', 1), 10);
+        $usersFound = $this->getDoctrine()->getRepository('SnoozitUserBundle:User')->getTimelineUsersFound($this->get('sz_search_engine_manager')->getPageTitle());
 
         $breadcrumb = array(
             array($region->getNom(), $this->generateUrl('snoozit_platform_show_by_region', array('slug' => $region->getSlug())), true),
@@ -131,7 +133,7 @@ class AdvertController extends Controller
 
         $requestRubriqueId = $region->getId();
 
-        return $this->getGlobalAdvertTemplating($advertList, $breadcrumb, $choices, $page_title, null ,$userFollow, $requestRubriqueId);
+        return $this->getGlobalAdvertTemplating($advertList, $breadcrumb, $choices, $page_title, null ,$userFollow, $requestRubriqueId, $usersFound);
 
     }
 
@@ -251,26 +253,6 @@ class AdvertController extends Controller
         $requestRubriqueId = $category->getId();
 
         return $this->getGlobalAdvertTemplating($advertList, $breadcrumb, $choices, $page_title, $localisation, $userFollow, $requestRubriqueId, $category->getId());
-    }
-
-    // Quand on est interessé par l'annonce
-    public function interestedByAction(Advert $advert)
-    {
-        if(!is_object($this->getUser()) || !$this->getUser() instanceof UserInterface ){
-            throw new AccessDeniedException('Vous devez etre identifié pour pouvoir acceder à cette zone.');
-        }
-
-        $advertManager = $this->getAdvertManager();
-
-        $response = $this->redirect($this->generateUrl('snoozit_show_advert',array('id' => $advert->getId(),'slug' => $advert->getSlug())));
-
-        if($advertManager->processInterest($advert)){
-
-            return $response;
-        }
-
-        return $response;
-
     }
 
     // Modification de l'annonce par un Invité
@@ -457,9 +439,8 @@ class AdvertController extends Controller
         return $this->render('SnoozitPlatformBundle:Advert/Edit/SecurityAccess:editAdvertErrorUser.html.twig', array('advert' => $advert,'breadcrumb' => $breadcrumb));
     }
 
-    private function getGlobalAdvertTemplating($advertList, $breadcrumb, $choices, $page_title, $localisation = null, $userFollow = false, $requestRubriqueId = null, $categoryID = null )
+    private function getGlobalAdvertTemplating($advertList, $breadcrumb, $choices, $page_title, $localisation = null, $userFollow = false, $requestRubriqueId = null, $categoryID = null, $usersFound = null )
     {
-
         return $this->render('SnoozitPlatformBundle:Site:Index/index.html.twig', array(
             'advertList'    => $advertList,
             'breadcrumb'    => $breadcrumb,
@@ -469,8 +450,8 @@ class AdvertController extends Controller
             'followLink'    => $this->getRouteForFollowingButton($requestRubriqueId),
             'userFollow'    => $userFollow,
             'categoryID'    => $categoryID,
+            'usersFound'    => $usersFound
             ));
-
     }
 
     private function getRouteForFollowingButton($requestRubriqueId)

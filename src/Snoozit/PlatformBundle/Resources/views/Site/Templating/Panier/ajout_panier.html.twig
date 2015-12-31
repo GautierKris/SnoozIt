@@ -1,0 +1,25 @@
+{% extends 'SnoozitPlatformBundle:Site:layout.html.twig' %}
+
+{% block body %}
+    <div class="col-md-2" id="menuLeft-container" >
+        <div  role="navigation" id="menuLeft">
+            {{ render(controller('SnoozitPlatformBundle:Site:categoriesMenu')) }}
+        </div>
+        <div class="fixedButton">
+            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <p class="log-btn col-md-12">
+                    <br />
+                    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-xs btn-default btn-block " >Inscription</a>
+                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-xs btn-primary btn-block ">Connexion</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-10 col-md-offset-2">
+        <div class="row">
+            {# L'espace pour le breadcrumb #}
+            {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
+        </div>
+        {% include 'SnoozitPlatformBundle:Site/Templating/Panier:ajout_panier_content.html.twig' %}
+    </div>
+{% endblock %}
