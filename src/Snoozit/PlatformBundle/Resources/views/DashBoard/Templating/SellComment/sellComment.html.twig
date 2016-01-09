@@ -1,32 +1,24 @@
-<div id="sellCommentContainer{{ u.advert.id }}">
-    <div class="row">
-        <div class="sell-comment-area ">
-            <hr>
-
-            <form action="{{ path(app.request.attributes.get('_route')) }}" method="post">
-
-                <div class="form-group">
-                    <span class="toggleSellComment text-primary pull-right" rel="{{ u.advert.id }}"> Masquer les commentaires</span>
-                    <label for="sell-content">{{ app.user.username }} :</label>
-                    {{ form_widget(form.content) }}
-                </div>
-                {{ form_widget(form.advertInterest, {'value' : u.id }) }}
-                {{ form_rest(form) }}
-                <div class="form-group">
-                    <input type="submit" class="btn btn-xs btn-primary btn-rounded col-xs-4" value="Publier">
-                </div>
-
-            </form>
-
-        </div>
+    <div class="col-xs-12 text-center sell-comment-title">
+        <h3 class="text-bold"> Questions / Réponses pour {{ u.advert.title }}</h3>
     </div>
-    <hr />
-
-    {% if u.sellComments is not empty %} <!-- A modifier par is not empty -->
-        {% for c in u.sellComments %}
-            <div class="row">
-                <div class="sell-comment col-xs-12">
-                    <h4><img src="{{ asset('uploads/avatar/'~c.user.avatar.path) }}" alt="{{ c.user.username }}" class="img-circle img-24"> {{ c.user.username }}
+    <div class="col-xs-5 sell-comment-area">
+        {{ render(controller('SnoozitPlatformBundle:Panier:getSellCommentForm',  {
+            'form_path' :  path(app.request.attributes.get('_route')),
+            'advertId' : u.advert.id,
+            'advertInterest' : u.id,
+        })) }}
+    </div>
+    <div class="col-xs-7 sell-comment-box">
+        {% if u.sellComments is not empty %} <!-- A modifier par is not empty -->
+            {% for c in u.sellComments %}
+                {% if loop.index is divisibleby(2) %}
+                    {% set  sellComment = 'sell-comment-even' %}
+                {% else %}
+                    {% set  sellComment = 'sell-comment-odd' %}
+                {% endif %}
+                <div class="sell-comment {{ sellComment }} col-xs-12">
+                    <h4><img src="{{ asset('uploads/avatar/'~c.user.avatar.path) }}" alt="{{ c.user.username }}"
+                             class="img-circle img-24"> {{ c.user.username }}
                         <span class="text-star">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -34,14 +26,22 @@
                             <i class="fa fa-star-half-o"></i>
                             <i class="fa fa-star-half-empty"></i>
                         </span>
-                        <span class="pull-right text-bold">
-                            {{ c.created|date('h:i  d/m') }}
-                        </span>
+                <span class="pull-right text-bold">
+                    {{ c.created|date('d/m h:i') }}mn
+                </span>
                     </h4>
+
                     <p>{{ c.content|nl2br }}</p>
-                    <hr>
                 </div>
-            </div>
-    {% endfor %}
-{% endif %}
-</div>
+            {% endfor %}
+            {% else %}
+            <p class="text-center text-bold">Aucun commentaire</p>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-block btn-primary toggleSellComment" rel="{{ u.advert.id }}">Fermer ce panneau de commentaire</button>
+        </div>
+    </div>
+
+

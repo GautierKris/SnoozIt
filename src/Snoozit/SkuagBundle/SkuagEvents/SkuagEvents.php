@@ -18,6 +18,7 @@ final class SkuagEvents
     const ON_ADD_INTEREST           = 'skuag.platform.add_interest';
     const ON_REMOVE_INTEREST        = 'skuag.platform.remove_interest';
     const ON_DESIST_INTEREST        = 'skuag.platform.desist_interest';
+    const ON_SOLD_SUCCESS           = 'skuag.platform.sold_success';
 
     // Les négociations
     const ON_ADD_NEGOCE             = 'skuag.platform.add_negoce';
@@ -33,4 +34,5 @@ final class SkuagEvents
     const ON_FOLLOW_DEPARTEMENT     = 'skuag.platform.follow_departement';
     const ON_FOLLOW_CITY            = 'skuag.platform.follow_city';
     const ON_REFUSE_FOLLOW          = 'skuag.platform_follow_refus';
+
 }

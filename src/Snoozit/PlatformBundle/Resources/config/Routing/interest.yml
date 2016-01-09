@@ -46,3 +46,10 @@ snoozit_interest_advert:
     requirements:
         id: \d+
 
+snoozit_dashboard_interest_confirm_vente:
+    path: /confirm-vente/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:confirmVente }
+
+snoozit_platform_argent_recu:
+    path: /confirm_cash_reception/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Interest:argentRecu }

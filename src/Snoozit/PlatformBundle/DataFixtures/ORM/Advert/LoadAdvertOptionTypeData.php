@@ -19,17 +19,25 @@ class LoadAdvertOptionTypeData extends AbstractFixture implements OrderedFixture
      */
     public function load(ObjectManager $manager)
     {
-        $default        = $this->createNotificationtype('En cours');
-        $success        = $this->createNotificationtype('Félicitation!');
-        $refus          = $this->createNotificationtype('Refus');
-        $vendu          = $this->createNotificationtype('Vendu');
-        $desistement    = $this->createNotificationtype('Désistement');
+        $default            = $this->createNotificationtype('En cours');
+        $success            = $this->createNotificationtype('Félicitation!');
+        $refus              = $this->createNotificationtype('Refus');
+        $vendu              = $this->createNotificationtype('Vendu');
+        $desistement        = $this->createNotificationtype('Désistement');
+        $attenteValidation  = $this->createNotificationtype('Attente validation');
+        $attentePaiement    = $this->createNotificationtype('Attente de paiement');
+        $attenteProduit     = $this->createNotificationtype('Attente du produit');
+        $finish             = $this->createNotificationtype('Terminé');
 
         $manager->persist($default);
         $manager->persist($success);
         $manager->persist($refus);
         $manager->persist($vendu);
         $manager->persist($desistement);
+        $manager->persist($attenteValidation);
+        $manager->persist($attentePaiement);
+        $manager->persist($attenteProduit);
+        $manager->persist($finish);
 
         $manager->flush();
     }

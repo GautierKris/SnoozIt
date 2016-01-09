@@ -753,4 +753,20 @@ class AdvertManager
         return;
     }
 
+    // Confirme une vente
+    public function confirmVente(AdvertInterest $interest)
+    {
+        // Renvoi " Felicitation! "
+        $optionType = $this->entityManager->getRepository('SnoozitPlatformBundle:AdvertOptionType')->find(7);
+
+        // On lance le dispatch d'évenement
+        //$this->containerAware->get('event_dispatcher')->dispatch(SkuagEvents::ON_ACCEPT_INTEREST, new InterestEvent($interest->getAdvert(), $interest->getUser()));
+
+        $interest->setAdvertOptionType($optionType);
+
+        $this->entityManager->persist($interest);
+        $this->entityManager->flush();
+
+        return;
+    }
 }

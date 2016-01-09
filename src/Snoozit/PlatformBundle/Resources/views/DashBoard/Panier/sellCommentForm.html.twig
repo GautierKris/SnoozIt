@@ -1,0 +1,17 @@
+<form action="{{ form_path }}" method="post">
+
+    <div class="form-group">
+        <span class="toggleSellComment text-primary pull-right" rel="{{ advertId }}"> Masquer les commentaires</span>
+        <label for="sell-content">{{ app.user.username }} :</label>
+        {{ form_widget(form.content) }}
+    </div>
+
+    {{ form_widget(form.advertInterest, { 'value' : advertInterestId }) }}
+
+    {{ form_rest(form) }}
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-xs btn-primary btn-rounded btn-padding" value="Publier maintenant">
+    </div>
+
+</form>

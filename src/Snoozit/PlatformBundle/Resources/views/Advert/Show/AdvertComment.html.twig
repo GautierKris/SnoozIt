@@ -1,33 +1,37 @@
-<div class="has-error">
-    {{ form_errors(form.comment) }}
-</div>
-
-<form action="#" class="form-horizontal col-xs-12" method="post">
-
-    <div class="form-group">
-        {{ form_widget(form.comment) }}
-    </div>
-    <div class="form-group publish-box">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <button class="btn btn-success btn-xs pull-right">Publier</button>
-        {% else %}
-            <p class="text-center help-block">Vous devez etre identifié pour utiliser les commentaires</p>
-        {% endif %}
+{% if not advert.sold %}
+    <div class="has-error">
+        {{ form_errors(form.comment) }}
     </div>
 
-    {{ form_rest(form) }}
-</form>
+    <form action="#" class="form-horizontal col-xs-12" method="post">
+        <div class="form-group">
+            {{ form_widget(form.comment) }}
+        </div>
+        <div class="form-group publish-box">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <button class="btn btn-success btn-xs pull-right">Publier</button>
+            {% else %}
+                <p class="text-center help-block">Vous devez etre identifié pour utiliser les commentaires</p>
+            {% endif %}
+        </div>
+
+        {{ form_rest(form) }}
+    </form>
+{% endif %}
 
 {% if advert.comments %}
     {% for a in advert.comments %}
         <div class="clearfix box">
             <div class="col-md-1 col-xs-2 divNoPadding">
-                <img src="{{ asset('uploads/avatar/'~a.user.avatar.path) }}" alt="..." class="img-thumbnail img-responsive" />
+                <img src="{{ asset('uploads/avatar/'~a.user.avatar.path) }}" alt="..."
+                     class="img-thumbnail img-responsive"/>
             </div>
             <div class="col-md-11 col-xs-10">
                 <h4>
-                    <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username}) }}" >{{ a.user.username }}</a> -
-                    <a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.user.city.slug}) }}" class="text-primary" >{{ a.user.city.nom }} ({{ a.user.city.postal }})</a>
+                    <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username}) }}">{{ a.user.username }}</a>
+                    -
+                    <a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.user.city.slug}) }}"
+                       class="text-primary">{{ a.user.city.nom }} ({{ a.user.city.postal }})</a>
                         <span class="help-block">
                             <i>
                                 {{ a.created|date('d M Y \\à H:i') }}
@@ -39,6 +43,7 @@
                         </span>
 
                 </h4>
+
                 <p>{{ a.comment }}</p>
             </div>
         </div>

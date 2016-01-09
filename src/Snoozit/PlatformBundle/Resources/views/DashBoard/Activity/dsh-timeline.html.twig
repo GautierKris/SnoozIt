@@ -145,6 +145,9 @@
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:userAdvertToHide.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
 
+                                {% if u.type.id == 11 %}
+                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:soldSuccess.html.twig' %}
+                                {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
                             {% endif %}
                 {% endif %}
             {% endfor %}

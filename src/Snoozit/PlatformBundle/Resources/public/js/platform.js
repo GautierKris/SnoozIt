@@ -131,12 +131,12 @@ $(document).ready(function(){
         element.on('click', function(){
 
             var elementId = $(this).attr('rel');
-            var container = $('#sellCommentContainer'+elementId);
+            var container = $('#sellCommentContainer_'+elementId);
 
-            if( $('.toggle').hasClass('hidden')){
-                $('.toggle').removeClass('hidden');
+            if( container.hasClass('hidden')){
+                container.removeClass('hidden');
+                container.show();
             }
-
             container.toggle();
 
         });
@@ -154,11 +154,11 @@ $(document).ready(function(){
         elm.selectionEnd = cursorPos-1;
     }
 
-        // Supprime le dernier caractère s'il n'est pas alphanumérique sur evt keyup
-        $('body').delegate('input.only_alpha_num','keyup',function(){
-            if(!$(this).val().match(/^[0-9]*$/i)) // a-z et 0-9 uniquement
-                supprimer_dernier_caractere(this);
-        });
+    // Supprime le dernier caractère s'il n'est pas alphanumérique sur evt keyup
+    $('body').delegate('input.only_alpha_num','keyup',function(){
+        if(!$(this).val().match(/^[0-9]*$/i)) // a-z et 0-9 uniquement
+            supprimer_dernier_caractere(this);
+    });
 
 
     $(function(){

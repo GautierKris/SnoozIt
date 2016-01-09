@@ -63,7 +63,11 @@ class SellCommentHandler
     {
         $entity = $this->form->getData();
 
+        $advertInterest = $entity->getAdvertInterest();
+
         $this->entityManager->persist($entity);
+        $this->entityManager->persist($advertInterest);
+
         $this->entityManager->flush();
 
         return true;

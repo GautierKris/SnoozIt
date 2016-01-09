@@ -1,17 +1,17 @@
 <h2 class="panier-title">Ca les interessent</h2>
 
-    <div class="row">
-        <div class="col-xs-12 panier-nav">
-            <ul class="nav nav-pills text-bold">
-                <li role="presentation" class="active"><a href="{{ path('snoozit_platform_panier_homepage') }}" class="text-grey">En cours <span class="badge badge-primary">{{ stats.income|length }}</span></a></li>
-                <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_desistement') }}" class="text-grey">Désistements <span class="badge badge-primary">{{ stats.desist|length }}</span></a></li>
-                <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_archives') }}" class="text-grey">Archives <span class="badge badge-primary">{{ stats.archives|length }}</span></a></li>
-            </ul>
-        </div>
+<div class="row">
+    <div class="col-xs-12 panier-nav">
+        <ul class="nav nav-pills text-bold">
+            <li role="presentation" class="active"><a href="{{ path('snoozit_platform_panier_homepage') }}" class="text-grey">En cours <span class="badge badge-primary">{{ stats.income|length }}</span></a></li>
+            <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_desistement') }}" class="text-grey">Désistements <span class="badge badge-primary">{{ stats.desist|length }}</span></a></li>
+            <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_archives') }}" class="text-grey">Archives <span class="badge badge-primary">{{ stats.archives|length }}</span></a></li>
+        </ul>
     </div>
+</div>
 
-    <br>
-    <div class="row" id="advert-manager">
+<br>
+<div class="row" id="advert-manager">
     {% if advertList %}
         {% for u in advertList  %}
             <div class="col-md-10 col-md-offset-1 divNoPadding-right">
@@ -22,6 +22,10 @@
                         {% if u.advertOptionType.id == 5 %}
                             <div class="travers rotate">
                                 <span class="desist">Désistement</span>
+                            </div>
+                        {% elseif u.advertOptionType.id == 6 %}
+                            <div class="travers rotate text-bold">
+                                <span class="attentevalidation">A valider</span>
                             </div>
                         {% endif %}
                         <div class="col-md-8 col-md-offset-2">
@@ -81,30 +85,19 @@
                                 <p class="text-center">Votre prix: <span class="price">{{ u.advert.price }} €</span></p>
                             </div>
                         </div>
-
                         <hr>
 
                         <div class="row">
                             {% if u.advertOptionType.id == 1 %}
-
                                 <div class="col-xs-5 col-xs-offset-1">
                                     <a href="{{ path('snoozit_dashboard_accept_interest', {'id' : u.id }) }}" class="btn btn-primary btn-xs btn-rounded btn-block ">Accepter</a>
                                 </div>
                                 <div class="col-xs-5">
                                     <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : u.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block">Refuser</a>
                                 </div>
-                            {% elseif u.advertOptionType.id == 5 %}
-                                <div class="row">
-                                    <div class="col-xs-5 col-xs-offset-1">
-                                        <button class="btn btn-warning btn-xs btn-rounded btn-block">{{ u.updated|date('d/m') }} - {{ u.user.username }} s'est désisté</button>
-                                    </div>
-                                    <div class="col-xs-5">
-                                        <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id' : u.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
-                                    </div>
-                                </div>
                             {% elseif u.advertOptionType.id == 2 %}
                                 <div class="col-md-6">
-                                    <button class="btn btn-success btn-xs btn-rounded btn-block">{{ u.updated|date('d/m') }} - En attente de confirmation</button>
+                                    <button class="btn btn-success btn-xs btn-rounded btn-block">{{ u.updated|date('d/m') }} -  En attente de confirmation</button>
                                 </div>
                                 <div class="col-xs-6">
                                     <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }}) <i class="fa fa-caret-down"></i> </button>
@@ -115,6 +108,44 @@
                                 </div>
                                 <div class="col-xs-5">
                                     <a href="{{ path('snoozit_dashboard_archive_interest_from_interface', {'id' : u.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
+                                </div>
+                            {% elseif u.advertOptionType.id == 4 %}
+                                <div class="col-md-6">
+                                    <button class="btn btn-success btn-xs btn-rounded btn-block">Vendu</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }}) <i class="fa fa-caret-down"></i> </button>
+                                </div>
+                            {% elseif u.advertOptionType.id == 5 %}
+                                <div class="row">
+                                    <div class="col-xs-5 col-xs-offset-1">
+                                        <button class="btn btn-warning btn-xs btn-rounded btn-block">{{ u.updated|date('d/m') }} - {{ u.user.username }} s'est désisté</button>
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id' : u.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
+                                    </div>
+                                </div>
+                            {% elseif u.advertOptionType.id == 6 %}
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <a class="btn btn-attentevalidation btn-xs btn-rounded btn-block"  href="{{ path('snoozit_dashboard_interest_confirm_vente', {'id' : u.id }) }}">Confirmer cette vente</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }}) <i class="fa fa-caret-down"></i> </button>
+                                </div>
+                            {% elseif u.advertOptionType.id == 7 %}
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <button class="btn btn-attentevalidation btn-xs btn-rounded btn-block">{{ u.advertOptionType.type }}</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }}) <i class="fa fa-caret-down"></i> </button>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <a class="btn btn-primary btn-xs btn-rounded btn-block" href="{{ path('snoozit_platform_argent_recu', {'id' : u.id }) }}">Paiement reçu</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="btn btn-rounded btn-xs btn-send btn-padding" >Reporter un problème </a>
                                 </div>
                             {% endif %}
                         </div>
@@ -129,19 +160,22 @@
                         <div class="text-center">
                             <br>
                             <a href="{{ path('snoozit_dashboard_manage_advert', {'advert' : u.advert.id }) }}" class="text-grey"><strong>Voir l'annonce</strong></a>
-                            {% if u.advertOptionType.id == 2 %}
-                            <br>
-                            <a href="#" class="text-danger text-lowersize">Annuler cette vente</a>
+                            {% if u.advertOptionType.id == 2 or u.advertOptionType.id == 6 or u.advertOptionType.id == 7 %}
+                                <br>
+                                <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : u.id }) }}" class="text-danger text-lowersize">Annuler cette vente</a>
                             {% endif %}
                         </div>
                     </div>
 
-                    {% if u.advertOptionType.id == 2 %}
-                            <div class="toggle hidden">
-                                <div class="col-md-9 col-md-offset-3">
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Templating/SellComment:sellComment.html.twig' %}
-                                </div>
+                    {% if u.advertOptionType.id == 2 or u.advertOptionType.id == 6 %}
+                        <div class="toggle hidden sellCommentContainer" id="sellCommentContainer_{{ u.advert.id }}">
+                            <div class="col-xs-12">
+                                <br>
+                                <br>
+                                <br>
+                                {% include 'SnoozitPlatformBundle:DashBoard/Templating/SellComment:sellComment.html.twig' %}
                             </div>
+                        </div>
                     {% endif %}
 
                 </div>

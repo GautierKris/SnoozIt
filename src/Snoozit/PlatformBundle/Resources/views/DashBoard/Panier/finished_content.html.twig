@@ -17,24 +17,26 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr class="text-uppercase">
-                    <th class="text-center">#</th>
                     <th class="text-center col-xs-1">#</th>
                     <th class="col-xs-3">Auteur</th>
                     <th class="col-xs-6">Titre de l'annonce</th>
                     <th class="col-xs-1">Prix</th>
-                    <th class="text-center col-xs-1">Status</th>
+                    <th class="text-center col-xs-1">Statut</th>
                 </tr>
                 </thead>
                 <tbody>
-
                 {% for u in advertList %}
                     <tr>
-                        <th scope="row" class="text-center removecheckbox">
-                            <label for="">
-                                <input type="checkbox">
-                            </label>
-                        </th>
-                        <td>
+                        <th scope="row">
+                            {% if u.advertOptionType.id == 9 %}
+                                <div class="travers rotate">
+                                    <span class="attentevalidation">Félicitation</span>
+                                </div>
+                                {% else %}
+                                    <div class="travers rotate">
+                                        <span class="sold">Vendu</span>
+                                    </div>
+                            {% endif %}
                             {% if u.advert.pictureOne is not null %}
                                 <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="..."
                                      class="img-responsive">
@@ -42,7 +44,7 @@
                                 <img src="{{ asset('uploads/annonce/4ddf6e813832d52e98fe6a735bcb07dd278aca6f.jpeg') }}"
                                      alt="..." class="img-responsive">
                             {% endif %}
-                        </td>
+                        </th>
 
                         <td class="user">
                             <h4>
@@ -64,7 +66,8 @@
                             <span class="text-default text-normal">Catégorie</span>
                             <a href="{{ path('snoozit_platform_show_by_category', {'slug' : u.advert.category.slug}) }}"
                                class="text-bold">{{ u.advert.category.category }}</a>
-                            <h4>{{ u.advert.title|truncate(50) }}</h4>
+                            <h4 class="text-bold"><a href="{{ path('snoozit_show_advert', {'id' : u.advert.id, 'slug' : u.advert.slug }) }}" class="text-grey">{{ u.advert.title|truncate(50) }}</a></h4>
+
                         </td>
 
                         <td class="price">{{ u.advert.price }} €</td>

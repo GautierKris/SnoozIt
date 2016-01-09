@@ -18,6 +18,14 @@ snoozit_platform_add_in_panier:
     path: /add/{id}
     defaults: { _controller: SnoozitPlatformBundle:Panier:addInPanier}
 
+snoozit_platform_confirm_achat:
+    path: /confirm/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Panier:confirmAchat}
+
+snoozit_platform_produit_recu:
+    path: /confirm_reception/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Panier:produitRecu }
+
 snoozit_platform_remove_in_panier:
     path: /remove/{id}
     defaults: { _controller: SnoozitPlatformBundle:Panier:removeInPanier}
@@ -25,5 +33,11 @@ snoozit_platform_remove_in_panier:
 snoozit_dashboard_remove_refus_from_interface:
     path:     /remove-refus/{id}
     defaults: { _controller: SnoozitPlatformBundle:Panier:removeRefusInPanier }
+    requirements:
+        id: \d+
+
+snoozit_dashboard_reactive_interest:
+    path:     /reactive/{id}
+    defaults: { _controller: SnoozitPlatformBundle:Panier:reactiveInterest }
     requirements:
         id: \d+

@@ -44,6 +44,11 @@
             {% for a in advertList %}
                 <section>
                     <div class="well well-sm box-time-advert">
+                        {% if a.sold %}
+                            <div class="travers rotate">
+                                <span class="sold">Vendu</span>
+                            </div>
+                        {% endif %}
 
                         <div class="box-header">
 
@@ -75,7 +80,11 @@
                                 </div>
 
                                 <div class="col-xs-4 text-right">
+                                    {% if not a.sold %}
                                     {{ include('SnoozitPlatformBundle:Site/Templating/Annonce:dropdown.html.twig') }}
+                                        {% else %}
+                                        <span class="btn btn-warning btn-xs">Annonce terminée</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

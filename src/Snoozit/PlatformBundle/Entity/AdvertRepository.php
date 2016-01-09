@@ -20,7 +20,7 @@ class AdvertRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('a');
         $qb->select(
-            'a.title','a.urgent','a.views', 'a.price','a.delivery','a.success', 'a.created', 'a.id' ,'a.slug','a.description','a.espece','a.paypal',
+            'a.title','a.urgent', 'a.sold' ,'a.views', 'a.price','a.delivery','a.success', 'a.created', 'a.id' ,'a.slug','a.description','a.espece','a.paypal',
             'b.category', 'b.slug category_slug' , 'q.parent parentCat',
             'c.nom city', 'c.slug city_slug','c.postal',
             'u.username', 'u.id userId',
@@ -39,6 +39,7 @@ class AdvertRepository extends EntityRepository
             ->leftJoin('u.avatar', 'v')
             ->leftJoin('b.parentcategory', 'q')
             ->orderBy('a.created' , 'DESC')
+            ->where('a.sold IS NULL')
             ->setMaxResults(30);
 
         return $qb;
@@ -143,6 +144,7 @@ class AdvertRepository extends EntityRepository
             'price'         => $row['price'],
             'urgent'        => $row['urgent'],
             'success'       => $row['success'],
+            'sold'          => $row['sold'],
             'parentCat'     => $row['parentCat'],
             'category'      => $row['category'],
             'delivery'      => $row['delivery'],
@@ -208,6 +210,7 @@ class AdvertRepository extends EntityRepository
                 'title'             => $advert->getTitle(),
                 'price'             => $advert->getPrice(),
                 'urgent'            => $advert->getUrgent(),
+                'sold'              => $advert->getSold(),
                 'negotiate'         => $advert->getNegotiable(),
                 'paypal'            => $advert->getPaypal(),
                 'cheque'            => $advert->getCheque(),
@@ -247,7 +250,7 @@ class AdvertRepository extends EntityRepository
     public function getByRegion($region, $choices)
     {
         $qb = $this->getByLocalisationQueryBuilder();
-        $qb->where('d.region = :region')->setParameter('region', $region);
+        $qb->andWhere('d.region = :region')->setParameter('region', $region);
 
         if($choices){
             $this->queryFilters($choices, $qb);
@@ -261,7 +264,7 @@ class AdvertRepository extends EntityRepository
     public function getByDepartement($departement, $choices)
     {
         $qb = $this->getByLocalisationQueryBuilder();
-        $qb->where('c.departement = :departement')->setParameter('departement', $departement);
+        $qb->andWhere('c.departement = :departement')->setParameter('departement', $departement);
 
         if($choices){
             $this->queryFilters($choices, $qb);
@@ -275,7 +278,8 @@ class AdvertRepository extends EntityRepository
     public function getByCity($city, $choices)
     {
         $qb = $this->getByLocalisationQueryBuilder();
-        $qb->where('a.city = :city')->setParameter('city', $city);
+        $qb->andWhere('a.city = :city')->setParameter('city', $city);
+        ;
 
         if($choices){
             $this->queryFilters($choices, $qb);
@@ -289,7 +293,7 @@ class AdvertRepository extends EntityRepository
     public function getByCategory($category, $choices, $localisation)
     {
         $qb = $this->getByLocalisationQueryBuilder();
-        $qb->where('a.category = :category')->setParameter('category', $category);
+        $qb->andWhere('a.category = :category')->setParameter('category', $category);
 
         if($choices){
             $this->queryFilters($choices, $qb);

@@ -1,13 +1,21 @@
-
 <div class="row" id="breadcrumb" role="navigation">
     {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
 </div>
+{% if advert.sold %}
+    <h4 class="text-center text-danger">Cette annonce n'est plus disponible</h4>
+{% endif %}
 <div class="row" id="show-annonce" role="contentinfo">
     <div class="col-xs-12">
         <div class="well">
+            {% if advert.sold %}
+            <div class="travers rotate">
+                <span class="sold">Vendu</span>
+            </div>
+            {% endif %}
             <div class="row">
                 <div class="col-md-5 col-xs-12">
                     <div class="thumbnail bigPic">
+
                         {% if advert.pictures %}
                             {% if advert.pictures.0.path is not null %}
                                 <img src="{{ asset('uploads/annonce/'~advert.pictures.0.path) }}" alt="..." class="img-responsive">
@@ -20,9 +28,7 @@
                     </div>
                     <div class="thumbnail-min">
                         <div class="row">
-
                             <div class="col-xs-12">
-
                                 {% if advert.pictures %}
 
                                     {% set count = 1%}
@@ -53,14 +59,12 @@
                                         </div>
                                     {% endfor %}
                                 {% endif %}
-
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
                     <div class="box-show-content">
-
                         <div class="row">
                             <div class="col-md-10 box-content">
                                 <div class="content-header box">
@@ -75,22 +79,27 @@
                                 <div class="content-infos box">
                                     <div class="row">
                                         <div class="col-xs-7">
-                                            {% if advert.negotiate %}
-                                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                                    {% if app.user.id != advert.user.userId %}
-                                                        {% if advert.user.userId|UserTryNegotiate %}
-                                                            <button class="btn btn-primary btn-sm">Négociation en cours..</button>
+
+                                            {% if not advert.sold %}
+                                                {% if advert.negotiate %}
+                                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                                        {% if app.user.id != advert.user.userId %}
+                                                            {% if advert.user.userId|UserTryNegotiate %}
+                                                                <button class="btn btn-primary btn-sm">Négociation en cours..</button>
+                                                            {% else %}
+                                                                <a href="#" class="btn btn-warning btn-sm negociate btn-hidden-form" data-target="#hidden-form-negoce">Tentez la négociation</a>
+                                                            {% endif %}
                                                         {% else %}
-                                                            <a href="#" class="btn btn-warning btn-sm negociate btn-hidden-form" data-target="#hidden-form-negoce">Tentez la négociation</a>
+                                                            <a href="#" class="btn btn-warning btn-sm">Afficher les négociations</a>
                                                         {% endif %}
                                                     {% else %}
-                                                        <a href="#" class="btn btn-warning btn-sm">Afficher les négociations</a>
+                                                        <a href="#" class="btn btn-warning btn-sm negociate btn-hidden-form" data-target="#hidden-form-negoce">Tentez la négociation</a>
                                                     {% endif %}
                                                 {% else %}
-                                                    <a href="#" class="btn btn-warning btn-sm negociate btn-hidden-form" data-target="#hidden-form-negoce">Tentez la négociation</a>
+                                                    <span class="btn btn-warning btn-sm negociate">Non négociable</span>
                                                 {% endif %}
                                             {% else %}
-                                                <span class="btn btn-warning btn-sm negociate">Non négociable</span>
+                                                <span class="btn btn-warning btn-sm">Annonce terminée</span>
                                             {% endif %}
                                             <p class="share">Partager cette annonce</p>
                                             <ul class="list-inline">
@@ -102,6 +111,8 @@
                                         </div>
                                         <div class="col-xs-5 price">
                                             <p>{{ advert.price }}€</p>
+                                            {% if not advert.sold %}
+
                                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                                 {% if app.user.id != advert.user.userId  %}
                                                     {% if not advert.user.isGuest %}
@@ -123,6 +134,9 @@
                                             {% else %}
                                                 <a class="btn btn-success btn-sm btn-hidden-form" data-target="#hidden-form-interested">Ca m'interesse!</a>
                                             {% endif %}
+                                                {% else %}
+                                                    <a class="btn btn-warning btn-sm btn-hidden-form" data-target="#hidden-form-interested">Annonce terminée</a>
+                                            {% endif %}
                                         </div>
                                         <div class="col-xs-12 paiement">
                                             <p>Paiement:
@@ -135,12 +149,12 @@
                                     </div>
                                 </div>
                                 <!-- Formulaire de négociation -->
-                                {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') or advert.user.isGuest %}
-                                    {% include 'SnoozitPlatformBundle:Advert/Show:interested-form.html.twig' %}
+                                {% if not advert.sold %}
+                                    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') or advert.user.isGuest %}
+                                        {% include 'SnoozitPlatformBundle:Advert/Show:interested-form.html.twig' %}
+                                    {% endif %}
+                                    {% include 'SnoozitPlatformBundle:Advert/Show:negotiate-form.html.twig' %}
                                 {% endif %}
-
-                                {% include 'SnoozitPlatformBundle:Advert/Show:negotiate-form.html.twig' %}
-
                                 <!-- Fin du formulaire --->
 
                                 <div class="content-description box">
@@ -152,15 +166,12 @@
                             </div>
                             <div class="col-md-2 col-md-offset-0 col-xs-6 col-xs-offset-3 box-owner">
                                 <aside>
-
                                     {% if advert.user.isGuest %}
                                         {% include 'SnoozitPlatformBundle:Advert/Show:aside-guest.html.twig' %}
                                     {% else %}
                                         {% include 'SnoozitPlatformBundle:Advert/Show:aside-user.html.twig' %}
                                     {% endif %}
-
                                 </aside>
-
                             </div>
                         </div>
                     </div>
@@ -170,7 +181,6 @@
     </div>
 </div>
 <div class="row" id="show-annonce-content" role="complementary">
-
     <div class="col-xs-6 comment-box">
 
         <h3>Commentaires</h3>

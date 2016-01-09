@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Kris
+ * Date: 06/01/16
+ * Time: 13:29
+ */
 
 namespace Snoozit\SkuagBundle\Listener\Interest;
 
@@ -9,7 +15,7 @@ use Snoozit\SkuagBundle\SkuagEvents\InterestEvent;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class AddInterestListener
+class SoldSuccessListener
 {
     protected $entityManager;
     protected $mailer;
@@ -26,7 +32,7 @@ class AddInterestListener
 
     public function getNotificationType()
     {
-        $type = $this->entityManager->getRepository('SnoozitPlatformBundle:NotificationType')->find(2);
+        $type = $this->entityManager->getRepository('SnoozitPlatformBundle:NotificationType')->find(11);
 
         if(!$type){
             throw new EntityNotFoundException();
@@ -35,39 +41,40 @@ class AddInterestListener
         return $type;
     }
 
-    public function processAddInterest(InterestEvent $event)
+    public function processSoldSuccess(InterestEvent $event)
     {
         // Initialisation
         $userLogCustomer = new UserLog();
 
+        $userLogCustomer->setType($this->getNotificationType());
+
         $userLogCustomer->setOwner($event->getCustomer()); // L'acheter potentiel ( interest ) est le propriétaire du log
         $userLogCustomer->setUser($event->getCustomer());
-        $userLogCustomer->setUserAsked($event->getCustomer());
+        $userLogCustomer->setUserAsked($event->getOwner());
+
         $userLogCustomer->setAdvert($event->getAdvert());
         $userLogCustomer->setContent('');
-        $userLogCustomer->setType($this->getNotificationType());
 
         $this->recordLog($userLogCustomer);
 
         // Si l'utilisateur n'est pas un membre
-        if(is_null($event->getOwner())) {
-            $this->sendGuestMessage($event);
-        }else{
+
             $userLog = new UserLog();
 
             $userLog->setType($this->getNotificationType())
-                    ->setUser($event->getOwner())
-                    ->setOwner($event->getCustomer())
-                    ->setUserAsked($event->getOwner())
-                    ->setAdvert($event->getAdvert())
-                    ->setContent('');
+
+                ->setOwner($event->getOwner())
+                ->setUser($event->getOwner())
+                ->setUserAsked($event->getCustomer())
+
+                ->setAdvert($event->getAdvert())
+                ->setContent('');
 
             $this->recordLog($userLog);
 
-            if($event->getOwnerNotifications()){
+            /*if($event->getOwnerNotifications()){
                 $this->sendMessage($event);
-            }
-        }
+            }*/
 
         return;
     }
@@ -75,7 +82,6 @@ class AddInterestListener
     private function recordLog($userLog)
     {
         $this->entityManager->persist($userLog);
-
         $this->entityManager->flush();
 
         return;
@@ -85,7 +91,7 @@ class AddInterestListener
     {
         $templating = $this->containerAware->get('templating');
 
-        $message = new \Swift_Message("Vous avez reçu une demande!",
+        $message = new \Swift_Message("Vente réussie à modifier SoldSuccessListener",
 
             $templating->render('SnoozitSkuagBundle:Mail/Interest:InterestedMail.html.twig',
                 array(
@@ -103,28 +109,4 @@ class AddInterestListener
 
         $this->mailer->send($message);
     }
-
-    private function sendGuestMessage(InterestEvent $event)
-    {
-        $templating = $this->containerAware->get('templating');
-
-        $message = new \Swift_Message("Vous avez reçu une demande!",
-
-            $templating->render('SnoozitSkuagBundle:Mail/Interest:InterestedMail.html.twig',
-                array(
-                    'slug'              => $event->getAdvertSlug(),
-                    'id'                => $event->getAdvertId(),
-                    'title'             => $event->getAdvertTitle(),
-                    'userInterested'    => $event->getCustomerUsername(),
-                    'ownername'         => $event->getGuestOwnerName()
-                )
-            ),
-            'text/html');
-
-        $message->addTo('gautierkris@gmail.com')
-            ->addFrom('gautierkris@gmail.com');
-
-        $this->mailer->send($message);
-    }
-
 }

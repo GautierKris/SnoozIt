@@ -25,10 +25,11 @@ class AdvertController extends Controller
     }
 
     // Affiche une annonce
-    public function showAction(Request $request,Advert $advert, $slug)
+    public function showAction(Advert $advert, $slug)
     {
         $user = $this->getUser();
         $userFollow = false;
+
         if(is_object($user) || $user instanceof User) {
             if($advert->getUser()){
                 $userFollow = $this->checkIfUserFollow($advert->getUser());

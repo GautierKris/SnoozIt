@@ -36,11 +36,6 @@ class NotificationIsNewExtension extends \Twig_Extension
         return true;
     }
 
-    public function isNew($notification)
-    {
-
-    }
-
     /**
      * {@inheritdoc}
      */

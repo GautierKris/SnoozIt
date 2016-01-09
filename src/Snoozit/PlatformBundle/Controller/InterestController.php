@@ -2,9 +2,12 @@
 
 namespace Snoozit\PlatformBundle\Controller;
 
+use Doctrine\ORM\EntityNotFoundException;
 use FOS\UserBundle\Model\UserInterface;
 use Snoozit\PlatformBundle\Entity\Advert;
 use Snoozit\PlatformBundle\Entity\AdvertInterest;
+use Snoozit\SkuagBundle\SkuagEvents\InterestEvent;
+use Snoozit\SkuagBundle\SkuagEvents\SkuagEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -156,6 +159,56 @@ class InterestController extends Controller
     public function refuseInterestAction(Request $request, AdvertInterest $interest)
     {
 
+    }
+
+    // Je confirme la vente du produit
+    public function confirmVenteAction(AdvertInterest $advertInterest)
+    {
+        if ($this->getUser() != $advertInterest->getAdvert()->getUser()) {
+            throw new AccessDeniedException('Cet interet ne vous concerne pas.');
+        }
+
+        $advertManager = $this->getAdvertManager();
+
+        $advertManager->confirmVente($advertInterest);
+
+        $this->get('event_dispatcher')->dispatch(SkuagEvents::ON_SOLD_SUCCESS, new InterestEvent($advertInterest->getAdvert(), $advertInterest->getUser()));
+
+        return $this->redirect($this->generateUrl('snoozit_dashboard_interest'));
+    }
+
+    // Le produit acheté à bien été recu par l'acheteur
+    public function argentRecuAction(AdvertInterest $advertInterest)
+    {
+        $user = $this->getUser();
+        // On controle si l'interet est bien avec le statut (7) soit 'En attente produit'
+        if($advertInterest->getAdvertOptionType()->getId() != 7){
+            throw new EntityNotFoundException('Cette annonce ne remplie pas les conditions requises.');
+        }
+
+        // On controle que l'utilisateur est bien l'acheteur.
+        if($user != $advertInterest->getAdvert()->getUser()){
+            throw new AccessDeniedException("Cet interet ne vous appartient pas");
+        }
+
+        // Tout les testes sont bien validés on passe au traitement
+        $em = $this->getDoctrine()->getEntityManager();
+
+        // On récupere le statut (4) soit attente validation
+        $advertOptionType = $em->getRepository("SnoozitPlatformBundle:AdvertOptionType")->find(4);
+
+        // Modification du statut de l'interet
+        $advertInterest->setAdvertOptionType($advertOptionType);
+
+        // On passe donc l'annonce en non visible via setSold() = true
+        $advert = $advertInterest->getAdvert();
+        $advert->setSold(true);
+
+        $em->persist($advertInterest);
+        $em->persist($advert);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('snoozit_dashboard_interest'));
     }
 
     //////////////////////////////////

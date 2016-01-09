@@ -274,6 +274,13 @@ class Advert
      */
     private $published;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sold", type="boolean", nullable=true)
+     */
+    private $sold;
+
     public function __construct()
     {
         $this->success = false;
@@ -283,6 +290,7 @@ class Advert
         $this->negotiations = new ArrayCollection();
         $this->views = 0;
         $this->published = true;
+        $this->sold = false;
     }
 
     public function isNew()
@@ -1168,5 +1176,28 @@ class Advert
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set sold
+     *
+     * @param boolean $sold
+     * @return Advert
+     */
+    public function setSold($sold)
+    {
+        $this->sold = $sold;
+
+        return $this;
+    }
+
+    /**
+     * Get sold
+     *
+     * @return boolean 
+     */
+    public function getSold()
+    {
+        return $this->sold;
     }
 }

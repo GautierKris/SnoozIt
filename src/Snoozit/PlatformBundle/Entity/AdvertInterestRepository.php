@@ -32,6 +32,8 @@ class AdvertInterestRepository extends EntityRepository
             ->where('a.user = :user')
             ->andWhere('a.customerFade = false')
             ->andWhere('a.advertOptionType != 5')
+            ->andWhere('a.advertOptionType != 4')
+            ->orderBy('a.updated' , 'DESC')
             ->setParameter('user', $user);
 
         $result = $qb->getQuery()->getResult();
@@ -42,13 +44,16 @@ class AdvertInterestRepository extends EntityRepository
     // Liste des désistement de l'utilisateur
     public function findDashboardUserInterestByStatus($user, $status)
     {
+
         $qb = $this->createQueryBuilder('a');
 
         $qb->leftJoin('a.advert' , 'b')
             ->leftJoin('a.advertOptionType', 'c')
             ->where('a.user = :user')
-            ->andWhere('c.id = :status')
-            ->setParameters(array('user' => $user, 'status' => $status));
+            ->andWhere('c.id = :status or c.id = 9');
+        $qb->setParameters(array('user' => $user, 'status' => $status));
+
+
 
         $result = $qb->getQuery()->getResult();
 

@@ -9,6 +9,7 @@ parameters:
     plateform_refuse_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\RefuseInterestListener
     plateform_accept_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\AcceptInterestListener
     plateform_desist_interest_listener.class: Snoozit\SkuagBundle\Listener\Interest\DesistInterestListener
+    plateform_sold_success_listener.class: Snoozit\SkuagBundle\Listener\Interest\SoldSuccessListener
 
     plateform_advert_show_listener.class: Snoozit\SkuagBundle\Listener\Advert\ShowAdvertListener
 
@@ -23,6 +24,12 @@ parameters:
     plateform_user_advert_to_show.class: Snoozit\SkuagBundle\Listener\User\ShowUserAdvertsListener
 
 services:
+    plateform_sold_success_listener:
+        class: %plateform_sold_success_listener.class%
+        arguments: [@doctrine.orm.entity_manager, @swiftmailer.mailer, @router, @service_container]
+        tags:
+          - { name: kernel.event_listener, event: skuag.platform.sold_success , method: processSoldSuccess }
+
     plateform_user_advert_to_hidden:
         class: %plateform_user_advert_to_hidden.class%
         arguments: [@doctrine.orm.entity_manager]

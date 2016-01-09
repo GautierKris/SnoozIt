@@ -1,9 +1,9 @@
-/*@import url(https://fonts.googleapis.com/css?family=Poiret+One);*/
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
 
 body{
     background: #f5f8fa;
     font-family: "Lucida Grande", Arial, sans-serif;
-    color: #555;
+    color: #111;
     font-size: 11px;
     padding: 60px 0;
 }
@@ -59,6 +59,8 @@ h5{ font-size: .9em;}
 .badge-warning:hover{ background: #c48023;}
 .badge-hidden{ background: transparent; color: #999; font-weight: normal }
 
+.btn-attentevalidation{ background: #aeeb5f; color: #333;}
+.btn-new{ background: transparent; color: orange; border: 1px solid #ddd }
 /** Classes d'alignements **/
 .divNoPadding{
     padding: 0;
@@ -393,13 +395,11 @@ select.form-control{
 .box-show-content{}
 .box-show-content h3{ font-size: 1.6em;}
 
-.box-show-content{}
+.box-show-content{ }
 .box-show-content .box-content{}
 .box-show-content .box-owner{
     background: #313844;
     color: #fff;
-    position: relative;
-    top: -30px;
     border-radius: 10px;
 }
 .box-show-content .box-owner .img{ position: relative; cursor: pointer}
@@ -456,11 +456,13 @@ select.form-control{
 .hidden-form form .form-group{ margin-bottom: 0}
 
     /** Box complement  **/
-#show-annonce-content{ }
-#show-annonce-conten .bigPic img{ max-height: 100px;}
+#show-annonce .well { overflow: hidden; position: relative }
+#show-annonce-content .bigPic img{ max-height: 100px;}
 #show-annonce-content h4>a{ color: #000}
 #show-annonce-content h4>a:hover{ color: #0088cc}
 #show-annonce-content span.help-block{ font-style: italic; font-size: .9em; display: inline }
+#show-annonce-content .propose-box h4>a{ color: #666666; font-weight: 400}
+
 .comment-box form{ background: transparent; border: 1px solid #D9D6D3; margin-bottom: 20px}
 .comment-box textarea{  border: none; font-size: 1.1em}
 .comment-box .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
@@ -475,7 +477,6 @@ select.form-control{
 
 .propose-box .box { padding: 5px 0 ;border-bottom: 1px solid #D9D6D3; }
 .propose-box .box h4{ margin: 0 0 5px;}
-#show-annonce-content .propose-box h4>a{ color: #666666; font-weight: 400}
 .propose-box .box .price{ color: #5cb85c; font-weight: 800;}
 .propose-box .box img{ height: 50px; width: 50px}
 
@@ -537,7 +538,7 @@ select.form-control{
 
 /** dsh-timeline **/
 #time-advert{ }
-#time-advert .box-time-advert{  margin-bottom: 10px}
+#time-advert .box-time-advert{  margin-bottom: 10px; position: relative; overflow: hidden}
 #time-advert .box-header .dropdown .btn.dropdown-toggle {
     border: none;
     background: transparent;
@@ -655,6 +656,16 @@ select.form-control{
     background-color: #d9534f;
     border-color: #d43f3a;
     }
+.travers > span.sold{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: orange;
+    }
+.travers > span.attentevalidation{
+    color: #333;
+    border:1px solid #ddd;
+    background-color: #aeeb5f;
+}
 .rotate {
     /* Safari */
     -webkit-transform: rotate(-45deg);

@@ -1,0 +1,46 @@
+{% if u.user == app.user and u.owner == app.user %}
+    <section>
+        <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% if u.advert.pictureOne %}
+                    <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                         class="img-responsive advert-img pull-left img-thumbnail">
+                    {% else %}
+                        <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                             class="img-responsive advert-img pull-left img-thumbnail">
+                    {% endif %}
+                    <h4 class="text-grey">
+                        <a href="{{ path('snoozit_show_advert', {'id' : u.advert.id , 'slug' : u.advert.slug }) }}">{{ u.advert.title }}</a>
+                        </h4>
+                    <p class="text-success text-bold">Vente réussie ! </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% else %}
+    {% if u.user == app.user and u.owner != u.userAsked %}
+
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
+                        <h4 class="text-grey">
+                            <a href="{{ path('snoozit_show_advert', {'id' : u.advert.id , 'slug' : u.advert.slug }) }}">{{ u.advert.title }}</a>
+                        </h4>
+                        <p class="text-success text-bold">Félicitation! Achat réussit </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% endif %}
+
+{% endif %}
