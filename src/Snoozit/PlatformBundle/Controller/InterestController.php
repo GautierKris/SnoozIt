@@ -14,9 +14,40 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class InterestController extends Controller
 {
+
     //////////////////////////////////
-    //      LA PAGES DU PANIER
+    //      LA PAGES DES INTERETS
     //////////////////////////////////
+
+    // Affiche les interets
+    public function getInterestCenterAction()
+    {
+        $advertManager = $this->getAdvertManager();
+
+        $stats  = array('income' => $advertManager->getDashboardInterest(),
+            'desist' => $advertManager->getDashboardUserInterestByStatus(5),
+            'archives' => $advertManager->getInterestArchives(),
+            'success' => $advertManager->getAdvertInSoldSuccess());
+
+        // Création du formulaire pour les commentaires de chaque annonces
+        $sellCommentHandler = $this->get('sz_panier_comment_handler');
+
+        if($sellCommentHandler->process()){
+            return $this->redirect($this->generateUrl('snoozit_dashboard_interest'));
+        }
+
+        $breadcrumb = array(
+            array('Dashboard', $this->generateUrl('snoozit_dashboard_homepage')),
+            array('Interest center', '#', true)
+        );
+
+        return $this->render('SnoozitPlatformBundle:DashBoard/Interest:interest.html.twig', array(
+            'breadcrumb' => $breadcrumb,
+            'advertList' => $advertManager->getDashboardInterest(),
+            'stats' => $stats,
+            'form'  => $sellCommentHandler->createView()
+        ));
+    }
 
     // Je suis interessé ou plus interessé par une annonce
     public function interestedByAction(Request $request, Advert $advert)
@@ -181,10 +212,6 @@ class InterestController extends Controller
     public function argentRecuAction(AdvertInterest $advertInterest)
     {
         $user = $this->getUser();
-        // On controle si l'interet est bien avec le statut (7) soit 'En attente produit'
-        if($advertInterest->getAdvertOptionType()->getId() != 7){
-            throw new EntityNotFoundException('Cette annonce ne remplie pas les conditions requises.');
-        }
 
         // On controle que l'utilisateur est bien l'acheteur.
         if($user != $advertInterest->getAdvert()->getUser()){
@@ -194,52 +221,40 @@ class InterestController extends Controller
         // Tout les testes sont bien validés on passe au traitement
         $em = $this->getDoctrine()->getEntityManager();
 
-        // On récupere le statut (4) soit attente validation
-        $advertOptionType = $em->getRepository("SnoozitPlatformBundle:AdvertOptionType")->find(4);
+        // Soit on est en statut " Produit Recu " et donc on valide définitivement la vente en passant au statut "Vendu"
+        if($advertInterest->getAdvertOptionType()->getId() == 11){
 
-        // Modification du statut de l'interet
-        $advertInterest->setAdvertOptionType($advertOptionType);
+            $advertOptionType = $em->getRepository("SnoozitPlatformBundle:AdvertOptionType")->find(4);
+            // Modification du statut de l'interet
+            $advertInterest->setAdvertOptionType($advertOptionType);
 
-        // On passe donc l'annonce en non visible via setSold() = true
-        $advert = $advertInterest->getAdvert();
-        $advert->setSold(true);
+            // On passe donc l'annonce en non visible via setSold() = true
+            $advert = $advertInterest->getAdvert();
+            $advert->setSold(true);
+            $advert->setSoldTo($advertInterest->getUser());
 
-        $em->persist($advertInterest);
-        $em->persist($advert);
-        $em->flush();
+            $em->persist($advertInterest);
+            $em->persist($advert);
+            $em->flush();
 
-        return $this->redirect($this->generateUrl('snoozit_dashboard_interest'));
-    }
+        }
+        // Soit on est en statut " Attente de paiement " et on passe au statut " Argent reçu "
+        elseif($advertInterest->getAdvertOptionType()->getId() == 7)
+        {
+            $advertOptionType = $em->getRepository("SnoozitPlatformBundle:AdvertOptionType")->find(10);
+            // Modification du statut de l'interet
+            $advertInterest->setAdvertOptionType($advertOptionType);
 
-    //////////////////////////////////
-    //      LA PAGES DES INTERETS
-    //////////////////////////////////
+            // On passe donc l'annonce en non visible via setSold() = true
+            $advert = $advertInterest->getAdvert();
 
-    // Affiche les interets
-    public function getInterestCenterAction()
-    {
-        $advertManager = $this->getAdvertManager();
-
-        $stats  = array('income' => $advertManager->getDashboardInterest(), 'desist' => $advertManager->getDashboardUserInterestByStatus(5), 'archives' => $advertManager->getInterestArchives());
-
-        // Création du formulaire pour les commentaires de chaque annonces
-        $sellCommentHandler = $this->get('sz_panier_comment_handler');
-
-        if($sellCommentHandler->process()){
-            return $this->redirect($this->generateUrl('snoozit_dashboard_interest'));
+            $em->persist($advertInterest);
+            $em->flush();
+        }else{
+            throw new EntityNotFoundException('Cette annonce ne remplie pas les conditions requises.');
         }
 
-        $breadcrumb = array(
-            array('Dashboard', $this->generateUrl('snoozit_dashboard_homepage')),
-            array('Interest center', '#', true)
-        );
-
-        return $this->render('SnoozitPlatformBundle:DashBoard/Interest:interest.html.twig', array(
-            'breadcrumb' => $breadcrumb,
-            'advertList' => $advertManager->getDashboardInterest(),
-            'stats' => $stats,
-            'form'  => $sellCommentHandler->createView()
-        ));
+        return $this->redirect($this->generateUrl('snoozit_dashboard_interest'));
     }
 
     // Affiche les interets ayant recu un desistement
@@ -311,6 +326,30 @@ class InterestController extends Controller
         }
 
         throw new AccessDeniedException('Il y a un probleme de traitement dans removeDesistInterestFromInterface');
+    }
+
+    public function advertSuccessArchiveAction(Request $request)
+    {
+        $advertManager = $this->getAdvertManager();
+
+        $interestListToPaginate = $advertManager->getAdvertInSoldSuccess();
+        $advertList = $this->get('knp_paginator')->paginate($interestListToPaginate, $request->query->getInt('page', 1), 20);
+        $stats  = array('income' => $advertManager->getDashboardInterest(),
+            'desist' => $advertManager->getDashboardUserInterestByStatus(5),
+            'archives' => $advertManager->getInterestArchives(),
+            'success' => $advertManager->getAdvertInSoldSuccess());
+
+        $breadcrumb = array(
+            array('Dashboard', $this->generateUrl('snoozit_dashboard_homepage')),
+            array('Interest center', $this->generateUrl('snoozit_dashboard_interest')),
+            array('Vente réussie' , '#', true)
+        );
+
+        return $this->render('SnoozitPlatformBundle:DashBoard/Interest:interest_archives_advert_sold_success.html.twig', array(
+            'breadcrumb' => $breadcrumb,
+            'advertList' => $advertList,
+            'stats' => $stats
+        ));
     }
 
     ////////////////////////////////////

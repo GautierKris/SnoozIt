@@ -73,13 +73,13 @@ class AdvertController extends Controller
         $this->get('event_dispatcher')->dispatch(SkuagEvents::ON_SHOW_ADVERT, new AdvertEvent($advert));
 
         return $this->render('SnoozitPlatformBundle:Advert/Show:show.html.twig', array(
-                'advert'        => $hydratedAdvert,
-                'advertListToPropose' => $advertListToPropose,
-                'form'          => $advertCommentHandler->createView(),
-                'formNegoce'    => $advertNegoceHandler->createView(),
-                'breadcrumb'    => $breadcrumb,
-                'userFollow'    => $userFollow,
-            ));
+            'advert'        => $hydratedAdvert,
+            'advertListToPropose' => $advertListToPropose,
+            'form'          => $advertCommentHandler->createView(),
+            'formNegoce'    => $advertNegoceHandler->createView(),
+            'breadcrumb'    => $breadcrumb,
+            'userFollow'    => $userFollow,
+        ));
     }
 
     // Formulaire pour ajouter une annonce
@@ -452,7 +452,7 @@ class AdvertController extends Controller
             'userFollow'    => $userFollow,
             'categoryID'    => $categoryID,
             'usersFound'    => $usersFound
-            ));
+        ));
     }
 
     private function getRouteForFollowingButton($requestRubriqueId)
@@ -490,7 +490,7 @@ class AdvertController extends Controller
         $user = $this->getUser();
 
         if($item instanceof Category){
-           return $this->checkIfUserFollowProcess($user->getFollowedcategories(), $item);
+            return $this->checkIfUserFollowProcess($user->getFollowedcategories(), $item);
         }
 
         if($item instanceof Region){

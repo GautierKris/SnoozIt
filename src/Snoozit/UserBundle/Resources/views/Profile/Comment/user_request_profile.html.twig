@@ -15,7 +15,7 @@
             <h2>{{ user.username }}</h2>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 {% if app.user.id == user.id %}
-                    <a href="#" class="btn btn-xs btn-primary btn-rounded">Editer mon profile</a>
+                    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-xs btn-primary btn-rounded">Editer mon profile</a>
                 {% else %}
                     {% if userFollow %}
                         <a href="{{ path('snoozit_follow_user', {'id' : user.id }) }}" class="btn btn-xs btn-success btn-rounded">Se désabonner </a>

@@ -281,6 +281,12 @@ class Advert
      */
     private $sold;
 
+    /**
+     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="sold_to_id", referencedColumnName="id", nullable=true)
+     */
+    private $soldTo;
+
     public function __construct()
     {
         $this->success = false;
@@ -1199,5 +1205,28 @@ class Advert
     public function getSold()
     {
         return $this->sold;
+    }
+
+    /**
+     * Set soldTo
+     *
+     * @param \Snoozit\UserBundle\Entity\User $soldTo
+     * @return Advert
+     */
+    public function setSoldTo(\Snoozit\UserBundle\Entity\User $soldTo = null)
+    {
+        $this->soldTo = $soldTo;
+
+        return $this;
+    }
+
+    /**
+     * Get soldTo
+     *
+     * @return \Snoozit\UserBundle\Entity\User 
+     */
+    public function getSoldTo()
+    {
+        return $this->soldTo;
     }
 }

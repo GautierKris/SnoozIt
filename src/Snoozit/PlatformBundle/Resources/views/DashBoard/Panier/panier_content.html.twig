@@ -24,42 +24,43 @@
                 </thead>
                 <tbody>
                 {% for u in advertConsoleList %}
-
-                    {% if u.advertOptionType.id == 1 %}
-                        {% set color = 'hidden' %}
-                    {% elseif u.advertOptionType.id == 2 %}
-                        {% set color = 'primary' %}
-                    {% elseif u.advertOptionType.id == 3 %}
-                        {% set color = 'danger' %}
-                    {% elseif u.advertOptionType.id == 4 %}
-                        {% set color = 'success' %}
-                    {% elseif u.advertOptionType.id == 5 %}
-                        {% set color = 'warning' %}
-                    {% elseif u.advertOptionType.id == 6 %}
-                        {% set color = 'attentevalidation' %}
-                    {% else %}
-                        {% set color = 'default' %}
-                    {% endif %}
-
-                    <tr>
-
-                        <th>
-                            {% if u.advertOptionType.id == 7 %}
-                            <div class="travers rotate">
-                                <span class="attentevalidation">Attente produit</span>
-                            </div>
-                            {% endif %}
-                            {% if u.advert.pictureOne is not null %}
-                                <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="..." class="img-responsive">
-                            {% else %}
-                                <img src="{{ asset('uploads/annonce/4ddf6e813832d52e98fe6a735bcb07dd278aca6f.jpeg') }}"
-                                     alt="..." class="img-responsive">
-                            {% endif %}
-                        </th>
-                        <td class="user">
-                            <h4>
-                                <a href="{{ path('fos_user_profile_show_name', {'username' : u.advert.user.username}) }}"
-                                   class="text-bold">{{ u.advert.user.username }}</a>
+                        {% if u.advertOptionType.id == 1 %}
+                            {% set color = 'hidden' %}
+                        {% elseif u.advertOptionType.id == 2 %}
+                            {% set color = 'primary' %}
+                        {% elseif u.advertOptionType.id == 3 %}
+                            {% set color = 'danger' %}
+                        {% elseif u.advertOptionType.id == 4 %}
+                            {% set color = 'success' %}
+                        {% elseif u.advertOptionType.id == 5 %}
+                            {% set color = 'warning' %}
+                        {% elseif u.advertOptionType.id == 6 %}
+                            {% set color = 'attentevalidation' %}
+                        {% else %}
+                            {% set color = 'default' %}
+                        {% endif %}
+                        <tr>
+                            <th>
+                                {% if u.advertOptionType.id == 7 %}
+                                    <div class="travers rotate">
+                                        <span class="attentevalidation">Attente produit</span>
+                                    </div>
+                                {% elseif u.advertOptionType.id == 11  %}
+                                    <div class="travers rotate">
+                                        <span class="attentevalidation">Attente paiement</span>
+                                    </div>
+                                {% endif %}
+                                {% if u.advert.pictureOne is not null %}
+                                    <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="..." class="img-responsive">
+                                {% else %}
+                                    <img src="{{ asset('uploads/annonce/noAvatar.png') }}"
+                                         alt="..." class="img-responsive">
+                                {% endif %}
+                            </th>
+                            <td class="user">
+                                <h4>
+                                    <a href="{{ path('fos_user_profile_show_name', {'username' : u.advert.user.username}) }}"
+                                       class="text-bold">{{ u.advert.user.username }}</a>
                                 <span class="text-star">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -67,60 +68,59 @@
                                     <i class="fa fa-star-half-o"></i>
                                     <i class="fa fa-star-half-empty"></i>
                                 </span>
-                            </h4>
-                            <h5>{{ u.advert.user.city.departement.region.nom }}
-                                , {{ u.advert.user.city.departement.nom }}<br>{{ u.advert.user.city.nom }}</h5>
-                        </td>
-                        <td class="content">
-                            <span class="text-bold">#{{ u.id }}</span> -
-                            <span class="text-default text-normal">Catégorie</span>
-                            <a href="{{ path('snoozit_platform_show_by_category', {'slug' : u.advert.category.slug}) }}"
-                               class="text-bold">{{ u.advert.category.category }}
-                            </a>
-                            {% if u.updated|NotificationIsNew %}
-                                <span class="label label-hidden panier_label_new">Nouveauté</span>
-                            {% endif %}
-                            <span class="pull-right text-primary text-bold">{{ u.advert.price }} €</span>
-                            <h4 class="text-bold"><a href="{{ path('snoozit_show_advert', {'id' : u.advert.id, 'slug' : u.advert.slug }) }}" class="text-grey">{{ u.advert.title|truncate(50) }}</a></h4>
-                        </td>
-                        <td class="text-center status">
-                            {% if u.advertOptionType.id == 5 or u.advertOptionType.id == 3 %}
-                                <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id': u.id}) }}" class="btn btn-xs btn-{{ color }} btn-rounded btn-block"><i class="fa fa-eraser"></i> {{ u.advertOptionType.type }}</a>
-                            {% elseif u.advertOptionType.id == 6 %}
-                                <a href="#" class="btn btn-xs btn-{{ color }} btn-rounded btn-block">{{ u.advertOptionType.type }}</a>
-                                <a class="btn btn-warning btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
-                                <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
-                            {% elseif u.advertOptionType.id == 7 %}
-                                <a href="{{ path('snoozit_platform_produit_recu', {'id' : u.id }) }}" class="btn btn-xs btn-primary btn-rounded btn-block">Produit reçu</a>
-                                <a class="btn btn-warning btn-xs btn-rounded btn-block " href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
-                                <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
-                                <a href="#" class="btn btn-rounded btn-xs btn-send btn-padding">Reporter un probleme</a>
-                            {% else %}
-                                {% if u.advertOptionType.id == 2 %}
-                                    <a class="btn btn-primary btn-xs btn-rounded btn-block" href="{{ path('snoozit_platform_confirm_achat', {'id' : u.id}) }}"><i class="fa fa-check"></i> Confirmer cet achat</a>
+                                </h4>
+                                <h5>{{ u.advert.user.city.departement.region.nom }}
+                                    , {{ u.advert.user.city.departement.nom }}<br>{{ u.advert.user.city.nom }}</h5>
+                            </td>
+                            <td class="content">
+                                <span class="text-bold">#{{ u.id }} - Option : {{ u.advertOptionType.id }}</span> -
+                                <span class="text-default text-normal">Catégorie</span>
+                                <a href="{{ path('snoozit_platform_show_by_category', {'slug' : u.advert.category.slug}) }}"
+                                   class="text-bold">{{ u.advert.category.category }}
+                                </a>
+                                {% if u.updated|NotificationIsNew %}
+                                    <span class="label label-hidden panier_label_new">Nouveauté</span>
+                                {% endif %}
+                                <span class="pull-right text-primary text-bold">{{ u.advert.price }} €</span>
+                                <h4 class="text-bold"><a href="{{ path('snoozit_show_advert', {'id' : u.advert.id, 'slug' : u.advert.slug }) }}" class="text-grey">{{ u.advert.title|truncate(50) }}</a></h4>
+                            </td>
+                            <td class="text-center status">
+                                {% if u.advertOptionType.id == 5 %}
+                                    <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id': u.id}) }}" class="btn btn-xs btn-{{ color }} btn-rounded btn-block"><i class="fa fa-eraser"></i> {{ u.advertOptionType.type }}</a>
+                                {% elseif u.advertOptionType.id == 6 %}
+                                    <a href="#" class="btn btn-xs btn-{{ color }} btn-rounded btn-block">{{ u.advertOptionType.type }}</a>
                                     <a class="btn btn-warning btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
                                     <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
-                                {% else %}
-                                    {% if u.advertOptionType.id == 3 %}
-                                        <a  class="btn btn-danger btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : u.id}) }}">Archiver ce refus</a>
+                                {% elseif u.advertOptionType.id == 7  %}
+                                    <a href="{{ path('snoozit_platform_produit_recu', {'id' : u.id }) }}" class="btn btn-xs btn-primary btn-rounded btn-block">Produit reçu</a>
+                                    <a class="btn btn-warning btn-xs btn-rounded btn-block " href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
+                                    <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
+                                    <a href="#" class="btn btn-rounded btn-xs btn-send btn-padding">Reporter un probleme</a>
+                                {% elseif u.advertOptionType.id == 11 %}
+                                    <span class="btn btn-xs btn-primary btn-rounded btn-block">En attente de paiement</span>
+                                    <a href="#" class="btn btn-rounded btn-xs btn-send btn-padding">Reporter un probleme</a>
+                                {% elseif u.advertOptionType.id == 2 %}
+                                        <a class="btn btn-primary btn-xs btn-rounded btn-block" href="{{ path('snoozit_platform_confirm_achat', {'id' : u.id}) }}"><i class="fa fa-check"></i> Confirmer cet achat</a>
+                                        <a class="btn btn-warning btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
+                                        <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                     {% else %}
-                                        <a  class="btn btn-default btn-xs btn-rounded btn-block" href="{{ path('snoozit_interest_advert', {'id' : u.advert.id}) }}"> <i class="fa fa-remove"></i> Annuler cet interet</a>
-                                    {% endif %}
+                                        {% if u.advertOptionType.id == 3 %}
+                                            <a  class="btn btn-danger btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : u.id}) }}">Archiver ce refus</a>
+                                        {% else %}
+                                            <a  class="btn btn-default btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_remove_interest', {'id' : u.advert.id}) }}"> <i class="fa fa-remove"></i> Annuler cet interet</a>
+                                        {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        </td>
-                    </tr>
-
-                    {% if u.advertOptionType.id == 2 or u.advertOptionType.id == 6 or u.advertOptionType.id == 7 %}
-                        <tr class="toggle hidden sellCommentContainer" id="sellCommentContainer_{{ u.advert.id }}">
-                            <td colspan="5">
-                                <div class="definitiveChoice">
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Templating/SellComment:sellComment.html.twig' %}
-                                </div>
                             </td>
                         </tr>
-                    {% endif %}
-
+                        {% if u.advertOptionType.id == 2 or u.advertOptionType.id == 6 or u.advertOptionType.id == 7 or u.advertOptionType.id == 11 %}
+                            <tr class="toggle hidden sellCommentContainer" id="sellCommentContainer_{{ u.advert.id }}">
+                                <td colspan="5">
+                                    <div class="definitiveChoice">
+                                        {% include 'SnoozitPlatformBundle:DashBoard/Templating/SellComment:sellComment.html.twig' %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
                 {% endfor %}
                 </tbody>
             </table>

@@ -8,5 +8,5 @@ parameters:
     mailer_transport: gmail
     mailer_host: 127.0.0.1
     mailer_user: gautierkris@gmail.com
-    mailer_password: ac150910
+    mailer_password: Ej220912
     secret: 526620d64011b47a2108986867b762dad4eb90d6

@@ -30,6 +30,7 @@ class LoadNotificationTypeData extends AbstractFixture implements OrderedFixture
         $acceptInterest = $this->createNotificationtype('Interet Accepté');
         $soldSuccess = $this->createNotificationtype('Vente réussie');
 
+
         $manager->persist($abonnement);
         $manager->persist($interet);
         $manager->persist($negoce);

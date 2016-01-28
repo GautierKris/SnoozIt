@@ -27,7 +27,11 @@
 
                 {% for u in advertList %}
                     <tr>
+
                         <th scope="row">
+                            <div class="travers rotate">
+                                <span class="desist">Refus</span>
+                            </div>
                             {% if u.advert.pictureOne is not null %}
                                 <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="..."
                                      class="img-responsive">

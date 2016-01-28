@@ -769,4 +769,10 @@ class AdvertManager
 
         return;
     }
+
+    // Renvoi les annonces qui ont été vendu
+    public function getAdvertInSoldSuccess()
+    {
+        return $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getAdvertInSoldSuccess($this->getUser());
+    }
 }

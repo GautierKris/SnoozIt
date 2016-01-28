@@ -1,16 +1,14 @@
 <h2 class="panier-title">Ca les interessent</h2>
-
 <div class="row">
     <div class="col-xs-12 panier-nav">
         <ul class="nav nav-pills text-bold">
             <li role="presentation" class="active"><a href="{{ path('snoozit_platform_panier_homepage') }}" class="text-grey">En cours <span class="badge badge-primary">{{ stats.income|length }}</span></a></li>
             <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_desistement') }}" class="text-grey">Désistements <span class="badge badge-primary">{{ stats.desist|length }}</span></a></li>
             <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_archives') }}" class="text-grey">Archives <span class="badge badge-primary">{{ stats.archives|length }}</span></a></li>
+            <li role="presentation"><a href="{{ path('snoozit_dashboard_interest_achive_success_archive') }}" class="text-grey">Vente reussie <span class="badge badge-primary">{{ stats.success|length }}</span></a></li>
         </ul>
     </div>
 </div>
-
-<br>
 <div class="row" id="advert-manager">
     {% if advertList %}
         {% for u in advertList  %}
@@ -26,6 +24,14 @@
                         {% elseif u.advertOptionType.id == 6 %}
                             <div class="travers rotate text-bold">
                                 <span class="attentevalidation">A valider</span>
+                            </div>
+                        {% elseif u.advertOptionType.id == 11  %}
+                            <div class="travers rotate">
+                                <span class="attentevalidation">Attente paiement</span>
+                            </div>
+                        {% elseif u.advertOptionType.id == 10  %}
+                            <div class="travers rotate">
+                                <span class="attentevalidation">Attente produit</span>
                             </div>
                         {% endif %}
                         <div class="col-md-8 col-md-offset-2">
@@ -109,13 +115,6 @@
                                 <div class="col-xs-5">
                                     <a href="{{ path('snoozit_dashboard_archive_interest_from_interface', {'id' : u.id }) }}" class="btn btn-danger btn-xs btn-rounded btn-block"><i class="fa fa-archive"></i> Archiver</a>
                                 </div>
-                            {% elseif u.advertOptionType.id == 4 %}
-                                <div class="col-md-6">
-                                    <button class="btn btn-success btn-xs btn-rounded btn-block">Vendu</button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }}) <i class="fa fa-caret-down"></i> </button>
-                                </div>
                             {% elseif u.advertOptionType.id == 5 %}
                                 <div class="row">
                                     <div class="col-xs-5 col-xs-offset-1">
@@ -132,12 +131,42 @@
                                 <div class="col-xs-6">
                                     <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }}) <i class="fa fa-caret-down"></i> </button>
                                 </div>
-                            {% elseif u.advertOptionType.id == 7 %}
+                            {% elseif u.advertOptionType.id == 7  %}
                                 <div class="col-xs-5 col-xs-offset-1">
                                     <button class="btn btn-attentevalidation btn-xs btn-rounded btn-block">{{ u.advertOptionType.type }}</button>
                                 </div>
                                 <div class="col-xs-6">
-                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }}) <i class="fa fa-caret-down"></i> </button>
+                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }})<i class="fa fa-caret-down"></i> </button>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <a class="btn btn-primary btn-xs btn-rounded btn-block" href="{{ path('snoozit_platform_argent_recu', {'id' : u.id }) }}">Paiement reçu</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="btn btn-rounded btn-xs btn-send btn-padding" >Reporter un problème </a>
+                                </div>
+                                {% elseif u.advertOptionType.id == 11 %}
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <button class="btn btn-attentevalidation btn-xs btn-rounded btn-block">{{ u.advertOptionType.type }}</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }})<i class="fa fa-caret-down"></i> </button>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <a class="btn btn-primary btn-xs btn-rounded btn-block" href="{{ path('snoozit_platform_argent_recu', {'id' : u.id }) }}">Paiement reçu</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="btn btn-rounded btn-xs btn-send btn-padding" >Reporter un problème </a>
+                                </div>
+                            {% elseif u.advertOptionType.id == 10 %}
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <button class="btn btn-attentevalidation btn-xs btn-rounded btn-block">{{ u.advertOptionType.type }}</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="toggleSellComment btn btn-rounded btn-xs btn-default btn-padding" rel="{{ u.advert.id }}">Espace commentaires ({{ u.sellComments|length }})<i class="fa fa-caret-down"></i> </button>
                                 </div>
                                 <br>
                                 <br>
@@ -148,6 +177,7 @@
                                     <a class="btn btn-rounded btn-xs btn-send btn-padding" >Reporter un problème </a>
                                 </div>
                             {% endif %}
+
                         </div>
                     </div>
 
@@ -166,8 +196,8 @@
                             {% endif %}
                         </div>
                     </div>
-
-                    {% if u.advertOptionType.id == 2 or u.advertOptionType.id == 6 %}
+                    <div class="clearfix"></div>
+                    {% if u.advertOptionType.id == 2 or u.advertOptionType.id == 6 or u.advertOptionType.id == 11 %}
                         <div class="toggle hidden sellCommentContainer" id="sellCommentContainer_{{ u.advert.id }}">
                             <div class="col-xs-12">
                                 <br>
@@ -181,7 +211,6 @@
                 </div>
 
             </div>
-
         {% endfor %}
     {% else %}
         <h3 class="text-center">Aucun interet en cours.</h3>

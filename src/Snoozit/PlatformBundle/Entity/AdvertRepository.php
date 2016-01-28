@@ -39,7 +39,7 @@ class AdvertRepository extends EntityRepository
             ->leftJoin('u.avatar', 'v')
             ->leftJoin('b.parentcategory', 'q')
             ->orderBy('a.created' , 'DESC')
-            ->where('a.sold IS NULL')
+            ->where('a.sold IS NOT NULL')
             ->setMaxResults(30);
 
         return $qb;
@@ -513,6 +513,21 @@ class AdvertRepository extends EntityRepository
             ->setParameter('users' , $users);
 
         return $qb->getQuery()->getResult();
+    }
+
+    // Renvoi les annonces vendu pour un utilisateur
+    public function getAdvertInSoldSuccess($user)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->select('a')
+            ->where('a.user = :user')
+            ->andWhere('a.sold = true')
+            ->setParameters(array('user' => $user));
+
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
     }
 
 }

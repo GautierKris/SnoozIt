@@ -125,4 +125,39 @@ class SiteController extends Controller
         return $this->render('SnoozitPlatformBundle:Error404:errorUserNotMember.html.twig', array('breadcrumb' => $breadcrumb));
     }
 
+    // Incoming Comment Template pour le breadcrumb
+    public function IncomingCommentTemplateAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $newList = $em->getRepository('SnoozitPlatformBundle:AdvertInterest')->getInterestNotification($this->getUser());
+        $incomingComments = $em->getRepository('SnoozitPlatformBundle:sellComment')->findIncomingComment($this->getUser(), $this->getUser()->getLastActivity());
+
+        $incomingList = array_merge($newList, $incomingComments);
+
+        usort($incomingList, array($this, 'trie_par_date'));
+
+        return $this->render('SnoozitPlatformBundle:Site/Templating/Breadcrumb:incomingComment.html.twig', array('incomingList' => $incomingList));
+    }
+
+    private function trie_par_date($a, $b) {
+
+        if(is_array($a)){
+            $datea = $a['updated'];
+        }else{
+            $datea = $a->getUpdated();
+        }
+
+        if(is_array($b)){
+            $dateb = $b['updated'];
+        }else{
+            $dateb = $b->getUpdated();
+        }
+        $date1 = strtotime($datea->format('r'));
+        $date2 = strtotime($dateb->format('r'));
+        return $date1 < $date2 ;
+    }
+
+
+
 }

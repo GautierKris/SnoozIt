@@ -31,7 +31,7 @@ class sellComment
     protected $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User", inversedBy="sellComments", cascade={"persist", "remove"} )
+     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User", cascade={"persist", "remove"} )
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $user;
@@ -43,6 +43,14 @@ class sellComment
      * @Gedmo\Timestampable(on="create")
      */
     protected $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @ORM\Column(name="updated", type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updated;
 
     /**
      * @ORM\ManyToOne(targetEntity = "Snoozit\PlatformBundle\Entity\AdvertInterest", inversedBy="sellComments", cascade={"persist", "remove"} )
@@ -151,5 +159,27 @@ class sellComment
     public function getAdvertInterest()
     {
         return $this->advertInterest;
+    }
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Advert
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

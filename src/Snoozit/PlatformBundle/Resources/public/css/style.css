@@ -21,7 +21,12 @@ body{
 .bg-googleplus{ background: #dd4b39; color: #FFF }
 .bg-instagram{ background: #517fa4; color: #FFF }
 
+.img-responsive {
+    /* patch pour firefox */
+    width:100%;
+}
 /*  Avatar */
+.avatar20{ height: 20px; width: 20px;}
 .avatar30{ height: 30px; width: 30px;}
 
 /* Placeholder */
@@ -89,7 +94,7 @@ a.text-remove{ text-decoration: line-through; color: #999}
     border-radius: 3px;
 }
 *:focus{ outline: none; }
-.btn:focus, .btn.focus,  {
+.btn:focus, .btn.focus {
     color: #ffffff;
     text-decoration: none;
     outline: none;
@@ -278,14 +283,12 @@ select.form-control{
     border-left-color: #0088cc;
     color: #0088cc;
 }
-
 #menuLeft .nav-pills>li.mainCategoryMenu>a:hover{
     color: #0088cc;
 }
 #menuLeft .nav-pills>li.mainCategoryMenu.blue>a{
     color: #0088cc;
 }
-
 #menuLeft .nav-pills>.mainCategoryMenu:hover{
     border-left-color: #0088cc;
     color: #0088cc;
@@ -306,15 +309,36 @@ select.form-control{
 .breadcrumb a>i:hover{ color: #0088cc; }
 .breadcrumb img{ height: 20px; margin-right: 5px; margin-top: -2px}
 .breadcrumb a.btn{ position: relative; top: -2px; color: #fff;}
-.breadcrumb .connected-breadcrumb>a{ border-right: 1px solid #fdf5ce; padding: 0 8px;color: #555; }
+.breadcrumb .connected-breadcrumb>.dropdown{ display: inline-block}
+.breadcrumb .connected-breadcrumb>a, .breadcrumb .connected-breadcrumb>.dropdown .dropdown-toggle{ border-right: 1px solid #fdf5ce; padding: 0 8px;color: #555; }
 .breadcrumb .connected-breadcrumb>a.panier{ border-right: 1px solid #fdf5ce; padding: 0 8px; color: #555; }
 .breadcrumb .connected-breadcrumb>a.panier:hover{ color: #0088cc }
 .breadcrumb .connected-breadcrumb>a.panier:hover>i{ color: #0088cc }
 .breadcrumb .connected-breadcrumb>a.panier .label{ border-radius: 50% }
 .breadcrumb .connected-breadcrumb>a.panier .label:hover{ background: #296192}
+.breadcrumb .connected-breadcrumb i.active{ color: red }
+.breadcrumb i{ font-size: 1.3em}
 .breadcrumb i.active{ color: #0088cc; }
 
-
+.breadcrumb .incomingCommentList{ font-size: 1em}
+.breadcrumb .dropdown-menu {
+    width: 370px;
+    max-height: 700px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.breadcrumb .incomingCommentList li>a{ white-space: normal; }
+.breadcrumb .incomingCommentList li{ font-size: .9em; padding: 10px 0; border-bottom: 1px solid #ddd }
+.breadcrumb .incomingCommentList li h4{ margin: 0 0 5px 0}
+.breadcrumb .incomingCommentList li i.ico-incoming{ font-size: .9em}
+.breadcrumb .incomingCommentList li h4>p{ font-size: 1em}
+.breadcrumb .incomingCommentList{ padding-top: 20px}
+.breadcrumb .incomingCommentList li p.show { margin-bottom: 0; }
+.breadcrumb .incomingCommentList li h4>img{  position: relative; top: 2px; height: 24px; width: 24px}
+.breadcrumb .incomingCommentList li .advert-img>img{ height: auto; border: 2px solid #2e6da4}
+.breadcrumb .incomingCommentList li:hover{ background: #f5f5f5 }
+.breadcrumb .incomingCommentList li.owner{ border-left: 2px solid #00aced; border-right: 2px solid #00aced;}
+.breadcrumb .incomingCommentList li.customer{ border-left: 2px solid #e1e8ed; border-right: 2px solid #e1e8ed;}
 
 /* Les box d'annonces de la page d'accueil */
 #annonces-container .avatar > img{ width: 20px; height: 20px; float: left; margin-right: 5px;}
@@ -485,7 +509,7 @@ select.form-control{
     background: #f6f3f0;
     padding: 50px 0;
 }
-#showUseProfile .profile-user .avatar> img{ margin: 0 auto; border: 1px solid #fff;}
+#showUseProfile .profile-user .avatar> img{ height:70px; width: 70px; margin: 0 auto; border: 1px solid #fff;}
 #showUseProfile .profile-user .avatar> img.thumbnail-followed{ border-color: #4cae4c;}
 #showUseProfile .profile-user .btn{ padding: 2px 20px; }
 
@@ -538,7 +562,7 @@ select.form-control{
 
 /** dsh-timeline **/
 #time-advert{ }
-#time-advert .box-time-advert{  margin-bottom: 10px; position: relative; overflow: hidden}
+#time-advert .box-time-advert{  margin-bottom: 10px; position: relative;}
 #time-advert .box-header .dropdown .btn.dropdown-toggle {
     border: none;
     background: transparent;
@@ -556,6 +580,7 @@ select.form-control{
     white-space: nowrap;
     cursor: pointer;
 }
+
 #time-advert .box-time-advert-usersFound .box-header{ border:none; margin-bottom: 0; position: relative;}
 #time-advert .box-time-advert-usersFound .box-header p{ margin-bottom: 0;}
 #time-advert .box-header{ border-bottom: 1px solid #ddd; margin-bottom: 10px;position: relative;}
@@ -571,6 +596,7 @@ select.form-control{
 #time-advert .box-content p{ }
 #time-advert .box-content .description{ margin-bottom: 5px;}
 #time-advert .box-content .text-lowersize span{ margin-right: 10px;}
+#time-advert .userLogsBox{ overflow: hidden}
 #time-advert .userLogsBox{ border-left: 2px solid #f8a22c; margin-bottom: 10px; background: #fff}
 #time-advert .userLogsBox img.advert-img{ max-height: 50px; margin: 0 auto; max-width: 50px;}
 
@@ -644,7 +670,7 @@ select.form-control{
 }
 
 .travers{ position: absolute;
-    z-index: 9999;
+    z-index: 100;
     top: 30px;
     left: -30px;
     width: 140px;

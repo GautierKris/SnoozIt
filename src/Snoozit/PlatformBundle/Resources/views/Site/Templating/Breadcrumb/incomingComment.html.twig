@@ -1,0 +1,231 @@
+{% if incomingList %}
+    {% for i in incomingList %}
+
+        {% if i.advertOptionType is defined %}
+            {% if i.user == app.user %}
+                {% set routing = 'snoozit_platform_panier_homepage' %}
+                {% set borderclass = 'customer' %}
+            {% else %}
+                {% set routing = 'snoozit_dashboard_interest' %}
+                {% set borderclass = 'owner' %}
+            {% endif %}
+            <li class="{{ borderclass }}">
+                <div class="clearfix">
+            <div class="col-xs-12">
+                <h4 class="title">
+                    <img src="{{ asset('uploads/avatar/'~i.user.avatar.path) }}" alt="{{ i.user.username }}"
+                         class="img-responsive pull-left img-circle">
+                    <a class="text-bold"
+                       href="{{ path('fos_user_profile_show_name', {'username' : i.user.username }) }}">{{ i.user.username }}</a>
+                        <span class="text-star">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <i class="fa fa-star-half-empty"></i>
+                    </span>
+                        <span class="pull-right">
+                            {{ i.created|date('d/m/y h:i') }}
+                        </span>
+                    <p>{{ i.user.city.departement.region.nom }}</p>
+                </h4>
+
+            </div>
+            <div class="col-xs-2 text-center advert-img divNoPadding-right">
+                <img src="{{ asset('uploads/annonce/2e743bb91c80c35d72158bda717e80f985693340.jpeg') }}"
+                     alt="{{ i.advert.title }}" class="img-responsive img-circle">
+            </div>
+
+            <div class="col-xs-10">
+                <a href="{{ path(routing) }}" class="text-bold">
+                    <h4 class="text-bold">{{ i.advert.title|truncate(50) }}</h4>
+                    {% if i.advertOptionType.id == 6 and i.advert.user != app.user %}
+                        <p class="text-success"> Annonce en attente de validation</p>
+                    {% elseif i.advertOptionType.id == 2 and i.user == app.user %}
+                        <p class="text-success"><i class="fa fa-spinner ico-incoming"></i>
+                            Reste à confirmer cette achat </p>
+                    {% elseif i.advertOptionType.id == 2 and i.user != app.user and i.advert.user == app.user %}
+                        <p class="text-success"><i class="fa fa-check ico-incoming"></i>
+                            En attente de confirmation... </p>
+                    {% elseif i.advertOptionType.id == 3 and i.advert.user != app.user %}
+                        <p class="text-danger"><i class="fa fa-remove ico-incoming"></i>
+                            Désolé {{ i.advert.user.username }} à refuser de donner suite </p>
+                    {% elseif i.advertOptionType.id == 3 and i.advert.user == app.user and not i.ownerFade  %}
+                        <p class="text-warning"><i class="fa fa-remove ico-incoming"></i>
+                            Vous avez refusé de vendre à {{ i.user.username }} </p>
+                    {% elseif i.advertOptionType.id == 6 and i.advert.user == app.user %}
+                        <p class="text-success"><i class="fa fa-check ico-incoming"></i> Annonce à
+                            confirmer</p>
+                    {% elseif i.advertOptionType.id == 7 and i.advert.user != app.user %}
+                        <p class="text-info"><i class="fa fa-money ico-incoming"></i> En attente du produit</p>
+                    {% elseif i.advertOptionType.id == 7 and i.advert.user == app.user %}
+                        <p class="text-info"><i class="fa fa-money ico-incoming"></i> En attente du paiement</p>
+                    {% elseif i.advertOptionType.id == 4 and i.advert.user == app.user %}
+                        <p class="text-success"><i class="fa fa-check ico-incoming"></i> Votre produit est vendu </p>
+                    {% elseif i.advertOptionType.id == 4 and i.advert.soldTo == app.user %}
+                        <p class="text-success"><i class="fa fa-check ico-incoming"></i> Vous avez acheté ce
+                            produit</p>
+                    {% elseif i.advertOptionType.id == 4 and i.advert.soldTo != app.user and i.advert.user != app.user %}
+                        <p class="text-danger"><i class="fa fa-warning ico-incoming"></i> Désolé vous avez raté
+                            cette vente</p>
+                    {% elseif i.advertOptionType.id == 1 and i.advert.user != app.user %}
+                        <p class="text-success"><i class="fa fa-info-circle ico-incoming"></i> Nouvel interet
+                            pour cette annonce</p>
+                    {% elseif i.advertOptionType.id == 1 and i.advert.user == app.user %}
+                        <p class="text-success"><i
+                                    class="fa fa-info-circle ico-incoming"></i> {{ i.user.username }} est
+                            interéssé par cette annonce</p>
+                    {% endif %}
+                </a>
+            </div>
+
+        {% if i.advertOptionType.id == 1 and i.advert.user == app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_dashboard_accept_interest', {'id' : i.id }) }}"
+                           class="text-grey">Accepter</a> -
+                        <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : i.id }) }}"
+                           class="text-grey">Refuser </a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 1 and i.advert.user != app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_dashboard_desist_interest', {'id' : i.id }) }}"
+                           class="text-grey"><i class="fa fa-remove"></i> Annuler cet interet</a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 2 and i.advert.user != app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_platform_confirm_achat', {'id' : i.id}) }}" class="text-success">Confirmer cet achat</a> -
+                        <a href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : i.id}) }}" class="text-grey">Se désister</a>
+
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 3 and i.advert.user != app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_dashboard_archive_interest_from_interface', {'id' : i.id}) }}"
+                           class="text-grey">Supprimer</a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 3 and i.advert.user == app.user and not i.ownerFade  %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_dashboard_archive_interest_from_interface', {'id' : i.id}) }}"
+                           class="text-grey">Supprimer</a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 2 and i.advert.user == app.user and not i.ownerFade %} <!-- Annulation de l'encours en cours -->
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : i.id }) }}"
+                           class="text-grey">Annuler cet encours</a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 6 and i.advert.user == app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_dashboard_interest_confirm_vente', {'id' : i.id }) }}"
+                           class="text-grey">Confirmer cette vente</a> -
+                        <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : i.id }) }}"
+                           class="text-grey">Annuler cet encours</a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 6 and i.advert.user != app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : i.id}) }}" class="text-grey">Se désister</a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 7 and i.advert.user != app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_platform_argent_recu', {'id' : i.id }) }}"
+                           class="text-success"><i class="fa fa-check"></i> Produit reçu</a>
+                    </p>
+                </div>
+            </div>
+        {% elseif i.advertOptionType.id == 7 and i.advert.user == app.user %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="text-bold text-center">
+                        <a href="{{ path('snoozit_platform_produit_recu', {'id' : i.id }) }}"
+                           class="text-success"><i class="fa fa-check"></i> Paiement reçu</a>
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+        </li>
+        {% elseif i.content is defined and not i.advertInterest.advert.sold %}
+           {% if i.advertInterest.user == app.user %}
+                {% set routing = 'snoozit_platform_panier_homepage' %}
+            {% else %}
+                {% set routing = 'snoozit_dashboard_interest' %}
+            {% endif %}
+            <li>
+                <div class="clearfix">
+                    <div class="col-xs-12">
+                        <h4 class="title">
+                            <img src="{{ asset('uploads/avatar/'~i.user.avatar.path) }}" alt="{{ i.user.username }}"
+                                 class="img-responsive pull-left img-circle">
+                            <a class="text-bold"
+                               href="{{ path('fos_user_profile_show_name', {'username' : i.user.username }) }}">{{ i.user.username }}</a>
+                    <span class="text-star">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-half-empty"></i>
+                </span>
+                    <span class="pull-right">
+                        {{ i.created|date('d/m/y h:i') }}
+                    </span>
+                            <p>{{ i.user.city.departement.region.nom }}</p>
+                        </h4>
+                    </div>
+                    <div class="col-xs-12">
+                        <a href="{{ path(routing) }}">
+                            <h4 class="text-bold">{{ i.advertInterest.advert.title|truncate(50) }}</h4>
+                            <p class="text-grey">
+                                <span class="text-bold text-grey">Commentaire: </span>{{ i.content|truncate(100) }}
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <li><a href="#">Pas de notification</a></li>
+{% endif %}
+

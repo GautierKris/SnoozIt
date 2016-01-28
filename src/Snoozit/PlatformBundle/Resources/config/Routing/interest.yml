@@ -53,3 +53,7 @@ snoozit_dashboard_interest_confirm_vente:
 snoozit_platform_argent_recu:
     path: /confirm_cash_reception/{id}
     defaults: { _controller: SnoozitPlatformBundle:Interest:argentRecu }
+
+snoozit_dashboard_interest_achive_success_archive:
+    path: /archive-vente-reussie
+    defaults: { _controller: SnoozitPlatformBundle:Interest:advertSuccessArchive}

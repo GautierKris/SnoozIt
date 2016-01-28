@@ -28,6 +28,8 @@ class LoadAdvertOptionTypeData extends AbstractFixture implements OrderedFixture
         $attentePaiement    = $this->createNotificationtype('Attente de paiement');
         $attenteProduit     = $this->createNotificationtype('Attente du produit');
         $finish             = $this->createNotificationtype('Terminé');
+        $goldSuccess        = $this->createNotificationtype('Argent reçu');
+        $itemSuccess        = $this->createNotificationtype('Produit reçu');
 
         $manager->persist($default);
         $manager->persist($success);
@@ -38,6 +40,8 @@ class LoadAdvertOptionTypeData extends AbstractFixture implements OrderedFixture
         $manager->persist($attentePaiement);
         $manager->persist($attenteProduit);
         $manager->persist($finish);
+        $manager->persist($goldSuccess);
+        $manager->persist($itemSuccess);
 
         $manager->flush();
     }

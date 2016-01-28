@@ -58,8 +58,9 @@ class DashBoardController extends Controller
 
     private function mergeAllActivity($advertListToPaginate)
     {
-        $userLogs = $this->getUser()->getUserLogs();
-        $userLogs = $userLogs->toArray();
+        //$userLogs = $this->getUser()->getUserLogs();
+        //$userLogs = $userLogs->toArray();
+        $userLogs = $this->getDoctrine()->getManager()->getRepository('SnoozitPlatformBundle:AdvertInterest')->getInterestNotification($this->getUser());
         $allActivity = array_merge($userLogs, $advertListToPaginate); // Mix les 4 repertoires d'annonces par date
 
         usort($allActivity, array($this, 'trie_par_date'));
@@ -71,16 +72,33 @@ class DashBoardController extends Controller
     private function trie_par_date($a, $b) {
 
         if(is_array($a)){
-            $datea = $a['created'];
+            if($a['title']){
+                $datea = $a['created'];
+            }else{
+                $datea = $a['updated'];
+            }
         }else{
-            $datea = $a->getCreated();
+            if(!$a instanceof AdvertInterest){
+                $datea = $a->getCreated();
+            }else{
+                $datea = $a->getUpdated();
+            }
         }
 
         if(is_array($b)){
-            $dateb = $b['created'];
+            if(null !== $b['title']){
+                $dateb = $b['created'];
+            }else{
+                $dateb = $b['updated'];
+            }
         }else{
-            $dateb = $b->getCreated();
+            if(!$b instanceof AdvertInterest){
+                $dateb = $b->getCreated();
+            }else{
+                $dateb = $b->getUpdated();
+            }
         }
+
         $date1 = strtotime($datea->format('r'));
         $date2 = strtotime($dateb->format('r'));
         return $date1 < $date2 ;
@@ -170,8 +188,6 @@ class DashBoardController extends Controller
             'userInterest'  => $advertManager->getDashboardUserInterest()
         ));
     }
-
-
 
     // Advert Manager
     private function getAdvertManager()

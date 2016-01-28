@@ -38,9 +38,6 @@
                                             {% endif %}
                                             <span class="text-default text-normal">dans la catégorie</span>
                                             <a href="{{ path('snoozit_platform_show_by_category', {'slug' : a.category_slug}) }}" class="text-grey">{{ a.category }}</a>
-
-
-
                                         </h5>
                                         <p class="datetime">{{ a.created|date('d M Y \\à h:i') }} -
                                             {{ a.departementName }} -
@@ -51,7 +48,6 @@
                                                 <span class="label label-hidden">New</span>
                                             {% endif %}
                                         </p>
-
                                     </div>
 
                                     <div class="col-md-2 dropdown text-right divNoPadding-left">
@@ -104,48 +100,32 @@
                             <div class="clearfix"></div>
                         </div>
                     </section>
-                {% else %}
+                {% else%}
                         {% set u = a %}
                         <!-- On limite à 5 les affichages -->
                             <!-- Si le type d'annonce est Abonnement (1) -->
-                            {% if u.type is not null %}
-                                {% if u.type.id == 1 %}
+                            {% if u.advertOptiontype is not null %}
+                                {% if u.advertOptiontype.id == 1 or u.advertOptiontype.id == 2 or u.advertOptiontype.id == 6 or u.advertOptiontype.id == 7 or u.advertOptiontype.id == 4 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:abonnement.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Abonnement (1) -->
 
-                                {% if u.type.id == 2 %}
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
-                                {% endif %} <!-- Si le type d'annonce est Abonnement (2) -->
-
-                                {% if u.type.id == 3 %}
+                                {% if u.advertOptiontype.id == 3 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Negoce (3) -->
 
-                                {% if u.type.id == 4 %}
-
-                                {% endif %} <!-- Si le type d'annonce est Systeme (4) -->
-
-                                {% if u.type.id == 5 %}
+                                {% if u.advertOptiontype.id == 5 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Abonnement (5) -->
 
-                                {% if u.type.id == 6 %}
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
-                                {% endif %} <!-- Si le type d'annonce est Abonnement (6) -->
-
-                                {% if u.type.id == 7 %}
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:register.html.twig' %}
-                                {% endif %} <!-- Si le type d'annonce est Abonnement (7) -->
-
-                                {% if u.type.id == 8 %}
+                                {% if u.advertOptiontype.id == 8 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
 
-                                {% if u.type.id == 9 %}
+                                {% if u.advertOptiontype.id == 9 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:userAdvertToHide.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
 
-                                {% if u.type.id == 11 %}
+                                {% if u.advertOptiontype.id == 11 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:soldSuccess.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
                             {% endif %}

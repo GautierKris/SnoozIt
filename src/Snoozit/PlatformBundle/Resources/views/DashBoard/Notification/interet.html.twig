@@ -1,4 +1,4 @@
-{% if u.type.id == 2 and u.advert.user is not null %}
+{% if u.advertOptionType.id == 2 and u.advert.user is not null %}
     <section>
         <div class="well well-sm userLogsBox text-center">
             <div class="row">
@@ -14,7 +14,9 @@
                         {% endif %}
 
                         <h4 class="text-grey">Nouvel interet le <span
-                                    class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                                    class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span>
+                        <a class="pull-right text-bold text-grey" href="{{ path('snoozit_dashboard_interest') }}">Répondre</a>
+                        </h4>
 
                         <p>
                             <a href="{{ path('fos_user_profile_show_name', {'username' : u.owner.username}) }}">{{ u.owner.username }} </a>
@@ -33,7 +35,9 @@
                         {% endif %}
 
                         <h4 class="text-grey"> Nouvel interet <span
-                                    class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
+                                    class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span>
+                            <a class="pull-right text-bold text-grey" href="{{ path('snoozit_platform_panier_homepage') }}">Suivit</a>
+                        </h4>
                         <p>Pour l'annonce de <a
                                     href="{{ path('fos_user_profile_show_name', {'username' : u.advert.user.username}) }}">{{ u.advert.user.username }}</a>
                             -
@@ -46,7 +50,7 @@
     </section>
 {% endif %}
 
-{% if u.type.id == 5 %}
+{% if u.advertOptionType.id == 5 %}
     <section>
         <div class="well well-sm userLogsBox text-center" style="border-left-color: red">
 
@@ -88,7 +92,7 @@
     </section>
 {% endif %}
 
-{% if (u.type.id == 6) and (u.owner != app.user) %}
+{% if (u.advertOptionType.id == 6) and (u.owner != app.user) %}
     <section>
         <div class="well well-sm userLogsBox text-center" style="border-left-color: red">
             <div class="row">

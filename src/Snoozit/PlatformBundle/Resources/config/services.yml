@@ -38,6 +38,7 @@ parameters:
     twig_count_user_advert_extension.class: Snoozit\PlatformBundle\Twig\Extension\CountUserAdvertExtension
     twig_get_region_name_extension.class: Snoozit\PlatformBundle\Twig\Extension\GetRegionNameExtension
     twig_notification_is_new_extension.class: Snoozit\PlatformBundle\Twig\Extension\NotificationIsNewExtension
+    twig_incoming_comment_extension.class: Snoozit\PlatformBundle\Twig\Extension\IncomingCommentExtension
 
     sz_listener_activity.class:  Snoozit\PlatformBundle\Listener\ActivityListener
     sz_search_engine_handler.class: Snoozit\PlatformBundle\Handler\SearchEngineHandler
@@ -235,6 +236,12 @@ services:
 
     twig_notification_is_new_extension:
         class: %twig_notification_is_new_extension.class%
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: twig.extension }
+
+    twig_incoming_comment_extension:
+        class: %twig_incoming_comment_extension.class%
         arguments: [@doctrine.orm.entity_manager, @security.token_storage]
         tags:
             - { name: twig.extension }

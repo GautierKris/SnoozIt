@@ -15,7 +15,7 @@
                 <p class="region-selected">
                     {% if app.user.city is defined %}
                         {{ app.user.city.departement.region.nom }}
-                    {% elseif app.session.get('selectedRegion') is defined %}
+                    {% elseif app.session.get('selectedRegion') is defined and  app.session.get('selectedRegion') is not null%}
                         {{ app.session.get('selectedRegion')|GetRegionName }}
                     {% endif %}
                 </p>

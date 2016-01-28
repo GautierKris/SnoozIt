@@ -166,6 +166,12 @@ class User extends BaseUser
      */
     protected $hiddenUsers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Snoozit\PlatformBundle\Entity\AdvertInterest", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({ "created" = "desc" })
+     */
+    protected $interests;
+
 
     public function __construct()
     {
@@ -173,6 +179,7 @@ class User extends BaseUser
         $this->userLogs = new ArrayCollection();
         $this->hiddenUsers = new ArrayCollection();
         $this->profileComments = new ArrayCollection();
+        $this->interests = new ArrayCollection();
         $this->showphone = true;
         $this->last_activity = new \DateTime();
         $this->totalFollower = 0;
@@ -804,5 +811,38 @@ class User extends BaseUser
     public function getHiddenUsersChild()
     {
         return $this->hiddenUsersChild;
+    }
+
+    /**
+     * Add interests
+     *
+     * @param \Snoozit\PlatformBundle\Entity\AdvertInterest $interests
+     * @return User
+     */
+    public function addInterest(\Snoozit\PlatformBundle\Entity\AdvertInterest $interests)
+    {
+        $this->interests[] = $interests;
+
+        return $this;
+    }
+
+    /**
+     * Remove interests
+     *
+     * @param \Snoozit\PlatformBundle\Entity\AdvertInterest $interests
+     */
+    public function removeInterest(\Snoozit\PlatformBundle\Entity\AdvertInterest $interests)
+    {
+        $this->interests->removeElement($interests);
+    }
+
+    /**
+     * Get interests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInterests()
+    {
+        return $this->interests;
     }
 }

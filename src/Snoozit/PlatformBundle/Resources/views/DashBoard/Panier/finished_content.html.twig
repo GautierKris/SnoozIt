@@ -28,7 +28,7 @@
                 {% for u in advertList %}
                     <tr>
                         <th scope="row">
-                            {% if u.advertOptionType.id == 9 %}
+                            {% if u.advertOptionType.id == 4 and u.advert.soldTo == app.user %}
                                 <div class="travers rotate">
                                     <span class="attentevalidation">Félicitation</span>
                                 </div>
@@ -73,7 +73,11 @@
                         <td class="price">{{ u.advert.price }} €</td>
 
                         <td class="text-center status">
-                            <a href="#" class="text-info text-bold">{{ u.advertOptionType.type }}</a>
+                            {% if u.advertOptionType.id == 4 and u.advert.soldTo == app.user %}
+                                <a href="#" class="text-info text-bold">Acheté !</a>
+                            {% else %}
+                                <a href="#" class="text-info text-bold">{{ u.advertOptionType.type }}</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

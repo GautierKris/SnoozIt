@@ -12,4 +12,56 @@ use Doctrine\ORM\EntityRepository;
  */
 class sellCommentRepository extends EntityRepository
 {
+    public function findIncomingComment($user, $date)
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb2 = $this->createQueryBuilder('s');
+
+        $list = array(3,5,9);
+
+        $qb->select('s, u, a, b')
+            ->leftJoin('s.user', 'u')
+            ->leftJoin('s.advertInterest', 'a')
+            ->leftJoin('a.advert', 'b')
+            ->where('s.user != :user and s.created < :date and a.user = :user')
+            ->andWhere('a.advertOptionType NOT IN (:list)')
+            ->setParameters(array('user' => $user, 'date' => $date, 'list' => $list));
+
+        $result = $qb->getQuery()->getResult();
+
+        $qb2->select('s, u, a, b')
+            ->leftJoin('s.user', 'u')
+            ->leftJoin('s.advertInterest', 'a')
+            ->leftJoin('a.advert', 'b')
+            ->where('s.user != :user and b.user = :user')
+            ->andWhere('a.advertOptionType NOT IN (:list)')
+            ->setParameters(array('user' => $user, 'list' => $list));
+
+        $result2 = $qb2->getQuery()->getResult();
+
+        $allActivity = array_merge($result, $result2);
+
+        usort($allActivity, array($this, 'trie_par_date'));
+
+        return $allActivity;
+
+    }
+
+    private function trie_par_date($a, $b) {
+
+        if(is_array($a)){
+            $datea = $a['created'];
+        }else{
+            $datea = $a->getCreated();
+        }
+
+        if(is_array($b)){
+            $dateb = $b['created'];
+        }else{
+            $dateb = $b->getCreated();
+        }
+        $date1 = strtotime($datea->format('r'));
+        $date2 = strtotime($dateb->format('r'));
+        return $date1 < $date2 ;
+    }
 }

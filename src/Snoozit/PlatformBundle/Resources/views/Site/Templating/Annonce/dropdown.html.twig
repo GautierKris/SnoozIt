@@ -16,9 +16,9 @@
                     <li><span class="ajaxAddAbo" id="addProfile{{ a.userId }}" rel="{{ a.userId }}"><i class="fa fa-user-plus"></i> Suivre {{ a.username }}</span></li>
                     <li><span class="hidden ajaxRemoveAboProfile" rel="{{ a.userId }}"><i class="fa fa-user-times"></i> Ne plus suivre {{ a.username }}</span></li>
                 {% endif %}
-                    <li><a href="{{ path('snoozit_dashboard_hidden_user_advert', {'hidden': a.userId }) }}"><i class="fa fa-microphone-slash"></i> Ne plus afficher d'annonce de {{ a.username }}</a></li>
-                {% else %}
-                    <li class="disabled"><a href="#"><i class="fa fa-user-secret"></i> {{ a.guestUsername }} est un utilisateur anonyme.</a></li>
+                <li><a href="{{ path('snoozit_dashboard_hidden_user_advert', {'hidden': a.userId }) }}"><i class="fa fa-microphone-slash"></i> Ne plus afficher d'annonce de {{ a.username }}</a></li>
+            {% else %}
+                <li class="disabled"><a href="#"><i class="fa fa-user-secret"></i> {{ a.guestUsername }} est un utilisateur anonyme.</a></li>
             {% endif %}
             <li class="divider"></li>
         {% endif %}
@@ -29,7 +29,17 @@
             <li><a href="#"><i class="fa fa-bell"></i>Signaler ce contenu à <span class="text-primary">Snoozit</span></a></li>
             <li class="divider"></li>
             {% if a.id|UserIsInterestBy %}
-                <li><a href="{{ path('snoozit_interest_advert', {'id' : a.id}) }}" class="btn btn-xs btn-danger"><i class="fa fa-shopping-cart"></i> Ca ne m'interesse plus</a></li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% if app.user.interests %}
+                        {% for i in app.user.interests %}
+                            {% if i.advert.id == a.id and i.advertOptiontype.id == 3 %}
+                                <li><a href="#" class="btn btn-xs btn-danger"><i class="fa fa-shopping-cart"></i> {{ a.username }} à refuser de vous le vendre</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    <li><a href="{{ path('snoozit_interest_advert', {'id' : a.id}) }}" class="btn btn-xs btn-danger"><i class="fa fa-shopping-cart"></i> Ca ne m'interesse plus</a></li>
+                {% endif %}
             {% else %}
                 <li><a href="{{ path('snoozit_interest_advert', {'id' : a.id}) }}" class="btn btn-xs btn-success"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
             {% endif %}
@@ -41,7 +51,11 @@
     {% else %}
         <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}"><i class="fa fa-align-justify"></i> Afficher plus</a></li>
         <li class="disabled"><a href="#"><i class="fa fa-align-justify"></i> Fonction inconnue</a></li>
-        <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}" class="btn btn-xs btn-success"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
+        {% if a.sold %}
+            <li><a href="#" class="btn btn-xs btn-warning"><i class="fa fa-shopping-cart"></i> Vendu</a></li>
+        {% else %}
+            <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}" class="btn btn-xs btn-success"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
+        {% endif %}
     {% endif %}
 
 </ul>

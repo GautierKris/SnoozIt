@@ -17,16 +17,27 @@
                     <li>{{ b.title|truncate(80) }}</li>
                 {% endif %}
             {% endfor %}
-        {% else %}
         {% endif %}
+
         <li class="pull-right connected-breadcrumb">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <a href="{{ path('snoozit_platform_panier_homepage') }}" class="panier"><i class="fa fa-shopping-cart"></i> Panier <span class="label label-primary"> {{ app.user.id|CountPanier }}</span></a>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-comments {% if app.user|incomingComment %} active {% endif %}"></i>
+                    </a>
+                    <ul class="dropdown-menu incomingCommentList dropdown-menu-right " aria-labelledby="dropdownMenu2">
+                        {% if  app.user|incomingComment %}
+                            {{ render(controller('SnoozitPlatformBundle:Site:IncomingCommentTemplate')) }}
+                        {% endif %}
+
+                    </ul>
+                </div>
                 <a href="{{ path('snoozit_add_advert') }}" class="publish"><i class="fa fa-edit"></i></a>
                 <a href="#"><i class="fa fa-users"></i></a>
                 <a href="#"><i class="fa fa-gears"></i></a>
                 <a href="{{ path('fos_user_security_logout') }}" class="disconnect"><i class="fa fa-unlink"></i></a>
-                <img src="{{ asset('uploads/avatar/'~app.user.avatar.path) }}" alt="..." class="img-circle">
+                <img src="{{ asset('uploads/avatar/'~app.user.avatar.path) }}" alt="..." class="img-circle avatar20">
                 <a href="{{ path('snoozit_dashboard_homepage')}}">{{ app.user.username }}</a>
                 {% else %}
                     <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-user"></i></a>

@@ -14,6 +14,7 @@ class AdvertInterestRepository extends EntityRepository
 
         $qb->leftJoin('a.advert' , 'b')
             ->where('b.user = :user')
+            ->andWhere('b.sold = false')
             ->andWhere('a.ownerFade = false')
             ->setParameter('user', $user);
 
@@ -123,7 +124,7 @@ class AdvertInterestRepository extends EntityRepository
         return $result;
     }
 
-    //
+    // Renvoi les interets archivé
     public function getInterestArchives($user)
     {
         $qb = $this->createQueryBuilder('a');
@@ -157,4 +158,81 @@ class AdvertInterestRepository extends EntityRepository
 
         return $result;
     }
+
+    private function trie_par_date($a, $b) {
+
+        if(is_array($a)){
+            $datea = $a['updated'];
+        }else{
+            $datea = $a->getUpdated();
+        }
+
+        if(is_array($b)){
+            $dateb = $b['updated'];
+        }else{
+            $dateb = $b->getUpdated();
+        }
+        $date1 = strtotime($datea->format('r'));
+        $date2 = strtotime($dateb->format('r'));
+        return $date1 < $date2 ;
+    }
+
+
+    // Renvoi les notification des interets à valider pour le breadcrumb
+    public function getInterestNotification($user)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb1 = $this->createQueryBuilder('a');
+        $qb3 = $this->createQueryBuilder('a');
+        $qb4 = $this->createQueryBuilder('a');
+
+        $list = array(6,7,9,4,10,11,1,3,2);
+        $list3 = array(4);
+
+        // ON RÉCUPERE LES ANNONCES AVEC LE STATUT 1
+        $qb->leftJoin('a.advert' , 'b')
+            ->where('b.user != :user') // L'utilisateur n'est pas le créateur de l'annonce
+            ->andWhere('a.user = :user') // L'utilisateur est le créateur de l'interet
+            ->andWhere('a.advertOptionType IN (:list)') // Si option est dans la liste "$list"
+            ->andWhere('a.customerFade = 0') // ou CustomerFade est a false
+            ->setParameters(array('user' => $user, 'list' => $list));
+
+        $result = $qb->getQuery()->getResult();
+
+        // ON RÉCUPERE LES ANNONCES AVEC LE STATUT 1
+        $qb1->leftJoin('a.advert' , 'b')
+            ->where('b.user = :user') // L'utilisateur n'est pas le créateur de l'annonce
+            ->andWhere('a.user != :user and a.advertOptionType IN (:list)') // L'utilisateur est le créateur de l'interet
+            ->andWhere('a.advertOptionType IN (:list)') // Si option est dans la liste "$list"
+            ->andWhere('a.ownerFade = 0') // ou CustomerFade est a false
+            ->setParameters(array('user' => $user, 'list' => $list));
+
+        $result1 = $qb1->getQuery()->getResult();
+
+        $qb3->leftJoin('a.advert' , 'b')
+            ->where('b.user = :user')
+            ->andWhere('a.advertOptionType IN (:list3)')
+            ->andWhere('b.soldTo = a.user')
+            ->setParameters(array('user' => $user, 'list3' => $list3));
+
+        $result3 = $qb3->getQuery()->getResult();
+
+        $qb4->leftJoin('a.advert' , 'b')
+            ->where('b.user = :user')
+            ->andWhere('a.user != :user')
+            ->andWhere('a.advertOptionType IN (:list4)')
+            ->andWhere('a.ownerFade IS NOT NULL')
+            ->setParameters(array('user' => $user, 'list4' => $list3));
+
+        $result4 = $qb4->getQuery()->getResult();
+
+        $resultFinal = array_merge($result, $result1, $result3, $result4);
+
+        usort($resultFinal, array($this, 'trie_par_date'));
+
+        return $resultFinal;
+    }
+
+
+
 }

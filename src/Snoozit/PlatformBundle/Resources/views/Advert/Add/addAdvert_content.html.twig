@@ -1,10 +1,10 @@
-<div class="container" id="addAnnonce">
+<div class="container" >
 
     <div class="row">
         {{ render( controller('SnoozitPlatformBundle:Site:breadcrumb', {'breadcrumb': breadcrumb})) }}
     </div>
 
-    <div class="row">
+    <div class="row" id="addAnnonce">
         <!-- Début du formulaire -->
         <form action="{{ path('snoozit_add_advert') }}" method="post" {{ form_enctype(form) }}>
 

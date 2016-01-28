@@ -313,9 +313,6 @@ class PanierController extends Controller
     {
         $user = $this->getUser();
         // On controle si l'interet est bien avec le statut (7) soit 'En attente produit'
-        if($advertInterest->getAdvertOptionType()->getId() != 7){
-            throw new EntityNotFoundException('Cette annonce ne remplie pas les conditions requises.');
-        }
 
         // On controle que l'utilisateur est bien l'acheteur.
         if($user != $advertInterest->getUser()){
@@ -325,19 +322,35 @@ class PanierController extends Controller
         // Tout les testes sont bien validés on passe au traitement
         $em = $this->getDoctrine()->getEntityManager();
 
-        // On récupere le statut (4) soit attente validation
-        $advertOptionType = $em->getRepository("SnoozitPlatformBundle:AdvertOptionType")->find(4);
+        // Soit on est en statut " Argent Recu " et donc on valide définitivement la vente en passant au statut "Vendu"
+        if($advertInterest->getAdvertOptionType()->getId() == 11){
 
-        // Modification du statut de l'interet
-        $advertInterest->setAdvertOptionType($advertOptionType);
+            $advertOptionType = $em->getRepository("SnoozitPlatformBundle:AdvertOptionType")->find(4);
+            // Modification du statut de l'interet
+            $advertInterest->setAdvertOptionType($advertOptionType);
 
-        // On passe donc l'annonce en non visible via setSold() = true
-        $advert = $advertInterest->getAdvert();
-        $advert->setSold(true);
+            // On passe donc l'annonce en non visible via setSold() = true
+            $advert = $advertInterest->getAdvert();
+            $advert->setSold(true);
+            $advert->setSoldTo($advertInterest->getUser());
 
-        $em->persist($advertInterest);
-        $em->persist($advert);
-        $em->flush();
+            $em->persist($advertInterest);
+            $em->persist($advert);
+            $em->flush();
+
+        }
+        // Soit on est en statut " Attente de produit " et on passe au statut " Produit reçu "
+        elseif($advertInterest->getAdvertOptionType()->getId() == 7)
+        {
+            $advertOptionType = $em->getRepository("SnoozitPlatformBundle:AdvertOptionType")->find(11);
+            // Modification du statut de l'interet
+            $advertInterest->setAdvertOptionType($advertOptionType);
+
+            $em->persist($advertInterest);
+            $em->flush();
+        }else{
+            throw new EntityNotFoundException('Cette annonce ne remplie pas les conditions requises.');
+        }
 
         return $this->redirect($this->generateUrl('snoozit_platform_panier_homepage'));
     }

@@ -31,7 +31,7 @@ class AdvertInterest
     private $notification;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Snoozit\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Snoozit\UserBundle\Entity\User", inversedBy="interests")
      */
     private $user;
 

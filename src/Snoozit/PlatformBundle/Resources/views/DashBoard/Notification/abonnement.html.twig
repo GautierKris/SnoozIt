@@ -1,73 +1,361 @@
-{% if u.user == app.user and u.owner != app.user %}
-    <section>
-        <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
-            <div class="row">
-                <div class="col-xs-12">
-                    {% if u.userAsked.avatar %}
-                        <img src="{{ asset('uploads/avatar/'~u.userAsked.avatar.path) }}" alt="{{ u.userAsked.username }}"
-                             class="img-responsive advert-img pull-left img-thumbnail">
-                    {% endif %}
-                    <h4 class="text-grey"><a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }} </a>-
-                        <a href="{{ path('snoozit_platform_show_by_city', {'slug' : u.userAsked.city.slug}) }}" class="text-default text-normal">{{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }} </a><span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
-                    <p>Je {{ u.content }}! </p>
+{% if u.advertOptionType.id == 1 %}
+    {% if u.user == app.user and u.advert.user != app.user  %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
+
+                        <h4>Vous êtes interessé par : <a class="text-bold"
+                                                         href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
+
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.advert.user.avatar.path) }}"
+                                 alt="{{ u.advert.user.username }}" class="img-circle avatar20">
+                            {{ u.advert.user.username }} le {{ u.created|date('d/m/Y \\à\\ h:i') }}
+                            <span class="pull-right">
+                                <a href="{{ path('snoozit_platform_panier_homepage') }}"
+                                   class="label label-cat-multimedia"> Afficher </a>
+                            </span>
+                        </p>
+
+                        <p class="text-center">
+                            <a href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id }) }}"
+                               class="text-grey"><i class="fa fa-remove"></i> Annuler cet interet</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-{% else %}
+        </section>
+    {% elseif u.user != app.user and u.advert.user == app.user %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
 
-    {% if u.user == app.user and u.owner == app.user %}
+                        <h4>
+                            Nouvel interet pour : <a class="text-bold"
+                                                     href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
 
-        {% if u.userAsked is null %}
-            <section>
-                <div class="well well-sm userLogsBox text-center">
-                    {% if u.region is not null %}
-                        {% set abo = u.region.nom %}
-                        {% set aboRoute = 'snoozit_platform_show_by_region' %}
-                        {% set aboSlug = u.region.slug %}
-                    {% endif %}
-
-                    {% if u.departement is not null %}
-                        {% set abo = u.departement.nom %}
-                        {% set aboRoute = 'snoozit_platform_show_by_departement' %}
-                        {% set aboSlug = u.departement.slug %}
-                    {% endif %}
-
-                    {% if u.city is not null %}
-                        {% set abo = u.city.nom %}
-                        {% set aboRoute = 'snoozit_platform_show_by_city' %}
-                        {% set aboSlug = u.city.slug %}
-                    {% endif %}
-
-                    {% if u.category is not null %}
-                        {% set abo = u.category.category %}
-                        {% set aboRoute = 'snoozit_platform_show_by_category' %}
-                        {% set aboSlug = u.category.slug %}
-                    {% endif %}
-
-                    <h4 class="text-grey">Nouvel abonnement <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span>
-                    </h4>
-                    <p> {{ u.content }} <a href="{{ path(aboRoute, {'slug': aboSlug}) }}">{{ abo }}</a> </p>
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                                 alt="{{ u.user.username }}" class="img-circle avatar20">
+                            {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ h:i') }}
+                            <span class="pull-right">
+                                <a href="{{ path('snoozit_dashboard_interest') }}" class="label label-cat-multimedia">
+                                    Afficher </a>
+                            </span>
+                        </p>
+                        <p class="text-center">
+                            <a href="{{ path('snoozit_dashboard_accept_interest', {'id' : u.id }) }}"
+                               class="text-grey">Accepter</a> -
+                            <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : u.id }) }}"
+                               class="text-grey">Refuser </a>
+                        </p>
+                    </div>
                 </div>
-            </section>
-        {% else %}
+            </div>
+        </section>
+    {% endif %}
+{% elseif u.advertOptionType.id == 2 %} <!-- Si on est en phase de confirmation d'interet -->
+    {% if u.user == app.user and u.advert.user != app.user %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
+
+                        <h4>
+                            Interet en attente : <a class="text-bold"
+                                                    href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
+
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                                 alt="{{ u.user.username }}" class="img-circle avatar20">
+                            {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ h:i') }}
+                            <span class="pull-right">
+                                <a href="{{ path('snoozit_dashboard_interest') }}" class="label label-cat-multimedia">
+                                    Afficher </a>
+                            </span>
+                        </p>
+                        <p class="text-center">
+                            <a href="{{ path('snoozit_platform_confirm_achat', {'id' : u.id}) }}" class="text-success"><i class="fa fa-check"></i> Confirmer cet achat</a> -
+                            <a href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : u.id}) }}" class="text-grey"><i class="fa fa-remove"></i> Se désister</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% elseif u.user != app.user and u.advert.user == app.user %}
             <section>
-                <div class="well well-sm userLogsBox text-center" style="border-left-color: #00a300">
+                <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
                     <div class="row">
                         <div class="col-xs-12">
-                            {% if u.user.avatar %}
-                                <img src="{{ asset('uploads/avatar/'~u.userAsked.avatar.path) }}" alt="{{ u.userAsked.username }}"
+                            {% if u.advert.pictureOne %}
+                                <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                     class="img-responsive advert-img pull-left img-thumbnail">
+                            {% else %}
+                                <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
                                      class="img-responsive advert-img pull-left img-thumbnail">
                             {% endif %}
-                            <h4 class="text-grey">Abonnement <span class="text-default text-normal">{{ u.created|date('d M Y à H:i') }}</span></h4>
-                            <p>{{ u.content }} <a href="{{ path('fos_user_profile_show_name', {'username' : u.userAsked.username}) }}">{{ u.userAsked.username }}</a> de   {{ u.userAsked.city.nom }} {{ u.userAsked.city.postal }}</p>
+
+                            <h4>
+                                Interet en attente : <a class="text-bold"
+                                                        href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                            </h4>
+
+                            <p class="text-grey">
+                                <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                                     alt="{{ u.user.username }}" class="img-circle avatar20">
+                                {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ h:i') }}
+                                <span class="pull-right">
+                                <a href="{{ path('snoozit_dashboard_interest') }}" class="label label-cat-multimedia">
+                                    Afficher </a>
+                            </span>
+                            </p>
+                            <p class="text-center">
+                                <a href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id }) }}">Annuler cet encours</a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
-        {% endif %}
-
-
     {% endif %}
+{% elseif u.advertOptionType.id == 6 %} <!-- Si on est en phase de confirmation d'interet -->
+    {% if u.user == app.user and u.advert.user != app.user %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="travers rotate text-bold">
+                            <span class="attentevalidation">En attente</span>
+                        </div>
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
 
+                        <h4>
+                            En attente de confirmation: <a class="text-bold"
+                                                      href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
+
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.advert.user.avatar.path) }}"
+                                 alt="{{ u.advert.user.username }}" class="img-circle avatar20">
+                            {{ u.advert.user.username }} le {{ u.updated|date('d/m/Y \\à\\ h:i') }}
+                            <span class="pull-right">
+                                <a href="{{ path('snoozit_dashboard_interest') }}" class="label label-cat-multimedia">
+                                    Afficher </a>
+                            </span>
+                        </p>
+                        <p class="text-center">
+                            <a href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : u.id}) }}" class="text-grey"><i class="fa fa-remove"></i> Se désister</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% elseif u.user != app.user and u.advert.user == app.user %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="travers rotate text-bold">
+                            <span class="attentevalidation">A valider</span>
+                        </div>
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
+
+                        <h4>
+                            Confirmer cette vente: <a class="text-bold"
+                                                    href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
+
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                                 alt="{{ u.user.username }}" class="img-circle avatar20">
+                            {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ h:i') }}
+                            <span class="pull-right">
+                                <a href="{{ path('snoozit_dashboard_interest') }}" class="label label-cat-multimedia">
+                                    Afficher </a>
+                            </span>
+                        </p>
+                        <p class="text-center">
+                            <a href="{{ path('snoozit_dashboard_interest_confirm_vente', {'id' : u.id }) }}"
+                               class="text-success"><i class="fa fa-check"></i> Confirmer cette vente</a> -
+                            <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : u.id }) }}"
+                               class="text-grey"><i class="fa fa-remove"></i> Annuler cet encours</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% elseif u.advertOptionType.id == 7 %} <!-- Si on est en phase d'attente de paiement -->
+    {% if u.user == app.user and u.advert.user != app.user %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="travers rotate text-bold">
+                            <span class="attentevalidation">Transferable</span>
+                        </div>
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
+                        <h4>
+                            Il est temps de finaliser: <a class="text-bold"
+                                                           href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.advert.user.avatar.path) }}"
+                                 alt="{{ u.advert.user.username }}" class="img-circle avatar20">
+                            {{ u.advert.user.username }} le {{ u.updated|date('d/m/Y \\à\\ H:i') }}
+                            <span class="pull-right">
+                                <a href="{{ path('snoozit_dashboard_interest') }}" class="label label-cat-multimedia">
+                                    Afficher </a>
+                            </span>
+                        </p>
+                        <p class="text-center">
+                            <a href="{{ path('snoozit_platform_produit_recu', {'id' : u.id }) }}"
+                               class="text-success"><i class="fa fa-check"></i> Produit reçu</a> -
+                            <a href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : u.id}) }}" class="text-grey"><i class="fa fa-remove"></i> Se désister</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% elseif u.user != app.user and u.advert.user == app.user %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="travers rotate text-bold">
+                            <span class="attentevalidation">Transferable</span>
+                        </div>
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
+                        <h4>
+                            Il est temps de finaliser: <a class="text-bold"
+                                                      href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                                 alt="{{ u.user.username }}" class="img-circle avatar20">
+                            {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ H:i') }}
+                            <span class="pull-right">
+                                <a href="{{ path('snoozit_dashboard_interest') }}" class="label label-cat-multimedia">
+                                    Afficher </a>
+                            </span>
+                        </p>
+                        <p class="text-center">
+                            <a href="{{ path('snoozit_platform_argent_recu', {'id' : u.id }) }}"
+                               class="text-success"><i class="fa fa-check"></i> Paiement reçu</a> -
+                            <a href="{{ path('snoozit_dashboard_remove_interest', {'id' : u.id }) }}"
+                               class="text-grey"><i class="fa fa-remove"></i> Annuler cet encours</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- La vente est réussie -->
+    {% endif %}
+{% elseif u.advertOptionType.id == 4 %}
+    {% if u.user == app.user and u.advert.user != app.user %}
+        <section>
+            <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="travers rotate text-bold">
+                            <span class="attentevalidation">Félicitation !</span>
+                        </div>
+                        {% if u.advert.pictureOne %}
+                            <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                 class="img-responsive advert-img pull-left img-thumbnail">
+                        {% endif %}
+                        <h4>
+                            Vous venez d'acheter: <a class="text-bold" href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                        </h4>
+                        <p class="text-grey">
+                            <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                                 alt="{{ u.user.username }}" class="img-circle avatar20">
+                            {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ H:i') }}
+                        </p>
+                        <p class="text-bold text-success">Faites en bon usage!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% elseif u.user != app.user and u.advert.user == app.user %}
+            <section>
+                <div class="well well-sm userLogsBox text-center" style="border-left-color: #296192">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="travers rotate text-bold">
+                                <span class="attentevalidation">Vendu !</span>
+                            </div>
+                            {% if u.advert.pictureOne %}
+                                <img src="{{ asset('uploads/annonce/'~u.advert.pictureOne.path) }}" alt="{{ u.advert.title }}"
+                                     class="img-responsive advert-img pull-left img-thumbnail">
+                            {% else %}
+                                <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advert.title }}"
+                                     class="img-responsive advert-img pull-left img-thumbnail">
+                            {% endif %}
+                            <h4>
+                                Vous venez de vendre: <a class="text-bold" href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advert.title }}</a>
+                            </h4>
+                            <p class="text-grey">
+                                <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                                     alt="{{ u.user.username }}" class="img-circle avatar20">
+                                {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ H:i') }}
+                            </p>
+                            <p class="text-bold text-success">Vous venez de gagner {{ u.advert.price }}€</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    {% endif %}
 {% endif %}
