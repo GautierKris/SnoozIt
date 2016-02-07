@@ -1,0 +1,24 @@
+    <section>
+        <div class="well well-sm userLogsBox text-center" style="border-left-color: #c48023">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% if u.advertInterest.advert.pictureOne %}
+                        <img src="{{ asset('uploads/annonce/'~u.advertInterest.advert.pictureOne.path) }}" alt="{{ u.advertInterest.advert.title }}"
+                             class="img-responsive advert-img pull-left img-thumbnail">
+                    {% else %}
+                        <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="{{ u.advertInterest.advert.title }}"
+                             class="img-responsive advert-img pull-left img-thumbnail">
+                    {% endif %}
+                    <h4>
+                        <span class="text-bold">Nouveau commentaire pour </span> <a class="text-bold" href="{{ path('snoozit_platform_panier_homepage') }}">{{ u.advertInterest.advert.title }}</a>
+                    </h4>
+                    <p class="text-grey">
+                        <img src="{{ asset('uploads/avatar/'~u.user.avatar.path) }}"
+                             alt="{{ u.user.username }}" class="img-circle avatar20">
+                        {{ u.user.username }} le {{ u.updated|date('d/m/Y \\à\\ H:i') }}
+                    </p>
+                    <blockquote>{{ u.content }}</blockquote>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -100,39 +100,27 @@
                             <div class="clearfix"></div>
                         </div>
                     </section>
-                {% else%}
+                {% else %}
                         {% set u = a %}
                         <!-- On limite à 5 les affichages -->
                             <!-- Si le type d'annonce est Abonnement (1) -->
-                            {% if u.advertOptiontype is not null %}
-                                {% if u.advertOptiontype.id == 1 or u.advertOptiontype.id == 2 or u.advertOptiontype.id == 6 or u.advertOptiontype.id == 7 or u.advertOptiontype.id == 4 %}
+                            {% if u.advertOptiontype is defined and u.advertOptiontype is not null %}
+
+                                {% if u.advertOptiontype.id == 1 or u.advertOptiontype.id == 2 or u.advertOptiontype.id == 3 or u.advertOptiontype.id == 4 or u.advertOptiontype.id == 6 or u.advertOptiontype.id == 7 or u.advertOptiontype.id == 10 or u.advertOptiontype.id == 11 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:abonnement.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Abonnement (1) -->
-
-                                {% if u.advertOptiontype.id == 3 %}
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
-                                {% endif %} <!-- Si le type d'annonce est Negoce (3) -->
-
-                                {% if u.advertOptiontype.id == 5 %}
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:interet.html.twig' %}
-                                {% endif %} <!-- Si le type d'annonce est Abonnement (5) -->
-
-                                {% if u.advertOptiontype.id == 8 %}
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:negociation.html.twig' %}
-                                {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
 
                                 {% if u.advertOptiontype.id == 9 %}
                                     {% include 'SnoozitPlatformBundle:DashBoard/Notification:userAdvertToHide.html.twig' %}
                                 {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
 
-                                {% if u.advertOptiontype.id == 11 %}
-                                    {% include 'SnoozitPlatformBundle:DashBoard/Notification:soldSuccess.html.twig' %}
-                                {% endif %} <!-- Si le type d'annonce est Negoce (8) -->
+                        {% elseif u.content is defined %}
+                            {% include 'SnoozitPlatformBundle:DashBoard/Notification:sellComment.html.twig' %}
                             {% endif %}
+
                 {% endif %}
             {% endfor %}
         {% else %}
-
             <div class="clearfix" id="dsh-no-follow-box">
                 {% if not app.user.tutonotification %} <!-- Si les notifications pour le tutoriel du départ est à TRUE -->
                     <div class="well well-sm" id="dsh-message-system">

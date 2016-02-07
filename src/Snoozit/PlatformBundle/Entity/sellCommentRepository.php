@@ -17,13 +17,13 @@ class sellCommentRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s');
         $qb2 = $this->createQueryBuilder('s');
 
-        $list = array(3,5,9);
+        $list = array(3,5,9,10,11);
 
         $qb->select('s, u, a, b')
             ->leftJoin('s.user', 'u')
             ->leftJoin('s.advertInterest', 'a')
             ->leftJoin('a.advert', 'b')
-            ->where('s.user != :user and s.created < :date and a.user = :user')
+            ->where('s.user != :user and s.created < :date and a.user = :user and b.sold = 0')
             ->andWhere('a.advertOptionType NOT IN (:list)')
             ->setParameters(array('user' => $user, 'date' => $date, 'list' => $list));
 
@@ -33,9 +33,9 @@ class sellCommentRepository extends EntityRepository
             ->leftJoin('s.user', 'u')
             ->leftJoin('s.advertInterest', 'a')
             ->leftJoin('a.advert', 'b')
-            ->where('s.user != :user and b.user = :user')
+            ->where('s.user = :user and s.created < :date and a.user = :user and b.sold = 0')
             ->andWhere('a.advertOptionType NOT IN (:list)')
-            ->setParameters(array('user' => $user, 'list' => $list));
+            ->setParameters(array('user' => $user, 'date' => $date, 'list' => $list));
 
         $result2 = $qb2->getQuery()->getResult();
 

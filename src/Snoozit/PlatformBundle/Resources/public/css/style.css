@@ -6,8 +6,11 @@ body{
     color: #111;
     font-size: 11px;
     padding: 60px 0;
+    min-width: 1100px;
 }
 
+#wrapSite{ min-width: 1100px; }
+#wrapSite2{ min-width: 800px; }
 .has-error{ color: #d9534f; }
 .has-error ul{ color: #d9534f; list-style-type: none; margin-left: 0; padding-left: 0}
 
@@ -41,6 +44,7 @@ h5{ font-size: .9em;}
 
 .datetime-title{ margin: 0 0 15px}
 .text-star{ color: #f0ad4e }
+.text-warning{ color: orange}
 .text-grey{ color: #555 }
 .text-lowersize{ font-size: .9em}
 .text-default{ color: #999;}
@@ -66,6 +70,7 @@ h5{ font-size: .9em;}
 
 .btn-attentevalidation{ background: #aeeb5f; color: #333;}
 .btn-new{ background: transparent; color: orange; border: 1px solid #ddd }
+
 /** Classes d'alignements **/
 .divNoPadding{
     padding: 0;
@@ -173,8 +178,9 @@ select.form-control{
     padding: 10px;
     border: 0;
     border-bottom: 1px solid #fff;
+    min-width: 1100px;
 }
-.navbar #header{max-width: 1200px; margin: 0 auto }
+.navbar #header{ max-width: 1200px; margin: 0 auto }
 .navbar form{
     background: #fff;
     text-align: center;
@@ -304,7 +310,7 @@ select.form-control{
 .fixedButton .btn{ border-radius: 8px}
 
 /* Le fil d'ariane */
-.breadcrumb{ background: #fff; color: #000}
+.breadcrumb{ background: #fff; color: #000;}
 .breadcrumb a>i{ color: #666}
 .breadcrumb a>i:hover{ color: #0088cc; }
 .breadcrumb img{ height: 20px; margin-right: 5px; margin-top: -2px}
@@ -316,7 +322,7 @@ select.form-control{
 .breadcrumb .connected-breadcrumb>a.panier:hover>i{ color: #0088cc }
 .breadcrumb .connected-breadcrumb>a.panier .label{ border-radius: 50% }
 .breadcrumb .connected-breadcrumb>a.panier .label:hover{ background: #296192}
-.breadcrumb .connected-breadcrumb i.active{ color: red }
+.breadcrumb .connected-breadcrumb i.active{ color: orange }
 .breadcrumb i{ font-size: 1.3em}
 .breadcrumb i.active{ color: #0088cc; }
 
@@ -341,7 +347,7 @@ select.form-control{
 .breadcrumb .incomingCommentList li.customer{ border-left: 2px solid #e1e8ed; border-right: 2px solid #e1e8ed;}
 
 /* Les box d'annonces de la page d'accueil */
-#annonces-container .avatar > img{ width: 20px; height: 20px; float: left; margin-right: 5px;}
+#annonces-container .avatar > img{ width: 20px; height: 20px; float: left; margin-right: 5px; }
 #annonces-container{ margin-left: -15px; margin-right: 10px;}
 #annonces-container .well{ padding: 0;}
 #annonces-container .box-annonce{ margin-left: 5px; border-bottom: 1px solid #D9D6D3; padding: 10px; border-left: 3px solid transparent; max-height: 90px  }
@@ -485,7 +491,7 @@ select.form-control{
 #show-annonce-content h4>a{ color: #000}
 #show-annonce-content h4>a:hover{ color: #0088cc}
 #show-annonce-content span.help-block{ font-style: italic; font-size: .9em; display: inline }
-#show-annonce-content .propose-box h4>a{ color: #666666; font-weight: 400}
+#show-annonce-content .propose-box h4>a{ color: #0088cc; font-weight: 400}
 
 .comment-box form{ background: transparent; border: 1px solid #D9D6D3; margin-bottom: 20px}
 .comment-box textarea{  border: none; font-size: 1.1em}
@@ -525,7 +531,7 @@ select.form-control{
 #showUseProfile .profile-comment blockquote{ font-size: 1em;}
 #showUseProfile .profile-comment blockquote:hover{ background: #f5f5f5}
 #showUseProfile .profile-comment img{ height: 30px; width: 30px; margin-right: 5px;}
-
+#showUseProfile .profile-comment .profile-comment-box{ min-height: 250px;}
 /* SHOW PROFILE */
 .fos_user_user_show{ padding-top: 10px; }
 .fos_user_user_show .profile-nav{ margin-bottom: 10px; border-bottom: 3px solid #eee; }
@@ -562,7 +568,7 @@ select.form-control{
 
 /** dsh-timeline **/
 #time-advert{ }
-#time-advert .box-time-advert{  margin-bottom: 10px; position: relative;}
+#time-advert .box-time-advert{  margin-bottom: 10px; position: relative; }
 #time-advert .box-header .dropdown .btn.dropdown-toggle {
     border: none;
     background: transparent;
@@ -571,6 +577,16 @@ select.form-control{
 #time-advert .dropdown-menu .btn{ color: #fff; }
 #time-advert .dropdown-menu .btn:hover{ color: #fff; background: #55a955; border: 1px solid transparent}
 #time-advert .dropdown-menu > li > span {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    cursor: pointer;
+}
+#time-advert .dropdown-menu > li > a {
     display: block;
     padding: 3px 20px;
     clear: both;
@@ -597,10 +613,10 @@ select.form-control{
 #time-advert .box-content .description{ margin-bottom: 5px;}
 #time-advert .box-content .text-lowersize span{ margin-right: 10px;}
 #time-advert .userLogsBox{ overflow: hidden}
+#time-advert .userLogsBox blockquote{ font-size: 1em; border-left: 2px solid #ddd; padding: 2px}
 #time-advert .userLogsBox{ border-left: 2px solid #f8a22c; margin-bottom: 10px; background: #fff}
-#time-advert .userLogsBox img.advert-img{ max-height: 50px; margin: 0 auto; max-width: 50px;}
+#time-advert .userLogsBox img.advert-img{ max-height: 50px; margin: 0 auto; max-width: 50px; position: absolute; left: 15px;}
 
-#timeline-dropdown{}
 #timeline-dropdown i{ margin-right: 8px;}
 #dropdownMenu1{ border: none;}
 
@@ -676,7 +692,7 @@ select.form-control{
     width: 140px;
     text-align: center
 }
-.travers > span{ width: 100%; display: inline-block; line-height: 1.7em}
+.travers > span{ width: 160px; display: inline-block; line-height: 1.7em}
 .travers > span.desist{
     color: #fff;
     background-color: #d9534f;
@@ -692,6 +708,16 @@ select.form-control{
     border:1px solid #ddd;
     background-color: #aeeb5f;
 }
+.travers > span.attente-warning{
+    color: #333;
+    border:1px solid #ddd;
+    background-color: #f8a22c;
+}
+.travers > span.attente-primary{
+    color: #fff;
+    border:1px solid #ddd;
+    background-color: #0088cc;
+}
 .rotate {
     /* Safari */
     -webkit-transform: rotate(-45deg);
@@ -704,3 +730,8 @@ select.form-control{
     /* Opera */
     -o-transform: rotate(-45deg);
 }
+
+.advertListBoughted{ padding: 10px 0; border-bottom: 1px solid #ddd;}
+.advertListBoughted h4{ margin: 0}
+.advertListBoughted p{ margin: 0}
+

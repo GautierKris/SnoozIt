@@ -312,7 +312,6 @@ class PanierController extends Controller
     public function produitRecuAction(AdvertInterest $advertInterest)
     {
         $user = $this->getUser();
-        // On controle si l'interet est bien avec le statut (7) soit 'En attente produit'
 
         // On controle que l'utilisateur est bien l'acheteur.
         if($user != $advertInterest->getUser()){

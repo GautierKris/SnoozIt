@@ -187,7 +187,7 @@
 .userActivity-table .price{ line-height: 5em; font-weight: 600}
 .userActivity-table .status { line-height: 2em;}
 .userActivity-table .status>a { line-height: 5em;}
-.userActivity-table .status>a.btn { line-height: 2em;}#ad
+.userActivity-table .status>a.btn { line-height: 1.4em;}
 .userActivity-table .status-desist { line-height: 2.7em;}
 .userActivity-table .status .btn-block{ display: inline-block; font-weight: 900}
 .userActivity-table .panier_label_new{ width: auto }
@@ -220,3 +220,7 @@ span.toggleSellComment{ cursor: pointer}
 .sell-comment-even{ background: #f5f8fa; }
 .sell-comment-odd{ background: #fff;}
 .sell-comment-box{ background: #fff; border-left: 2px solid #ddd; padding-left: 0; padding-right: 0; margin-bottom: 20px;}
+
+.panier-recap{}
+.panier-recap .price{ line-height: 3em;}
+.panier-recap h3{ margin-top: 0}

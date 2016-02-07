@@ -287,6 +287,12 @@ class Advert
      */
     private $soldTo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="in_progress_user_id", referencedColumnName="id", nullable=true)
+     */
+    private $inProgress;
+
     public function __construct()
     {
         $this->success = false;
@@ -1228,5 +1234,28 @@ class Advert
     public function getSoldTo()
     {
         return $this->soldTo;
+    }
+
+    /**
+     * Set inProgess
+     *
+     * @param \Snoozit\UserBundle\Entity\User $inProgess
+     * @return Advert
+     */
+    public function setInProgress(\Snoozit\UserBundle\Entity\User $inProgress = null)
+    {
+        $this->inProgress = $inProgress;
+
+        return $this;
+    }
+
+    /**
+     * Get inProgress
+     *
+     * @return \Snoozit\UserBundle\Entity\User 
+     */
+    public function getInProgress()
+    {
+        return $this->inProgress;
     }
 }

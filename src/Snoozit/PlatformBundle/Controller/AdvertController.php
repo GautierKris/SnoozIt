@@ -29,12 +29,8 @@ class AdvertController extends Controller
     {
         $user = $this->getUser();
         $userFollow = false;
+        $userSoldToFollow = false;
 
-        if(is_object($user) || $user instanceof User) {
-            if($advert->getUser()){
-                $userFollow = $this->checkIfUserFollow($advert->getUser());
-            }
-        }
 
         // Le manager des annonces et l'handler des comments
         $advertManager          = $this->get('sz_advert_manager');
@@ -70,6 +66,18 @@ class AdvertController extends Controller
             return $this->redirect($this->generateUrl('snoozit_show_advert', array('id' => $advert->getId(), 'slug' => $slug)));
         }
 
+        $soldToUser = $advert->getSoldTo();
+
+        if(is_object($user) || $user instanceof User) {
+            if($advert->getUser()){
+                $userFollow = $this->checkIfUserFollow($advert->getUser());
+
+                if($soldToUser != null){
+                    $userSoldToFollow = $this->checkIfUserFollow($soldToUser);
+                }
+            }
+        }
+
         $this->get('event_dispatcher')->dispatch(SkuagEvents::ON_SHOW_ADVERT, new AdvertEvent($advert));
 
         return $this->render('SnoozitPlatformBundle:Advert/Show:show.html.twig', array(
@@ -79,6 +87,8 @@ class AdvertController extends Controller
             'formNegoce'    => $advertNegoceHandler->createView(),
             'breadcrumb'    => $breadcrumb,
             'userFollow'    => $userFollow,
+            'userSoldToFollow'    => $userSoldToFollow,
+            'soldToUser'    => $soldToUser
         ));
     }
 

@@ -45,6 +45,10 @@
                                     <div class="travers rotate">
                                         <span class="attentevalidation">Attente produit</span>
                                     </div>
+                                {% elseif u.advertOptionType.id == 10  %}
+                                    <div class="travers rotate">
+                                        <span class="attentevalidation">Paiment reçu</span>
+                                    </div>
                                 {% elseif u.advertOptionType.id == 11  %}
                                     <div class="travers rotate">
                                         <span class="attentevalidation">Attente paiement</span>
@@ -83,26 +87,36 @@
                                 {% endif %}
                                 <span class="pull-right text-primary text-bold">{{ u.advert.price }} €</span>
                                 <h4 class="text-bold"><a href="{{ path('snoozit_show_advert', {'id' : u.advert.id, 'slug' : u.advert.slug }) }}" class="text-grey">{{ u.advert.title|truncate(50) }}</a></h4>
+                                {% if u.advert.inProgress is not null and u.advert.inProgress.id != app.user.id %}
+                                        <span class="text-bold text-primary">Ce produit est en cours de transfert de propriétaire, si la vente définitive n'aboutie pas votre interet sera mis à jour.</span>
+                                {% endif %}
                             </td>
                             <td class="text-center status">
+                                {% if u.advert.inProgress is null or u.advert.inProgress.id == u.user.id or u.advertOptionType.id == 3 %}
                                 {% if u.advertOptionType.id == 5 %}
                                     <a href="{{ path('snoozit_dashboard_remove_desist_interest_from_interface', {'id': u.id}) }}" class="btn btn-xs btn-{{ color }} btn-rounded btn-block"><i class="fa fa-eraser"></i> {{ u.advertOptionType.type }}</a>
                                 {% elseif u.advertOptionType.id == 6 %}
                                     <a href="#" class="btn btn-xs btn-{{ color }} btn-rounded btn-block">{{ u.advertOptionType.type }}</a>
                                     <a class="btn btn-warning btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
-                                    <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
+                                    <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                 {% elseif u.advertOptionType.id == 7  %}
                                     <a href="{{ path('snoozit_platform_produit_recu', {'id' : u.id }) }}" class="btn btn-xs btn-primary btn-rounded btn-block">Produit reçu</a>
                                     <a class="btn btn-warning btn-xs btn-rounded btn-block " href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
-                                    <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
+                                    <span class="btn btn-primary btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                     <a href="#" class="btn btn-rounded btn-xs btn-send btn-padding">Reporter un probleme</a>
+                                {% elseif u.advertOptionType.id == 10 %}
+                                    <span class="btn btn-xs btn-warning btn-rounded btn-block">En attente du produit</span>
+                                    <a class="btn btn-xs btn-success btn-rounded btn-block " href="{{ path('snoozit_platform_produit_recu', {'id' : u.id}) }}">Produit reçu</a>
+                                    <span class="btn btn-xs btn-primary btn-rounded btn-block toggleSellComment" rel="{{ u.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
+                                    <a href="#" class="btn">Reporter un probleme</a>
                                 {% elseif u.advertOptionType.id == 11 %}
                                     <span class="btn btn-xs btn-primary btn-rounded btn-block">En attente de paiement</span>
+                                    <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                     <a href="#" class="btn btn-rounded btn-xs btn-send btn-padding">Reporter un probleme</a>
                                 {% elseif u.advertOptionType.id == 2 %}
                                         <a class="btn btn-primary btn-xs btn-rounded btn-block" href="{{ path('snoozit_platform_confirm_achat', {'id' : u.id}) }}"><i class="fa fa-check"></i> Confirmer cet achat</a>
                                         <a class="btn btn-warning btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
-                                        <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.advert.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
+                                        <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                     {% else %}
                                         {% if u.advertOptionType.id == 3 %}
                                             <a  class="btn btn-danger btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_remove_refus_from_interface', {'id' : u.id}) }}">Archiver ce refus</a>
@@ -110,10 +124,13 @@
                                             <a  class="btn btn-default btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_remove_interest', {'id' : u.advert.id}) }}"> <i class="fa fa-remove"></i> Annuler cet interet</a>
                                         {% endif %}
                                 {% endif %}
+                                {% else %}
+                                    <span class="btn btn-xs btn-warning btn-rounded btn-padding"> Vente en cours</span>
+                                {% endif %}
                             </td>
                         </tr>
                         {% if u.advertOptionType.id == 2 or u.advertOptionType.id == 6 or u.advertOptionType.id == 7 or u.advertOptionType.id == 11 %}
-                            <tr class="toggle hidden sellCommentContainer" id="sellCommentContainer_{{ u.advert.id }}">
+                            <tr class="toggle hidden sellCommentContainer" id="sellCommentContainer_{{ u.id }}">
                                 <td colspan="5">
                                     <div class="definitiveChoice">
                                         {% include 'SnoozitPlatformBundle:DashBoard/Templating/SellComment:sellComment.html.twig' %}

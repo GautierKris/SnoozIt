@@ -47,6 +47,7 @@ class StatsManager
             $successAmount  = $this->countAdvertSuccessAmount(); // Le total en Euros des ventes réussies
             $recentNegoce   = $this->countRecentNegoce();
             $totalViews     = $this->countTotalView();
+            $bought         = $this->getBought();
 
         }else{
             $percentAdvert  = 0;
@@ -60,6 +61,7 @@ class StatsManager
             $successAmount  = 0;
             $recentNegoce   = 0;
             $totalViews     = 0;
+            $bought         = 0;
         }
 
         $countAdvertUserIsInterested = $this->countAdvertUserIsInterested();
@@ -81,6 +83,7 @@ class StatsManager
             'negoceByWeek'                  => $this->countNegoceForUserAdvertByWeek(),
             'interestByWeek'                => $this->countInterestForUserAdvertByWeek(),
             'totalViews'                    => $totalViews,
+            'bought'                        => $bought,
         );
 
         return $analys;
@@ -246,6 +249,13 @@ class StatsManager
         $totalAdvert = $this->countUserAdverts();
 
         return round($count/$totalAdvert*100);
+    }
+
+    private function getBought()
+    {
+        $adverts = $this->getAdvertRepository()->findBy(array('soldTo' => $this->getUser()));
+
+        return count($adverts);
     }
 
 }

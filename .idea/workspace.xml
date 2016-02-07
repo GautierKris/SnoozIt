@@ -2,70 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ece6651-38d3-46f9-ba36-b1ff65ca9f16" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_archives_advert_sold_success.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_archives_advert_sold_success_content.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/alreadySold.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/incomingComment.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Twig/Extension/IncomingCommentExtension.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/-kB9dEhipU.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/4aHHuNYeBW.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/6qP4bMVtvX.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/7WOEe7Nmvd.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/IfFDMmwKiR.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/Lmk8SH_Ifq.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/QCgCZL1RHw.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/VvZt7dcE-n.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/WT9TjR1POZ.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/j80NLK3cm1.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/lt3WOYrcCK.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/moQL_Rn0bA.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/oD2J5gtlkO.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/pvDV-671Tw.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/t8jzEWmR5l.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/spool/default/yliUbJvjFz.message" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Templating/menuLeft.html.twig" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Snoozit.iml" afterPath="$PROJECT_DIR$/.idea/Snoozit.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Bought/bought.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Bought/bought_content.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/sellComment.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/bootstrap.php.cache" afterPath="$PROJECT_DIR$/app/bootstrap.php.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml" afterPath="$PROJECT_DIR$/app/config/parameters.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/AdvertController.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/AdvertController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/DashBoardController.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/DashBoardController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/InterestController.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/InterestController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/PanierController.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/PanierController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/SiteController.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/SiteController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Advert/LoadAdvertOptionTypeData.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Advert/LoadAdvertOptionTypeData.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Notification/LoadNotificationTypeData.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Notification/LoadNotificationTypeData.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/Advert.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/Advert.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterest.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterestRepository.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterestRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertRepository.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellComment.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellComment.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellCommentRepository.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellCommentRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/AdvertManager.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/AdvertManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/Routing/interest.yml" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/Routing/interest.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/StatsManager.php" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/StatsManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/Routing/dashboard.yml" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/Routing/dashboard.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/dashboard.css" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/dashboard.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/style.css" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Add/addAdvert_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Add/addAdvert_content.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/aside-user.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/aside-user.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/show_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/show_content.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/dsh-timeline.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/dsh-timeline.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_archives_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_archives_content.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/stats.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/stats.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_content.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_desistement_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_desistement_content.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/abonnement.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/abonnement.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/interet.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/interet.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/soldSuccess.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/soldSuccess.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/finished_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/finished_content.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/panier_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/panier_content.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/refus_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/refus_content.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Templating/SellComment/sellComment.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Templating/SellComment/sellComment.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/index_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/index_content.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Index/index.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Index/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/breadcrumb.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/breadcrumb.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Header/header.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Header/header.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/Avatar.php" afterPath="$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/Avatar.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/timeline.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/timeline.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/incomingComment.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/incomingComment.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/UserBundle/Controller/ProfileController.php" afterPath="$PROJECT_DIR$/src/Snoozit/UserBundle/Controller/ProfileController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/Comment/user_request_profile.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/Comment/user_request_profile.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/show_content.html.twig" afterPath="$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/show_content.html.twig" />
     </list>
     <ignored path="Snoozit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,66 +55,12 @@
     <favorites_list name="Snoozit" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="dsh-timeline.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/dsh-timeline.html.twig">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="stats.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/stats.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.125">
-              <caret line="108" column="48" selection-start-line="108" selection-start-column="48" selection-end-line="108" selection-end-column="48" />
-              <folding>
-                <element signature="e#1746#1772#0#Twig" expanded="false" />
-                <element signature="e#2686#2719#0#Twig" expanded="false" />
-                <element signature="e#3071#3100#0#Twig" expanded="false" />
-                <element signature="e#3757#3821#0#Twig" expanded="false" />
-                <element signature="e#4689#4708#0#Twig" expanded="false" />
-                <element signature="e#7321#7387#0#Twig" expanded="false" />
-                <element signature="e#7598#7660#0#Twig" expanded="false" />
-                <element signature="e#7875#7941#0#Twig" expanded="false" />
-                <element signature="e#8152#8223#0#Twig" expanded="false" />
-                <element signature="e#8435#8501#0#Twig" expanded="false" />
-                <element signature="e#9597#9615#0#Twig" expanded="false" />
-                <element signature="e#9715#9736#0#Twig" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="abonnement.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/abonnement.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.85736924">
-              <caret line="354" column="104" selection-start-line="354" selection-start-column="104" selection-end-line="354" selection-end-column="104" />
-              <folding>
-                <element signature="e#40#4260#0#Twig" expanded="false" />
-                <element signature="e#4359#8625#0#Twig" expanded="false" />
-                <element signature="e#8724#13371#0#Twig" expanded="false" />
-                <element signature="e#13466#18339#0#Twig" expanded="false" />
-                <element signature="e#15945#18285#0#HTML" expanded="false" />
-                <element signature="e#19468#19500#0#Twig" expanded="true" />
-                <element signature="e#20238#20272#0#HTML" expanded="true" />
-                <element signature="e#21233#21265#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DashBoardController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/DashBoardController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.25">
-              <caret line="62" column="120" selection-start-line="62" selection-start-column="111" selection-end-line="62" selection-end-column="134" />
-              <folding>
-                <element signature="e#2456#2494#1#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdvertInterestRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterestRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.083333">
-              <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.6418384">
+              <caret line="41" column="77" selection-start-line="41" selection-start-column="77" selection-end-line="41" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -167,22 +82,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/AdvertComment.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/show_content.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/show_content.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/SkuagBundle/SkuagEvents/SkuagEvents.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/SkuagBundle/Resources/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/Snoozit/SkuagBundle/Listener/Interest/AddInterestListener.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/SkuagBundle/Listener/Interest/SoldSuccessListener.php" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Add/addAdvert_content.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Header/header.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Templating/SellComment/sellComment.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/AdvertController.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/Advert.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/Routing/interest.yml" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_archives_advert_sold_success.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_archives_content.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/soldSuccess.html.twig" />
@@ -190,34 +89,50 @@
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Twig/Extension/IncomingCommentExtension.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellComment.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/SiteController.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertRepository.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/AdvertManager.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/InterestController.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_desistement_content.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_archives_advert_sold_success_content.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/finished_content.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/refus_content.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Handler/AdvertHandler.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellCommentRepository.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterest.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterestRepository.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/dashboard.css" />
         <option value="$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/Comment/user_request_profile.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/SkuagBundle/Listener/Interest/RefuseInterestListener.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/interet.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/DashBoardController.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/style.css" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/breadcrumb.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/PanierController.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Notification/LoadNotificationTypeData.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterestRepository.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/sellComment.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/UserBundle/Controller/ProfileController.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/User.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/dashboard.css" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Advert/LoadAdvertOptionTypeData.php" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/panier_content.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/PanierController.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/Advert.php" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_content.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/panier_content.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/incomingComment.html.twig" />
-        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/dsh-timeline.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/timeline.html.twig" />
         <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/abonnement.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/Routing/dashboard.yml" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/index_content.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Bought/bought.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/StatsManager.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertRepository.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/AdvertManager.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/AdvertController.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/aside-user.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/show_content.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Bought/bought_content.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/dsh-timeline.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/DashBoardController.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellCommentRepository.php" />
+        <option value="$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/show_content.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Index/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/style.css" />
+        <option value="$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/stats.html.twig" />
       </list>
     </option>
   </component>
@@ -260,7 +175,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -355,7 +269,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DataFixtures" />
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -381,45 +299,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DataFixtures" />
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ORM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Snoozit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Snoozit" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Snoozit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PlatformBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DataFixtures" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ORM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Notification" />
+              <option name="myItemId" value="Site" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -445,20 +333,87 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DataFixtures" />
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ORM" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Advert" />
+              <option name="myItemId" value="Site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Index" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snoozit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snoozit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snoozit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PlatformBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snoozit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snoozit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snoozit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snoozit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -466,7 +421,7 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="user.css&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/public/css/user.css&#10;dropdown&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig&#10;breadcr&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/breadcrumb.html.twig&#10;NameT&#9;null&#9;null&#10;timeline&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/timeline.html.twig&#10;header.&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Header/header.html.twig" />
+    <property name="SearchEverywhereHistoryKey" value="soldS&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/soldSuccess.html.twig&#10;user.css&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/public/css/user.css&#10;dropdown&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig&#10;breadcr&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/breadcrumb.html.twig&#10;NameT&#9;null&#9;null&#10;timeline&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/timeline.html.twig&#10;header.&#9;FILE&#9;file:///Users/Kris/Sites/Snoozit/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Header/header.html.twig" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="111" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -554,13 +509,13 @@
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28836834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2956381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32825205" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3274596" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31277534" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31217483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -592,181 +547,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_desistement_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.023006136">
-          <caret line="8" column="135" selection-start-line="8" selection-start-column="135" selection-end-line="8" selection-end-column="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Edit/Bloc/bloc-two.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Edit/editAdvert_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/AdvertComment.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/show_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19017433">
-          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="26" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/finished_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7163233">
-          <caret line="75" column="61" selection-start-line="75" selection-start-column="61" selection-end-line="75" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Localisation/fixturesMemoryLimitPatch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/refus_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.0">
-          <caret line="32" column="58" selection-start-line="32" selection-start-column="58" selection-end-line="32" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Twig/Extension/UserInterestExtension.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55368096">
-          <caret line="27" column="63" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Twig/Extension/IncomingCommentExtension.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5">
-          <caret line="37" column="104" selection-start-line="37" selection-start-column="92" selection-end-line="37" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/UserRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Handler/AdvertHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4263804">
-          <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/AdvertController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2990798">
-          <caret line="312" column="27" selection-start-line="312" selection-start-column="11" selection-end-line="312" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Controller/ProfileController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.8985736">
-          <caret line="169" column="97" selection-start-line="169" selection-start-column="97" selection-end-line="169" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73692554">
-          <caret line="33" column="92" selection-start-line="33" selection-start-column="92" selection-end-line="33" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Panier/remove_panier.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5229794">
-          <caret line="22" column="80" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Panier/remove_panier_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Menu/menu_left.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/user_info_left.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/Comment/user_request_profile.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02377179">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/show_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04754358">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/user.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/SkuagBundle/Listener/Interest/AcceptInterestListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/SkuagBundle/Listener/Interest/RefuseInterestListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.56259906">
@@ -778,27 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellCommentRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/AdvertManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="544" column="96" selection-start-line="544" selection-start-column="84" selection-end-line="544" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="399" column="20" selection-start-line="399" selection-start-column="20" selection-end-line="399" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -816,27 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/dashboard.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="169" column="33" selection-start-line="169" selection-start-column="33" selection-end-line="169" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.375">
-          <caret line="55" column="41" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/breadcrumb.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7131902">
-          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/SkuagBundle/Listener/Interest/AddInterestListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5484897">
@@ -851,13 +589,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.583333">
-          <caret line="34" column="53" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Notification/LoadNotificationTypeData.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.67408586">
@@ -865,122 +596,375 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Advert/LoadAdvertOptionTypeData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.88235295">
-          <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/PanierController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29888713">
-          <caret line="333" column="35" selection-start-line="333" selection-start-column="35" selection-end-line="333" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/InterestController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0">
-          <caret line="260" column="72" selection-start-line="260" selection-start-column="72" selection-end-line="260" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Templating/SellComment/sellComment.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5942948">
           <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/soldSuccess.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.25">
+          <caret line="2" column="91" selection-start-line="2" selection-start-column="85" selection-end-line="2" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28969958">
+          <caret line="33" column="92" selection-start-line="33" selection-start-column="92" selection-end-line="33" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/sellComment.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Controller/ProfileController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02377179">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/SiteController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.7916665">
-          <caret line="133" column="104" selection-start-line="133" selection-start-column="85" selection-end-line="133" selection-end-column="104" />
-          <folding />
+        <state vertical-scroll-proportion="3.0903327">
+          <caret line="133" column="122" selection-start-line="133" selection-start-column="122" selection-end-line="133" selection-end-column="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Twig/Extension/CountPanierExtension.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="57" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.833334">
+          <caret line="174" column="0" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/DataFixtures/ORM/Advert/LoadAdvertOptionTypeData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.875">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/PanierController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.875">
+          <caret line="319" column="0" selection-start-line="319" selection-start-column="0" selection-end-line="319" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/Advert.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-612.875">
+          <caret line="1240" column="6" selection-start-line="1240" selection-start-column="6" selection-end-line="1240" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/incomingComment.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.326466">
-          <caret line="188" column="47" selection-start-line="188" selection-start-column="47" selection-end-line="188" selection-end-column="47" />
-          <folding>
-            <element signature="e#114#423#0#Twig" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-28.125">
+          <caret line="46" column="75" selection-start-line="46" selection-start-column="75" selection-end-line="46" selection-end-column="75" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Panier/panier_content.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73692554">
-          <caret line="50" column="42" selection-start-line="47" selection-start-column="32" selection-end-line="50" selection-end-column="42" />
-          <folding />
+        <state vertical-scroll-proportion="0.7458746">
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_content.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7147385">
-          <caret line="162" column="38" selection-start-line="162" selection-start-column="38" selection-end-line="162" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/DashBoardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.25">
-          <caret line="62" column="120" selection-start-line="62" selection-start-column="111" selection-end-line="62" selection-end-column="134" />
-          <folding>
-            <element signature="e#2456#2494#1#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="1.5940593">
+          <caret line="184" column="26" selection-start-line="184" selection-start-column="26" selection-end-line="184" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertInterestRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.083333">
+        <state vertical-scroll-proportion="0.0">
           <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/dsh-timeline.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/InterestController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.125">
-          <caret line="108" column="48" selection-start-line="108" selection-start-column="48" selection-end-line="108" selection-end-column="48" />
-          <folding>
-            <element signature="e#1746#1772#0#Twig" expanded="false" />
-            <element signature="e#2686#2719#0#Twig" expanded="false" />
-            <element signature="e#3071#3100#0#Twig" expanded="false" />
-            <element signature="e#3757#3821#0#Twig" expanded="false" />
-            <element signature="e#4689#4708#0#Twig" expanded="false" />
-            <element signature="e#7321#7387#0#Twig" expanded="false" />
-            <element signature="e#7598#7660#0#Twig" expanded="false" />
-            <element signature="e#7875#7941#0#Twig" expanded="false" />
-            <element signature="e#8152#8223#0#Twig" expanded="false" />
-            <element signature="e#8435#8501#0#Twig" expanded="false" />
-            <element signature="e#9597#9615#0#Twig" expanded="false" />
-            <element signature="e#9715#9736#0#Twig" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="4.635499">
+          <caret line="203" column="31" selection-start-line="203" selection-start-column="24" selection-end-line="203" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Twig/Extension/CountAdvertInterestExtension.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Notification/abonnement.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.85736924">
-          <caret line="354" column="104" selection-start-line="354" selection-start-column="104" selection-end-line="354" selection-end-column="104" />
+        <state vertical-scroll-proportion="0.26454446">
+          <caret line="464" column="99" selection-start-line="464" selection-start-column="99" selection-end-line="464" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/config/Routing/dashboard.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.85026735">
+          <caret line="53" column="68" selection-start-line="53" selection-start-column="68" selection-end-line="53" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_desistement.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Bought/bought.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23051591">
+          <caret line="14" column="87" selection-start-line="14" selection-start-column="87" selection-end-line="14" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Interest/interest_desistement_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/StatsManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.833334">
+          <caret line="253" column="4" selection-start-line="253" selection-start-column="4" selection-end-line="258" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/dashboard.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30542988">
+          <caret line="18" column="21" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Breadcrumb/breadcrumb.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34577388">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/AdvertRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08122942">
+          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/show_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9524564">
+          <caret line="211" column="57" selection-start-line="211" selection-start-column="57" selection-end-line="211" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Advert/Show/aside-user.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6671949">
+          <caret line="48" column="57" selection-start-line="48" selection-start-column="57" selection-end-line="48" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Bought/bought_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="75" column="73" selection-start-line="75" selection-start-column="73" selection-end-line="75" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/dsh-timeline.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="57" selection-start-line="116" selection-start-column="57" selection-end-line="116" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/DashBoardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="121" selection-start-line="64" selection-start-column="111" selection-end-line="64" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Entity/sellCommentRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/UserBundle/Resources/views/Profile/show_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2266244">
+          <caret line="210" column="41" selection-start-line="210" selection-start-column="41" selection-end-line="210" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Manager/AdvertManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="551" column="52" selection-start-line="551" selection-start-column="52" selection-end-line="551" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Controller/AdvertController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="75" column="76" selection-start-line="75" selection-start-column="76" selection-end-line="75" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/index_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.25">
+          <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Index/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="56" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Index/index_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/timeline.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02377179">
+          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06291391">
+          <caret line="570" column="73" selection-start-line="570" selection-start-column="73" selection-end-line="570" selection-end-column="73" />
           <folding>
-            <element signature="e#40#4260#0#Twig" expanded="false" />
-            <element signature="e#4359#8625#0#Twig" expanded="false" />
-            <element signature="e#8724#13371#0#Twig" expanded="false" />
-            <element signature="e#13466#18339#0#Twig" expanded="false" />
-            <element signature="e#15945#18285#0#HTML" expanded="false" />
-            <element signature="e#19468#19500#0#Twig" expanded="true" />
-            <element signature="e#20238#20272#0#HTML" expanded="true" />
-            <element signature="e#21233#21265#0#Twig" expanded="true" />
+            <element signature="e#762#810#0" expanded="false" />
+            <element signature="e#1507#1636#0" expanded="false" />
+            <element signature="e#2360#2379#0" expanded="false" />
+            <element signature="e#2899#2992#0" expanded="false" />
+            <element signature="e#3042#3111#0" expanded="false" />
+            <element signature="e#3124#3214#0" expanded="false" />
+            <element signature="e#4378#4410#0" expanded="false" />
+            <element signature="e#4432#4506#0" expanded="false" />
+            <element signature="e#5058#5078#0" expanded="false" />
+            <element signature="e#5105#5221#0" expanded="false" />
+            <element signature="e#5248#5404#0" expanded="false" />
+            <element signature="e#5447#5472#0" expanded="false" />
+            <element signature="e#5767#5887#0" expanded="false" />
+            <element signature="e#5902#5927#0" expanded="false" />
+            <element signature="e#6029#6068#0" expanded="false" />
+            <element signature="e#6096#6451#0" expanded="false" />
+            <element signature="e#6468#6704#0" expanded="false" />
+            <element signature="e#6808#6831#0" expanded="false" />
+            <element signature="e#6874#6969#0" expanded="false" />
+            <element signature="e#6980#7210#0" expanded="false" />
+            <element signature="e#7233#7397#0" expanded="false" />
+            <element signature="e#7426#7484#0" expanded="false" />
+            <element signature="e#7837#7889#0" expanded="false" />
+            <element signature="e#8046#8120#0" expanded="false" />
+            <element signature="e#8160#8301#0" expanded="false" />
+            <element signature="e#8346#8401#0" expanded="false" />
+            <element signature="e#8450#8473#0" expanded="false" />
+            <element signature="e#8521#8544#0" expanded="false" />
+            <element signature="e#8589#8644#0" expanded="false" />
+            <element signature="e#10116#10206#0" expanded="false" />
+            <element signature="e#12910#13141#0" expanded="false" />
+            <element signature="e#13201#13254#0" expanded="false" />
+            <element signature="e#13322#13375#0" expanded="false" />
+            <element signature="e#14311#14504#0" expanded="false" />
+            <element signature="e#15323#15393#0" expanded="false" />
+            <element signature="e#17403#17588#0" expanded="false" />
+            <element signature="e#17611#17713#0" expanded="false" />
+            <element signature="e#17742#17765#0" expanded="false" />
+            <element signature="e#18464#18506#0" expanded="false" />
+            <element signature="e#19057#19106#0" expanded="false" />
+            <element signature="e#21464#21644#0" expanded="false" />
+            <element signature="e#22446#22496#0" expanded="false" />
+            <element signature="e#22803#22980#0" expanded="false" />
+            <element signature="e#23018#23195#0" expanded="false" />
+            <element signature="e#25456#25483#0" expanded="false" />
+            <element signature="e#25675#25745#0" expanded="false" />
+            <element signature="e#25758#26105#0" expanded="false" />
+            <element signature="e#26179#26585#0" expanded="false" />
+            <element signature="e#26272#26307#0" expanded="false" />
+            <element signature="e#26341#26481#0" expanded="false" />
+            <element signature="e#26595#26709#0" expanded="false" />
+            <element signature="e#26806#26888#0" expanded="false" />
+            <element signature="e#26909#26990#0" expanded="false" />
+            <element signature="e#27134#27212#0" expanded="false" />
+            <element signature="e#27331#27544#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/Site/Templating/Annonce/dropdown.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.022187">
+          <caret line="43" column="125" selection-start-line="43" selection-start-column="125" selection-end-line="43" selection-end-column="125" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Snoozit/PlatformBundle/Resources/views/DashBoard/Activity/stats.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6418384">
+          <caret line="41" column="77" selection-start-line="41" selection-start-column="77" selection-end-line="41" selection-end-column="77" />
+          <folding />
         </state>
       </provider>
     </entry>

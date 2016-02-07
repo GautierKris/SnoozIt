@@ -47,11 +47,11 @@ class ProfileController extends BaseController
            'Profile de '.$user->getUsername().'', $this->generateUrl('fos_user_profile_show_name', array('username' => $user->getUsername()))),
             );
 
-        $lastComment = $this->getDoctrine()->getManager()->getRepository('SnoozitPlatformBundle:UserProfileComment')->findOneBy(array('userProfile' => $user), array('created' => 'desc'));
+        $lastComment = $this->getDoctrine()->getRepository('SnoozitPlatformBundle:UserProfileComment')->findOneBy(array('userProfile' => $user), array('created' => 'desc'));
 
         $advertListToPaginate = $this->container->get('sz_advert_manager')->getUserAdvertList($user);
         $advertList  = $this->get('knp_paginator')->paginate($advertListToPaginate, $this->get('request')->query->getInt('page', 1), 10);
-
+        $advertListBoughted = $this->getDoctrine()->getRepository('SnoozitPlatformBundle:Advert')->findBy(array('soldTo' => $user));
 
         $userFollow = $this->checkIfUserFollow($user);
 
@@ -61,6 +61,7 @@ class ProfileController extends BaseController
             'breadcrumb' => $breadcrumb,
             'userFollow' => $userFollow,
             'lastComment' => $lastComment,
+            'advertListBoughted'  => $advertListBoughted,
             'form'      => $userProfileCommentHandler->createView()
         ));
     }

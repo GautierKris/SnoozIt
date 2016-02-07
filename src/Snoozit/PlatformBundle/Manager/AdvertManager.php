@@ -113,6 +113,13 @@ class AdvertManager
         return $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->rehydrateAdvert($advert);
     }
 
+    public function getBought()
+    {
+        $adverts = $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getBought($this->getUser());
+
+        return $adverts;
+    }
+
 // PARTIE CONCERNANT LES INTERETS POUR LES ANNONCES EMISES
 
     // Gere les interets pour les annonces
@@ -756,13 +763,14 @@ class AdvertManager
     // Confirme une vente
     public function confirmVente(AdvertInterest $interest)
     {
-        // Renvoi " Felicitation! "
         $optionType = $this->entityManager->getRepository('SnoozitPlatformBundle:AdvertOptionType')->find(7);
 
         // On lance le dispatch d'évenement
         //$this->containerAware->get('event_dispatcher')->dispatch(SkuagEvents::ON_ACCEPT_INTEREST, new InterestEvent($interest->getAdvert(), $interest->getUser()));
 
         $interest->setAdvertOptionType($optionType);
+        // On met l'annonce en statut " Vente en cours " afin que les autres annonces change de statut le temps des transferts d'argent et produit.
+        $interest->getAdvert()->setInProgess($interest->getUser());
 
         $this->entityManager->persist($interest);
         $this->entityManager->flush();
@@ -775,4 +783,5 @@ class AdvertManager
     {
         return $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getAdvertInSoldSuccess($this->getUser());
     }
+
 }

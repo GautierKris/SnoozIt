@@ -20,10 +20,10 @@ class AdvertRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('a');
         $qb->select(
-            'a.title','a.urgent', 'a.sold' ,'a.views', 'a.price','a.delivery','a.success', 'a.created', 'a.id' ,'a.slug','a.description','a.espece','a.paypal',
+            'a.title','a.urgent', 'a.sold', 'a.views' ,'a.price','a.delivery','a.success', 'a.created', 'a.updated','a.id' ,'a.slug','a.description','a.espece','a.paypal',
             'b.category', 'b.slug category_slug' , 'q.parent parentCat',
             'c.nom city', 'c.slug city_slug','c.postal',
-            'u.username', 'u.id userId',
+            'u.username', 'u.id userId', 's.id soldTo' ,'t.id inProgress',
             'g.username guestUsername',
             'f.nom regionName', 'f.slug regionSlug',
             'd.nom departementName',
@@ -35,6 +35,8 @@ class AdvertRepository extends EntityRepository
             ->leftJoin('d.region', 'f')
             ->leftJoin('a.user','u')
             ->leftJoin('a.guest','g')
+            ->leftJoin('a.soldTo','s')
+            ->leftJoin('a.inProgress','t')
             ->leftJoin('a.pictureOne', 'p')
             ->leftJoin('u.avatar', 'v')
             ->leftJoin('b.parentcategory', 'q')
@@ -145,6 +147,8 @@ class AdvertRepository extends EntityRepository
             'urgent'        => $row['urgent'],
             'success'       => $row['success'],
             'sold'          => $row['sold'],
+            'soldTo'        => $row['soldTo'],
+            'inProgress'    => $row['inProgress'],
             'parentCat'     => $row['parentCat'],
             'category'      => $row['category'],
             'delivery'      => $row['delivery'],
@@ -153,6 +157,7 @@ class AdvertRepository extends EntityRepository
             'city_slug'     => $row['city_slug'],
             'postal'        => $row['postal'],
             'created'       => $row['created'],
+            'updated'       => $row['updated'],
             'id'            => $row['id'],
             'picture_path'  => $row['picture_path'],
             'slug'          => $row['slug'],
@@ -164,6 +169,19 @@ class AdvertRepository extends EntityRepository
                 'avatar'    => $avatar
                 )
             );
+
+        return $result;
+    }
+
+    // Recupere les annonces achetés par l'utilisateur
+    public function getBought(User $user)
+    {
+        $qb = $this->getByLocalisationQueryBuilder();
+
+        $qb->where('a.soldTo = :user')
+            ->setParameter('user', $user);
+
+        $result = $qb->getQuery()->getResult();
 
         return $result;
     }
@@ -211,6 +229,8 @@ class AdvertRepository extends EntityRepository
                 'price'             => $advert->getPrice(),
                 'urgent'            => $advert->getUrgent(),
                 'sold'              => $advert->getSold(),
+                'soldTo'            => $advert->getSoldTo(),
+                'inProgress'        => $advert->getInProgress(),
                 'negotiate'         => $advert->getNegotiable(),
                 'paypal'            => $advert->getPaypal(),
                 'cheque'            => $advert->getCheque(),
@@ -225,6 +245,7 @@ class AdvertRepository extends EntityRepository
                 'city_slug'         => $advert->getCity()->getSlug(),
                 'postal'            => $advert->getCity()->getPostal(),
                 'created'           => $advert->getCreated(),
+                'updated'           => $advert->getUpdated(),
                 'id'                => $advert->getId(),
                 'slug'              => $advert->getSlug(),
                 'description'       => $advert->getDescription(),
@@ -402,6 +423,7 @@ class AdvertRepository extends EntityRepository
         $qb = $this->getByLocalisationQueryBuilder();
                 $qb->where('a.id IN (:followedList)')
                     ->orWhere('a.user = :user')
+                    ->andWhere('a.sold = 0')
                 ->orderBy('a.created', 'DESC');
 
         if(!empty($hiddenUsersIds)){

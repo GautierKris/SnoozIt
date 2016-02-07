@@ -41,7 +41,7 @@
                     <li><a href="{{ path('snoozit_interest_advert', {'id' : a.id}) }}" class="btn btn-xs btn-danger"><i class="fa fa-shopping-cart"></i> Ca ne m'interesse plus</a></li>
                 {% endif %}
             {% else %}
-                <li><a href="{{ path('snoozit_interest_advert', {'id' : a.id}) }}" class="btn btn-xs btn-success"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
+                <li><a href="{{ path('snoozit_interest_advert', {'id' : a.id}) }}" class="btn btn-xs btn-success interest-btn"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
             {% endif %}
         {% else %}
             <li><a class="btn btn-xs btn-success" href="{{ path('snoozit_dashboard_edit_advert', {'advert' : a.id }) }}">Editer mon annonce</a></li>
@@ -54,7 +54,7 @@
         {% if a.sold %}
             <li><a href="#" class="btn btn-xs btn-warning"><i class="fa fa-shopping-cart"></i> Vendu</a></li>
         {% else %}
-            <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}" class="btn btn-xs btn-success"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
+            <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}" class="btn btn-xs btn-success interest-btn"><i class="fa fa-shopping-cart"></i> Ca m'interesse</a></li>
         {% endif %}
     {% endif %}
 

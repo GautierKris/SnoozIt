@@ -49,3 +49,6 @@ snoozit_dashboard_manage_advert:
     requirements:
         advert: \d+
 
+snoozit_dashboard_bought:
+    path: /manager/bought
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:bought}

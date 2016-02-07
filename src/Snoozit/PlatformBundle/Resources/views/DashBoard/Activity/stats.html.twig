@@ -1,3 +1,113 @@
+<div class="panier-recap">
+    {% if app.user.interests is not empty %}
+        <h3><i class="fa fa-shopping-cart"></i> {{ app.user|CountPanier }} / <span class="text-warning text-bold">Panier</span></h3>
+        <div class="list-group">
+            {% if app.user|CountPanier >= 1 %}
+                {% for a in app.user.interests %}
+                    {% if not a.advert.sold %}
+
+                        {% if a.advertOptionType.id == 3 or a.advertOptionType.id == 5 %}
+                            {% set color = "danger" %}
+                        {% elseif a.advertOptionType.id == 10 or a.advertOptionType.id == 11 %}
+                            {% set color = "primary" %}
+                        {% else %}
+                            {% set color = "primary" %}
+                        {% endif %}
+
+                        <a href="{{ path('snoozit_platform_panier_homepage') }}" class="list-group-item clearfix">
+                            <div class="row">
+                                <div class="col-md-2 ">
+                                    {% if a.advert.pictureOne is not null %}
+                                        <img src="{{ asset('uploads/annonce/'~a.advert.pictureOne.path) }}" alt="..." class="img-thumbnail img-responsive">
+                                    {% else %}
+                                        <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="..." class="img-thumbnail img-responsive">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-8 divNoPadding">
+                                    <h4 class="list-group-item-heading"><span class=" text-primary">{{ a.advert.title }}</span></h4>
+                                    <p class="list-group-item-text">
+                                        {{ a.advert.user.username }}
+                                        <span class="text-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                                <i class="fa fa-star-half-empty"></i>
+                                            </span>
+                                        {% if a.advert.inProgress is not null and a.advert.inProgress == app.user %}
+                                            <span class="label label-{{ color }}">{{ a.advertOptionType.type }}</span>
+                                        {% elseif a.advert.inProgress is not null and a.advert.inProgress != app.user %}
+                                            <span class="label label-warning">Vente en cours...</span>
+                                        {% else %}
+                                            <span class="label label-{{ color }}">{{ a.advertOptionType.type }}</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="col-md-2 text-bold text-{{ color }}"><span class="price">{{ a.advert.price }}€</span></div>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p class="list-group-item"><i class="fa fa-shopping-cart"></i><em> Votre panier est vide.</em> </p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="panier-recap">
+    {% if advertWithInterestForUser is not empty %}
+        <h3><i class="fa fa-eye"></i> {{ advertWithInterestForUser|length }} / <span class="text-warning text-bold">Interet</span></h3>
+        <div class="list-group">
+            {% if advertWithInterestForUser|length >= 1 %}
+                {% for a in advertWithInterestForUser %}
+                    {% if not a.advert.sold %}
+                        {% if a.advertOptionType.id == 3 or a.advertOptionType.id == 5 %}
+                            {% set color = "danger" %}
+                        {% elseif a.advertOptionType.id == 10 or a.advertOptionType.id == 11 %}
+                            {% set color = "primary" %}
+                        {% else %}
+                            {% set color = "primary" %}
+                        {% endif %}
+                        <a href="{{ path('snoozit_dashboard_interest') }}" class="list-group-item clearfix">
+                            <div class="row">
+                                <div class="col-md-2 ">
+                                    {% if a.advert.pictureOne is not null %}
+                                        <img src="{{ asset('uploads/annonce/'~a.advert.pictureOne.path) }}" alt="..." class="img-thumbnail img-responsive">
+                                    {% else %}
+                                        <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="..." class="img-thumbnail img-responsive">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-8 divNoPadding">
+                                    <h4 class="list-group-item-heading"><span class=" text-primary">{{ a.advert.title }}</span></h4>
+                                    <p class="list-group-item-text">
+                                        {{ a.user.username }}
+                                        <span class="text-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                                <i class="fa fa-star-half-empty"></i>
+                                            </span>
+                                        {% if a.advert.inProgress is not null and a.advert.inProgress != a.user %}
+                                            <span class="label label-warning">Vente en cours...</span>
+                                        {% else %}
+                                            <span class="label label-{{ color }}">{{ a.advertOptionType.type }}</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="col-md-2 text-bold text-primary"><span class="price">{{ a.advert.price }}€</span></div>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p class="list-group-item"><i class="fa fa-eye"></i><em> Aucun interet pour vos annonces.</em> </p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
 <div class="well well-sm">
 
     <div class="percent-stats">

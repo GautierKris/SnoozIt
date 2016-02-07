@@ -7,9 +7,9 @@
         <h3>Activités de {{ user.username }}:</h3>
         <p>Derniere activité: {{ user.lastActivity|date("d M Y \\à\\ H:i \\m\\i\\n") }}</p>
         {% if lastComment %}
-         <p>Dernier commentaire: <a href="{{ path('fos_user_profile_show_name', {'username' : lastComment.user.username}) }}">{{ lastComment.user.username }}</a> - {{ lastComment.created|date("d M Y \\à\\ H:i \\m\\i\\n") }}
-             <a href="{{ path('fos_user_profile_show_comment', {'user': user.id , 'id' : lastComment.id }) }}"> <em>Voir</em></a>
-        </p>
+            <p>Dernier commentaire: <a href="{{ path('fos_user_profile_show_name', {'username' : lastComment.user.username}) }}">{{ lastComment.user.username }}</a> - {{ lastComment.created|date("d M Y \\à\\ H:i \\m\\i\\n") }}
+                <a href="{{ path('fos_user_profile_show_comment', {'user': user.id , 'id' : lastComment.id }) }}"> <em>Voir</em></a>
+            </p>
         {% endif %}
 
     </div>
@@ -81,8 +81,8 @@
 
                                 <div class="col-xs-4 text-right">
                                     {% if not a.sold %}
-                                    {{ include('SnoozitPlatformBundle:Site/Templating/Annonce:dropdown.html.twig') }}
-                                        {% else %}
+                                        {{ include('SnoozitPlatformBundle:Site/Templating/Annonce:dropdown.html.twig') }}
+                                    {% else %}
                                         <span class="btn btn-warning btn-xs">Annonce terminée</span>
                                     {% endif %}
                                 </div>
@@ -140,48 +140,94 @@
 <div class="col-md-3 col-xs-12 profile-comment">
     <h3>Quoi d'autre?</h3>
 
-    {% if user.profileComments %}
-        {% for c in user.profileComments %}
-            <div class="row">
-                <div class="col-md-12 profile-comment">
-                    <img src="{{ asset('uploads/avatar/'~c.user.avatar.path) }}" alt="..." class="img-responsive img-circle pull-left">
-                    <h4>
-                        <a href="{{ path('fos_user_profile_show_name', {'username' : c.user.username}) }}" class="user"> {{ c.user.username }}
-                            <span class="text-star">
+    <div class="profile-comment-box">
+
+        {% if user.profileComments %}
+            {% for c in user.profileComments %}
+                <div class="row">
+                    <div class="col-md-12 profile-comment">
+                        <img src="{{ asset('uploads/avatar/'~c.user.avatar.path) }}" alt="..." class="img-responsive img-circle pull-left">
+                        <h4>
+                            <a href="{{ path('fos_user_profile_show_name', {'username' : c.user.username}) }}" class="user"> {{ c.user.username }}
+                                <span class="text-star">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
                             <i class="fa fa-star-half-empty"></i>
                         </span>
-                        </a>
-                        <br/>
-                        {{ c.created|date('d/m/y \\à\ h:i') }} -
-                        {{ c.user.city.nom }} {{ c.user.city.postal }}
+                            </a>
+                            <br/>
+                            {{ c.created|date('d/m/y \\à\ h:i') }} -
+                            {{ c.user.city.nom }} {{ c.user.city.postal }}
 
-                    </h4>
-                    <a href="{{ path('fos_user_profile_show_comment', {'user': c.userProfile.id ,'id': c.id}) }}" class="text-grey">
-                        <blockquote class="clearfix">
-                            {{ c.content|truncate(300)|nl2br }}
-                            {% if c.content|length >= 301 %}
-                                 <em>Voir plus</em>
-                            {% endif %}
-                            <br>
+                        </h4>
+                        <a href="{{ path('fos_user_profile_show_comment', {'user': c.userProfile.id ,'id': c.id}) }}" class="text-grey">
+                            <blockquote class="clearfix">
+                                {{ c.content|truncate(300)|nl2br }}
+                                {% if c.content|length >= 301 %}
+                                    <em>Voir plus</em>
+                                {% endif %}
+                                <br>
                                 <p class="pull-right">
                                     <i class="fa fa-comments"></i> {{ c.commentToComments|length }} commentaires
                                 </p>
-                        </blockquote>
-                    </a>
+                            </blockquote>
+                        </a>
 
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if user.profileComments|length > 5 %}
+            <div class="more">
+                <a href="{{ path('fos_user_profile_show_comment_page', {'username' : user.username }) }}" class="btn btn-sm btn-default pull-right">Afficher plus</a>
+            </div>
+        {% endif %}
+
+    </div>
+    <h3><i class="fa fa-shopping-cart"></i> {{ advertListBoughted|length }} / <span class="pull-right text-warning"> Achat </span></h3>
+    {% if advertListBoughted is not empty %}
+        {% for a in advertListBoughted  %}
+            <div class="row advertListBoughted">
+                <div class="col-xs-2 divNoPadding-right">
+                    {% if a.pictureOne is not null %}
+                        <img src="{{ asset('uploads/annonce/'~a.pictureOne.path) }}" alt="..." class="img-responsive">
+                    {% else %}
+                        <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                    {% endif %}
+                </div>
+                <div class="col-xs-10">
+                    <h4><a href="{{ path('snoozit_show_advert', { 'slug' : a.slug, 'id' : a.id}) }}">{{ a.title }}</a></h4>
+                    <p>{{ a.user.username }} ( {{ a.price }}€ )</p>
+                    <p>Le {{ a.updated|date('d M Y \\à h:i') }}</p>
                 </div>
             </div>
         {% endfor %}
+        {% else %}
+        <p><em>Aucun achat pour le moment.</em></p>
     {% endif %}
-
-    {% if user.profileComments|length > 5 %}
-        <div class="more">
-            <a href="{{ path('fos_user_profile_show_comment_page', {'username' : user.username }) }}" class="btn btn-sm btn-default pull-right">Afficher plus</a>
-        </div>
+    <h3> <i class="fa fa-legal"></i> ... / <span class="pull-right text-warning">Vente</span>  </h3>
+    {% if advertList is not null %}
+        {% for a in advertList %}
+                {% if a.sold %}
+                <div class="row advertListBoughted">
+                    <div class="col-xs-2 divNoPadding-right">
+                        {% if a.picture_path is not null %}
+                            <img src="{{ asset('uploads/annonce/'~a.picture_path) }}" alt="..." class="img-responsive">
+                        {% else %}
+                            <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-10">
+                        <h4><a href="{{ path('snoozit_show_advert', { 'slug' : a.slug, 'id' : a.id}) }}">{{ a.title }}</a></h4>
+                        <p>{{ a.username }} ( {{ a.price }}€ )</p>
+                        <p>Le {{ a.updated|date('d M Y \\à h:i') }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 </div>
 

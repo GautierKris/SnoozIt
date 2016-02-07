@@ -287,6 +287,12 @@ class Advert
      */
     private $soldTo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="in_progress_user_id", referencedColumnName="id", nullable=true)
+     */
+    private $inProgess;
+
     public function __construct()
     {
         $this->success = false;

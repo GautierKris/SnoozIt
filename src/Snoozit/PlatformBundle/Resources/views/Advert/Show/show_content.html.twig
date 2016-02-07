@@ -204,9 +204,10 @@
                         </div>
                         <div class="col-xs-9">
                             <h4>
-                                <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username}) }}" >{{ a.user.username }}</a> -
                                 <a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug': a.slug}) }}" >{{ a.title|truncate(30,'...', true) }} </a></h4>
-                            <p><a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.city_slug}) }}" class="normal-link">{{ a.city~' ('~a.postal~')' }} </a>-
+                            <p>
+                                <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username}) }}" >{{ a.user.username }}</a> -
+                                <a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.city_slug}) }}" class="normal-link">{{ a.city~' ('~a.postal~')' }} </a>-
                                 <a href="{{ path('snoozit_platform_show_by_category', {'slug' : a.category_slug}) }}" class="normal-link">{{ a.category }}</a></p>
                             <p>{{ a.description|truncate(80) }}</p>
                         </div>

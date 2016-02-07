@@ -31,3 +31,33 @@
     {% endif %}
     <a class="btn btn-primary btn-block " href="{{ path('fos_user_profile_show_name', {'username' : advert.user.username}) }}">Profile</a>
 </div>
+
+{% if soldToUser is not null %}
+    <hr>Acheteur: </hr>
+    <div class="img">
+        {% if userSoldToFollow %}
+            {% set followed = 'thumbnail-followed' %}
+        {% else %}
+            {% set followed = '' %}
+        {% endif %}
+        <img src="{{ asset('uploads/avatar/'~soldToUser.avatar.path) }}" alt="{{ soldToUser.username }}" class="img-responsive img-thumbnail {{ followed }}">
+    </div>
+    <p>{{ soldToUser.username }}</p>
+    <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
+    <p class="help-block"> (330 Votes)</p>
+    <div class="btn-group-sm">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED')%}
+            {% if app.user != soldToUser %}
+                {% if not userSoldItFollow %}
+                    <a class="btn btn-success btn-success btn-block " href="{{ path('snoozit_follow_user', {'id' : soldToUser.id}) }}">S'abonner</a>
+                {% else %}
+                    <a class="btn btn-success btn-success btn-block" href="{{ path('snoozit_follow_user', {'id' : soldToUser.id}) }}">Abonné</a>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <a class="btn btn-success btn-success btn-block" href="{{ path('fos_user_security_login') }}">Suivre</a>
+        {% endif %}
+        <a class="btn btn-primary btn-block " href="{{ path('fos_user_profile_show_name', {'username' : soldToUser.username}) }}">Profile</a>
+    </div>
+
+{% endif %}

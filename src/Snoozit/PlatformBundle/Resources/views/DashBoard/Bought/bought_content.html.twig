@@ -1,0 +1,93 @@
+<h3><i class="fa fa-shopping-cart"></i> {{ advertList|length }} \ <span class="text-bold text-warning">Liste de vos achats:</span></h3>
+<div  id="time-advert">
+        {% if advertList %}
+        {% for a in advertList %}
+            <section>
+                <div class="well well-sm box-time-advert">
+
+                    <div class="box-header">
+
+                        <div class="row">
+                            <div class="col-xs-8">
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    {% if a.userId|userFollow %}
+                                        {% set userFollow = 'followed' %}
+                                    {% else %}
+                                        {% set userFollow = '' %}
+                                    {% endif %}
+                                {% endif %}
+                                <img src="{{ asset('uploads/avatar/'~a.avatar) }}" alt="..." class="img-circle img-responsive avatar pull-left {{ userFollow }}" >
+                                <h5>
+                                    {% if a.guestUsername %}
+                                        {{ a.guestUsername }}
+                                    {% else %}
+                                        <a href="{{ path('fos_user_profile_show_name', {'username' : a.username}) }}" class="user"> {{ a.username }}</a>
+                                    {% endif %}
+                                    <span class="text-default text-normal">dans la catégorie</span>
+                                    <a href="{{ path('snoozit_platform_show_by_category', {'slug' : a.category_slug}) }}" class="text-grey">{{ a.category }}</a>
+                                </h5>
+                                <p class="datetime">{{ a.created|date('d M Y \\à h:i') }}
+                                    {% if a|advertIsNew %}
+                                        <span class="label label-hidden">New</span>
+                                    {% endif %}
+                                </p>
+
+                            </div>
+
+                            <div class="col-xs-4 text-right">
+                                {% if not a.sold %}
+                                    {{ include('SnoozitPlatformBundle:Site/Templating/Annonce:dropdown.html.twig') }}
+                                {% else %}
+                                    <span class="btn btn-success btn-xs">Acheté le {{ a.updated|date('d M Y \\à h:i') }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-content">
+                        <div class="col-xs-2 thumbnail">
+                            {% if a.picture_path is not null %}
+                                <img src="{{ asset('uploads/annonce/'~a.picture_path) }}" alt="..." class="img-responsive">
+                            {% else %}
+                                <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive">
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-10">
+
+                            <h4 class="text-primary"><a
+                                        href="{{ path('snoozit_show_advert', {'id' :a.id , 'slug' :a.slug}) }}">{{ a.title }}</a></h4>
+                            <p class="text-grey text-bold">€ {{ a.price }}</p>
+
+                            <div class="description row">
+                                <span class="text-grey col-xs-2">Option</span>
+                                <span class="col-xs-10 text-lowersize">
+                                    {% if a.delivery %}
+                                        <i class="fa fa-car"></i> <span>Livraison</span>
+                                    {% endif %}
+                                    {% if a.urgent %}
+                                        <i class="fa fa-warning"></i> <span>Urgent</span>
+                                    {% endif %}
+                                </span>
+                            </div>
+
+                            <div class="description row">
+                                <span class="text-grey col-xs-2">Description</span>
+                                <span class="col-xs-10">
+                                     {{ a.description|truncate(500)|nl2br }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </section>
+        {% endfor %}
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(advertList) }}
+        </div>
+    {% else %}
+        <h3 class="text-grey text-center">Aucune annonce pour le moment.</h3>
+    {% endif %}
+</div>

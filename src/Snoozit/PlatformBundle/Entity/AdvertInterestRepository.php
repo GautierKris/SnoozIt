@@ -183,11 +183,8 @@ class AdvertInterestRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('a');
         $qb1 = $this->createQueryBuilder('a');
-        $qb3 = $this->createQueryBuilder('a');
-        $qb4 = $this->createQueryBuilder('a');
 
         $list = array(6,7,9,4,10,11,1,3,2);
-        $list3 = array(4);
 
         // ON RÉCUPERE LES ANNONCES AVEC LE STATUT 1
         $qb->leftJoin('a.advert' , 'b')
@@ -209,26 +206,11 @@ class AdvertInterestRepository extends EntityRepository
 
         $result1 = $qb1->getQuery()->getResult();
 
-        $qb3->leftJoin('a.advert' , 'b')
-            ->where('b.user = :user')
-            ->andWhere('a.advertOptionType IN (:list3)')
-            ->andWhere('b.soldTo = a.user')
-            ->setParameters(array('user' => $user, 'list3' => $list3));
 
-        $result3 = $qb3->getQuery()->getResult();
-
-        $qb4->leftJoin('a.advert' , 'b')
-            ->where('b.user = :user')
-            ->andWhere('a.user != :user')
-            ->andWhere('a.advertOptionType IN (:list4)')
-            ->andWhere('a.ownerFade IS NOT NULL')
-            ->setParameters(array('user' => $user, 'list4' => $list3));
-
-        $result4 = $qb4->getQuery()->getResult();
-
-        $resultFinal = array_merge($result, $result1, $result3, $result4);
+        $resultFinal = array_merge($result, $result1);
 
         usort($resultFinal, array($this, 'trie_par_date'));
+
 
         return $resultFinal;
     }

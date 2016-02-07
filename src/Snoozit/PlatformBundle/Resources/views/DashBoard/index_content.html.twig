@@ -19,16 +19,16 @@
             <p class="text-success"> {{ app.user.totalFollower }}</p>
         </a>
         <a class="col-md-2" href="#">
-            <h5>Gagné</h5>
-            <p class="text-success">€ {{ stats.successAmount }}</p>
+            <h5>Vente confirmé</h5>
+            <p class="text-success">0</p>
+        </a>
+        <a class="col-md-2" href="{{ path('snoozit_dashboard_bought') }}">
+            <h5>Achat</h5>
+            <p class="text-danger">{{ stats.bought }}</p>
         </a>
         <a class="col-md-2" href="#">
-            <h5>Dépensé</h5>
-            <p class="text-danger">€ 0</p>
-        </a>
-        <a class="col-md-2" href="#">
-            <h5>Reste</h5>
-            <p class="text-primary">€ {{ stats.toSell }}</p>
+            <h5>Bientôt</h5>
+            <p class="text-primary">...</p>
         </a>
 
     </div>

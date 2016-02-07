@@ -39,8 +39,8 @@ class DashBoardController extends Controller
         $merged = $this->mergeAllActivity($advertListToPaginate);
 
         $advertList  = $this->get('knp_paginator')->paginate($merged, $request->query->getInt('page', 1),20);
-
         $oneUserPropose = $em->getRepository('SnoozitUserBundle:User')->findOneBy(array('city' => $user->getCity()));
+        $advertWithInterestForUser = $this->getAdvertManager()->getDashboardInterest();
 
         $breadcrumb = array(
             array('Dashboard', '#', true)
@@ -52,6 +52,7 @@ class DashBoardController extends Controller
             'stats'          => $stats,
             'oneUserPropose' => $oneUserPropose,
             'userList'       => $userList,
+            'advertWithInterestForUser' => $advertWithInterestForUser
         ));
 
     }
@@ -61,7 +62,9 @@ class DashBoardController extends Controller
         //$userLogs = $this->getUser()->getUserLogs();
         //$userLogs = $userLogs->toArray();
         $userLogs = $this->getDoctrine()->getManager()->getRepository('SnoozitPlatformBundle:AdvertInterest')->getInterestNotification($this->getUser());
-        $allActivity = array_merge($userLogs, $advertListToPaginate); // Mix les 4 repertoires d'annonces par date
+        $sellComment = $this->getDoctrine()->getManager()->getRepository('SnoozitPlatformBundle:sellComment')->findIncomingComment($this->getUser(),  $this->getUser()->getLastActivity() );
+
+        $allActivity = array_merge($userLogs, $advertListToPaginate, $sellComment); // Mix les 4 repertoires d'annonces par date
 
         usort($allActivity, array($this, 'trie_par_date'));
 
@@ -103,7 +106,6 @@ class DashBoardController extends Controller
         $date2 = strtotime($dateb->format('r'));
         return $date1 < $date2 ;
     }
-    //////////////////////////////////////////////////
 
     // Affiche les annonces de l'utilisateurs
     public function userAdvertAction()
@@ -328,6 +330,26 @@ class DashBoardController extends Controller
         $this->get('sz_advert_negoce_handler')->removeNegoce($advertNegoce);
 
         return $this->redirect($this->generateUrl('snoozit_dashboard_negociation'));
+    }
+
+    public function boughtAction(Request $request)
+    {
+        $user = $this->getUser();
+        if(!is_object($user) || !$user instanceof User){
+            throw new AccessDeniedException("Vous devez etre identifié pour acceder à cette zone");
+        }
+
+        $advertListToPaginate = $this->getAdvertManager()->getBought();
+        $advertList  = $this->get('knp_paginator')->paginate($advertListToPaginate, $request->query->getInt('page', 1),20);
+
+        $breadcrumb = array(
+            array('Dashboard', '#', true)
+        );
+
+        return $this->render('SnoozitPlatformBundle:DashBoard/Bought:bought.html.twig', array(
+            'breadcrumb'     => $breadcrumb,
+            'advertList'     => $advertList,
+        ));
     }
 
 

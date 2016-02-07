@@ -172,7 +172,6 @@ class User extends BaseUser
      */
     protected $interests;
 
-
     public function __construct()
     {
         parent::__construct();
