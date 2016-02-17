@@ -1,0 +1,49 @@
+{% if score >= 5 %}
+    <p class="text-star fa-2x">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+    </p>
+{% elseif score >= 4 and score < 5 %}
+    <p class="text-star fa-2x">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-o"></i>
+    </p>
+{% elseif score >= 3 and score < 4 %}
+    <p class="text-star fa-2x">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+    </p>
+{% elseif score >= 2 and score < 3 %}
+    <p class="text-star fa-2x">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+    </p>
+{% elseif score >= 1 and score < 2 %}
+    <p class="text-star fa-2x">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+    </p>
+{% else %}
+    <p class="text-star fa-2x">
+        <i class="fa fa-star-half-o"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+    </p>
+{% endif %}

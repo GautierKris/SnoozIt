@@ -1,0 +1,23 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="evaluationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Evaluer {{ user.username }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>Vous avez déjà eu affaire à <strong>{{ user.username }}</strong> ? Evaluer cette prise de contact.</p>
+                <div class="rating" id="rating" rel="{{ user.id }}">
+                    <a href="#5" rel="5" class="ratingvalue" title="Donner 5 étoiles">☆</a>
+                    <a href="#4" rel="4" class="ratingvalue" title="Donner 4 étoiles">☆</a>
+                    <a href="#3" rel="3" class="ratingvalue" title="Donner 3 étoiles">☆</a>
+                    <a href="#2" rel="2" class="ratingvalue" title="Donner 2 étoiles">☆</a>
+                    <a href="#1" rel="1" class="ratingvalue" title="Donner 1 étoile">☆</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

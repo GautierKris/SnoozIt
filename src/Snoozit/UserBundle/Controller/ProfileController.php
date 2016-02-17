@@ -3,6 +3,7 @@
 namespace Snoozit\UserBundle\Controller;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserInterface;
@@ -10,7 +11,6 @@ use Snoozit\PlatformBundle\Entity\UserProfileComment;
 use Snoozit\UserBundle\Entity\User;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use Snoozit\UserBundle\Form\LocalisationType;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -54,6 +54,7 @@ class ProfileController extends BaseController
         $advertListBoughted = $this->getDoctrine()->getRepository('SnoozitPlatformBundle:Advert')->findBy(array('soldTo' => $user));
 
         $userFollow = $this->checkIfUserFollow($user);
+        $userAsEvaluated = $this->getDoctrine()->getRepository('SnoozitUserBundle:Evaluation')->findOneBy(array('user' => $this->getUser() , 'evaluated' => $user));
 
         return $this->render('SnoozitUserBundle:Profile:show.html.twig', array(
             'user' => $user,
@@ -62,6 +63,7 @@ class ProfileController extends BaseController
             'userFollow' => $userFollow,
             'lastComment' => $lastComment,
             'advertListBoughted'  => $advertListBoughted,
+            'userAsEvaluated'       => count($userAsEvaluated),
             'form'      => $userProfileCommentHandler->createView()
         ));
     }

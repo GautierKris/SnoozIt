@@ -7,6 +7,7 @@
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 
         {% if a.userId != app.user.id %}
+
             {% if a.guestUsername is null %}
 
                 {% if a.userId|userFollow %} <!-- Si je FOLLOW déja l'auteur -->
@@ -22,8 +23,7 @@
             {% endif %}
             <li class="divider"></li>
         {% endif %}
-
-
+    {% if a.guestUsername is null %}
         {% if a.userId != app.user.id %}
             <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}"><i class="fa fa-align-justify"></i> Afficher plus</a></li>
             <li><a href="#"><i class="fa fa-bell"></i>Signaler ce contenu à <span class="text-primary">Snoozit</span></a></li>
@@ -46,6 +46,9 @@
         {% else %}
             <li><a class="btn btn-xs btn-success" href="{{ path('snoozit_dashboard_edit_advert', {'advert' : a.id }) }}">Editer mon annonce</a></li>
         {% endif %}
+        {% else %}
+            <li><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}" class="btn btn-xs btn-success interest-btn"><i class="fa fa-shopping-cart"></i> Afficher plus</a></li>
+    {% endif %}
 
         <!-- Si je ne suis pas authentifier -->
     {% else %}

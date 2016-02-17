@@ -10,14 +10,7 @@
                             </div>
                             <div class="col-xs-10 divNoPadding">
                                 <h4><a href="{{ path('fos_user_profile_show_name', {'username' : u.username }) }}" class="text-grey">{{ u.username }}
-
-                                    <span class="text-star">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-o"></i>
-                                        <i class="fa fa-star-half-empty"></i>
-                                    </span>
+                                        {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': u.id|GetUserScore } %}
                                     </a>
                                     <div id="loading{{ u.id }}" class="pull-right hidden">
                                         <img src="{{ asset('bundles/snoozitplatform/images/loading.gif') }}" alt="Loading" class="loader-img">

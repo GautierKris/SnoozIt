@@ -16,7 +16,7 @@
                 {# 1/ Si on est connecté #}
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 
-                    {# 2/ Si il y a quelque chose ou s'abonner  de préciser#}
+                    {# 2/ Si il y a quelque chose ou s'abonner de préciser#}
                     {% if followLink is defined and followLink is not null %}
                         {# 3/ L'utilisateur est in abonné à cette rubrique #}
 

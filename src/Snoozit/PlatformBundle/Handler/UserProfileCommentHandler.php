@@ -94,7 +94,14 @@ class UserProfileCommentHandler
     // Injecte les données initiales
     private function injectData()
     {
-        $userProfile = $this->requestStack->getCurrentRequest()->attributes->get('user')->getId();
+        $requestUser = $this->requestStack->getCurrentRequest()->attributes->get('user');
+
+        if($requestUser){
+            $userProfile = $requestUser->getId();
+        }else{
+           $userProfile = $this->user;
+        }
+
         $entity = $this->entityManager->getRepository('SnoozitUserBundle:User')->find($userProfile);
         if(!$entity){
             throw new EntityNotFoundException("Ce profile n'existe pas.");

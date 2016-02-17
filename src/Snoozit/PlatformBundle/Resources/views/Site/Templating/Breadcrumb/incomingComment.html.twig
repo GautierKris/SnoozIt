@@ -1,4 +1,4 @@
-{% if incomingList %}
+{% if incomingList  %}
     {% for i in incomingList %}
 
         {% if i.advertOptionType is defined %}
@@ -17,14 +17,8 @@
                          class="img-responsive pull-left img-circle">
                     <a class="text-bold"
                        href="{{ path('fos_user_profile_show_name', {'username' : i.user.username }) }}">{{ i.user.username }}</a>
-                        <span class="text-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                        <i class="fa fa-star-half-empty"></i>
-                    </span>
-                        <span class="pull-right">
+                    {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': i.user.id|GetUserScore } %}
+                    <span class="pull-right">
                             {{ i.created|date('d/m/y h:i') }}
                         </span>
                     <p>{{ i.user.city.departement.region.nom }}</p>
@@ -235,14 +229,9 @@
                                  class="img-responsive pull-left img-circle">
                             <a class="text-bold"
                                href="{{ path('fos_user_profile_show_name', {'username' : i.user.username }) }}">{{ i.user.username }}</a>
-                    <span class="text-star">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                    <i class="fa fa-star-half-empty"></i>
-                </span>
-                    <span class="pull-right">
+                            {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': i.user.id|GetUserScore } %}
+
+                            <span class="pull-right">
                         {{ i.created|date('d/m/y h:i') }}
                     </span>
                             <p>{{ i.user.city.departement.region.nom }}</p>
@@ -260,7 +249,5 @@
             </li>
         {% endif %}
     {% endfor %}
-{% else %}
-    <li><a href="#">Pas de notification</a></li>
 {% endif %}
 

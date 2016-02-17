@@ -18,13 +18,15 @@
                     <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-xs btn-primary btn-rounded">Editer mon profile</a>
                 {% else %}
                     {% if userFollow %}
-                        <a href="{{ path('snoozit_follow_user', {'id' : user.id }) }}" class="btn btn-xs btn-success btn-rounded">Se désabonner </a>
+                        <span class="btn btn-xs btn-success btn-rounded ajaxRemoveAbo" id="remove{{ user.id }}" rel="{{ user.id }}">
+                             <span class="text text-bold">Se désabonner</span>
+                         </span>
                     {% else %}
-                        <a href="{{ path('snoozit_follow_user', {'id' : user.id }) }}" class="btn btn-xs btn-primary btn-rounded">S'abonner à {{ user.username }}</a>
+                        <span class="ajaxNewAbo btn btn-xs btn-primary btn-rounded text-bold" id="{{ user.id }}">S'abonner à {{ user.username }}</span>
                     {% endif %} {# Fin de 3  #}
                 {% endif %}
             {% else %}
-                <a href="#" class="btn btn-xs btn-primary btn-rounded">S'abonner à {{ user.username }}</a>
+                <a href="{{ path('fos_user_security_login') }}" class="btn btn-xs btn-primary btn-rounded">S'abonner à {{ user.username }}</a>
             {% endif %}
             <hr />
             <h3 class="text-primary">Localisation</h3>
@@ -34,22 +36,97 @@
                 {{ user.city.nom }} ({{ user.city.postal|truncate(2, '', false) }})
             </p>
             <h3 class="text-primary">Niveau</h3>
-            <p class="text-star fa-2x">
-                <i class="fa fa-star "></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-empty"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-            </p>
-            <p>153 Votes</p>
+            {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluation.html.twig' with {'score': user.score } only %}
             <hr>
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERERD') %}
+            {% if user.note %}
+
+                {% set note1 = 0 %}
+                {% set note2 = 0 %}
+                {% set note3 = 0 %}
+                {% set note4 = 0 %}
+                {% set note5 = 0 %}
+
+                {% for n in user.note %}
+                    {% if n.note == 5 %}
+                        {% set note5 = note5 + 1 %}
+                    {% elseif n.note == 4 %}
+                        {% set note4 = note4 + 1 %}
+                    {% elseif n.note == 3 %}
+                        {% set note3 = note3 + 1 %}
+                    {% elseif n.note == 2 %}
+                        {% set note2 = note2 + 1 %}
+                    {% elseif n.note == 1 %}
+                        {% set note1 = note1 + 1 %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <p class="text-star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <span class="text-grey"> ({{ note1 }})</span>
+            </p>
+            <p class="text-star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <span class="text-grey"> ({{ note2 }})</span>
+            </p>
+            <p class="text-star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <span class="text-grey"> ({{ note3 }})</span>
+            </p>
+            <p class="text-star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <span class="text-grey"> ({{ note4 }})</span>
+            </p>
+            <p class="text-star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <span class="text-grey"> ({{ note5 }})</span>
+            </p>
+
+
+            <p>Participant : {{ user.note|length }}</p>
+            <hr>
+
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 {% if app.user.id != user.id %}
-                    <p><a class="fa fa-thumbs-o-up"> Ce vendeur a votre confiance</a></p>
-                    <p><a class="fa fa-thumbs-o-down"> Recommanderiez pas ce vendeur</a></p>
+                    {% if userAsEvaluated == 1 %}
+                        <p class="fa fa-thumbs-o-up text-bold text-primary" > Vous avez déja évaluer {{ user.username }}</p>
+                        {% else %}
+                            <p><a class="fa fa-thumbs-o-up text-bold text-primary" href="#" data-toggle="modal" data-target="#evaluationModal"> Evaluez {{ user.username }}</a></p>
+                            {{ include('SnoozitUserBundle:Profile:evaluationModal.html.twig') }}
+                    {% endif %}
                 {% endif %}
+                {% else %}
+                    <p><a class="fa fa-lightbulb-o text-bold text-primary" href="{{ path('fos_user_security_login') }}"> Connectez vous pour évaluer {{ user.username }} </a></p>
             {% endif %}
 
+            <hr>
+            <div class="list-group-stat">
+                <ul class="list-group text-left">
+                    <li class="list-group-item"><i class="fa fa-shopping-cart fa-2x pull-left  text-primary"></i>Annonce parue <span class="badge badge-primary">{{ user.adverts|length }}</span></li>
+                    <li class="list-group-item"><i class="fa fa-legal fa-2x pull-left text-success"></i>Vente réussie <span class="badge badge-success">{{ user.totalSolded }}</span></li>
+                    <li class="list-group-item"><i class="fa fa-users fa-2x pull-left  text-warning"></i>Abonnés <span class="badge badge-warning">{{ user.totalFollower }}</span></li>
+                    <li class="list-group-item"><i class="fa fa-user fa-2x pull-left  text-info"></i>Abonnement <span class="badge badge-info">{{ user.totalAbonnement }}</span></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

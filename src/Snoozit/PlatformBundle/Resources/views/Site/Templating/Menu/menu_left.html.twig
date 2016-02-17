@@ -6,10 +6,9 @@
 
         <ul class="nav nav-pills nav-stacked">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_homepage') }}"><i class="fa fa-user-secret fa-user-co"></i> Mon panel <span class="label label-hidden pull-right">3</span></a></li>
+                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_homepage') }}"><i class="fa fa-user-secret fa-user-co"></i> Mon espace <span class="label label-hidden pull-right">3</span></a></li>
                 <li role="menuitem" class="mainParentCategoryMenu"><a href="#"><i class="fa fa-pagelines fa-user-co"></i> Créer une page <span class="label label-hidden pull-right">Projet</span></a></li>
                 <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears fa-user-co"></i> Modifier mon profil</a></li>
-                <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_homepage') }}"><i class="fa fa-comments fa-user-co"></i> Notification <span class="label label-hidden pull-right">0</span></a></li>
                 <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_user_advert') }}"><i class="fa fa-sign-out fa-user-co"></i> Mes annonces </a></li>
                 <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_interest') }}"><i class="fa fa-dashboard     fa-user-co"></i> Intéret <span class="label label-hidden pull-right">{{ stats.totalinterest }}</span></a></li>
                 <li role="menuitem" class="mainParentCategoryMenu"><a href="{{ path('snoozit_dashboard_negociation') }}"><i class="fa fa-exchange fa-user-co"></i> Négociation <span class="label label-hidden pull-right">{{ stats.inNegoce }}</span></a></li>

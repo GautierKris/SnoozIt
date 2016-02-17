@@ -38,8 +38,7 @@
                             </i>
                         </span>
                         <span class="pull-right">
-                                <i class="fa fa-star text-star"></i>
-                                <i class="fa fa-star text-star"></i>
+                           {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': a.user.id|GetUserScore } %}
                         </span>
 
                 </h4>

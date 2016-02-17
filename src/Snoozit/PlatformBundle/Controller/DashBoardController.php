@@ -59,8 +59,6 @@ class DashBoardController extends Controller
 
     private function mergeAllActivity($advertListToPaginate)
     {
-        //$userLogs = $this->getUser()->getUserLogs();
-        //$userLogs = $userLogs->toArray();
         $userLogs = $this->getDoctrine()->getManager()->getRepository('SnoozitPlatformBundle:AdvertInterest')->getInterestNotification($this->getUser());
         $sellComment = $this->getDoctrine()->getManager()->getRepository('SnoozitPlatformBundle:sellComment')->findIncomingComment($this->getUser(),  $this->getUser()->getLastActivity() );
 
@@ -153,6 +151,12 @@ class DashBoardController extends Controller
         if($advert->getUser() != $this->getUser()){
             throw new AccessDeniedException("Vous n'avez rien à faire ici, ce n'est pas votre annonce - Bon message à revoir, je sais");
         }
+
+        // Si l'annonce est déja vendu elle devient non modifiable.
+        if($advert->getSold()){
+            return $this->forward('SnoozitPlatformBundle:DashBoard:editAdvertAlreadySold', array('advert' => $advert));
+        }
+
         $advertHandler = $this->get('sz_advert_handler');
 
         // Génération du breadcrumb
@@ -165,7 +169,7 @@ class DashBoardController extends Controller
         if($advertHandler->process()){
             return $this->redirect($this->generateUrl('snoozit_show_advert', array(
                 'slug' => $advert->getSlug(),
-                'id'  => $advert->getId())));
+                'id'   => $advert->getId())));
         }
 
         return $this->render('SnoozitPlatformBundle:DashBoard/EditAdvert:editAdvert.html.twig',  array(
@@ -352,12 +356,37 @@ class DashBoardController extends Controller
         ));
     }
 
+    public function confirmedAction(Request $request)
+    {
+        $user = $this->getUser();
+        if(!is_object($user) || !$user instanceof User){
+            throw new AccessDeniedException("Vous devez etre identifié pour acceder à cette zone");
+        }
 
+        $advertListToPaginate = $this->getAdvertManager()->getConfirmed();
+        $advertList  = $this->get('knp_paginator')->paginate($advertListToPaginate, $request->query->getInt('page', 1),20);
 
+        $breadcrumb = array(
+            array('Dashboard', '#', true)
+        );
 
+        return $this->render('SnoozitPlatformBundle:DashBoard/Confirmed:confirmed.html.twig', array(
+            'breadcrumb'     => $breadcrumb,
+            'advertList'     => $advertList,
+        ));
+    }
 
+    public function editAdvertAlreadySoldAction(Advert $advert)
+    {
+        $breadcrumb = array(
+            array('Dashboard', $this->generateUrl('snoozit_dashboard_homepage')),
+            array("Impossible d'éditer une annonce"),
+        );
 
-
-
+        return $this->render('SnoozitPlatformBundle:DashBoard/EditAdvert:editAdvertSolded.html.twig', array(
+            'breadcrumb' => $breadcrumb,
+            'advert'    => $advert
+        ));
+    }
 
 }

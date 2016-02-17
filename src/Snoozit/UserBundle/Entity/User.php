@@ -172,6 +172,18 @@ class User extends BaseUser
      */
     protected $interests;
 
+    /**
+ * @ORM\OneToMany(targetEntity="Snoozit\UserBundle\Entity\Evaluation", mappedBy="evaluated", cascade={"persist", "remove"})
+ * @ORM\OrderBy({ "created" = "desc" })
+ */
+    private $note;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Snoozit\PlatformBundle\Entity\Advert", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({ "created" = "desc" })
+     */
+    private $adverts;
+
     public function __construct()
     {
         parent::__construct();
@@ -179,12 +191,61 @@ class User extends BaseUser
         $this->hiddenUsers = new ArrayCollection();
         $this->profileComments = new ArrayCollection();
         $this->interests = new ArrayCollection();
+        $this->note = new ArrayCollection();
+        $this->adverts = new ArrayCollection();
         $this->showphone = true;
         $this->last_activity = new \DateTime();
         $this->totalFollower = 0;
         $this->tutonotification = true;
     }
-    
+
+    // Pour connetre l'évaluation du membre
+    public function getScore()
+    {
+
+        if(!$this->getNote()){
+            return null;
+        }
+
+        // Initialisation des variables
+        $totalEvaluation = count($this->getNote());
+        $note1 = 0;
+        $note2 = 0;
+        $note3 = 0;
+        $note4 = 0;
+        $note5 = 0;
+
+
+        foreach($this->getNote() as $row)
+        {
+            if($row->getNote() == 5){
+                $note5 += 5;
+            }
+            if($row->getNote() == 4){
+                $note4 += 4;
+            }
+            if($row->getNote() == 3){
+                $note3 += 3;
+            }
+            if($row->getNote() == 2){
+                $note2 += 2;
+            }
+            if($row->getNote() == 1){
+                $note1 += 1;
+            }
+        }
+
+        $totalNote = $note1+$note2+$note3+$note4+$note5;
+
+        if($totalNote !=0){
+            $result = $totalNote/$totalEvaluation;
+        }else{
+            $result = 0;
+        }
+
+        return $result;
+    }
+
     /* Liste des method utilise pour l'affiche  des utilisateurs connectés */
     public function isOnline()
     {
@@ -202,6 +263,23 @@ class User extends BaseUser
     public function totalAbonnement()
     {
         return count($this->getFollowedcategories()->toArray()+$this->getFollowedcity()->toArray()+$this->getFolloweddepartement()->toArray()+ $this->getFollowedregion()->toArray()+$this->getFolloweduser()->toArray());
+    }
+
+    /* Compte les annonces vendues */
+    public function totalSolded()
+    {
+        $adverts = $this->getAdverts();
+        $count = 0;
+
+        if($adverts){
+            foreach ($adverts as $advert) {
+                if($advert->getSold()){
+                    $count += 1;
+                }
+            }
+        }
+
+        return $count;
     }
 
     /**
@@ -843,5 +921,71 @@ class User extends BaseUser
     public function getInterests()
     {
         return $this->interests;
+    }
+
+    /**
+     * Add note
+     *
+     * @param \Snoozit\UserBundle\Entity\Evaluation $note
+     * @return User
+     */
+    public function addNote(\Snoozit\UserBundle\Entity\Evaluation $note)
+    {
+        $this->note[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Remove note
+     *
+     * @param \Snoozit\UserBundle\Entity\Evaluation $note
+     */
+    public function removeNote(\Snoozit\UserBundle\Entity\Evaluation $note)
+    {
+        $this->note->removeElement($note);
+    }
+
+    /**
+     * Get note
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * Add adverts
+     *
+     * @param \Snoozit\PlatformBundle\Entity\Advert $adverts
+     * @return User
+     */
+    public function addAdvert(\Snoozit\PlatformBundle\Entity\Advert $adverts)
+    {
+        $this->adverts[] = $adverts;
+
+        return $this;
+    }
+
+    /**
+     * Remove adverts
+     *
+     * @param \Snoozit\PlatformBundle\Entity\Advert $adverts
+     */
+    public function removeAdvert(\Snoozit\PlatformBundle\Entity\Advert $adverts)
+    {
+        $this->adverts->removeElement($adverts);
+    }
+
+    /**
+     * Get adverts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAdverts()
+    {
+        return $this->adverts;
     }
 }

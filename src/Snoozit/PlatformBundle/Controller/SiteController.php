@@ -42,6 +42,7 @@ class SiteController extends Controller
         $searchEngineHandler = $this->getSearchEngineHandler();
 
         $regions = $em->getRepository('SnoozitPlatformBundle:Localisation\Region')->findAll();
+
         return $this->render('SnoozitPlatformBundle:Site/Welcome:welcome.html.twig', array('regions' => $regions, 'form' => $searchEngineHandler->createView()));
     }
 
@@ -100,6 +101,7 @@ class SiteController extends Controller
 
     }
 
+    // La pub du haut des timeline
     public function mediaPubAction()
     {
         $advertManager = $this->getAdvertManager();
@@ -156,6 +158,20 @@ class SiteController extends Controller
         $date1 = strtotime($datea->format('r'));
         $date2 = strtotime($dateb->format('r'));
         return $date1 < $date2 ;
+    }
+
+    public function ErrorPageAction($codeErreur)
+    {
+        $breadcrumb = array(
+            array('Il y a une erreur', '#', true)
+        );
+        if($codeErreur == 1){
+            $motif = "L'annonce qui vous interesse appartient a un invité et ne peut donc pas etre comptabilisé.";
+        }else{
+            $motif = "L'annonce qui vous interesse appartient a un invité et ne peut donc pas etre comptabilisé.";
+        }
+
+        return $this->render('SnoozitPlatformBundle:Error404:errorPage.html.twig', array('breadcrumb' => $breadcrumb, 'motif' => $motif));
     }
 
 

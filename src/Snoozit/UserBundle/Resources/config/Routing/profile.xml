@@ -45,4 +45,7 @@
         <default key="_controller">SnoozitUserBundle:Profile:profileCommentsPage</default>
     </route>
 
+    <route id="snoozit_evaluation_system" path="/evaluate/{id}/{note}" methods="GET POST">
+        <default key="_controller">SnoozitUserBundle:Evaluation:index</default>
+    </route>
 </routes>

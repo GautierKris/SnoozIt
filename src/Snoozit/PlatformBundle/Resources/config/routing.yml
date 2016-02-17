@@ -6,4 +6,6 @@ snoozit_platform_welcome:
     path:     /welcome
     defaults: { _controller: SnoozitPlatformBundle:Site:welcome }
 
-
+snoozit_platform_error_page:
+    path:     /erreur/{codeErreur}
+    defaults: { _controller: SnoozitPlatformBundle:Site:ErrorPage }

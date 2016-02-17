@@ -1,0 +1,49 @@
+<div class="list-group">
+    {% if app.user|CountPanier >= 1 %}
+        {% for a in app.user.interests %}
+            {% if not a.advert.sold %}
+                {% if a.advertOptionType.id == 3 or a.advertOptionType.id == 5 %}
+                    {% set color = "danger" %}
+                {% elseif a.advertOptionType.id == 10 or a.advertOptionType.id == 11 %}
+                    {% set color = "primary" %}
+                {% else %}
+                    {% set color = "primary" %}
+                {% endif %}
+
+                <a href="{{ path('snoozit_platform_panier_homepage') }}" class="list-group-item clearfix">
+                    <div class="col-md-2 divNoPadding-left">
+                        {% if a.advert.pictureOne is not null %}
+                            <img src="{{ asset('uploads/annonce/'~a.advert.pictureOne.path) }}" alt="..." class="img-thumbnail img-responsive">
+                        {% else %}
+                            <img src="{{ asset('uploads/annonce/noAvatar.png') }}" alt="..." class="img-thumbnail img-responsive">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 divNoPadding">
+                        <h5 class="list-group-item-heading"><span class=" text-primary text-bold">{{ a.advert.title }}</span></h5>
+                        <p class="list-group-item-text">
+                            {{ a.advert.user.username }}
+                            {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': a.advert.user.id|GetUserScore } %}
+
+                            {% if a.advert.inProgress is not null and a.advert.inProgress == app.user %}
+                                <span class="label label-{{ color }}">{{ a.advertOptionType.type }}</span>
+                            {% elseif a.advert.inProgress is not null and a.advert.inProgress != app.user %}
+                                <span class="label label-warning">Vente en cours...</span>
+                            {% else %}
+                                <span class="label label-{{ color }}">{{ a.advertOptionType.type }}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-md-2">
+                        <br>
+                        <p class="price text-bold text-center">{{ a.advert.price }}€</p>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    <a href="{{ path('snoozit_platform_panier_homepage') }}" class="list-group-item clearfix">
+        <button class="btn btn-xs btn-padding btn-rounded btn-primary">Voir mon panier</button>
+    </a>
+    {% else %}
+        <p class="list-group-item"><i class="fa fa-shopping-cart"></i><em> Votre panier est vide.</em> </p>
+    {% endif %}
+</div>

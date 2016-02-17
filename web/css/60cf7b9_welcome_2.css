@@ -1,0 +1,112 @@
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+
+body, html, .wlc-container, .row, .container-fluid { height: 100% }
+
+body{
+    background: url("../../bundles/snoozitplatform/images/blue.jpg");
+    background-size: cover;
+    font-size: 12px;
+    color: #fff;
+}
+
+/* Les titres */
+h3{ font-size: 2em; color: #fff; margin-bottom: 50px;}
+.text-star{ color: #f0ad4e }
+
+.stylised-font{
+    font-family: 'Poiret One', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+a{ color: #fff; line-height: 2em }
+a:hover{ text-decoration: none; color: #000}
+.inherit{ color: inherit; }
+
+.wlc-container h1{
+    font-family: 'Poiret One', cursive;
+    color: #fff;
+    font-size: 3em;
+    text-shadow: 1px 1px 1px #000;
+    margin: 0;
+    text-align: center;
+    font-weight: 800;
+    line-height: 2em;
+}
+
+/* La barre de recherche */
+#mainSearchContainer{
+    border-radius: 0;
+    min-height: 10px;
+    padding: 10px;
+    border: 0;
+}
+#mainSearchContainer form{
+    background: #fff;
+    text-align: center;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+#mainSearchContainer button{
+    border-radius: 0;
+}
+#mainSearchContainer .btn-success{ border-radius: 0}
+#mainSearchContainer input{
+    border: none;
+    height: 30px;
+}
+#mainSearchContainer select.form-control{
+    background: transparent;
+    background: url('../../bundles/snoozitplatform/images/br_down.png') no-repeat 100% 8px;
+    border: none;
+    border-left: 1px solid #ddd;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    overflow: hidden;
+    color:grey;
+    -webkit-appearance: none;
+    height: 30px;
+    padding: 0 10px;
+}
+#mainSearchContainer .snoozit{
+    margin-top: 0;
+    text-align: center;
+    font-family: 'Poiret One', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #0088cc;
+    font-size: 2em;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+}
+#mainSearchContainer .snoozit > a:hover{
+    color: #0088cc;
+}
+.reg>.btn{
+    padding: 2px 20px;
+    margin: 20px 5px 0;
+}
+
+.mapcontainer{
+    max-width: 500px;
+    margin:auto;
+    cursor: pointer;
+}
+.mapcontainer .mapTooltip {
+    position : fixed;
+    background-color : #fff;
+    opacity: 0.70;
+    filter:alpha(opacity=70);
+    border-radius:10px;
+    padding : 10px;
+    z-index: 1000;
+    max-width: 200px;
+    display:none;
+    color:#343434;
+}
+.map{
+}
+
+
+
+

@@ -6,29 +6,22 @@
 
             {% for m in mediaPubs %}
                 {% set picturePath = 'uploads/annonce/'~m.path %}
-                <a class="col-md-1 col-xs-2 thumbnail thumbnail-min" href="{{ path('snoozit_show_advert', {'slug': m.slug, 'id': m.id }) }}">
-                    <img src="{{ asset(picturePath) }}" alt="{{ m.slug }}" class="img-responsive" />
+                <a class="col-md-1 col-xs-2 thumbnail thumbnail-min"
+                   href="{{ path('snoozit_show_advert', {'slug': m.slug, 'id': m.id }) }}">
+                    <img src="{{ asset(picturePath) }}" alt="{{ m.slug }}" class="img-responsive"/>
                     <p class="help-block text-center">{{ m.price|truncate(7) }}€</p>
                 </a>
             {% endfor %}
 
-            {% if count %}
-                {% for i in count..11   %}
+            {% if count < 12 %}
+                {% for i in count..11 %}
                     <a class="col-md-1 col-xs-2 thumbnail thumbnail-min">
-                        <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive" />
+                        <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..."
+                             class="img-responsive"/>
                         <p class="help-block text-center">€</p>
                     </a>
                 {% endfor %}
-
             {% endif %}
-        {% else %}
-            {% for i in 0..11   %}
-                <a class="col-md-1 col-xs-2 thumbnail thumbnail-min">
-                    <img src="{{ asset('bundles/snoozitplatform/images/no-image-annonce.png') }}" alt="..." class="img-responsive" />
-                    <p class="help-block text-center">€</p>
-                </a>
-            {% endfor %}
         {% endif %}
-
     </div>
 </div>

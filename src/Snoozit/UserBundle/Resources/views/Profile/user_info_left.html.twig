@@ -14,12 +14,6 @@
         {{ app.user.city.nom }} ({{ app.user.city.postal|truncate(2, '', false) }})
     </p>
     <h3 class="text-primary">Niveau</h3>
-    <p class="text-star">
-        <i class="fa fa-star "></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star-half-empty"></i>
-        <i class="fa fa-star-o"></i>
-        <i class="fa fa-star-o"></i>
-    </p>
-    <p>153 Votes</p>
+    {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluation.html.twig' with {'score': app.user.score } %}
+    <p>Participant : {{ app.user.note|length }}</p>
 </div>

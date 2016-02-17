@@ -18,7 +18,6 @@ snoozit_follow_city:
     path: /city/{id}
     defaults: { _controller: SnoozitPlatformBundle:Follow:followCity }
 
-
 snoozit_refuse_abonnement:
     path: /refuse/abonnement/{follower}
     defaults: { _controller: SnoozitPlatformBundle:Follow:refuseAbonnement }

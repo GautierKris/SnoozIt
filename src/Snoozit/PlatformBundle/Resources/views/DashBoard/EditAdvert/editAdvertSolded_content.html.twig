@@ -1,0 +1,14 @@
+<div  class="row" id="addAnnonce">
+
+    <div class="col-md-12 text-center">
+
+        <h3 class="text-bold">{{ advert.title }}</h3>
+        <p class="text-success">Vendu le {{ advert.updated|date('d M Y \\à h:i') }}</p>
+
+        <p>Vous ne pouvez plus modifier cette annonce, vous avez vendue votre produit</p>
+
+        <a href="{{ path('snoozit_dashboard_homepage') }}">Retour sur mon espace</a>
+    </div>
+
+    <!-- Container -->
+</div>

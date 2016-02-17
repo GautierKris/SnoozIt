@@ -18,9 +18,9 @@
             <h5>Abonné</h5>
             <p class="text-success"> {{ app.user.totalFollower }}</p>
         </a>
-        <a class="col-md-2" href="#">
+        <a class="col-md-2" href="{{ path('snoozit_dashboard_confirmed') }}">
             <h5>Vente confirmé</h5>
-            <p class="text-success">0</p>
+            <p class="text-success">{{ stats.confirmed }}</p>
         </a>
         <a class="col-md-2" href="{{ path('snoozit_dashboard_bought') }}">
             <h5>Achat</h5>
@@ -65,7 +65,7 @@
     </div>
     <div class="col-md-5 sc-stats-box divNoPadding-left">
         {#{% include 'SnoozitPlatformBundle:DashBoard/Interest:dsh_interest.html.twig' %}#}
-        {% include 'SnoozitPlatformBundle:Dashboard/Activity:stats.html.twig' %}
+        {% include 'SnoozitPlatformBundle:DashBoard/Activity:stats.html.twig' %}
         {% include 'SnoozitPlatformBundle:DashBoard/UserPropose:userPropose.html.twig' %}
     </div>
 </div>

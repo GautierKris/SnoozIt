@@ -52,3 +52,7 @@ snoozit_dashboard_manage_advert:
 snoozit_dashboard_bought:
     path: /manager/bought
     defaults: { _controller: SnoozitPlatformBundle:DashBoard:bought}
+
+snoozit_dashboard_confirmed:
+    path: /manager/confirmed
+    defaults: { _controller: SnoozitPlatformBundle:DashBoard:confirmed}

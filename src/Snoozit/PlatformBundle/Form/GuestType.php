@@ -17,7 +17,7 @@ class GuestType extends AbstractType
         $builder
             ->add('username','text', array('attr' => array('class' => 'form-control input-sm', 'placeholder' => 'John Doe')))
             ->add('email','email', array('attr' => array('class' => 'form-control input-sm', 'placeholder' => 'Johndoe@email.com')))
-            ->add('phone', 'text', array('attr' => array('class' => 'form-control input-sm', 'placeholder' => 'John Doe')))
+            ->add('phone', 'text', array('required' => false,'attr' => array('class' => 'form-control input-sm', 'placeholder' => 'John Doe')))
             ->add('showphone','checkbox')
         ;
 

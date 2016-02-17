@@ -100,13 +100,13 @@
                                     <a class="btn btn-warning btn-xs btn-rounded btn-block" href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
                                     <span class="btn btn-default btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                 {% elseif u.advertOptionType.id == 7  %}
-                                    <a href="{{ path('snoozit_platform_produit_recu', {'id' : u.id }) }}" class="btn btn-xs btn-primary btn-rounded btn-block">Produit reçu</a>
+                                    <a href="{{ path('snoozit_platform_produit_recu', {'id' : u.id }) }}" class="btn btn-xs btn-primary btn-rounded btn-block"><i class="fa fa-thumbs-up"></i> Produit reçu</a>
                                     <a class="btn btn-warning btn-xs btn-rounded btn-block " href="{{ path('snoozit_dashboard_desist_interest', {'id' : u.id}) }}"><i class="fa fa-recycle"></i> Me désister</a>
                                     <span class="btn btn-primary btn-xs btn-rounded btn-block toggleSellComment" rel="{{ u.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                     <a href="#" class="btn btn-rounded btn-xs btn-send btn-padding">Reporter un probleme</a>
                                 {% elseif u.advertOptionType.id == 10 %}
                                     <span class="btn btn-xs btn-warning btn-rounded btn-block">En attente du produit</span>
-                                    <a class="btn btn-xs btn-success btn-rounded btn-block " href="{{ path('snoozit_platform_produit_recu', {'id' : u.id}) }}">Produit reçu</a>
+                                    <a class="btn btn-xs btn-success btn-rounded btn-block " href="{{ path('snoozit_platform_produit_recu', {'id' : u.id}) }}"><i class="fa fa-thumbs-up"></i> Produit reçu</a>
                                     <span class="btn btn-xs btn-primary btn-rounded btn-block toggleSellComment" rel="{{ u.id }}"><i class="fa fa-comments"></i>  Q & R ({{ u.sellComments|length }})</span>
                                     <a href="#" class="btn">Reporter un probleme</a>
                                 {% elseif u.advertOptionType.id == 11 %}

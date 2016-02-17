@@ -1,6 +1,6 @@
 <h3><i class="fa fa-shopping-cart"></i> {{ advertList|length }} \ <span class="text-bold text-warning">Liste de vos achats:</span></h3>
 <div  id="time-advert">
-        {% if advertList %}
+        {% if advertList is not empty %}
         {% for a in advertList %}
             <section>
                 <div class="well well-sm box-time-advert">
@@ -88,6 +88,6 @@
             {{ knp_pagination_render(advertList) }}
         </div>
     {% else %}
-        <h3 class="text-grey text-center">Aucune annonce pour le moment.</h3>
+        <h3 class="text-grey text-center">Vous n'avez réalisé aucun achat pour le moment.</h3>
     {% endif %}
 </div>

@@ -206,17 +206,15 @@
                             <h4>
                                 <a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug': a.slug}) }}" >{{ a.title|truncate(30,'...', true) }} </a></h4>
                             <p>
-                                <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username}) }}" >{{ a.user.username }}</a> -
+                                <a href="{{ path('fos_user_profile_show_name', {'username' : a.user.username}) }}" >{{ a.user.username }}</a>
+                                {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': a.user.id|GetUserScore } %}
+                                -
                                 <a href="{{ path('snoozit_platform_show_by_city', {'slug' : a.city_slug}) }}" class="normal-link">{{ a.city~' ('~a.postal~')' }} </a>-
                                 <a href="{{ path('snoozit_platform_show_by_category', {'slug' : a.category_slug}) }}" class="normal-link">{{ a.category }}</a></p>
                             <p>{{ a.description|truncate(80) }}</p>
                         </div>
 
                         <div class="col-xs-2 text-right">
-                            <span>
-                                <i class="fa fa-star text-star"></i>
-                                <i class="fa fa-star text-star"></i>
-                                <i class="fa fa-star text-star"></i></span>
                             <p class="price">{{ a.price }}€</p>
                         </div>
                     </div>

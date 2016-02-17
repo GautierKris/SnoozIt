@@ -20,7 +20,8 @@ class AdvertRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('a');
         $qb->select(
-            'a.title','a.urgent', 'a.sold', 'a.views' ,'a.price','a.delivery','a.success', 'a.created', 'a.updated','a.id' ,'a.slug','a.description','a.espece','a.paypal',
+            'a.title','a.urgent', 'a.sold', 'a.views','a.price','a.delivery','a.success', 'a.created', 'a.updated','a.id' ,
+            'a.slug','a.description','a.espece','a.paypal','a.cheque cheque','a.negotiable negotiable',
             'b.category', 'b.slug category_slug' , 'q.parent parentCat',
             'c.nom city', 'c.slug city_slug','c.postal',
             'u.username', 'u.id userId', 's.id soldTo' ,'t.id inProgress',
@@ -41,7 +42,7 @@ class AdvertRepository extends EntityRepository
             ->leftJoin('u.avatar', 'v')
             ->leftJoin('b.parentcategory', 'q')
             ->orderBy('a.created' , 'DESC')
-            ->where('a.sold IS NOT NULL')
+            ->where('a.sold = 0')
             ->setMaxResults(30);
 
         return $qb;
@@ -166,7 +167,7 @@ class AdvertRepository extends EntityRepository
                 'username'  => $username,
                 'isGuest'   => $guest,
                 'id'        => $userId,
-                'avatar'    => $avatar
+                'avatar'    => $avatar,
                 )
             );
 
@@ -186,6 +187,20 @@ class AdvertRepository extends EntityRepository
         return $result;
     }
 
+    // Recupere les annonces confirmées et vendues donc
+    public function getConfirmed(User $user)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.sold = 1')
+            ->andWhere('a.user = :user')
+            ->setParameter('user', $user);
+
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
     // Modifie les champs a afficher pour 1 annonce
     public function rehydrateAdvert(Advert $advert)
     {
@@ -198,6 +213,7 @@ class AdvertRepository extends EntityRepository
                 $phone      = $advert->getGuest()->getPhone();
                 $userId     = $advert->getGuest()->getId();
                 $avatar     = null;
+                $note       = null;
             }else{
                 $username  = $advert->getUser()->getUsername();
                 $connected = $advert->getUser()->isOnline();
@@ -206,6 +222,7 @@ class AdvertRepository extends EntityRepository
                 $phone     = $advert->getUser()->getPhone();
                 $userId    = $advert->getUser()->getId();
                 $avatar    = $advert->getUser()->getAvatar()->getPath();
+                $note      = $advert->getUser()->getScore();
             }
 
             $comments = $advert->getComments();
@@ -258,6 +275,7 @@ class AdvertRepository extends EntityRepository
                     'isGuest'   => $isGuest,
                     'userId'    => $userId,
                     'avatar'    => $avatar,
+                    'score'     => $note,
                 ),
                 'comments'      => $resultComments
             );

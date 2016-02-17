@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Poiret+One);
-
 body{
     background: #f5f8fa;
     font-family: "Lucida Grande", Arial, sans-serif;
@@ -13,6 +11,11 @@ body{
 #wrapSite2{ min-width: 800px; }
 .has-error{ color: #d9534f; }
 .has-error ul{ color: #d9534f; list-style-type: none; margin-left: 0; padding-left: 0}
+
+/* Les tooltips */
+
+.tooltip{ background: transparent; font-size: .9em; min-width: 120px}
+.tooltip-inner{ background: #337ab7; color: #fff;}
 
 /* Social css */
 .facebook{ color: #3b5998 }
@@ -58,6 +61,8 @@ h5{ font-size: .9em;}
 
 .badge-primary{ background: #337ab7;}
 .badge-primary:hover{ background: #296192;}
+.badge-info{ background: #31708f }
+.badge-info:hover{ background: #2d6784 }
 .badge-success{ background: #aeeb5f;}
 .badge-success:hover{ background: #9bd154;}
 .badge-danger{ background: #fe8c8c;}
@@ -311,9 +316,9 @@ select.form-control{
 
 /* Le fil d'ariane */
 .breadcrumb{ background: #fff; color: #000;}
-.breadcrumb a>i{ color: #666}
+.breadcrumb a>i{ color: #666; cursor: pointer}
 .breadcrumb a>i:hover{ color: #0088cc; }
-.breadcrumb img{ height: 20px; margin-right: 5px; margin-top: -2px}
+.breadcrumb img.avatar{ height: 20px; margin-right: 5px; margin-top: -2px}
 .breadcrumb a.btn{ position: relative; top: -2px; color: #fff;}
 .breadcrumb .connected-breadcrumb>.dropdown{ display: inline-block}
 .breadcrumb .connected-breadcrumb>a, .breadcrumb .connected-breadcrumb>.dropdown .dropdown-toggle{ border-right: 1px solid #fdf5ce; padding: 0 8px;color: #555; }
@@ -322,7 +327,7 @@ select.form-control{
 .breadcrumb .connected-breadcrumb>a.panier:hover>i{ color: #0088cc }
 .breadcrumb .connected-breadcrumb>a.panier .label{ border-radius: 50% }
 .breadcrumb .connected-breadcrumb>a.panier .label:hover{ background: #296192}
-.breadcrumb .connected-breadcrumb i.active{ color: orange }
+.breadcrumb .connected-breadcrumb i.active{ color: #0088cc }
 .breadcrumb i{ font-size: 1.3em}
 .breadcrumb i.active{ color: #0088cc; }
 
@@ -333,18 +338,21 @@ select.form-control{
     overflow-x: hidden;
     overflow-y: auto;
 }
+.breadcrumb .badgeshoppingCart{ position: relative; left: -5px; top: -8px; font-size: .8em}
+.breadcrumb .incomingCommentList a:first-child{ border-top: transparent}
 .breadcrumb .incomingCommentList li>a{ white-space: normal; }
 .breadcrumb .incomingCommentList li{ font-size: .9em; padding: 10px 0; border-bottom: 1px solid #ddd }
 .breadcrumb .incomingCommentList li h4{ margin: 0 0 5px 0}
 .breadcrumb .incomingCommentList li i.ico-incoming{ font-size: .9em}
 .breadcrumb .incomingCommentList li h4>p{ font-size: 1em}
-.breadcrumb .incomingCommentList{ padding-top: 20px}
+.breadcrumb .incomingCommentList{ padding-top: 5px}
 .breadcrumb .incomingCommentList li p.show { margin-bottom: 0; }
 .breadcrumb .incomingCommentList li h4>img{  position: relative; top: 2px; height: 24px; width: 24px}
 .breadcrumb .incomingCommentList li .advert-img>img{ height: auto; border: 2px solid #2e6da4}
 .breadcrumb .incomingCommentList li:hover{ background: #f5f5f5 }
 .breadcrumb .incomingCommentList li.owner{ border-left: 2px solid #00aced; border-right: 2px solid #00aced;}
 .breadcrumb .incomingCommentList li.customer{ border-left: 2px solid #e1e8ed; border-right: 2px solid #e1e8ed;}
+.breadcrumb .incomingCommentList .list-group{ margin-bottom: 0px}
 
 /* Les box d'annonces de la page d'accueil */
 #annonces-container .avatar > img{ width: 20px; height: 20px; float: left; margin-right: 5px; }
@@ -596,6 +604,7 @@ select.form-control{
     white-space: nowrap;
     cursor: pointer;
 }
+.dropdown-menu span.text-star > i{ font-size: .9em}
 
 #time-advert .box-time-advert-usersFound .box-header{ border:none; margin-bottom: 0; position: relative;}
 #time-advert .box-time-advert-usersFound .box-header p{ margin-bottom: 0;}
@@ -685,6 +694,10 @@ select.form-control{
     .propose-box .box .fa-star{ display: none;}
 }
 
+.box-travers{
+    overflow: hidden;
+    background: red;
+}
 .travers{ position: absolute;
     z-index: 100;
     top: 30px;
@@ -735,3 +748,23 @@ select.form-control{
 .advertListBoughted h4{ margin: 0}
 .advertListBoughted p{ margin: 0}
 
+/* Modal box pour Evaluation */
+.rating {
+    direction: rtl;
+}
+.rating a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 3em;
+    transition: color .4s;
+}
+.rating a:hover,
+.rating a:focus,
+.rating a:hover ~ a,
+.rating a:focus ~ a {
+    color: orange;
+    cursor: pointer;
+}
+
+.list-group-stat i{ position: relative; top: -4px; }
+.list-group-stat li.list-group-item{ background: transparent; border: none; }

@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SearchEngineController extends Controller
 {
-    public function catchAdvertAction()
+    public function catchAdvertAction(Request $request)
     {
 
         $searchEngineHandler = $this->getSearchEngineHandler();
@@ -53,7 +53,7 @@ class SearchEngineController extends Controller
                     )));
                 }
                 else{
-                    return $this->redirect($this->generateUrl('snoozit_platform_homepage'));
+                    return $this->redirect($this->generateUrl('snoozit_platform_welcome'));
                 }
 
             }else{

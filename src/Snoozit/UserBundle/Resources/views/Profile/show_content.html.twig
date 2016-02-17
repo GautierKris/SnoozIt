@@ -35,6 +35,8 @@
 
         <div class="clearfix"></div>
         <hr />
+        {% else %}
+        <p class="text-primary text-center"><em><i class="fa fa-lightbulb-o"></i> Vous pourriez poster un commentaire sur {{ user.username }} si vous étiez connecté</em></p>
     {% endif %}
 
     <h3>Flux d'activités:</h3>
@@ -99,7 +101,7 @@
                             </div>
                             <div class="col-xs-10">
 
-                                <h4 class="text-primary">{{ a.title }}</h4>
+                                <h4 class="text-primary"><a href="{{ path('snoozit_show_advert', {'id' : a.id, 'slug' : a.slug}) }}">{{ a.title }}</a></h4>
                                 <p class="text-grey text-bold">€ {{ a.price }}</p>
 
                                 <div class="description row">
@@ -142,20 +144,14 @@
 
     <div class="profile-comment-box">
 
-        {% if user.profileComments %}
+        {% if user.profileComments is not empty %}
             {% for c in user.profileComments %}
                 <div class="row">
                     <div class="col-md-12 profile-comment">
                         <img src="{{ asset('uploads/avatar/'~c.user.avatar.path) }}" alt="..." class="img-responsive img-circle pull-left">
                         <h4>
                             <a href="{{ path('fos_user_profile_show_name', {'username' : c.user.username}) }}" class="user"> {{ c.user.username }}
-                                <span class="text-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <i class="fa fa-star-half-empty"></i>
-                        </span>
+                                {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': c.user.id|GetUserScore } %}
                             </a>
                             <br/>
                             {{ c.created|date('d/m/y \\à\ h:i') }} -
@@ -170,7 +166,7 @@
                                 {% endif %}
                                 <br>
                                 <p class="pull-right">
-                                    <i class="fa fa-comments"></i> {{ c.commentToComments|length }} commentaires
+                                    <i class="fa fa-comments"></i> commentaire {{ c.commentToComments|length }}
                                 </p>
                             </blockquote>
                         </a>
@@ -178,6 +174,8 @@
                     </div>
                 </div>
             {% endfor %}
+            {% else %}
+            <p><em>Aucun message pour le moment.</em></p>
         {% endif %}
 
         {% if user.profileComments|length > 5 %}

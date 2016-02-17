@@ -192,6 +192,7 @@ class AdvertInterestRepository extends EntityRepository
             ->andWhere('a.user = :user') // L'utilisateur est le créateur de l'interet
             ->andWhere('a.advertOptionType IN (:list)') // Si option est dans la liste "$list"
             ->andWhere('a.customerFade = 0') // ou CustomerFade est a false
+            ->andWhere('b.guest = 0')
             ->setParameters(array('user' => $user, 'list' => $list));
 
         $result = $qb->getQuery()->getResult();
@@ -202,6 +203,7 @@ class AdvertInterestRepository extends EntityRepository
             ->andWhere('a.user != :user and a.advertOptionType IN (:list)') // L'utilisateur est le créateur de l'interet
             ->andWhere('a.advertOptionType IN (:list)') // Si option est dans la liste "$list"
             ->andWhere('a.ownerFade = 0') // ou CustomerFade est a false
+            ->andWhere('b.guest = 0')
             ->setParameters(array('user' => $user, 'list' => $list));
 
         $result1 = $qb1->getQuery()->getResult();

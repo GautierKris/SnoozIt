@@ -48,6 +48,7 @@ class StatsManager
             $recentNegoce   = $this->countRecentNegoce();
             $totalViews     = $this->countTotalView();
             $bought         = $this->getBought();
+            $confirmed      = $this->getConfirmedSold();
 
         }else{
             $percentAdvert  = 0;
@@ -62,6 +63,7 @@ class StatsManager
             $recentNegoce   = 0;
             $totalViews     = 0;
             $bought         = 0;
+            $confirmed      = 0;
         }
 
         $countAdvertUserIsInterested = $this->countAdvertUserIsInterested();
@@ -84,6 +86,7 @@ class StatsManager
             'interestByWeek'                => $this->countInterestForUserAdvertByWeek(),
             'totalViews'                    => $totalViews,
             'bought'                        => $bought,
+            'confirmed'                     => $confirmed,
         );
 
         return $analys;
@@ -251,11 +254,21 @@ class StatsManager
         return round($count/$totalAdvert*100);
     }
 
+    // Compte le nombre d'annonce acheté
     private function getBought()
     {
         $adverts = $this->getAdvertRepository()->findBy(array('soldTo' => $this->getUser()));
 
         return count($adverts);
     }
+
+    // Compte le nombre de vente confirmés
+    private function getConfirmedSold()
+    {
+        $adverts = $this->getAdvertRepository()->findBy(array('user' => $this->getUser(), 'sold' => true));
+
+        return count($adverts);
+    }
+
 
 }

@@ -113,13 +113,21 @@ class AdvertManager
         return $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->rehydrateAdvert($advert);
     }
 
+    // Les annonces achetées
+    public function getConfirmed()
+    {
+        $adverts = $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getConfirmed($this->getUser());
+
+        return $adverts;
+    }
+
+    // Les annonces confirmées vendues
     public function getBought()
     {
         $adverts = $this->entityManager->getRepository('SnoozitPlatformBundle:Advert')->getBought($this->getUser());
 
         return $adverts;
     }
-
 // PARTIE CONCERNANT LES INTERETS POUR LES ANNONCES EMISES
 
     // Gere les interets pour les annonces
@@ -770,7 +778,7 @@ class AdvertManager
 
         $interest->setAdvertOptionType($optionType);
         // On met l'annonce en statut " Vente en cours " afin que les autres annonces change de statut le temps des transferts d'argent et produit.
-        $interest->getAdvert()->setInProgess($interest->getUser());
+        $interest->getAdvert()->setInProgress($interest->getUser());
 
         $this->entityManager->persist($interest);
         $this->entityManager->flush();

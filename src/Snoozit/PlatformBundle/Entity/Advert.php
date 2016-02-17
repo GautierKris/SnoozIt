@@ -34,7 +34,7 @@ class Advert
      *      minMessage="Le titre doit comporter 3 caractères minnimum")
      *      maxMessage="Le titre doit comporter 50 caractères maximum")
      * @Assert\Regex(
-     *     pattern="/^[a-zA-Z_0-9_ -]{3,50}/",
+     *     pattern="/^[a-zA-Z_0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ_ -]{3,50}/",
      *     message="Votre titre ne peut contenir que des chiffres et lettres"
      * )
      */
@@ -220,7 +220,7 @@ class Advert
     private $guest;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity = "Snoozit\UserBundle\Entity\User", inversedBy="adverts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $user;

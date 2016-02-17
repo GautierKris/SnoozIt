@@ -6,13 +6,10 @@
             {% set followed = '' %}
     {% endif %}
     {#<i class="fa fa-plus fa-2x befriend"></i>#}
-
     <img src="{{ asset('uploads/avatar/'~advert.user.avatar) }}" alt="{{ advert.user.username }}" class="img-responsive img-thumbnail {{ followed }}">
-
 </div>
 <p>{{ advert.user.username }}</p>
-<p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-<p class="help-block"> (330 Votes)</p>
+    {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': advert.user.userId|GetUserScore } %}
 <div class="btn-group-sm">
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED')%}
         {% if app.user.id != advert.user.userId %}
@@ -43,12 +40,13 @@
         <img src="{{ asset('uploads/avatar/'~soldToUser.avatar.path) }}" alt="{{ soldToUser.username }}" class="img-responsive img-thumbnail {{ followed }}">
     </div>
     <p>{{ soldToUser.username }}</p>
-    <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
-    <p class="help-block"> (330 Votes)</p>
+    <a href="{{ path('fos_user_profile_show_name', {'username' : soldToUser.username}) }}" class="user">
+        {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': soldToUser.id|GetUserScore } %}
+    </a>
     <div class="btn-group-sm">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED')%}
             {% if app.user != soldToUser %}
-                {% if not userSoldItFollow %}
+                {% if not userSoldToFollow %}
                     <a class="btn btn-success btn-success btn-block " href="{{ path('snoozit_follow_user', {'id' : soldToUser.id}) }}">S'abonner</a>
                 {% else %}
                     <a class="btn btn-success btn-success btn-block" href="{{ path('snoozit_follow_user', {'id' : soldToUser.id}) }}">Abonné</a>

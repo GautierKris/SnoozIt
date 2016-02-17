@@ -27,13 +27,7 @@
                                                 {{ a.guestUsername }}
                                             {% else %}
                                                 <a href="{{ path('fos_user_profile_show_name', {'username' : a.username}) }}" class="user"> {{ a.username }}
-                                                    <span class="text-star">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                        <i class="fa fa-star-half-empty"></i>
-                                                    </span>
+                                                    {% include 'SnoozitPlatformBundle:Site/Templating/Star:starEvaluationLower.html.twig' with {'score': a.userId|GetUserScore } %}
                                                 </a>
                                             {% endif %}
                                             <span class="text-default text-normal">dans la catégorie</span>

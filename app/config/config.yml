@@ -99,6 +99,9 @@ fos_user:
             type: snoozit_user_profile
 
 services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:
@@ -116,4 +119,4 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 fos_js_routing:
-    routes_to_expose: [ snoozit_refuse_abonnement, snoozit_follow_user, snoozit_follow_category, snoozit_follow_city, snoozit_follow_departement, snoozit_follow_region ]
+    routes_to_expose: [ snoozit_evaluation_system, snoozit_refuse_abonnement, snoozit_follow_user, snoozit_follow_category, snoozit_follow_city, snoozit_follow_departement, snoozit_follow_region ]

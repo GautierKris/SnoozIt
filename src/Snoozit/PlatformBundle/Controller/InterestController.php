@@ -50,8 +50,12 @@ class InterestController extends Controller
     }
 
     // Je suis interessé ou plus interessé par une annonce
-    public function interestedByAction(Request $request, Advert $advert)
+    public function interestedByAction(Advert $advert)
     {
+        if($advert->getGuest()){
+            return $this->redirect($this->generateUrl('snoozit_platform_error_page', array('codeErreur' => 1)));
+        }
+
         if (!is_object($this->getUser()) || !$this->getUser() instanceof UserInterface) {
             throw new AccessDeniedException('Vous devez etre identifié pour pouvoir acceder à cette zone.');
         }
